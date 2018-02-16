@@ -1,0 +1,19 @@
+[Data Source]
+DisplayName=sven.ziegler@svenziegler.photography
+Enabled=true
+Parent=7403581681ef9fc87ad67f08d058070921b3a9e7
+
+[Mail Transport]
+BackendName=smtp
+
+[Authentication]
+Host=mail.svenziegler.photography
+Method=PLAIN
+Port=587
+ProxyUid=system-proxy
+RememberPassword=true
+User=sven.ziegler@svenziegler.photography
+CredentialName=
+
+[Security]
+Method=starttls-on-standard-port

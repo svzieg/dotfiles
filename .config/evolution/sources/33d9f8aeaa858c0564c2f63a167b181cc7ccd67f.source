@@ -1,0 +1,48 @@
+[Data Source]
+DisplayName=ziggo1879@gmail.com
+Enabled=true
+Parent=f931235de871b4b1bf1faeb0aed7485296f6f63a
+
+[Mail Composition]
+Bcc=
+Cc=
+DraftsFolder=folder://e9df468494bf66fdab6383f3534b614ba5a1fcb6/%5bGoogle%20Mail%5d/Entw%c3%bcrfe
+ReplyStyle=default
+SignImip=true
+TemplatesFolder=
+StartBottom=inconsistent
+TopSignature=inconsistent
+
+[Mail Identity]
+Address=ziggo1879@gmail.com
+Aliases=
+Name=
+Organization=
+ReplyTo=
+SignatureUid=none
+
+[Mail Submission]
+SentFolder=folder://local/Sent
+TransportUid=fdf4b4286035dd58a46529de2bdcd2a7c89ff774
+RepliesToOriginFolder=false
+UseSentFolder=true
+
+[Pretty Good Privacy (OpenPGP)]
+AlwaysTrust=false
+EncryptToSelf=true
+KeyId=
+SigningAlgorithm=
+SignByDefault=false
+EncryptByDefault=false
+PreferInline=false
+
+[Message Disposition Notifications]
+ResponsePolicy=ask
+
+[Secure MIME (S/MIME)]
+EncryptionCertificate=
+EncryptByDefault=false
+EncryptToSelf=true
+SigningAlgorithm=
+SigningCertificate=
+SignByDefault=false

@@ -1,0 +1,14 @@
+[Data Source]
+DisplayName=sven.ziegler@scheer-group.com
+Enabled=true
+Parent=61b6ad1afe1ead78a1ff38bba40fd6d532826149
+
+[Mail Account]
+BackendName=ews
+IdentityUid=07e7ee5238074f89788a2fd725936fc243549624
+ArchiveFolder=
+NeedsInitialSetup=false
+
+[Refresh]
+Enabled=true
+IntervalMinutes=60

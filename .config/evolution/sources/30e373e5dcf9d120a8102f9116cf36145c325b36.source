@@ -1,0 +1,57 @@
+[Data Source]
+DisplayName=ziggo1879@gmail.com
+Enabled=false
+Parent=
+
+[Offline]
+StaySynchronized=false
+
+[Refresh]
+Enabled=true
+IntervalMinutes=60
+
+[Authentication]
+Host=imap.googlemail.com
+Method=Google
+Port=993
+ProxyUid=system-proxy
+RememberPassword=true
+User=ziggo1879@gmail.com
+CredentialName=
+
+[Mail Account]
+BackendName=imapx
+IdentityUid=d1e4ee3670f1276ff1b9e5bf43a4ce3ef318e593
+ArchiveFolder=
+NeedsInitialSetup=false
+
+[Security]
+Method=ssl-on-alternate-port
+
+[Imapx Backend]
+FilterInbox=true
+StoreChangesInterval=3
+LimitByAge=false
+LimitUnit=years
+LimitValue=1
+UseMultiFetch=false
+CheckAll=false
+CheckSubscribed=false
+ConcurrentConnections=3
+FetchOrder=ascending
+FilterAll=false
+FilterJunk=false
+FilterJunkInbox=false
+Namespace=
+RealJunkPath=[Google Mail]/Spam
+RealTrashPath=[Google Mail]/Papierkorb
+ShellCommand=ssh -C -l %u %h exec /usr/sbin/imapd
+UseIdle=false
+UseNamespace=false
+UseQresync=false
+UseRealJunkPath=true
+UseRealTrashPath=true
+UseShellCommand=false
+UseSubscriptions=false
+IgnoreOtherUsersNamespace=false
+IgnoreSharedFoldersNamespace=false

@@ -1,0 +1,48 @@
+[Data Source]
+DisplayName=sven.ziegler@scheer-group.com
+Enabled=true
+Parent=61b6ad1afe1ead78a1ff38bba40fd6d532826149
+
+[Mail Composition]
+Bcc=
+Cc=
+DraftsFolder=folder://c0f3bfa60e184c79ccd896124c27afdb0ed758dd/Entw%c3%bcrfe
+ReplyStyle=default
+SignImip=true
+TemplatesFolder=
+StartBottom=inconsistent
+TopSignature=inconsistent
+
+[Mail Identity]
+Address=sven.ziegler@scheer-group.com
+Aliases=
+Name=
+Organization=
+ReplyTo=
+SignatureUid=c17bc22a3b10d11fef061d8a1ac61e7ae58c0026
+
+[Mail Submission]
+SentFolder=folder://c0f3bfa60e184c79ccd896124c27afdb0ed758dd/Gesendete%20Elemente
+TransportUid=f377b30805d62271fa0b9dcbbebe6e568f574cfa
+RepliesToOriginFolder=false
+UseSentFolder=true
+
+[Pretty Good Privacy (OpenPGP)]
+AlwaysTrust=false
+EncryptToSelf=true
+KeyId=754E5B9C
+SigningAlgorithm=
+SignByDefault=true
+EncryptByDefault=false
+PreferInline=false
+
+[Message Disposition Notifications]
+ResponsePolicy=ask
+
+[Secure MIME (S/MIME)]
+EncryptionCertificate=
+EncryptByDefault=false
+EncryptToSelf=true
+SigningAlgorithm=
+SigningCertificate=
+SignByDefault=false

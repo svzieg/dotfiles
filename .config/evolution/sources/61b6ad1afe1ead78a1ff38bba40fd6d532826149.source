@@ -1,0 +1,57 @@
+[Data Source]
+DisplayName=sven.ziegler@scheer-group.com
+Enabled=true
+Parent=
+
+[GNOME Online Accounts]
+AccountId=account_1510653217_2
+CalendarUrl=
+ContactsUrl=
+Name=
+Address=sven.ziegler@scheer-group.com
+
+[Offline]
+StaySynchronized=false
+
+[Authentication]
+Host=mail.scheer-group.com
+Method=none
+Port=443
+ProxyUid=system-proxy
+RememberPassword=true
+User=U500132
+CredentialName=
+
+[Collection]
+BackendName=ews
+CalendarEnabled=true
+ContactsEnabled=true
+Identity=U500132
+MailEnabled=true
+CalendarUrl=
+ContactsUrl=
+
+[Security]
+Method=none
+
+[Ews Backend]
+FilterInbox=true
+StoreChangesInterval=3
+LimitByAge=false
+LimitUnit=years
+LimitValue=1
+CheckAll=true
+ListenNotifications=true
+Email=sven.ziegler@scheer-group.com
+FilterJunk=false
+FilterJunkInbox=false
+GalUid=c0815c5dd5a6af81aa8bc4a7922fbd60c44a6b2a
+Hosturl=https://mail.scheer-group.com/EWS/Exchange.asmx
+Oaburl=https://mail.scheer-group.com/oab/983f819f-def1-4215-82cd-d56ac7588f0b/oab.xml
+OabOffline=false
+OalSelected=
+Timeout=120
+UseImpersonation=false
+ImpersonateUser=
+OverrideUserAgent=false
+UserAgent=Microsoft Office/14.0 (Windows NT ,5.1; Microsoft Outlook 14.0.4734; Pro)

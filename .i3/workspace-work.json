@@ -1,0 +1,10 @@
+// vim:ts=4:sw=4:et
+{
+    // tabbed split container with 2 children
+    "border": "pixel",
+    "floating": "auto_off",
+    "layout": "tabbed",
+    "percent": 1,
+    "type": "con"
+}
+
