@@ -1,7 +1,0 @@
-[Data Source]
-DisplayName=sven.ziegler@scheer-group.com
-Enabled=true
-Parent=61b6ad1afe1ead78a1ff38bba40fd6d532826149
-
-[Mail Transport]
-BackendName=ews

@@ -62,8 +62,9 @@ bindsym $mod+d exec rofi -show run
 
 #exec --no-startup-id volumeicon
 #bindsym $mod+Ctrl+m exec terminal -e 'alsamixer'
-exec --no-startup-id pulseaudio
+exec --no-startup-id pelseaudio
 exec --no-startup-id pa-applet
+exec --no-startup-id pulseeffects --gapplication-service
 bindsym $mod+Ctrl+m exec pavucontrol
 
 ################################################################################################
