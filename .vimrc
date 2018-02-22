@@ -39,7 +39,7 @@ NeoBundleLazy 'tpope/vim-fugitive'
 NeoBundleLazy 'tpope/vim-sensible'
 
 " Web
-NeoBundleLazy 'jelera/vim-javascript-syntax', {'autoload':{'filetypes':['javascript']}}
+"NeoBundleLazy 'jelera/vim-javascript-syntax', {'autoload':{'filetypes':['javascript']}}
 NeoBundleLazy 'pangloss/vim-javascript'
 NeoBundle 'digitaltoad/vim-jade'
 NeoBundle 'mattn/emmet-vim'
@@ -173,7 +173,7 @@ autocmd FileType html,markdown,javascript,xml setlocal foldmethod=syntax
 "{{{Syntastics
 "====================================================================================================
 set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
+"set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
 
 let g:syntastic_always_populate_loc_list = 1
