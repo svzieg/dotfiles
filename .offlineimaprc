@@ -1,0 +1,98 @@
+[general]
+pythonfile = ~/.offlineimap.py
+accounts = Gmail, Gmx, Photography 
+#Work
+
+[Account Gmail]
+localrepository = GmailLocal
+remoterepository = GmailRemote
+postsynchook = notmuch new
+
+[Account Gmx]
+localrepository = GmxLocal
+remoterepository = GmxRemote
+postsynchook = notmuch new
+
+[Account Work]
+localrepository = WorkLocal
+remoterepository = WorkRemote
+postsynchook = notmuch new
+
+[Account Photography]
+localrepository = PhotographyLocal
+remoterepository = PhotographyRemote
+postsynchook = notmuch new
+
+[Repository GmailRemote]
+type = Gmail
+remoteusereval = get_username("gmail")
+# probably a bad idea
+remotepasseval = get_password("gmail")
+nametrans = lambda x: 'INBOX.' + x
+sslcacertfile = /etc/ssl/certs/ca-certificates.crt
+ssl = yes
+nametrans = lambda foldername: re.sub ('^\[gmail\]', 'bak',
+                               re.sub ('sent_mail', 'sent',
+                               re.sub ('starred', 'flagged',
+                               re.sub (' ', '_', foldername.lower()))))
+folderfilter = lambda foldername: foldername not in ['[Gmail]/All Mail']
+
+[Repository GmxRemote]
+type = IMAP
+remotehost = imap.gmx.net
+remoteusereval = get_username("gmx")
+remotepasseval = get_password("gmx")
+sslcacertfile = /etc/ssl/certs/ca-certificates.crt
+ssl = yes
+# Besides, we only need `All Mail` folder.
+# Sup would manage mails on its own.
+# If your GMail language setting is not English, you can execute
+# `offlineimap --info` to find out the name of folder which is
+# translated and encoded after your account is configured.
+nametrans = lambda folder: re.sub('.*Spam.*$',        'Spam', 
+                           re.sub('.*Entw.*rfe$',     'Drafts', 
+                           re.sub('.*Gesendet$',      'Sent', 
+                           re.sub('.*Markiert$',      'Flagged', 
+                           re.sub('.*Wichtig$',       'Important', 
+                           re.sub('.*Gel.*scht$',     'Trash', 
+                           re.sub('.*Archiv$',        'Archive',
+                           folder)))))))
+
+
+
+
+[Repository PhotographyRemote]
+type = IMAP
+remotehost = mail.svenziegler.photography
+remoteusereval = get_username("photography")
+remotepasseval = get_password("photography")
+sslcacertfile = /etc/ssl/certs/ca-certificates.crt
+ssl = yes
+
+[Repository GmailLocal]
+type = GmailMaildir
+localfolders = ~/mail/Gmail
+restoreatime = no
+
+[Repository GmxLocal]
+type = Maildir
+localfolders = ~/mail/Gmx
+restoreatime = no
+nametrans = lambda folder: re.sub('Spam$', 'Spamverdacht',
+                           re.sub('Drafts', 'Entw&APw-rfe',
+                           re.sub('Sent', 'Gesendet',
+                           re.sub('Flagged', 'Markiert',
+                           re.sub('Important', 'Wichtig',
+                           re.sub('Trash', 'Gel&APY-scht',
+                           re.sub('Archive', 'Archiv',
+                           folder)))))))
+
+[Repository WorkLocal]
+type = Maildir
+localfolders = ~/mail/Work
+restoreatime = no
+
+[Repository PhotographyLocal]
+type = Maildir
+localfolders = ~/mail/Photography
+restoreatime = no

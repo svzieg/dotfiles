@@ -1,0 +1,33 @@
+
+folder-hook 'gmail' 'source ~/.mutt/gmail'
+folder-hook 'gmx' 'source ~/.mutt/gmx'
+folder-hook 'photography' 'source ~/.mutt/photography'
+folder-hook 'work' 'source ~/.mutt/work'
+
+
+source ~/.mutt/gmx
+
+# Macros for switching accounts
+macro index <f2> '<sync-mailbox><enter-command>source ~/.mutt/gmail<enter><change-folder>!<enter>'
+macro index <f3> '<sync-mailbox><enter-command>source ~/.mutt/gmx<enter><change-folder>!<enter>'
+macro index <f4> '<sync-mailbox><enter-command>source ~/.mutt/photography<enter><change-folder>!<enter>'
+macro index <f5> '<sync-mailbox><enter-command>source ~/.mutt/work<enter><change-folder>!<enter>'
+
+# Fetch mail shortcut
+bind index G imap-fetch-mail
+
+# IMAP and INBOX (this should map to any existing IMAP folders)
+mailboxes =INBOX \
+=Sent \
+=Drafts \
+=Spam \
+=Trash \
+=Lastfolder
+### BEGIN NOTMUCH-MUTT SETTINGS
+bind index u noop
+macro index  \
+      "unset wait_key~/.mutt/mutt-notmuch.pl --prompt search~/.cache/mutt_results" \
+      "search mail (using notmuch)"
+macro index  \
+      "unset wait_key~/.mutt/mutt-notmuch.pl thread~/.cache/mutt_resultsset wait_key" \
+      "search and reconstruct owning thread (using notmuch)"

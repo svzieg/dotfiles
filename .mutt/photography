@@ -1,0 +1,10 @@
+### save and sync my sent messages
+set record=~/mail/Photography/Sent
+## GMAIL USERS USE Sent Mail below instead:
+## set record="~/Maildir/Sent Mail"
+set spoolfile=~/mail/Photography/INBOX
+# set header cache
+set header_cache=~/Localmail/hcache
+# needed for maildir format
+set mbox_type=Maildir
+set folder=~/mail/Photography
