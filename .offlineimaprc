@@ -25,29 +25,25 @@ postsynchook = notmuch new
 
 [Repository GmailRemote]
 type = Gmail
-remoteuser = get_username("Gmail")
+remoteusereval = get_username("gmail")
 # probably a bad idea
-remotepass = get_password("Gmail")
+remotepasseval = get_password("gmail")
 nametrans = lambda x: 'INBOX.' + x
 sslcacertfile = /etc/ssl/certs/ca-certificates.crt
 ssl = yes
-nametrans = lambda folder: re.sub('.*Spam$',              'Spam', 
-                           re.sub('.*Entw&APw-rfe$',      'Drafts', 
-                           re.sub('.*Gesendet$',          'Sent', 
-                           re.sub('.*Markiert$',          'Flagged', 
-                           re.sub('.*Wichtig$',           'Important', 
-                           re.sub('.*Papierkorb$',        'Trash', 
-                           re.sub('.*Alle.*Nachrichten$',  'Archive',
-                           folder)))))))
+nametrans = lambda foldername: re.sub ('^\[gmail\]', 'bak',
+                               re.sub ('sent_mail', 'sent',
+                               re.sub ('starred', 'flagged',
+                               re.sub (' ', '_', foldername.lower()))))
+folderfilter = lambda foldername: foldername not in ['[Gmail]/All Mail']
 
 [Repository GmxRemote]
 type = IMAP
 remotehost = imap.gmx.net
-remoteuser = get_username("Gmx")
-remotepass = get_password("Gmx")
+remoteusereval = get_username("gmx")
+remotepasseval = get_password("gmx")
 sslcacertfile = /etc/ssl/certs/ca-certificates.crt
 ssl = yes
-# Spaces in pathname are bad. Lets use `archive` which is a simple word
 # Besides, we only need `All Mail` folder.
 # Sup would manage mails on its own.
 # If your GMail language setting is not English, you can execute
@@ -68,8 +64,8 @@ nametrans = lambda folder: re.sub('.*Spam.*$',        'Spam',
 [Repository PhotographyRemote]
 type = IMAP
 remotehost = mail.svenziegler.photography
-remoteuser = get_username("Photography")
-remotepass = get_password("Photography")
+remoteusereval = get_username("photography")
+remotepasseval = get_password("photography")
 sslcacertfile = /etc/ssl/certs/ca-certificates.crt
 ssl = yes
 
@@ -77,14 +73,6 @@ ssl = yes
 type = GmailMaildir
 localfolders = ~/mail/Gmail
 restoreatime = no
-nametrans = lambda folder: re.sub('Spam', '[Google Mail].Spam',
-                           re.sub('Drafts', '[Google Mail].Entw&APw-rfe',
-                           re.sub('Sent', '[Google Mail].Gesendet',
-                           re.sub('Flagged', '[Google Mail].Markiert',
-                           re.sub('Important', '[Google Mail].Wichtig',
-                           re.sub('Trash', '[Google Mail].Papierkorb',
-                           re.sub('Archive', '[Google Mail].Alle Nachrichten',
-                           folder)))))))
 
 [Repository GmxLocal]
 type = Maildir
