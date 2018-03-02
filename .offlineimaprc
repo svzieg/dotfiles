@@ -31,18 +31,22 @@ remotepasseval = get_password("gmail")
 nametrans = lambda x: 'INBOX.' + x
 sslcacertfile = /etc/ssl/certs/ca-certificates.crt
 ssl = yes
-nametrans = lambda foldername: re.sub ('^\[gmail\]', 'bak',
-                               re.sub ('sent_mail', 'sent',
-                               re.sub ('starred', 'flagged',
-                               re.sub (' ', '_', foldername.lower()))))
-folderfilter = lambda foldername: foldername not in ['[Gmail]/All Mail']
+maxconnections = 5
+nametrans = lambda folder: re.sub('.*Spam$', 'Spam', 
+                           re.sub('.*Drafts$', 'Drafts', 
+                           re.sub('.*Sent Mail$', 'Sent', 
+                           re.sub('.*Starred$', 'Flagged', 
+                           re.sub('.*Trash$', 'Trash', 
+                           re.sub('.*Important$', 'Important', 
+                           re.sub('.*All Mail$', 'Archive', folder)))))))
 
 [Repository GmxRemote]
 type = IMAP
 remotehost = imap.gmx.net
 remoteusereval = get_username("gmx")
 remotepasseval = get_password("gmx")
-sslcacertfile = /etc/ssl/certs/ca-certificates.crt
+maxconnections = 5
+sslcacertfile = /etc/ssl/certs/ca-certificates.rt
 ssl = yes
 # Besides, we only need `All Mail` folder.
 # Sup would manage mails on its own.
@@ -66,6 +70,7 @@ type = IMAP
 remotehost = mail.svenziegler.photography
 remoteusereval = get_username("photography")
 remotepasseval = get_password("photography")
+maxconnections = 5
 sslcacertfile = /etc/ssl/certs/ca-certificates.crt
 ssl = yes
 
@@ -73,6 +78,13 @@ ssl = yes
 type = GmailMaildir
 localfolders = ~/mail/Gmail
 restoreatime = no
+nametrans = lambda folder: re.sub('Spam', '[Google Mail].Spam',
+                           re.sub('Drafts', '[Google Mail].Drafts',
+                           re.sub('Sent', '[Google Mail].Sent Mail',
+                           re.sub('Flagged', '[Google Mail].Starred',
+                           re.sub('Trash', '[Google Mail].Trash',
+                           re.sub('Important', '[Google Mail].Important',
+                           re.sub('Archive', '[Google Mail].All Mail', folder)))))))
 
 [Repository GmxLocal]
 type = Maildir
