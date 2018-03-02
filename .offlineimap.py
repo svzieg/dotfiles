@@ -2,9 +2,9 @@
 
 import gnomekeyring as gkey
 
-def set_credentials(repo, user, pw):
-    KEYRING_NAME = "offlineimap"
-    attrs = { "repo": repo, "user": user }
+def set_credentials(repo, user, pw, smtp_host):
+    KEYRING_NAME="offlineimap"
+    attrs = { "repo": repo, "user": user, 'service': 'smtp', 'host': smtp_host }
     keyring = gkey.get_default_keyring_sync()
     gkey.item_create_sync(keyring, gkey.ITEM_NETWORK_PASSWORD,
         KEYRING_NAME, attrs, pw, True)
@@ -33,4 +33,8 @@ if __name__ == "__main__":
     if password != password_confirmation:
         print ("Error: password confirmation does not match")
         sys.exit(1)
-    set_credentials(repo, username, password)
+    smtp_host = raw_input("Enter smtp host: [%s] " % ("smtp." + username[username.find('@') + 1 :]))
+    if smtp_host == '':
+        smtp_host = "smtp." +username[username.find('@') + 1: ]
+    
+    set_credentials(repo, username, password, smtp_host)

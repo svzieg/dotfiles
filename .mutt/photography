@@ -8,3 +8,4 @@ set header_cache=~/Localmail/hcache
 # needed for maildir format
 set mbox_type=Maildir
 set folder=~/mail/Photography
+set sendmail      = "/usr/bin/msmtp -a photography"
