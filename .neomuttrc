@@ -1,20 +1,28 @@
-
-
-
-
-folder-hook 'gmail' 'source ~/.mutt/gmail'
-folder-hook 'gmx' 'source ~/.mutt/gmx'
-folder-hook 'photography' 'source ~/.mutt/photography'
-folder-hook 'work' 'source ~/.mutt/work'
+# Maildir
+set folder           = "~/mail/"
+set header_cache     = ~/.mutt/cache/headers
+set message_cachedir = ~/.mutt/cache/bodies
 
 
 source ~/.mutt/gmx
 
-# Macros for switching accounts
-macro index <f2> '<sync-mailbox><enter-command>source ~/.mutt/gmail<enter><change-folder>!<enter>'
-macro index <f3> '<sync-mailbox><enter-command>source ~/.mutt/gmx<enter><change-folder>!<enter>'
-macro index <f4> '<sync-mailbox><enter-command>source ~/.mutt/photography<enter><change-folder>!<enter>'
-macro index <f5> '<sync-mailbox><enter-command>source ~/.mutt/work<enter><change-folder>!<enter>'
+
+# {{{ Account settings
+folder-hook "+Gmx/.*" source ~/.mutt/gmx
+folder-hook "+Gmail/.*" source ~/.mutt/gmail
+folder-hook "+Photography/.*" source ~/.mutt/photography
+#folder-hook "+Gmx/.*" source ~/.mutt/gmx
+
+
+# Mailinglists
+alternates "ziggo1879@gmail.com|sven.ziegler@svenziegler.photography|sven.ziegler@scheer-group.com"
+# subscribe  coderdojo-cgn-planung colognerb
+
+
+source ~/mail/mailboxes
+
+
+# }}}
 
 # Fetch mail shortcut
 bind index G imap-fetch-mail
@@ -39,6 +47,74 @@ macro index  \
 macro index,pager \cb " unset pipe_decodeurlview" "get URLs"
 
 
+# {{{ Mutt Behavior
+#
+
+# Mutt Behaviour
+set move              = no
+set sort              = 'threads'
+set sort_aux          = 'reverse-last-date-received'
+set sort_re           = yes
+set pager_stop        = yes
+set pager_index_lines = 6
+set quit              = ask-yes
+set fast_reply        = yes
+set include           = yes
+set reverse_name      = yes
+
+# VIM-Like Movement in Index
+bind index g noop
+bind index gg first-entry
+bind index G  last-entry
+bind index,pager F  flag-message
+bind index,pager R  group-reply
+
+# Headers
+ignore "Authentication-Results:"
+ignore "DomainKey-Signature:"
+ignore "DKIM-Signature:"
+ignore "X-Flags:"
+hdr_order "Date From To Cc"
+
+#set editor
+set editor="vim"
+
+set xterm_set_titles  = yes
+set sidebar_visible   = no
+
+# Den Absender möchte ich *fett* dargestellt haben
+color header     brightblack   default  "^(from|subject):"
+# Und E-Mail Adressen im Body bitte cyanfarben
+color body       cyan          default  "[-a-z_0-9.+]+@[-a-z_0-9.]+"
+
+# Und ab hier die Farben der E-Mail Liste:
+uncolor index *
+color index      white         default  ~Q # Beantwortete Nachrichten
+color index      green         default  ~F # Markierte Nachrichten
+color index      red           default  ~N # Neue Nachrichten
+color index      brightred     default  ~O # Ungelesene Nachrichten
+color index      magenta       default  ~T # Getaggte Nachrichten
+color index      yellow        default  ~D # Gelöschte Nachrichten
+
+#GPG
+set pgp_use_gpg_agent = yes
+set pgp_timeout       = 3600
+set pgp_autosign      = no
+
+# SMIME
+set crypt_autosign           = no
+set crypt_replyencrypt       = no
+set crypt_replysign          = no
+set crypt_replysignencrypted = no
+
+set smime_ca_location  = "/etc/ssl/certs/ca-certificates.crt"
+set smime_certificates = "~/.smime/certificates"
+set smime_keys         = "~/.smime/keys"
+set smime_default_key  = "07efd20c.0"
+set smime_encrypt_with = "des3"
+
+#
+# }}}
 
 
 

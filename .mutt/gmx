@@ -1,11 +1,9 @@
-### save and sync my sent messages
-set record=~/mail/Gmx/Sent
-## GMAIL USERS USE Sent Mail below instead:
-## set record="~/Maildir/Sent Mail"
-set spoolfile=~/mail/Gmx/INBOX
+set spoolfile= "+Gmx/INBOX"
+set postponed= "+Gmx/Drafts"
+set record=    "+Gmx/Sent"
 # set header cache
-set header_cache=~/Localmail/hcache
+# set header_cache=~/Localmail/hcache
 # needed for maildir format
 set mbox_type=Maildir
-set folder=~/mail/Gmx
 set sendmail      = "/usr/bin/msmtp -a gmx"
+set from = "svzieg@gmx.de"

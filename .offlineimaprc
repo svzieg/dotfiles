@@ -16,8 +16,8 @@ accounts = Gmail, Gmx, Photography
 # The header, peritem, sep, and footer are all Python expressions passed
 # through eval, so you can (and must) use Python quoting.
 
-enabled = no
-filename = ~/Mutt/muttrc.mailboxes
+enabled = yes
+filename = ~/mail/mailboxes
 header = "mailboxes "
 peritem = "+%(accountname)s/%(foldername)s"
 sep = " "
@@ -31,7 +31,6 @@ remoterepository = GmailRemote
 postsynchook = notmuch new
 maxage = 30
 autorefresh = 5
-quick = 25
 
 [Account Gmx]
 localrepository = GmxLocal

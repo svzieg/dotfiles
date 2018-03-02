@@ -1,11 +1,9 @@
-### save and sync my sent messages
-set record=~/mail/Photography/Sent
-## GMAIL USERS USE Sent Mail below instead:
-## set record="~/Maildir/Sent Mail"
-set spoolfile=~/mail/Photography/INBOX
+set record    = "+Photography/Sent"
+set spoolfile = "+Photography/INBOX"
+set postponed = "+Photography/Drafts"
 # set header cache
-set header_cache=~/Localmail/hcache
+# set header_cache=~/Localmail/hcache
 # needed for maildir format
 set mbox_type=Maildir
-set folder=~/mail/Photography
 set sendmail      = "/usr/bin/msmtp -a photography"
+set from = "sven.ziegler@svenziegler.photography"
