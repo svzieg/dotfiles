@@ -65,6 +65,9 @@ bindsym $mod+d exec rofi -show run
 exec --no-startup-id pelseaudio
 exec --no-startup-id pa-applet
 exec --no-startup-id pulseeffects --gapplication-service
+
+exec --no-startup-id offlineimap
+
 bindsym $mod+Ctrl+m exec pavucontrol
 
 ################################################################################################

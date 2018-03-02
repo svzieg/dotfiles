@@ -1,34 +1,67 @@
 [general]
 pythonfile = ~/.offlineimap.py
+maxsyncaccounts = 3
 accounts = Gmail, Gmx, Photography 
 #Work
+
+
+[mbnames]
+
+# offlineimap can record your mailbox names in a format you specify.
+# You can define the header, each mailbox item, the separator,
+# and the footer.  Here is an example for Mutt.
+# If enabled is yes, all six setting must be specified, even if they
+# are just the empty string "".
+#
+# The header, peritem, sep, and footer are all Python expressions passed
+# through eval, so you can (and must) use Python quoting.
+
+enabled = no
+filename = ~/Mutt/muttrc.mailboxes
+header = "mailboxes "
+peritem = "+%(accountname)s/%(foldername)s"
+sep = " "
+footer = "\n"
+
+
 
 [Account Gmail]
 localrepository = GmailLocal
 remoterepository = GmailRemote
 postsynchook = notmuch new
+maxage = 30
+autorefresh = 5
+quick = 25
 
 [Account Gmx]
 localrepository = GmxLocal
 remoterepository = GmxRemote
 postsynchook = notmuch new
+autorefresh = 5
+maxage = 365
+quick = 24
 
 [Account Work]
 localrepository = WorkLocal
 remoterepository = WorkRemote
 postsynchook = notmuch new
+autorefresh = 5
+quick = 24
+maxage = 365
 
 [Account Photography]
 localrepository = PhotographyLocal
 remoterepository = PhotographyRemote
 postsynchook = notmuch new
+autorefresh = 5
+quick = 24
+maxage = 365
 
 [Repository GmailRemote]
 type = Gmail
 remoteusereval = get_username("gmail")
 # probably a bad idea
 remotepasseval = get_password("gmail")
-nametrans = lambda x: 'INBOX.' + x
 sslcacertfile = /etc/ssl/certs/ca-certificates.crt
 ssl = yes
 maxconnections = 5
@@ -46,7 +79,8 @@ remotehost = imap.gmx.net
 remoteusereval = get_username("gmx")
 remotepasseval = get_password("gmx")
 maxconnections = 5
-sslcacertfile = /etc/ssl/certs/ca-certificates.rt
+autorefresh = 5
+sslcacertfile = /etc/ssl/certs/ca-certificates.crt
 ssl = yes
 # Besides, we only need `All Mail` folder.
 # Sup would manage mails on its own.
@@ -71,6 +105,7 @@ remotehost = mail.svenziegler.photography
 remoteusereval = get_username("photography")
 remotepasseval = get_password("photography")
 maxconnections = 5
+autorefresh = 5
 sslcacertfile = /etc/ssl/certs/ca-certificates.crt
 ssl = yes
 

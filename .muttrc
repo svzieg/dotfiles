@@ -25,9 +25,14 @@ mailboxes =INBOX \
 =Lastfolder
 ### BEGIN NOTMUCH-MUTT SETTINGS
 bind index u noop
+
 macro index  \
       "unset wait_key~/.mutt/mutt-notmuch.pl --prompt search~/.cache/mutt_results" \
       "search mail (using notmuch)"
 macro index  \
       "unset wait_key~/.mutt/mutt-notmuch.pl thread~/.cache/mutt_resultsset wait_key" \
       "search and reconstruct owning thread (using notmuch)"
+
+macro index,pager \cb " unset pipe_decodeurlview" "get URLs"
+
+
