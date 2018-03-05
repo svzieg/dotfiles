@@ -2,6 +2,7 @@
 set folder           = "~/mail/"
 set header_cache     = ~/.mutt/cache/headers
 set message_cachedir = ~/.mutt/cache/bodies
+set virtual_spoolfile=yes
 
 
 source ~/.mutt/gmx
@@ -46,6 +47,9 @@ macro index  \
 
 macro index,pager \cb " unset pipe_decodeurlview" "get URLs"
 
+macro index A "<modify-labels>+archive -unread -inbox\\n" "Archive message"
+#macro index c "<change-vfolder>?" "Change to vfolder overview"
+macro index \\\\ "<vfolder-from-query>" "Search mailbox"
 
 # {{{ Mutt Behavior
 #
