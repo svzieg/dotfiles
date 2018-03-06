@@ -18,3 +18,4 @@ alias ssh_build='ssh developer@dev1.scheer-group.com -p2245'
 alias mount_build='sudo sshfs -o allow_other,IdentityFile=/home/svzieg/.ssh/id_rsa,port=2245 developer@dev1.scheer-group.com:/home/developer /mnt/build/'
 
 alias config='/usr/bin/git --git-dir=/home/svzieg/.cfg/ --work-tree=/home/svzieg'
+compdef config='git'
