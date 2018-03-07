@@ -39,6 +39,9 @@ NeoBundle 'vim-syntastic/syntastic'
 NeoBundle 'tpope/vim-surround'
 NeoBundle 'tpope/vim-fugitive'
 NeoBundle 'tpope/vim-sensible'
+NeoBundle 'alvan/vim-closetag'
+NeoBundle 'tpope/vim-sexp-mappings-for-regular-people'
+NeoBundle 'jiangmiao/auto-pairs'
 
 " Web
 "NeoBundleLazy 'jelera/vim-javascript-syntax', {'autoload':{'filetypes':['javascript']}}

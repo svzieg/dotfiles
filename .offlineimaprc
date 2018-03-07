@@ -1,8 +1,7 @@
 [general]
 pythonfile = ~/.offlineimap.py
-maxsyncaccounts = 3
-accounts = Gmail, Gmx, Photography 
-#Work
+maxsyncaccounts = 4
+accounts = Gmail, Gmx, Photography, Work
 
 
 [mbnames]
@@ -29,7 +28,6 @@ footer = "\n"
 localrepository = GmailLocal
 remoterepository = GmailRemote
 postsynchook = notmuch new
-maxage = 30
 autorefresh = 5
 
 [Account Gmx]
@@ -37,24 +35,18 @@ localrepository = GmxLocal
 remoterepository = GmxRemote
 postsynchook = notmuch new
 autorefresh = 5
-maxage = 365
-quick = 24
 
 [Account Work]
 localrepository = WorkLocal
 remoterepository = WorkRemote
 postsynchook = notmuch new
 autorefresh = 5
-quick = 24
-maxage = 365
 
 [Account Photography]
 localrepository = PhotographyLocal
 remoterepository = PhotographyRemote
 postsynchook = notmuch new
 autorefresh = 5
-quick = 24
-maxage = 365
 
 [Repository GmailRemote]
 type = Gmail
@@ -107,6 +99,22 @@ maxconnections = 5
 autorefresh = 5
 sslcacertfile = /etc/ssl/certs/ca-certificates.crt
 ssl = yes
+
+[Repository WorkRemote]
+type = IMAP
+remotehost = localhost
+remoteport = 1143
+remoteusereval = get_username("work")
+remotepasseval = get_password("work")
+maxconnections = 5
+autorefresh = 5
+ssl = no
+
+[Repository WorkLocal]
+type = Maildir
+localfolders = ~/mail/Work
+restoreatime = no
+
 
 [Repository GmailLocal]
 type = GmailMaildir

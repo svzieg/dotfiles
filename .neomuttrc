@@ -1,54 +1,40 @@
 # Maildir
-set folder           = "~/mail/"
+set folder           = "~/mail"
 set header_cache     = ~/.mutt/cache/headers
 set message_cachedir = ~/.mutt/cache/bodies
-set virtual_spoolfile=yes
-
-
-source ~/.mutt/gmx
-
 
 # {{{ Account settings
-folder-hook "+Gmx/.*" source ~/.mutt/gmx
-folder-hook "+Gmail/.*" source ~/.mutt/gmail
-folder-hook "+Photography/.*" source ~/.mutt/photography
+# folder-hook "+Gmx/.*" source ~/.mutt/gmx
+# folder-hook "+Gmail/.*" source ~/.mutt/gmail
+# folder-hook "+Photography/.*" source ~/.mutt/photography
 #folder-hook "+Gmx/.*" source ~/.mutt/gmx
+source ~/mail/notmuch-mailboxes
+source ~/mail/mailboxes
 
+reply-hook "-C *svzieg@gmx.de*" source ~/.mutt/gmx
 
 # Mailinglists
 alternates "ziggo1879@gmail.com|sven.ziegler@svenziegler.photography|sven.ziegler@scheer-group.com"
 # subscribe  coderdojo-cgn-planung colognerb
 
 
-source ~/mail/mailboxes
-
+# unfortunately these don't have access to info like subjects or senders
+set new_mail_command="notify-send 'New email' '%n new message(s)' &"
 
 # }}}
 
 # Fetch mail shortcut
-bind index G imap-fetch-mail
+#bind index G imap-fetch-mail
 
 # IMAP and INBOX (this should map to any existing IMAP folders)
-mailboxes =INBOX \
-=Sent \
-=Drafts \
-=Spam \
-=Trash \
-=Lastfolder
+mailboxes inbox 
 ### BEGIN NOTMUCH-MUTT SETTINGS
-bind index u noop
-
-macro index  \
-      "unset wait_key~/.mutt/mutt-notmuch.pl --prompt search~/.cache/mutt_results" \
-      "search mail (using notmuch)"
-macro index  \
-      "unset wait_key~/.mutt/mutt-notmuch.pl thread~/.cache/mutt_resultsset wait_key" \
-      "search and reconstruct owning thread (using notmuch)"
-
 macro index,pager \cb " unset pipe_decodeurlview" "get URLs"
 
+
 macro index A "<modify-labels>+archive -unread -inbox\\n" "Archive message"
-#macro index c "<change-vfolder>?" "Change to vfolder overview"
+#macro index d "<modify-labels>+trash -unread -inbox\\n" "Delete message"
+macro index c "<change-vfolder>?" "Change to vfolder overview"
 macro index \\\\ "<vfolder-from-query>" "Search mailbox"
 
 # {{{ Mutt Behavior
@@ -129,16 +115,19 @@ set smime_encrypt_with = "des3"
 # This variable specifies notmuch query limit. 
 set nm_db_limit = 0 # This variable specifies the default Notmuch database in format:
 # notmuch://<absolute path> 
-set nm_default_uri = "" # The messages tagged with these tags are excluded and not loaded
+set nm_default_uri = "notmuch:///home/svzieg/mail" 
+# The messages tagged with these tags are excluded and not loaded
 # from notmuch DB to NeoMutt unless specified explicitly. 
-set nm_exclude_tags = "" # This option specifies timeout for Notmuch database. Default is 5 seconds.
-set nm_open_timeout = 5 # This variable specifies notmuch query type, supported types: 'threads' and
+set nm_exclude_tags = "" 
+# This option specifies timeout for Notmuch database. Default is 5 seconds.
+set nm_open_timeout = 5 
+# This variable specifies notmuch query type, supported types: 'threads' and
 # 'messages'. 
 set nm_query_type = messages # Add messages stored to the NeoMutt record (see $record in the NeoMutt docs) also to notmuch DB. If you reply to an email then the new email inherits tags from the original email.
-set nm_record = no # Tags that should be removed or added to the to the messages stored in the NeoMutt record.
+set nm_record = yes # Tags that should be removed or added to the to the messages stored in the NeoMutt record.
 
 # example:
-# set record = "~/sent-mails"
+set record = "~/sent-mails"
 # set nm_record = yes
 set nm_record_tags = "-inbox,archive,me"
 set nm_record_tags = "" # This variable specifies notmuch tag which is used for unread messages. set nm_unread_tag = unread # This variable allows you to customize the file browser display for virtual
@@ -153,7 +142,7 @@ set nm_record_tags = "" # This variable specifies notmuch tag which is used for 
 # %*X  soft-fill with character ``X'' as pad
 set vfolder_format = "%6n(%6N) %f" # When set, NeoMutt will use the first virtual mailbox (see virtual-mailboxes)
 # as a spoolfile. 
-set virtual_spoolfile = no # setup time window preferences
+set virtual_spoolfile = yes # setup time window preferences
 # first setup the duration, and then the time unit of that duration
 # when set to 0 (the default) the search window feature is disable
 set nm_query_window_duration=2 
