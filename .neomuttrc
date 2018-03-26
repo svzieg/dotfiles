@@ -11,7 +11,6 @@ set message_cachedir = ~/.mutt/cache/bodies
 source ~/mail/notmuch-mailboxes
 source ~/mail/mailboxes
 
-reply-hook "-C *svzieg@gmx.de*" source ~/.mutt/gmx
 
 # Mailinglists
 alternates "ziggo1879@gmail.com|sven.ziegler@svenziegler.photography|sven.ziegler@scheer-group.com"
@@ -20,6 +19,25 @@ alternates "ziggo1879@gmail.com|sven.ziegler@svenziegler.photography|sven.ziegle
 
 # unfortunately these don't have access to info like subjects or senders
 set new_mail_command="notify-send 'New email' '%n new message(s)' &"
+
+alias f__1 Sven Ziegler <svzieg@gmx.de>
+alias f__2 Sven Ziegler <sven.ziegler@scheer-group.com>
+alias f__3 Sven Ziegler <sven.ziegler@svenziegler.photography>
+alias f__4 Sven Ziegler <ziggo1879@gmail.com>
+macro compose <esc>f "<edit-from><kill-line>f__<tab><search>sven.ziegler@scheer-group.com<enter>"
+
+set from=svzieg@gmx.de
+send-hook  '~f .*svzieg@gmx.de.*'                         'source "~/.mutt/gmx"'
+send2-hook '~f .*svzieg@gmx.de.*'                         'source "~/.mutt/gmx"'
+
+send-hook  '~f .*ziggo1879@gmail.com.*'                   'source "~/.mutt/gmail"'
+send2-hook '~f .*ziggo1879@gmail.com.*'                   'source "~/.mutt/gmail"'
+
+send-hook  '~f .*sven.ziegler@scheer-group.com.*'         'source "~/.mutt/work"'
+send2-hook '~f .*sven.ziegler@scheer-group.com.*'         'source "~/.mutt/work"'
+
+send-hook  "-f *sven.ziegler@svenziegler.photography*"    'source "~/.mutt/photography"'
+send2-hook "-f *sven.ziegler@svenziegler.photography*"    'source "~/.mutt/photography"'
 
 # }}}
 
@@ -51,6 +69,13 @@ set quit              = ask-yes
 set fast_reply        = yes
 set include           = yes
 set reverse_name      = yes
+
+# autoview settings, show HTML if no Text is available
+auto_view text/html
+alternative_order text/enriched text/plain text/html text
+## Make quick html view macro
+bind index,pager V  noop        ## Unbinds V from version
+macro index,pager V "<view-attachments><search>html<enter><view-mailcap><exit>"
 
 # VIM-Like Movement in Index
 bind index g noop
@@ -90,6 +115,7 @@ color index      yellow        default  ~D # Gelöschte Nachrichten
 set pgp_use_gpg_agent = yes
 set pgp_timeout       = 3600
 set pgp_autosign      = no
+set crypt_use_gpgme   = yes
 
 # SMIME
 set crypt_autosign           = no
@@ -100,8 +126,14 @@ set crypt_replysignencrypted = no
 set smime_ca_location  = "/etc/ssl/certs/ca-certificates.crt"
 set smime_certificates = "~/.smime/certificates"
 set smime_keys         = "~/.smime/keys"
-set smime_default_key  = "07efd20c.0"
-set smime_encrypt_with = "des3"
+
+
+# SPAM
+spam "X-DCC-.*-Metrics:.*(....)=many"         "90+/DCC-%1"
+spam "X-Spam-Status: Yes"                     "90+/SA"
+spam "X-PerlMX-Spam: .*Probability=([0-9]+)%" "%1/PM"
+set spam_separator=", "
+
 
 #
 # }}}
@@ -113,7 +145,8 @@ set smime_encrypt_with = "des3"
 # VARIABLES - shown with their default values
 # --------------------------------------------------------------------------
 # This variable specifies notmuch query limit. 
-set nm_db_limit = 0 # This variable specifies the default Notmuch database in format:
+set nm_db_limit = 0 
+# This variable specifies the default Notmuch database in format:
 # notmuch://<absolute path> 
 set nm_default_uri = "notmuch:///home/svzieg/mail" 
 # The messages tagged with these tags are excluded and not loaded
@@ -169,5 +202,65 @@ bind index > vfolder-window-forward
 # virtual-mailboxes "Climbing" "notmuch://?query=climbing" 
 # unvirtual-mailboxes { * | mailbox ...} 
 # 
+# --------------------------------------------------------------------------
+# vim: syntax=neomuttrc
+#
+#
+
+
+# Example NeoMutt config file for the custom tags feature.
+
+# --------------------------------------------------------------------------
+# FUNCTIONS - shown with an example mapping
+# --------------------------------------------------------------------------
+# modify (notmuch/imap) tags
+bind index,pager \` modify-labels
+# modify (notmuch/imap) tag non-interactively.
+#bind index,pager tt "<modify-labels>!todo\n" "Toggle the 'todo' tag"
+# modify labels and then hide message
+# bind index,pager ??? modify-labels-then-hide
+# --------------------------------------------------------------------------
+# COMMANDS - shown with an example
+# --------------------------------------------------------------------------
+# Replace some tags with icons
+ tag-transforms tag transformed-string { tag transformed-string ...}
+ tag-transforms "inbox"   ""   \
+                "unread"  "u"   \
+                "replied" " "  \
+                "sent"    "s "  \
+                "important"    ""  \
+                "todo"    ""   \
+                "deleted" "" \
+                "invites" ""
+
+# The formats must start with 'G' and the entire sequence is case sensitive.
+ tag-formats tag format-string { tag format-string ...}
+ tag-formats "inbox"   "GI" \
+              "unread"  "GU" \
+              "replied" "GR" \
+              "sent"    "GS" \
+              "important"    "GF" \
+              "todo"    "Gt" \
+              "deleted" "GD" \
+              "invites" "Gi"
+
+# Now instead of using '%g' or '%J' in your $index_format, which lists all tags
+# in a non-deterministic order, you can something like the following which puts
+# a transformed tag name in a specific spot on the index line:
+set index_format='%4C %S %[%d.%m.%y] %-18.18n %?GF?%GF& ? %?GU?%GU& ? %?GR?%GR& ? %?GI?%GI& ? %s'
+
+# The %G formatting sequence may display all tags including tags hidden by
+# nm_hidden_tags.
+#
+# --------------------------------------------------------------------------
+# COLORS - some unpleasant examples are given
+# --------------------------------------------------------------------------
+# These symbols are added to the index-color feature:
+# an individual message tag, %G, uses tag name
+# this symbol uses a pattern
+color index_tag red black "important"
+# the transformed message tags, %g
+# this symbol does not use a pattern
+# color index_tags green default
 # --------------------------------------------------------------------------
 # vim: syntax=neomuttrc

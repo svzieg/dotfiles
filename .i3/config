@@ -81,7 +81,7 @@ bindsym $mod+Ctrl+m exec pavucontrol
 bindsym $mod+Ctrl+b exec terminal -e 'bmenu'
 bindsym $mod+F1 exec evolution
 bindsym $mod+F2 exec chromium
-bindsym $mod+F3 exec pcmanfm
+bindsym $mod+F3 exec terminal -e 'ranger'
 # bindsym $mod+F3 exec ranger
 bindsym $mod+Shift+F3 exec gksu pcmanfm
 bindsym $mod+F5 exec terminal -e 'mocp'
@@ -222,18 +222,18 @@ bindsym $mod+Shift+7 move container to workspace $ws7; workspace $ws7
 bindsym $mod+Shift+8 move container to workspace $ws8; workspace $ws8
 
 # Open applications on specific workspaces
- assign [class="Chromium|Google-Chrome|Firefox"] $ws1
- assign [class="Skype"] $ws7
- assign [class="urxvt|URxvt"] $ws2
- assign [class="jetbrains-webstorm|webstorm|Webstorm"] $ws3
- assign [class="VirtualBox"] $ws5
- 
- assign [class="Evolution|evolution"] $ws6
- assign [class="Franz|franz"] $ws7
-
- assign [class="Spotify|spotify"] $ws8
- assign [class="nuvolaplayer3"] $ws8
- assign [class="nuvolaplayer3-deezer"] $ws8
+#  assign [class="Chromium|Google-Chrome|Firefox"] $ws1
+#  assign [class="Skype"] $ws7
+#  assign [class="urxvt|URxvt"] $ws2
+#  assign [class="jetbrains-webstorm|webstorm|Webstorm"] $ws3
+#  assign [class="VirtualBox"] $ws5
+#  
+#  assign [class="Evolution|evolution"] $ws6
+#  assign [class="Franz|franz"] $ws7
+#
+#  assign [class="Spotify|spotify"] $ws8
+#  assign [class="nuvolaplayer3"] $ws8
+#  assign [class="nuvolaplayer3-deezer"] $ws8
 # assign [class="Skype"] 5
 
 # Open specific applications in floating mode

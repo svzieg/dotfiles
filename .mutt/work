@@ -1,10 +1,15 @@
-### save and sync my sent messages
-set record=~/mail/Work/Sent
-## GMAIL USERS USE Sent Mail below instead:
-## set record="~/Maildir/Sent Mail"
-set spoolfile=~/mail/Work/INBOX
-# set header cache
-set header_cache=~/Localmail/hcache
-# needed for maildir format
-set mbox_type=Maildir
-set folder=~/mail/Work
+set sendmail="msmtp -a work"
+
+#GPG
+set pgp_use_gpg_agent = yes
+set pgp_timeout       = 3600
+set pgp_autosign      = yes
+
+# SMIME
+set crypt_autosign           = yes
+set crypt_replyencrypt       = yes
+set crypt_replysign          = yes
+set crypt_replysignencrypted = yes
+
+set smime_default_key  = "397AC5F8C537AF088A50D1745B6E01C4754E5B9C"
+set smime_encrypt_with = "rsa2048"

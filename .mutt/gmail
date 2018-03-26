@@ -1,9 +1,12 @@
-## GMAIL USERS USE Sent Mail below instead:
-## set record="~/Maildir/Sent Mail"
-set spoolfile= "+Gmail/INBOX"
-set postponed= "+Gmail/Drafts"
-set record=    "+Gmail/Sent"
-# needed for maildir format
-set mbox_type = Maildir
-set sendmail  = "/usr/bin/msmtp -a gmail"
-set from      = "ziggo1879@gmail.com"
+set sendmail="msmtp -a gmail"
+
+#GPG
+set pgp_use_gpg_agent = no
+set pgp_timeout       = 3600
+set pgp_autosign      = no
+
+# SMIME
+set crypt_autosign           = no
+set crypt_replyencrypt       = no
+set crypt_replysign          = no
+set crypt_replysignencrypted = no

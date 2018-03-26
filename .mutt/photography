@@ -1,9 +1,15 @@
-set record    = "+Photography/Sent"
-set spoolfile = "+Photography/INBOX"
-set postponed = "+Photography/Drafts"
-# set header cache
-# set header_cache=~/Localmail/hcache
-# needed for maildir format
-set mbox_type=Maildir
-set sendmail      = "/usr/bin/msmtp -a photography"
-set from = "sven.ziegler@svenziegler.photography"
+set sendmail="msmtp -a photography"
+
+#GPG
+set pgp_use_gpg_agent = yes
+set pgp_timeout       = 3600
+set pgp_autosign      = yes
+
+# SMIME
+set crypt_autosign           = yes
+set crypt_replyencrypt       = yes
+set crypt_replysign          = yes
+set crypt_replysignencrypted = yes
+
+set smime_default_key  = "B2D503B909502B6EB52FE7008D927C5A6A952429"
+set smime_encrypt_with = "rsa2048"

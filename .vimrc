@@ -35,21 +35,24 @@ NeoBundle 'klen/rope-vim'
 NeoBundle 'tpope/vim-surround'
 NeoBundle 'godlygeek/tabular'
 "NeoBundle 'walm/jshint
-NeoBundle 'vim-syntastic/syntastic'
+"NeoBundle 'vim-syntastic/syntastic'
+NeoBundle 'w0rp/ale'
 NeoBundle 'tpope/vim-surround'
+NeoBundle 'godlygeek/tabular'
 NeoBundle 'tpope/vim-fugitive'
 NeoBundle 'tpope/vim-sensible'
 NeoBundle 'alvan/vim-closetag'
 NeoBundle 'tpope/vim-sexp-mappings-for-regular-people'
 NeoBundle 'jiangmiao/auto-pairs'
-
+NeoBundle 'raghur/vim-ghost', {'build': {'unix': 'sh ./install'}}
 " Web
 "NeoBundleLazy 'jelera/vim-javascript-syntax', {'autoload':{'filetypes':['javascript']}}
 NeoBundle 'pangloss/vim-javascript'
 NeoBundle 'digitaltoad/vim-jade'
 NeoBundle 'mattn/emmet-vim'
 NeoBundle 'sidorares/node-vim-debugger'
-NeoBundle 'maksimr/vim-jsbeautify'
+"NeoBundle 'maksimr/vim-jsbeautify'
+NeoBundle 'prettier/vim-prettier', { 'do': 'yarn install' }
 NeoBundle 'editorconfig/editorconfig-vim'
 
 " Node
@@ -72,6 +75,14 @@ NeoBundle 'flazz/vim-colorschemes'
 "NeoBundle 'fholgado/minibufexpl.vim'
 NeoBundle 'fcpg/vim-farout'
 
+" Bugtracker
+NeoBundle 'rafi/vim-unite-issue', {
+    \  'directory': 'unite-issue',
+    \  'unite_sources': [ 'issue' ],
+    \  'depends': [
+    \    'mattn/webapi-vim', 'tyru/open-browser.vim', 'Shougo/unite.vim'
+    \  ]
+    \ }
 
 
 " Required:
@@ -101,6 +112,9 @@ set autoindent                          " Always  set auto indenting on
 
 
 set path=**
+set wildignore+=*/node_modules/*,*/build/*,*/bower_components/*,*/out*/
+set wildmenu
+set wildmode=list:longest,full
 
 set selectmode=mouse                    " select when using the mouse
 
@@ -110,7 +124,7 @@ set cmdheight=2                         " set the commandheight
 set nobackup
 set nowritebackup
 
-set textwidth=78                      " i like about 80 character width lines
+set textwidth=100                     " i like about 80 character width lines
 set mouse=a                           " enable use of mouse
 " Set 52 lines for the display, 1 for the status line.
 " and other display options
@@ -153,12 +167,39 @@ set backupdir=~/.vim/backup//
 set directory=~/.vim/swap//
 set undodir=~/.vim/undo//
 
+" Vertical Split Theme
+hi VertSplit ctermfg=white
+set fillchars+=vert:\|
+
 "set autochdir
 "}}}
 
-"{{{ Omnicomplete
+" {{{                        Spell Checking
+"=========================================================================
+if has("spell")
+  " turn spelling on by default
+  set spell
+  set spelllang=en,de
 
-" Enable omni completion.
+  " toggle spelling with F4 key
+  map <F4> :set spell!<CR><Bar>:echo "Spell Check: " . strpart("OffOn", 3 * &spell, 3)<CR>
+
+
+  " they were using white on white
+  hi clear PmenuSel
+  hi clear SpellBad
+  hi PmenuSel ctermfg=black ctermbg=lightgray
+  hi SpellBad cterm=underline 
+
+  " limit it to just the top 10 items
+  set sps=best,10                    
+
+endif
+"}}}
+
+" {{{                        Omni Completion
+"=========================================================================
+
 autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
 autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
 autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
@@ -167,11 +208,18 @@ autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 
 "}}}
 
-"{{{ Folding 
+" {{{                        Folding settings
+"=========================================================================
 
 autocmd FileType vim setlocal foldmethod=marker
 autocmd FileType html,markdown,javascript,xml setlocal foldmethod=syntax
 
+"}}}
+
+" {{{                        Syntax Highlighting
+"=========================================================================
+
+autocmd BufNewFile,BufReadPost *.md set filetype=markdown
 
 "}}}
 
@@ -186,35 +234,74 @@ let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 
-let g:syntastic_javascript_checkers = ['flow']
+let g:syntastic_javascript_checkers = ['eslint']
 let g:syntastic_html_checkers = ['tidy']
 let g:syntastic_json_checkers = ['tidy']
 
 let g:syntastic_javascript_closurecompiler_path = "~/.vim/closure-compiler-v20171023.jar"
+let g:syntastic_javascript_eslint_args = ['--fix']
+
+"accordingly to --fix, we had to reread the file after write
+" enable autoread to reload any files from files when checktime is called and
+" the file is changed
+set autoread
+" add an autocmd after vim started to execute checktime for *.js files on write
+au VimEnter *.js au BufWritePost *.js checktime
+" call checktime after systasticscheck
+function! SyntasticCheckHook(errors)
+  checktime
+endfunction
+"}}}
+
+" {{{                        Ale-Linting
+"=========================================================================
+" Put this in vimrc or a plugin file of your own.
+" After this is configured, :ALEFix will try and fix your JS code with ESLint.
+let g:ale_fixers = {
+\   'javascript': ['eslint'],
+\}
+
+" Set this setting in vimrc if you want to fix files automatically on save.
+" This is off by default.
+let g:ale_fix_on_save = 1
+
+" different signs for warning/error
+let g:ale_sign_error = '>>'
+let g:ale_sign_warning = '--'
+
+let g:ale_echo_msg_error_str = 'E'
+let g:ale_echo_msg_warning_str = 'W'
+let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
+
+let g:ale_open_list = 0
+
+nnoremap <leader>? :ALEDetail<cr>
 "}}}
 
 "{{{ JSBeatufiy
-map <c-f> :call JsBeautify()<cr>
-" or
-autocmd FileType javascript noremap <buffer>  <c-f> :call JsBeautify()<cr>
-" for json
-autocmd FileType json noremap <buffer> <c-f> :call JsonBeautify()<cr>
-" for jsx
-autocmd FileType jsx noremap <buffer> <c-f> :call JsxBeautify()<cr>
-" for html
-autocmd FileType html noremap <buffer> <c-f> :call HtmlBeautify()<cr>
-" for css or scss
-autocmd FileType css noremap <buffer> <c-f> :call CSSBeautify()<cr>
+if exists('JsBeautify') 
+  map <c-f> :call JsBeautify()<cr>
+  " or
+  autocmd FileType javascript noremap <buffer>  <c-f> :call JsBeautify()<cr>
+  " for json
+  autocmd FileType json noremap <buffer> <c-f> :call JsonBeautify()<cr>
+  " for jsx
+  autocmd FileType jsx noremap <buffer> <c-f> :call JsxBeautify()<cr>
+  " for html
+  autocmd FileType html noremap <buffer> <c-f> :call HtmlBeautify()<cr>
+  " for css or scss
+  autocmd FileType css noremap <buffer> <c-f> :call CSSBeautify()<cr>
 
 
-".vimrc
-autocmd FileType javascript vnoremap <buffer>  <c-f> :call RangeJsBeautify()<cr>
-autocmd FileType json vnoremap <buffer> <c-f> :call RangeJsonBeautify()<cr>
-autocmd FileType jsx vnoremap <buffer> <c-f> :call RangeJsxBeautify()<cr>
-autocmd FileType html vnoremap <buffer> <c-f> :call RangeHtmlBeautify()<cr>
-autocmd FileType css vnoremap <buffer> <c-f> :call RangeCSSBeautify()<cr>
+  ".vimrc
+  autocmd FileType javascript vnoremap <buffer>  <c-f> :call RangeJsBeautify()<cr>
+  autocmd FileType json vnoremap <buffer> <c-f> :call RangeJsonBeautify()<cr>
+  autocmd FileType jsx vnoremap <buffer> <c-f> :call RangeJsxBeautify()<cr>
+  autocmd FileType html vnoremap <buffer> <c-f> :call RangeHtmlBeautify()<cr>
+  autocmd FileType css vnoremap <buffer> <c-f> :call RangeCSSBeautify()<cr>
 
-let g:EditorConfig_exclude_patterns = ['fugitive://.*']
+  let g:EditorConfig_exclude_patterns = ['fugitive://.*']
+endif 
 
 "}}}
 
@@ -335,8 +422,7 @@ let g:EditorConfig_exclude_patterns = ['fugitive://.*']
 " let g:neosnippet#snippets_directory='~/Templates/vim/snippets'
 " "}}}
 
-
-"{{{ Ultisnips }}}
+"{{{ Ultisnips 
 " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
 let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<c-b>"
@@ -373,3 +459,58 @@ let g:javascript_conceal_noarg_arrow_function = "🞅"
 let g:javascript_conceal_underscore_arrow_function = "🞅"
 
 "}}}
+
+" {{{                        Fast FileType Changes
+"=========================================================================
+command! Html set filetype=html
+command! Js set filetype=javascript
+command! Css set filetype=css
+command! Md set filetype=markdown
+"}}}
+
+" {{{                        Bug Tracker
+"=========================================================================
+let g:jira_url = 'https://support.e2ebridge.com'
+let g:jira_username = 'sziegler'
+let g:jira_password = system('secret-tool lookup user sziegler platform support.e2ebridge.com')
+
+" Customize
+let g:unite_source_issue_jira_priority_table = {
+  \ 10000: '◡', 1: '⚡', 2: 'ᛏ', 3: '●', 4: '○', 5: '▽' }
+
+let g:unite_source_issue_jira_status_table = {
+  \ 1: 'plan', 3: 'develop', 4: 'reopened', 5: 'resolved', 6: 'closed',
+  \ 10000: 'feedback', 10001: 'staged', 10002: 'waiting',
+  \ 10003: 'deployed', 10004: 'pending', 10008: 'review' }
+
+let g:unite_source_issue_jira_type_table = {
+  \ 1: 'bug', 2: 'feature', 3: 'task', 4: 'change', 5: 'sub-task',
+  \ 6: 'epic', 7: 'story', 8: 'system', 9: 'sub-bug' }
+"}}}
+
+" {{{                        Tabularize
+"=========================================================================
+if exists(":Tabularize")
+  nmap <leader>a= :Tabularize /=<CR>
+  vmap <leader>a= :Tabularize /=<CR>
+  nmap <leader>a: :Tabularize /:\zs<CR>
+  vmap <leader>a: :Tabularize /:\zs<CR>
+endif
+
+" Tpopes Auto align
+inoremap <silent> <Bar>   <Bar><Esc>:call <SID>align()<CR>a
+
+function! s:align()
+  let p = '^\s*|\s.*\s|\s*$'
+  if exists(':Tabularize') && getline('.') =~# '^\s*|' && (getline(line('.')-1) =~# p || getline(line('.')+1) =~# p)
+    let column = strlen(substitute(getline('.')[0:col('.')],'[^|]','','g'))
+    let position = strlen(matchstr(getline('.')[0:col('.')],'.*|\s*\zs.*'))
+    Tabularize/|/l1
+    normal! 0
+    call search(repeat('[^|]*|',column).'\s\{-\}'.repeat('.',position),'ce',line('.'))
+  endif
+endfunction
+
+"}}}
+
+

@@ -1,9 +1,16 @@
-set spoolfile= "+Gmx/INBOX"
-set postponed= "+Gmx/Drafts"
-set record=    "+Gmx/Sent"
-# set header cache
-# set header_cache=~/Localmail/hcache
-# needed for maildir format
-set mbox_type=Maildir
-set sendmail      = "/usr/bin/msmtp -a gmx"
-set from = "svzieg@gmx.de"
+set sendmail="msmtp -a gmx"
+my_hdr "Bcc: svzieg@gmx.de"
+
+#GPG
+set pgp_use_gpg_agent = yes
+set pgp_timeout       = 3600
+set pgp_autosign      = yes
+
+# SMIME
+set crypt_autosign           = yes
+set crypt_replyencrypt       = yes
+set crypt_replysign          = yes
+set crypt_replysignencrypted = yes
+
+set smime_default_key  = "3452E0CC3B819C1536CC786BF9AB89B4D4A18AEA"
+set smime_encrypt_with = "rsa2048"
