@@ -255,15 +255,27 @@ endfunction
 
 " {{{                        Ale-Linting
 "=========================================================================
+
+
+" linter settings
+let g:ale_lint_on_text_changed = 0
+let g:ale_lint_on_enter = 1
+let g:ale_lint_on_save = 1
+
 " Put this in vimrc or a plugin file of your own.
 " After this is configured, :ALEFix will try and fix your JS code with ESLint.
 let g:ale_fixers = {
-\   'javascript': ['eslint'],
+\   'javascript': ['prettier', 'eslint'],
 \}
 
 " Set this setting in vimrc if you want to fix files automatically on save.
 " This is off by default.
-let g:ale_fix_on_save = 1
+let g:ale_fix_on_save = 0
+
+
+" eslint_d statt eslint benutzten da schneller
+let g:ale_javascript_eslint_use_global = 1
+let g:ale_javascript_eslint_executable = 'eslint_d'
 
 " different signs for warning/error
 let g:ale_sign_error = '>>'
