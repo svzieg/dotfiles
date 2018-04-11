@@ -24,21 +24,20 @@ bindsym $mod+n border normal
 # is used in the bar {} block below.
 font pango:System San Francisco Display, Awesome 11
 
+#color from pywal
+set_from_resource $bg i3wm.color0 #2f343f
+set_from_resource $fg i3wm.color7 #d8dee8
+set_from_resource $c1 i3wm.color1 #bf616a
+set_from_resource $c3 i3wm.color3 #ebcb8b
+set_from_resource $c5 i3wm.color5 #81a1c1
 
-
-set $bg-color 	         #2f343f
-set $inactive-bg-color   #2f343f
-set $text-color          #f3f4f5
-set $inactive-text-color #676E7D
-set $urgent-bg-color     #E53935
-
-# window colors
-#                       border              background         text                 indicator
-client.focused          $bg-color           $bg-color          $text-color          #00ff00
-client.unfocused        $inactive-bg-color $inactive-bg-color $inactive-text-color #00ff00
-client.focused_inactive	$foreground_i3wmthemer	$background_i3wmthemer	$foreground_i3wmthemer	$background_i3wmthemer		$background_i3wmthemer
-client.urgent           $urgent-bg-color    $urgent-bg-color   $text-color          #00ff00
-
+# class                 border  backgr. text indicator child_border
+client.focused          $bg     $bg     $fg  $bg       $c1
+client.focused_inactive $bg     $bg     $fg  $bg       $c5
+client.unfocused        $bg     $bg     $fg  $bg       $c5
+client.urgent           $bg     $bg     $fg  $bg       $c3
+client.placeholder      $bg     $bg     $fg  $bg       $bg
+client.background       $bg
 
 
 # Use Mouse+$mod to drag floating windows
@@ -69,7 +68,11 @@ exec --no-startup-id pulseeffects --gapplication-service
 exec --no-startup-id davmail
 exec --no-startup-id offlineimap
 
+exec --no-startup-id wal -i ~/.i3/wallpaper.jpg
+
+
 bindsym $mod+Ctrl+m exec pavucontrol
+bindsym $mod+Ctrl+i exec nm-connection-editor
 
 ################################################################################################
 
@@ -321,6 +324,11 @@ mode "resize" {
 bindsym $mod+Shift+l exec --no-startup-id blurlock
 
 # Start i3bar to display a workspace bar (plus the system information i3status if available)
+
+bar {
+        i3bar_command pkill lemonbar;/home/svzieg/.bar/panel-pywal
+}
+
 #bar {
 #	status_command i3blocks -c /home/svzieg/.i3/i3blocks.conf
 #	#wheel_up_cmd nop
@@ -343,19 +351,18 @@ exec autorandr --change
 
 # Autostart applications
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
-exec --no-startup-id nitrogen --restore
 exec --no-startup-id nm-applet
 exec --no-startup-id xfce4-power-manager
 exec --no-startup-id pamac-tray
 #exec --no-startup-id clipit
 # exec --no-startup-id blueman
-# exec_always --no-startup-id sbxkb
+exec_always --no-startup-id sbxkb
 exec --no-startup-id compton -b
 exec --no-startup-id conky -c ~/.config/conky/.conkyrc
 # exec --no-startup-id start_conky_green
 exec --no-startup-id xautolock -time 10 -locker blurlock
 exec --no-startup-id owncloud 
-exec_always --no-startup-id $HOME/.config/polybar/launch.sh
+# exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 
 
 # Autostart Workenvironment
@@ -379,7 +386,7 @@ client.urgent #274D01 #900000 #FFFFFF #900000
 for_window [class="^.*"] border pixel 2
 
 # Set inner/outer gaps
-gaps inner 5
+gaps inner 2
 gaps outer 0
 
 # Additionally, you can issue commands with the following syntax. This is useful to bind keys to changing the gap size.
