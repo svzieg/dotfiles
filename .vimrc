@@ -45,6 +45,7 @@ NeoBundle 'alvan/vim-closetag'
 NeoBundle 'tpope/vim-sexp-mappings-for-regular-people'
 NeoBundle 'jiangmiao/auto-pairs'
 NeoBundle 'raghur/vim-ghost', {'build': {'unix': 'sh ./install'}}
+NeoBundle 'Badacadabra/vim-archery'
 " Web
 "NeoBundleLazy 'jelera/vim-javascript-syntax', {'autoload':{'filetypes':['javascript']}}
 NeoBundle 'pangloss/vim-javascript'
@@ -134,7 +135,8 @@ if has('gui_running')
 
     set columns=110                       " add columns for the Project plugin
 endif
-colorscheme farout
+" colorscheme farout
+colorscheme iceberg
 
 set history=50                          " keep 50 lines of command line history
     
@@ -189,7 +191,7 @@ if has("spell")
   hi clear PmenuSel
   hi clear SpellBad
   hi PmenuSel ctermfg=black ctermbg=lightgray
-  hi SpellBad cterm=underline 
+  hi SpellBad cterm=underline ctermbg=none
 
   " limit it to just the top 10 items
   set sps=best,10                    

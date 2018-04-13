@@ -68,7 +68,7 @@ exec --no-startup-id pulseeffects --gapplication-service
 exec --no-startup-id davmail
 exec --no-startup-id offlineimap
 
-exec --no-startup-id wal -i ~/.i3/wallpaper.jpg
+exec --no-startup-id wal -i ~/wallpaper/Free-Arch-Linux-Image.png
 
 
 bindsym $mod+Ctrl+m exec pavucontrol
@@ -324,10 +324,7 @@ mode "resize" {
 bindsym $mod+Shift+l exec --no-startup-id blurlock
 
 # Start i3bar to display a workspace bar (plus the system information i3status if available)
-
-bar {
-        i3bar_command pkill lemonbar;/home/svzieg/.bar/panel-pywal
-}
+exec_always --no-startup-id $home/.config/lemonbar/startbar &
 
 #bar {
 #	status_command i3blocks -c /home/svzieg/.i3/i3blocks.conf

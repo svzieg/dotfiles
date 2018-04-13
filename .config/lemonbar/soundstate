@@ -1,0 +1,25 @@
+#!/bin/bash
+
+outstr=""
+volstatus=$(pulseaudio-ctl full-status)
+
+i=0
+for x in $(echo $volstatus | tr " " "\n")
+do
+  case "$i" in
+    0) volume=$(echo "$x");;
+    1) mute=$(echo "$x");;
+    2) sourcemute=$(echo "$x");;
+  esac
+  let i=i+1
+done
+
+if [[ $mute == "yes" ]]
+then
+  outstr="${outstr} Mute"
+else
+  outstr=${outstr}${volume}
+fi
+
+
+echo ${outstr}
