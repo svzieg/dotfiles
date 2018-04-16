@@ -20,7 +20,9 @@
 *.color15:      #f1cbb3
 
 URxvt.internalBorder: 6
-URxvt.font: xft:Monofur Nerd Font Mono:regular:size=12
+urxvt*font: xft:Monofur Nerd Font Mono:style=Book:size=12, \
+            xft:FontAwesome:style=Regular:pixelsize=12
+
 URxvt.geometry: 80x20
 URxvt.depth: 32
 URxvt.background:	[100]#1e1e20

@@ -18,20 +18,30 @@ newCounter="$(notmuch count tag:new)"
 # retag wrong tagged tags (comment in)
 #notmuch tag -inbox -gmail -gmx -photography -work -sent +new -- 
 
-# retag all "new" messages "inbox" and "unread"
-notmuch tag +inbox -new -- tag:new
 
 # tag all messages from "me" as sent and remove tags inbox and unread
-notmuch tag -new -inbox +sent -- from:svzieg@gmx.de or from:sven.ziegler@scheer-group.com or from:sven.ziegler@svenziegler.photography or from:ziggo1879@gmail.com
+notmuch tag -new -inbox +sent -- tag:new and from:svzieg@gmx.de or from:sven.ziegler@scheer-group.com or from:sven.ziegler@svenziegler.photography or from:ziggo1879@gmail.com
 # tag newsletters, but dont show them in inbox
-notmuch tag +newsletters -new -- from:newsletter@example.org or subject:'newsletter*'
+# notmuch tag +newsletters -new -- from:newsletter@example.org or subject:'newsletter*'
 
+# retag all "new" messages "inbox" and "unread"
+notmuch tag +inbox -- tag:new
+notmuch tag -inbox +newsletter -- tag:inbox and to:ziggo1879+newsletter@gmail.com
+notmuch tag -inbox +spam -- tag:inbox and to:ziggo1879+gewinn@gmail.com
 
 # add receiver tag
-notmuch tag +gmail --        tag:inbox and to:ziggo1879@gmail.com
-notmuch tag +gmx --          tag:inbox and to:svzieg@gmx.de
-notmuch tag +photography --  tag:inbox and to:sven.ziegler@svenziegler.photography
-notmuch tag +work --         tag:inbox and to:sven.ziegler@scheer-group.com
+notmuch tag +gmail --        tag:new and to:ziggo1879@gmail.com
+notmuch tag +gmx --          tag:new and to:svzieg@gmx.de
+notmuch tag +photography --  tag:new and to:sven.ziegler@svenziegler.photography
+notmuch tag +work --         tag:new and to:sven.ziegler@scheer-group.com
+
+# add wiki, bugtracker tag
+notmuch tag +wiki --         tag:new and tag:work and from:wiki@e2ebridge.com
+notmuch tag +jira --         tag:new and tag:work and from:issues@e2ebridge.com
+notmuch tag +bpaas --        tag:new and tag:work and subject:".*(?i)bpaas.*"
+
+# delete all new tags
+notmuch tag -new -- tag:new
 
 if [ "$newCounter" != "0" ]; then
   notify-send "`$newCounter` Mails arrived"  
