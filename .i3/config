@@ -324,7 +324,7 @@ mode "resize" {
 bindsym $mod+Shift+l exec --no-startup-id blurlock
 
 # Start i3bar to display a workspace bar (plus the system information i3status if available)
-exec_always --no-startup-id $home/.config/lemonbar/startbar &
+exec_always --no-startup-id ~/.config/lemonbar/startbar &
 
 #bar {
 #	status_command i3blocks -c /home/svzieg/.i3/i3blocks.conf
