@@ -46,9 +46,17 @@ NeoBundle 'tpope/vim-sexp-mappings-for-regular-people'
 NeoBundle 'jiangmiao/auto-pairs'
 NeoBundle 'raghur/vim-ghost', {'build': {'unix': 'sh ./install'}}
 NeoBundle 'Badacadabra/vim-archery'
+NeoBundle 'xolox/vim-notes', {'depends': ['vim-misc']}
+NeoBundle 'tpope/vim-dispatch'
+NeoBundle 'mileszs/ack.vim'
+
+"Syntax
+" NeoBundle 'sheerun/vim-polyglot'
+NeoBundle 'pangloss/vim-javascript'
+NeoBundle 'elzr/vim-json'
+
 " Web
 "NeoBundleLazy 'jelera/vim-javascript-syntax', {'autoload':{'filetypes':['javascript']}}
-NeoBundle 'pangloss/vim-javascript'
 NeoBundle 'digitaltoad/vim-jade'
 NeoBundle 'mattn/emmet-vim'
 NeoBundle 'sidorares/node-vim-debugger'
@@ -104,16 +112,10 @@ NeoBundleCheck
 set backspace=indent,eol,start          " allow backspacing over everything in insert mode
 
 
-syntax on
-
-set shiftwidth=2                        " I like 4 spaces for indenting
-set tabstop=2                           " I like 4 stops
-set expandtab                           " Spaces instead of tabs
-set autoindent                          " Always  set auto indenting on
 
 
 set path=**
-set wildignore+=*/node_modules/*,*/build/*,*/bower_components/*,*/out*/
+set wildignore+=*/node_modules/*,*/build/*,*/bower_components/*,*/out*/,*/www*/,*/.vim$,\~$,*/.log,*/.aux,*/.cls,*/.aux,*/.bbl,*/.blg,*/.fls,*/.fdb*/,*/.toc,*/.out,*/.glo,*/.log,*/.ist,*/.fdb_latexmk,*/.min*/
 set wildmenu
 set wildmode=list:longest,full
 
@@ -154,7 +156,6 @@ set ignorecase                          " Set ignorecase on
 set scs                                 " smart search (override 'ic' when pattern has uppers)
 set gdefault                            " Set 'g' substitute flag on
 
-set statusline=[%02n]\ %f\ %(\[%M%R%H]%)%=\ %4l,%02c%2V\ %P%*           " Set status line
 
 set laststatus=2                        " Always display a status line at the bottom of the window
 
@@ -169,11 +170,71 @@ set backupdir=~/.vim/backup//
 set directory=~/.vim/swap//
 set undodir=~/.vim/undo//
 
+
+"set autochdir
+"}}}
+
+" {{{                        FORMAT
+"=========================================================================
+
+syntax on
+
+if has('conceal')
+  set conceallevel=2 concealcursor=nv 
+  let g:indentLine_concealcursor = "nv"
+endif
+
+set shiftwidth=2                        " I like 2 spaces for indenting
+set tabstop=2                           " I like 2 stops
+set expandtab                           " Spaces instead of tabs
+set autoindent                          " Always  set auto indenting on
+
 " Vertical Split Theme
 hi VertSplit ctermfg=white
 set fillchars+=vert:\|
 
-"set autochdir
+set statusline=[%02n]\ %f\ %(\[%M%R%H]%)%=\ %4l,%02c%2V\ %P%*           " Set status line
+
+" {{{                        VIM-JSON
+"=========================================================================
+let g:vim_json_syntax_conceal = 2
+augroup jsonshow
+  au!
+  au FileType json let g:json_conceal="adgms"
+  au FileType json hi Conceal guibg=White guifg=DarkMagenta
+augroup END
+"}}}
+
+"{{{ Vim-Javascript
+"=================================================================================================================ff
+
+let g:javascript_plugin_jsdoc = 1
+let g:javascript_plugin_ngdoc = 1
+let g:javascript_plugin_flow = 1
+
+let g:javascript_conceal_function             = "ƒ"
+let g:javascript_conceal_null                 = "ø"
+let g:javascript_conceal_this                 = "@"
+let g:javascript_conceal_return               = "⇚"
+let g:javascript_conceal_undefined            = "¿"
+let g:javascript_conceal_NaN                  = "ℕ"
+let g:javascript_conceal_prototype            = "¶"
+let g:javascript_conceal_static               = "•"
+let g:javascript_conceal_super                = "Ω"
+let g:javascript_conceal_arrow_function       = "⇒"
+let g:javascript_conceal_noarg_arrow_function = "🞅"
+let g:javascript_conceal_underscore_arrow_function = "🞅"
+
+"}}}
+
+" {{{                        Folding settings
+"=========================================================================
+
+autocmd FileType vim setlocal foldmethod=marker
+" autocmd FileType html,markdown,javascript,xml setlocal foldmethod=syntax
+
+"}}}
+
 "}}}
 
 " {{{                        Spell Checking
@@ -210,13 +271,6 @@ autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 
 "}}}
 
-" {{{                        Folding settings
-"=========================================================================
-
-autocmd FileType vim setlocal foldmethod=marker
-autocmd FileType html,markdown,javascript,xml setlocal foldmethod=syntax
-
-"}}}
 
 " {{{                        Syntax Highlighting
 "=========================================================================
@@ -268,7 +322,10 @@ let g:ale_lint_on_save = 1
 " After this is configured, :ALEFix will try and fix your JS code with ESLint.
 let g:ale_fixers = {
 \   'javascript': ['prettier', 'eslint'],
+\   'html': ['prettier', 'eslint'],
 \}
+  
+let g:ale_linter_aliases = {'html': ['html', 'javascript', 'css']}
 
 " Set this setting in vimrc if you want to fix files automatically on save.
 " This is off by default.
@@ -452,28 +509,6 @@ let g:UltiSnipsSnippetDirectories=["/home/svzieg/Templates/vim/snippets", "/home
 inoremap <Tab> <c-r>=UltiSnips#ExpandSnippet()<cr>
 "}}}
 
-"{{{ Vim-Javascript
-"=================================================================================================================ff
-
-let g:javascript_plugin_jsdoc = 1
-let g:javascript_plugin_ngdoc = 1
-let g:javascript_plugin_flow = 1
-
-let g:javascript_conceal_function             = "ƒ"
-let g:javascript_conceal_null                 = "ø"
-let g:javascript_conceal_this                 = "@"
-let g:javascript_conceal_return               = "⇚"
-let g:javascript_conceal_undefined            = "¿"
-let g:javascript_conceal_NaN                  = "ℕ"
-let g:javascript_conceal_prototype            = "¶"
-let g:javascript_conceal_static               = "•"
-let g:javascript_conceal_super                = "Ω"
-let g:javascript_conceal_arrow_function       = "⇒"
-let g:javascript_conceal_noarg_arrow_function = "🞅"
-let g:javascript_conceal_underscore_arrow_function = "🞅"
-
-"}}}
-
 " {{{                        Fast FileType Changes
 "=========================================================================
 command! Html set filetype=html
@@ -526,5 +561,6 @@ function! s:align()
 endfunction
 
 "}}}
+
 
 

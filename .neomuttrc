@@ -72,7 +72,8 @@ set reverse_name      = yes
 
 # autoview settings, show HTML if no Text is available
 auto_view text/html
-alternative_order text/enriched text/plain text/html text
+auto_view text/calendar
+alternative_order text/enriched text/plain text/html text/*
 ## Make quick html view macro
 bind index,pager V  noop        ## Unbinds V from version
 macro index,pager V "<view-attachments><search>html<enter><view-mailcap><exit>"
@@ -178,8 +179,11 @@ set vfolder_format = "%6n(%6N) %f" # When set, NeoMutt will use the first virtua
 set virtual_spoolfile = yes # setup time window preferences
 # first setup the duration, and then the time unit of that duration
 # when set to 0 (the default) the search window feature is disable
-set nm_query_window_duration=2 
+set nm_query_window_duration=4 
 set nm_query_window_timebase="week" 
+# use very high $read_inc to speed up reading hcache'd maildirs
+folder-hook . 'set read_inc=1000'
+folder-hook . 'set header_cache=/tmp/cache'
 # or "hour", "day", "week", "month", "year" 
 # --------------------------------------------------------------------------
 # FUNCTIONS - shown with an example mapping
