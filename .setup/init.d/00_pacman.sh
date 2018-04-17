@@ -1,1 +1,1 @@
-sudo pacman -S git
+sudo pacman -S git pass qutebrowser tmux
