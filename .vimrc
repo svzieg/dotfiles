@@ -49,6 +49,7 @@ NeoBundle 'Badacadabra/vim-archery'
 NeoBundle 'xolox/vim-notes', {'depends': ['vim-misc']}
 NeoBundle 'tpope/vim-dispatch'
 NeoBundle 'mileszs/ack.vim'
+NeoBundle 'craigemery/vim-autotag'
 
 "Syntax
 " NeoBundle 'sheerun/vim-polyglot'
@@ -175,12 +176,14 @@ set undodir=~/.vim/undo//
 "}}}
 
 " {{{                        FORMAT
+"
 "=========================================================================
 
 syntax on
 
 if has('conceal')
   set conceallevel=2 concealcursor=nv 
+  hi Conceal ctermbg=NONE ctermfg=red
   let g:indentLine_concealcursor = "nv"
 endif
 
@@ -205,7 +208,7 @@ augroup jsonshow
 augroup END
 "}}}
 
-"{{{ Vim-Javascript
+"{{{ Vim-Javascripti
 "=================================================================================================================ff
 
 let g:javascript_plugin_jsdoc = 1
@@ -219,11 +222,11 @@ let g:javascript_conceal_return               = "⇚"
 let g:javascript_conceal_undefined            = "¿"
 let g:javascript_conceal_NaN                  = "ℕ"
 let g:javascript_conceal_prototype            = "¶"
-let g:javascript_conceal_static               = "•"
+let g:javascript_conceal_static               = "ℂ"
 let g:javascript_conceal_super                = "Ω"
 let g:javascript_conceal_arrow_function       = "⇒"
-let g:javascript_conceal_noarg_arrow_function = "🞅"
-let g:javascript_conceal_underscore_arrow_function = "🞅"
+let g:javascript_conceal_noarg_arrow_function = "_"
+let g:javascript_conceal_underscore_arrow_function = "_"
 
 "}}}
 
@@ -270,7 +273,6 @@ autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
 autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 
 "}}}
-
 
 " {{{                        Syntax Highlighting
 "=========================================================================
