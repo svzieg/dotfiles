@@ -1,4 +1,10 @@
 
+function clone {
+    echo "installing oh-my-zsh"
+    git clone https://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh
+    echo "changing shell to zsh"
+    chsh -s /bin/zsh
+}
 
 if [ -f ~/.zshrc ]
 then
@@ -20,10 +26,7 @@ then
     # gesichert werden
     echo "~/.oh-my-zsh exists, but is not a git repository, backup"
     mv ~/.oh-my-zsh ~/.oh-my-zsh.bak
-    echo "installing oh-my-zsh"
-    git clone https://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh
-    echo "changing shell to zsh"
-    chsh -s /bin/zsh
+    clone
     echo "copy backuped files back to ~/oh-my-zsh"
     mv ~/.oh-my-zsh.bak ~/.oh-my-zsh
 
@@ -33,7 +36,8 @@ then
 
 
   cd "$cwd"
-
+else 
+  clone
 fi
 
 
