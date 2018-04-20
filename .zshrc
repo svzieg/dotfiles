@@ -45,3 +45,5 @@ alias mount_build='sudo sshfs -o allow_other,IdentityFile=/home/svzieg/.ssh/id_r
 
 alias config='/usr/bin/git --git-dir=/home/svzieg/.cfg/ --work-tree=/home/svzieg'
 compdef config='git'
+
+export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
