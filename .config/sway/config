@@ -44,7 +44,7 @@ client.background       $bg
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec terminal
+bindsym $mod+Return exec termite
 
 # kill focused window
 bindsym $mod+Shift+x kill
@@ -324,22 +324,23 @@ mode "resize" {
 bindsym $mod+Shift+l exec --no-startup-id swaylock -c 000000
 
 # Start i3bar to display a workspace bar (plus the system information i3status if available)
-exec_always --no-startup-id ~/.config/lemonbar/startbar &
+#exec_always --no-startup-id ~/.config/lemonbar/startbar &
 
-#bar {
-#	status_command i3blocks -c /home/svzieg/.i3/i3blocks.conf
-#	#wheel_up_cmd nop
-#	#wheel_down_cmd nop
-#	#font pango:Cantarell,Icons 9
-#	colors {
-#		background $bg-color
-#	    	separator #757575
-#		#                  border             background         text
-#		focused_workspace  $bg-color          $bg-color          $text-color
-#		inactive_workspace $inactive-bg-color $inactive-bg-color $inactive-text-color
-#		urgent_workspace   $urgent-bg-color   $urgent-bg-color   $text-color
-#	}
-#}
+bar {
+	status_command i3blocks -c /home/svzieg/.i3/i3blocks.conf
+	#wheel_up_cmd nop
+	#wheel_down_cmd nop
+	#font pango:Cantarell,Icons 9
+  position top
+	colors {
+		background $bg-color
+	    	separator #757575
+		#                  border             background         text
+		focused_workspace  $bg-color          $bg-color          $text-color
+		inactive_workspace $inactive-bg-color $inactive-bg-color $inactive-text-color
+		urgent_workspace   $urgent-bg-color   $urgent-bg-color   $text-color
+	}
+}
 
 
 # Restore layout
