@@ -19,7 +19,7 @@ fi
 
 if [ $(which yaourt) ]
 then
-  yaourt -S --noconfirm autoenv
+  yaourt -S --noconfirm autoenv lemonbar
 else 
   >&2 echo "ACHTUNG: YAOURT nicht gefunden"
 fi
