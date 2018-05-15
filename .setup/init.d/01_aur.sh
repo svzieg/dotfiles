@@ -19,7 +19,7 @@ fi
 
 if [ $(which yaourt) ]
 then
-  yaourt -S --noconfirm autoenv lemonbar
+  yaourt -S --noconfirm autoenv ttf-monofur-powerline-git
 else 
   >&2 echo "ACHTUNG: YAOURT nicht gefunden"
 fi

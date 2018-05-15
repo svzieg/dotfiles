@@ -2,11 +2,6 @@ export XKB_DEFAULT_LAYOUT=de,de
 export XKB_DEFAULT_VARIANT=neo,nodeadkeys
 export XKB_DEFAULT_OPTIONS=grp:alt_shift_toggle
 
-# If running trom tty1 start sway
-if [ $(tty) == "/dev/tty1" ]; then
-	sway
-	exit 0
-fi
 
 if [ -f /etc/bash_completion ]; then
 	    . /etc/bash_completion
@@ -84,3 +79,9 @@ alias config='/usr/bin/git --git-dir=/home/svzieg/.cfg/ --work-tree=/home/svzieg
 export SONAR_SCANNER_HOME="/opt/sonar-scanner"
 export PATH="${PATH}:${SONAR_SCANNER_HOME}/bin"
 source /usr/share/autoenv/activate.sh
+
+# If running trom tty1 start sway
+if [ $(tty) == "/dev/tty1" ]; then
+	sway
+	exit 0
+fi

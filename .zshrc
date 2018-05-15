@@ -1,3 +1,5 @@
+
+
 # Created by newuser for 5.2
 # If you come from bash you might have to change your $PATH.
 export PATH=$PATH:/home/svzieg/Android/Sdk:/home/svzieg/Android/Sdk/tools:/home/svzieg/Android/Sdk/platform-tools
@@ -5,7 +7,7 @@ export PATH=$PATH:/home/svzieg/Android/Sdk:/home/svzieg/Android/Sdk/tools:/home/
 # Path to your oh-my-zsh installation.
 export ZSH=/home/svzieg/.oh-my-zsh
 
-plugins=(git jira node npm archlinux systemd nyan pj command-not-found autoenv colored-man-pages colorize)
+plugins=(git node npm archlinux systemd nyan pj command-not-found autoenv colored-man-pages colorize)
 
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
@@ -47,3 +49,14 @@ alias config='/usr/bin/git --git-dir=/home/svzieg/.cfg/ --work-tree=/home/svzieg
 compdef config='git'
 
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+
+
+export XKB_DEFAULT_LAYOUT=de,de
+export XKB_DEFAULT_VARIANT=neo,nodeadkeys
+export XKB_DEFAULT_OPTIONS=grp:alt_shift_toggle
+
+# If running trom tty1 start sway
+if [ $(tty) = "/dev/tty1" ]; then
+	sway
+	exit 0
+fi
