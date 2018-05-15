@@ -4,9 +4,6 @@
 # Please see http://i3wm.org/docs/userguide.html for a complete reference!
 
 
-output eDP-1 pos 0 0
-output VGA-1 pos 3600 0
-output HDMI-A-1 pos 1920 0
 
 
 
@@ -59,6 +56,7 @@ bindsym $mod+Shift+x kill
 
 # start program launcher
 bindsym $mod+d exec --no-startup-id dmenu_recency -p Run -l 10
+
 #bindsym $mod+d exec rofi -show run 
 #bindsym $mod+d exec termite --class "fzf-menu" --geometry 640x480 \ 
 #-e "/path/to/menu/script.sh fzf"
@@ -338,21 +336,6 @@ bindsym $mod+Shift+l exec --no-startup-id swaylock -c 000000
 # Start i3bar to display a workspace bar (plus the system information i3status if available)
 #exec_always --no-startup-id ~/.config/lemonbar/startbar &
 
-bar {
-	status_command i3blocks -c /home/svzieg/.i3/i3blocks.conf
-	#wheel_up_cmd nop
-	#wheel_down_cmd nop
-	#font pango:Cantarell,Icons 9
-  position top
-	colors {
-		background $bg-color
-	    	separator #757575
-		#                  border             background         text
-		focused_workspace  $bg-color          $bg-color          $text-color
-		inactive_workspace $inactive-bg-color $inactive-bg-color $inactive-text-color
-		urgent_workspace   $urgent-bg-color   $urgent-bg-color   $text-color
-	}
-}
 
 
 # Restore layout
@@ -448,3 +431,4 @@ mode "$mode_gaps_outer" {
         bindsym Escape mode "default"
 }
 
+include ~/.config/sway/config.d/*

@@ -1,0 +1,5 @@
+#!conf
+# Konfigurationsdatei für die Displayausgabe
+output eDP-1 pos 0 0
+output VGA-1 pos 3600 0
+output HDMI-A-1 pos 1920 0

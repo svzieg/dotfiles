@@ -50,6 +50,7 @@ NeoBundle 'xolox/vim-notes', {'depends': ['vim-misc']}
 NeoBundle 'tpope/vim-dispatch'
 NeoBundle 'mileszs/ack.vim'
 NeoBundle 'craigemery/vim-autotag'
+NeoBundle 'ktklin/confluence-vim'
 
 "Syntax
 " NeoBundle 'sheerun/vim-polyglot'
@@ -565,4 +566,8 @@ endfunction
 "}}}
 
 
-
+"{{{ Confluence
+"
+let g:confluence_url= 'https://wiki.e2ebridge.com/rest/api/content'
+"
+"}}}

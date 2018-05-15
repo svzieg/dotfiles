@@ -1,0 +1,18 @@
+#!conf
+
+# Konfiguration für die Statusbar
+bar {
+	status_command i3blocks -c /home/svzieg/.i3/i3blocks.conf
+	#wheel_up_cmd nop
+	#wheel_down_cmd nop
+	#font pango:Cantarell,Icons 9
+  position top
+	colors {
+		background $bg-color
+	    	separator #757575
+		#                  border             background         text
+		focused_workspace  $bg-color          $bg-color          $text-color
+		inactive_workspace $inactive-bg-color $inactive-bg-color $inactive-text-color
+		urgent_workspace   $urgent-bg-color   $urgent-bg-color   $text-color
+	}
+}
