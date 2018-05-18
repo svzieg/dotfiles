@@ -78,7 +78,6 @@ alias config='/usr/bin/git --git-dir=/home/svzieg/.cfg/ --work-tree=/home/svzieg
 alias config='/usr/bin/git --git-dir=/home/svzieg/.cfg/ --work-tree=/home/svzieg'
 export SONAR_SCANNER_HOME="/opt/sonar-scanner"
 export PATH="${PATH}:${SONAR_SCANNER_HOME}/bin"
-source /usr/share/autoenv/activate.sh
 
 # If running trom tty1 start sway
 if [ $(tty) == "/dev/tty1" ]; then

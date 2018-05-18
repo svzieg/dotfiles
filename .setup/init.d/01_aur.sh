@@ -19,7 +19,7 @@ fi
 
 if [ $(which yaourt) ]
 then
-  yaourt -S --noconfirm autoenv ttf-monofur-powerline-git
+  yaourt -S --noconfirm brightnessctl dmenu2 pamac_aur davmail
 else 
   >&2 echo "ACHTUNG: YAOURT nicht gefunden"
 fi

@@ -1,6 +1,5 @@
 [general]
 pythonfile = ~/.offlineimap.py
-maxsyncaccounts = 4
 accounts = Gmail, Gmx, Photography, Work
 
 
@@ -28,25 +27,21 @@ footer = "\n"
 localrepository = GmailLocal
 remoterepository = GmailRemote
 postsynchook = notmuch new
-autorefresh = 5
 
 [Account Gmx]
 localrepository = GmxLocal
 remoterepository = GmxRemote
 postsynchook = notmuch new
-autorefresh = 5
 
 [Account Work]
 localrepository = WorkLocal
 remoterepository = WorkRemote
 postsynchook = notmuch new
-autorefresh = 5
 
 [Account Photography]
 localrepository = PhotographyLocal
 remoterepository = PhotographyRemote
 postsynchook = notmuch new
-autorefresh = 5
 
 [Repository GmailRemote]
 type = Gmail
@@ -70,7 +65,6 @@ remotehost = imap.gmx.net
 remoteusereval = get_username("gmx")
 remotepasseval = get_password("gmx")
 maxconnections = 5
-autorefresh = 5
 sslcacertfile = /etc/ssl/certs/ca-certificates.crt
 ssl = yes
 # Besides, we only need `All Mail` folder.
@@ -96,7 +90,6 @@ remotehost = mail.svenziegler.photography
 remoteusereval = get_username("photography")
 remotepasseval = get_password("photography")
 maxconnections = 5
-autorefresh = 5
 sslcacertfile = /etc/ssl/certs/ca-certificates.crt
 ssl = yes
 
@@ -107,7 +100,6 @@ remoteport = 1143
 remoteusereval = get_username("work")
 remotepasseval = get_password("work")
 maxconnections = 5
-autorefresh = 5
 ssl = no
 
 [Repository WorkLocal]

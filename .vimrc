@@ -1,21 +1,22 @@
 
-"{{{ NeoBundle Scripts-----------------------------
+"{{{ Dein Scripts-----------------------------
 " ======================================================================================
 if &compatible
     set nocompatible               " Be iMproved
 endif
+" Add the dein installation directory into runtimepath
+set runtimepath+=~/.cache/dein/repos/github.com/Shougo/dein.vim
 
+if dein#load_state('~/.cache/dein')
+ call dein#begin('~/.cache/dein')
 
-" Required:
-set runtimepath^=/home/svzieg/.vim/bundle/neobundle.vim/
+ call dein#add('~/.cache/dein')
+ call dein#add('Shougo/deoplete.nvim')
+ if !has('nvim')
+   call dein#add('roxma/nvim-yarp')
+   call dein#add('roxma/vim-hug-neovim-rpc')
+ endif
 
-" Required:
-call neobundle#begin(expand('/home/svzieg/.vim/bundle'))
-
-" Let NeoBundle manage NeoBundle
-" Required:
-NeoBundleFetch 'Shougo/neobundle.vim'
-"}}}
 
 "{{{ Plugins
 "==========================================================================================
@@ -24,56 +25,56 @@ NeoBundleFetch 'Shougo/neobundle.vim'
 " Add or remove your Bundles here:
 
 " Coding Helper
-"NeoBundle 'Shougo/neocomplete.vim'
-"NeoBundle 'Valloric/YouCompleteMe', {'build': {'unix': 'sh ./install.sh --tern-completer'}}
-NeoBundle 'tomtom/tcomment_vim'
-"NeoBundle 'Shougo/neosnippet.vim'
-"NeoBundle 'Shougo/neosnippet-snippets'
-NeoBundle 'SirVer/ultisnips'
-NeoBundle 'honza/vim-snippets'
-NeoBundle 'klen/rope-vim'
-NeoBundle 'tpope/vim-surround'
-NeoBundle 'godlygeek/tabular'
-"NeoBundle 'walm/jshint
-"NeoBundle 'vim-syntastic/syntastic'
-NeoBundle 'w0rp/ale'
-NeoBundle 'tpope/vim-surround'
-NeoBundle 'godlygeek/tabular'
-NeoBundle 'tpope/vim-fugitive'
-NeoBundle 'tpope/vim-sensible'
-NeoBundle 'alvan/vim-closetag'
-NeoBundle 'tpope/vim-sexp-mappings-for-regular-people'
-NeoBundle 'jiangmiao/auto-pairs'
-NeoBundle 'raghur/vim-ghost', {'build': {'unix': 'sh ./install'}}
-NeoBundle 'Badacadabra/vim-archery'
-NeoBundle 'xolox/vim-notes', {'depends': ['vim-misc']}
-NeoBundle 'tpope/vim-dispatch'
-NeoBundle 'mileszs/ack.vim'
-NeoBundle 'craigemery/vim-autotag'
-NeoBundle 'ktklin/confluence-vim'
+"call dein#add( 'Shougo/neocomplete.vim'
+"call dein#add( 'Valloric/YouCompleteMe', {'build': {'unix': 'sh ./install.sh --tern-completer'}}
+call dein#add( 'tomtom/tcomment_vim')
+"call dein#add( 'Shougo/neosnippet.vim'
+"call dein#add( 'Shougo/neosnippet-snippets'
+call dein#add( 'SirVer/ultisnips')
+call dein#add( 'honza/vim-snippets')
+call dein#add( 'klen/rope-vim')
+call dein#add( 'tpope/vim-surround')
+call dein#add( 'godlygeek/tabular')
+"call dein#add( 'walm/jshint
+"call dein#add( 'vim-syntastic/syntastic'
+call dein#add( 'w0rp/ale')
+call dein#add( 'tpope/vim-surround')
+call dein#add( 'godlygeek/tabular')
+call dein#add( 'tpope/vim-fugitive')
+call dein#add( 'tpope/vim-sensible')
+call dein#add( 'alvan/vim-closetag')
+call dein#add( 'tpope/vim-sexp-mappings-for-regular-people')
+call dein#add( 'jiangmiao/auto-pairs')
+call dein#add( 'raghur/vim-ghost', {'build': {'unix': 'sh ./install'}})
+call dein#add( 'Badacadabra/vim-archery')
+call dein#add( 'xolox/vim-notes', {'depends': ['vim-misc']})
+call dein#add( 'tpope/vim-dispatch')
+call dein#add( 'mileszs/ack.vim')
+call dein#add( 'craigemery/vim-autotag')
+call dein#add( 'ktklin/confluence-vim')
+call dein#add('Shougo/deoplete.nvim')
 
 "Syntax
-" NeoBundle 'sheerun/vim-polyglot'
-NeoBundle 'pangloss/vim-javascript'
-NeoBundle 'elzr/vim-json'
-
+" call dein#add( 'sheerun/vim-polyglot'
+call dein#add( 'pangloss/vim-javascript')
+call dein#add( 'elzr/vim-json')
 " Web
-"NeoBundleLazy 'jelera/vim-javascript-syntax', {'autoload':{'filetypes':['javascript']}}
-NeoBundle 'digitaltoad/vim-jade'
-NeoBundle 'mattn/emmet-vim'
-NeoBundle 'sidorares/node-vim-debugger'
-"NeoBundle 'maksimr/vim-jsbeautify'
-NeoBundle 'prettier/vim-prettier', { 'do': 'yarn install' }
-NeoBundle 'editorconfig/editorconfig-vim'
+"call dein#add(Lazy 'jelera/vim-javascript-syntax', {'autoload':{'filetypes':['javascript']}}
+call dein#add( 'digitaltoad/vim-jade')
+call dein#add( 'mattn/emmet-vim')
+call dein#add( 'sidorares/node-vim-debugger')
+"call dein#add( 'maksimr/vim-jsbeautify'
+call dein#add( 'prettier/vim-prettier', { 'do': 'yarn install' })
+call dein#add( 'editorconfig/editorconfig-vim')
 
 " Node
-NeoBundle 'moll/vim-node'
-NeoBundle 'ternjs/tern_for_vim', {'build': {'unix': 'yarn install'}}
+call dein#add( 'moll/vim-node')
+call dein#add( 'ternjs/tern_for_vim', {'build': {'unix': 'yarn install'}})
 
 " Navigation
-NeoBundle 'scrooloose/nerdtree'
-"NeoBundle 'easymotion/vim-easymotion'
-"NeoBundle 'wincent/command-t', 
+call dein#add( 'scrooloose/nerdtree')
+"call dein#add( 'easymotion/vim-easymotion'
+"call dein#add( 'wincent/command-t', 
 "    \   'build_commands': ['make', 'ruby'],
 "    \   'build': {
 "    \      'unix': 'cd ruby/command-t/ext/command-t && { make clean; ruby extconf.rb && make }'
@@ -81,23 +82,22 @@ NeoBundle 'scrooloose/nerdtree'
 "\ }
 
 " ColorSchemes and Style of vim
-NeoBundle 'flazz/vim-colorschemes'
-"NeoBundle 'vim-airline/vim-airline'
-"NeoBundle 'fholgado/minibufexpl.vim'
-NeoBundle 'fcpg/vim-farout'
+call dein#add( 'flazz/vim-colorschemes')
+"call dein#add( 'vim-airline/vim-airline'
+"call dein#add( 'fholgado/minibufexpl.vim'
+call dein#add( 'fcpg/vim-farout')
 
 " Bugtracker
-NeoBundle 'rafi/vim-unite-issue', {
-    \  'directory': 'unite-issue',
-    \  'unite_sources': [ 'issue' ],
-    \  'depends': [
-    \    'mattn/webapi-vim', 'tyru/open-browser.vim', 'Shougo/unite.vim'
-    \  ]
-    \ }
 
 
-" Required:
-call neobundle#end()
+
+ call dein#end()
+ call dein#save_state()
+endif
+
+"}}}
+
+
 
 
 " Required:
@@ -105,8 +105,9 @@ filetype plugin indent on
 
 " If there are uninstalled bundles found on startup,
 " this will conveniently prompt you to install them.
-NeoBundleCheck
 "End NeoBundle Scripts-------------------------
+"call dein#check_update()
+
 "}}}
 
 "{{{ Vim Einstellungen 
@@ -565,9 +566,14 @@ endfunction
 
 "}}}
 
-
 "{{{ Confluence
 "
 let g:confluence_url= 'https://wiki.e2ebridge.com/rest/api/content'
 "
+"}}}
+
+"{{{ Deoplete (Autocomplete) 
+
+let g:deoplete#enable_at_startup = 1
+
 "}}}

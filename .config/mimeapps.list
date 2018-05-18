@@ -46,3 +46,4 @@ application/octet-stream=org.gnome.gedit.desktop;
 application/json=mousepad.desktop;org.gnome.gedit.desktop;
 image/x-eps=inkscape.desktop;
 image/tiff=inkscape.desktop;
+video/x-matroska=vlc.desktop;
