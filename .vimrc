@@ -45,9 +45,9 @@ call dein#add( 'tpope/vim-sensible')
 call dein#add( 'alvan/vim-closetag')
 call dein#add( 'tpope/vim-sexp-mappings-for-regular-people')
 call dein#add( 'jiangmiao/auto-pairs')
-call dein#add( 'raghur/vim-ghost', {'build': {'unix': 'sh ./install'}})
+"call dein#add( 'raghur/vim-ghost', {'build': {'unix': 'sh ./install'}})
 call dein#add( 'Badacadabra/vim-archery')
-call dein#add( 'xolox/vim-notes', {'depends': ['vim-misc']})
+"call dein#add( 'xolox/vim-notes', {'depends': ['vim-misc']})
 call dein#add( 'tpope/vim-dispatch')
 call dein#add( 'mileszs/ack.vim')
 call dein#add( 'craigemery/vim-autotag')
@@ -58,6 +58,7 @@ call dein#add('Shougo/deoplete.nvim')
 " call dein#add( 'sheerun/vim-polyglot'
 call dein#add( 'pangloss/vim-javascript')
 call dein#add( 'elzr/vim-json')
+call dein#add('heavenshell/vim-jsdoc')
 " Web
 "call dein#add(Lazy 'jelera/vim-javascript-syntax', {'autoload':{'filetypes':['javascript']}}
 call dein#add( 'digitaltoad/vim-jade')
@@ -75,7 +76,7 @@ call dein#add( 'ternjs/tern_for_vim', {'build': {'unix': 'yarn install'}})
 call dein#add( 'scrooloose/nerdtree')
 "call dein#add( 'easymotion/vim-easymotion'
 "call dein#add( 'wincent/command-t', 
-"    \   'build_commands': ['make', 'ruby'],
+"    \   'build_commands': ['make', 'ruby'],    
 "    \   'build': {
 "    \      'unix': 'cd ruby/command-t/ext/command-t && { make clean; ruby extconf.rb && make }'
 "    \   }
@@ -83,6 +84,8 @@ call dein#add( 'scrooloose/nerdtree')
 
 " ColorSchemes and Style of vim
 call dein#add( 'flazz/vim-colorschemes')
+call dein#add( 'cocopon/iceberg.vim')
+call dein#add( 'janko-m/vim-test')
 "call dein#add( 'vim-airline/vim-airline'
 "call dein#add( 'fholgado/minibufexpl.vim'
 call dein#add( 'fcpg/vim-farout')
@@ -114,9 +117,6 @@ filetype plugin indent on
 " =======================================================================================
 set backspace=indent,eol,start          " allow backspacing over everything in insert mode
 
-
-
-
 set path=**
 set wildignore+=*/node_modules/*,*/build/*,*/bower_components/*,*/out*/,*/www*/,*/.vim$,\~$,*/.log,*/.aux,*/.cls,*/.aux,*/.bbl,*/.blg,*/.fls,*/.fdb*/,*/.toc,*/.out,*/.glo,*/.log,*/.ist,*/.fdb_latexmk,*/.min*/
 set wildmenu
@@ -145,6 +145,9 @@ colorscheme iceberg
 
 set history=50                          " keep 50 lines of command line history
     
+set hidden
+set confirm 
+set confirm
 set ruler                               " show the cursor position all the time
 
 
@@ -175,6 +178,24 @@ set undodir=~/.vim/undo//
 
 
 "set autochdir
+"}}}
+
+"{{{ General Shortcuts 
+
+nnoremap <A-left> <C-w>h
+nnoremap <A-down> <C-w>j
+nnoremap <A-up> <C-w>k
+nnoremap <A-right> <C-w>l
+
+" Terminal Shortcuts
+if has('terminal') 
+  tnoremap <Esc> <C-\><C-n>
+  tnoremap <A-left> <C-\><C-n><C-w>h
+  tnoremap <A-down> <C-\><C-n><C-w>j
+  tnoremap <A-up> <C-\><C-n><C-w>k
+  tnoremap <A-right> <C-\><C-n><C-w>l
+endif
+
 "}}}
 
 " {{{                        FORMAT
@@ -230,6 +251,7 @@ let g:javascript_conceal_arrow_function       = "⇒"
 let g:javascript_conceal_noarg_arrow_function = "_"
 let g:javascript_conceal_underscore_arrow_function = "_"
 
+
 "}}}
 
 " {{{                        Folding settings
@@ -278,8 +300,12 @@ autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 
 " {{{                        Syntax Highlighting
 "=========================================================================
-
-autocmd BufNewFile,BufReadPost *.md set filetype=markdown
+augroup syntaxHighlighting
+  au!
+  autocmd BufNewFile,BufReadPost *.md set filetype=markdown
+  autocmd BufNewFile,BufReadPost *.jsdoc set filetype=javascript
+  autocmd BufNewFile,BufReadPost *.xaml set filetype=xml
+augroup END
 
 "}}}
 
@@ -333,7 +359,7 @@ let g:ale_linter_aliases = {'html': ['html', 'javascript', 'css']}
 
 " Set this setting in vimrc if you want to fix files automatically on save.
 " This is off by default.
-let g:ale_fix_on_save = 0
+let g:ale_fix_on_save = 1
 
 
 " eslint_d statt eslint benutzten da schneller
@@ -348,7 +374,17 @@ let g:ale_echo_msg_error_str = 'E'
 let g:ale_echo_msg_warning_str = 'W'
 let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
 
-let g:ale_open_list = 0
+let g:ale_open_list = 1
+  
+  augroup FixOnEnter
+    au!
+    au BufEnter * execute 'ALEFix'
+  augroup END 
+
+  augroup CloseLoclistWindowGroup
+    autocmd!
+    autocmd QuitPre * if empty(&buftype) | lclose | endif
+  augroup END
 
 nnoremap <leader>? :ALEDetail<cr>
 "}}}
@@ -577,3 +613,18 @@ let g:confluence_url= 'https://wiki.e2ebridge.com/rest/api/content'
 let g:deoplete#enable_at_startup = 1
 
 "}}}
+
+
+" {{{                        JS-Doc
+"=========================================================================
+
+let g:jsdoc_allow_input_prompt=1
+let g:jsdoc_input_description=1
+let g:jsdoc_additional_descriptions=1
+let g:jsdoc_access_descriptions=1
+let g:jsdoc_underscore_private=1
+let g:jsdoc_param_description_separator=' - '
+let g:jsdoc_enable_es6=0
+
+"}}}
+

@@ -2,7 +2,7 @@
 
 # Created by newuser for 5.2
 # If you come from bash you might have to change your $PATH.
-export PATH=$PATH:/home/svzieg/Android/Sdk:/home/svzieg/Android/Sdk/tools:/home/svzieg/Android/Sdk/platform-tools
+export PATH=$PATH:/home/svzieg/Android/Sdk:/home/svzieg/Android/Sdk/tools:/home/svzieg/Android/Sdk/platform-tool:/home/svzieg/.gem/ruby/2.5.0/bins:/home/svzieg/.vagrant.d/gems/2.5.1/bins
 
 # Path to your oh-my-zsh installation.
 export ZSH=/home/svzieg/.oh-my-zsh
@@ -42,6 +42,7 @@ export ANDROID_HOME=~/Android/Sdk
 export GRADLE_HOME=/opt/android-studio/gradle/gradle-3.2
 
 export EDITOR=vim
+alias npm='yarn'
 alias ssh_build='ssh developer@dev1.scheer-group.com -p2245'
 alias mount_build='sudo sshfs -o allow_other,IdentityFile=/home/svzieg/.ssh/id_rsa,port=2245 developer@dev1.scheer-group.com:/home/developer /mnt/build/'
 
@@ -54,6 +55,8 @@ export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 export XKB_DEFAULT_LAYOUT=de,de
 export XKB_DEFAULT_VARIANT=neo,nodeadkeys
 export XKB_DEFAULT_OPTIONS=grp:alt_shift_toggle
+
+# Native Wayland support
 
 # If running trom tty1 start sway
 if [ $(tty) = "/dev/tty1" ]; then

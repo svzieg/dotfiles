@@ -1,9 +1,9 @@
 [Default Applications]
-x-scheme-handler/http=qutebrowser.desktop
-x-scheme-handler/https=qutebrowser.desktop
-x-scheme-handler/ftp=qutebrowser.desktop
+x-scheme-handler/http=vivaldi-stable.desktop
+x-scheme-handler/https=vivaldi-stable.desktop
+x-scheme-handler/ftp=vivaldi-stable.desktop
 x-scheme-handler/chrome=qutebrowser.desktop
-text/html=qutebrowser.desktop
+text/html=vivaldi-stable.desktop
 application/x-extension-htm=qutebrowser.desktop
 application/x-extension-html=qutebrowser.desktop
 application/x-extension-shtml=qutebrowser.desktop
@@ -19,6 +19,9 @@ application/pdf=epdfview.desktop
 application/x-bittorrent=transmission-gtk.desktop
 x-scheme-handler/nylas=nylas.desktop
 video/mp4=vlc.desktop
+text/xml=vivaldi-stable.desktop
+application/xhtml_xml=vivaldi-stable.desktop
+image/webp=vivaldi-stable.desktop
 
 [Added Associations]
 image/jpeg=viewnior.desktop;gpicview.desktop;
@@ -32,10 +35,10 @@ application/xml=mousepad.desktop;yed.desktop;dia.desktop;
 video/mp4=org.gnome.Totem.desktop;vlc.desktop;
 application/x-iso9660-appimage=xarchiver.desktop;
 x-scheme-handler/http=qutebrowser.desktop;firefox-beta-bin.desktop;userapp-Firefox-ES7K9Y.desktop;userapp-Pale Moon.desktop;firefox.desktop;
-x-scheme-handler/https=qutebrowser.desktop;firefox-beta-bin.desktop;userapp-Firefox-ES7K9Y.desktop;userapp-Pale Moon.desktop;firefox.desktop;
-x-scheme-handler/ftp=firefox-beta-bin.desktop;userapp-Firefox-ES7K9Y.desktop;userapp-Pale Moon.desktop;firefox.desktop;
+x-scheme-handler/https=qutebrowser.desktop;firefox-beta-bin.desktop;userapp-Firefox-ES7K9Y.desktop;userapp-Pale Moon.desktop;firefox.desktop;vivaldi-stable.desktop;google-chrome.desktop;chromium.desktop;
+x-scheme-handler/ftp=firefox-beta-bin.desktop;userapp-Firefox-ES7K9Y.desktop;userapp-Pale Moon.desktop;firefox.desktop;vivaldi-stable.desktop;google-chrome.desktop;chromium.desktop;
 x-scheme-handler/chrome=qutebrowser.desktop;firefox-beta-bin.desktop;userapp-Firefox-ES7K9Y.desktop;userapp-Pale Moon.desktop;firefox.desktop;
-text/html=mousepad.desktop;firefox-beta-bin.desktop;userapp-Firefox-ES7K9Y.desktop;userapp-Pale Moon.desktop;firefox.desktop;
+text/html=mousepad.desktop;firefox-beta-bin.desktop;userapp-Firefox-ES7K9Y.desktop;userapp-Pale Moon.desktop;firefox.desktop;vivaldi-stable.desktop;google-chrome.desktop;chromium.desktop;
 application/x-extension-htm=qutebrowser.desktop;firefox-beta-bin.desktop;userapp-Firefox-ES7K9Y.desktop;userapp-Pale Moon.desktop;firefox.desktop;
 application/x-extension-html=qutebrowser.desktop;firefox-beta-bin.desktop;userapp-Firefox-ES7K9Y.desktop;userapp-Pale Moon.desktop;firefox.desktop;
 application/x-extension-shtml=qutebrowser.desktop;firefox-beta-bin.desktop;userapp-Firefox-ES7K9Y.desktop;userapp-Pale Moon.desktop;firefox.desktop;
@@ -47,3 +50,6 @@ application/json=mousepad.desktop;org.gnome.gedit.desktop;
 image/x-eps=inkscape.desktop;
 image/tiff=inkscape.desktop;
 video/x-matroska=vlc.desktop;
+text/xml=vivaldi-stable.desktop;google-chrome.desktop;chromium.desktop;
+application/xhtml_xml=vivaldi-stable.desktop;google-chrome.desktop;chromium.desktop;
+image/webp=vivaldi-stable.desktop;google-chrome.desktop;chromium.desktop;
