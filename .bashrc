@@ -42,7 +42,6 @@ alias inst='sudo pacman -S'
 alias mirrors='sudo pacman-mirrors -g'
 alias db='sudo pacman -Syy'
 alias printer='system-config-printer'
-alias npm='yarn'
 
 alias ssh_build='ssh developer@dev1.scheer-group.com -p2245'
 alias mount_build='sudo sshfs -o allow_other,IdentityFile=/home/svzieg/.ssh/id_rsa,port=2245 developer@dev1.scheer-group.com:/home/developer /mnt/build/'
@@ -85,3 +84,4 @@ if [ $(tty) == "/dev/tty1" ]; then
 	sway
 	exit 0
 fi
+export PATH=/usr/bin/vendor_perl:$PATH

@@ -210,8 +210,8 @@ if has('conceal')
   let g:indentLine_concealcursor = "nv"
 endif
 
-set shiftwidth=2                        " I like 2 spaces for indenting
-set tabstop=2                           " I like 2 stops
+set shiftwidth=4                        " I like 2 spaces for indenting
+set tabstop=4                           " I like 2 stops
 set expandtab                           " Spaces instead of tabs
 set autoindent                          " Always  set auto indenting on
 
@@ -249,7 +249,7 @@ let g:javascript_conceal_static               = "ℂ"
 let g:javascript_conceal_super                = "Ω"
 let g:javascript_conceal_arrow_function       = "⇒"
 let g:javascript_conceal_noarg_arrow_function = "_"
-let g:javascript_conceal_underscore_arrow_function = "_"
+let g:javascript_conceal_underscore_arrow_function = "(_)"
 
 
 "}}}
