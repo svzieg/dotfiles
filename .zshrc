@@ -105,3 +105,4 @@ elif type compctl &>/dev/null; then
 fi
 ###-end-pm2-completion-###
 export PATH=/usr/bin/vendor_perl:$PATH
+export PATH=~/.npm/bin:$PATH

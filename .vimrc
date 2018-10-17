@@ -51,7 +51,6 @@ call dein#add( 'Badacadabra/vim-archery')
 call dein#add( 'tpope/vim-dispatch')
 call dein#add( 'mileszs/ack.vim')
 call dein#add( 'craigemery/vim-autotag')
-call dein#add( 'ktklin/confluence-vim')
 call dein#add('Shougo/deoplete.nvim')
 
 "Syntax
@@ -245,11 +244,11 @@ let g:javascript_conceal_return               = "⇚"
 let g:javascript_conceal_undefined            = "¿"
 let g:javascript_conceal_NaN                  = "ℕ"
 let g:javascript_conceal_prototype            = "¶"
-let g:javascript_conceal_static               = "ℂ"
+let g:javascript_conceal_static              = "ℂ"
 let g:javascript_conceal_super                = "Ω"
 let g:javascript_conceal_arrow_function       = "⇒"
 let g:javascript_conceal_noarg_arrow_function = "_"
-let g:javascript_conceal_underscore_arrow_function = "(_)"
+"let g:javascript_conceal_underscore_arrow_function = "_"
 
 
 "}}}
