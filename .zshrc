@@ -104,3 +104,4 @@ fi
 ###-end-pm2-completion-###
 export PATH=/usr/bin/vendor_perl:$PATH
 export PATH=~/.npm/bin:$PATH
+export PATH=$PATH:~/.bin

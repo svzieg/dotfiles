@@ -52,7 +52,7 @@ set $menu = # start a terminal
     bindsym $mod+Shift+x kill
 
     # start your launcher
-    bindsym $mod+d exec dmenu_recency -p Run -l 10 -fn Inconsolata-12:normal -nb "$bg" -nf "$fg" -sf "$c1" 
+    bindsym $mod+d exec dmenu_run  -p Run -l 10 -fn Inconsolata-12:normal -nb "$bg" -nf "$fg" -sf "$c1" 
 
     # Drag floating windows by holding down $mod and left mouse button.
     # Resize them with right mouse button + $mod.

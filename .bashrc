@@ -86,3 +86,4 @@ if [ $(tty) == "/dev/tty1" ]; then
 fi
 export PATH=/usr/bin/vendor_perl:$PATH
 export PATH=~/.npm/bin:$PATH
+export PATH=$PATH:~/.bin
