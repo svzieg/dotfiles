@@ -81,7 +81,7 @@ export PATH="${PATH}:${SONAR_SCANNER_HOME}/bin"
 
 # If running trom tty1 start sway
 if [ $(tty) == "/dev/tty1" ]; then
-	sway
+	sway-de-neo2
 	exit 0
 fi
 export PATH=/usr/bin/vendor_perl:$PATH

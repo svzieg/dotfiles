@@ -47,7 +47,7 @@ notmuch tag +bpaas --        tag:new and tag:work and subject:".*(?i)bpaas.*"
 notmuch tag -new -- tag:new
 
 if [ "$newCounter" != "0" ]; then
-  notify-send "`$newCounter` Mails arrived"  
+  dunstify "`$newCounter` Mails arrived"  
 fi
 
 echo "post-new complete; goodbye"
