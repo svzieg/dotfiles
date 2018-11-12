@@ -1,4 +1,9 @@
 text/html;      w3m %s;     nametemplate=%s.html;       needsterminal
 text/html;      w3m -v -F -T text/html -dump %s;        copiousoutput
 text/calendar;  calcurse -i %s;                         needsterminal 
-text/calendar; ~/scripts/vcalendar-filter;              copiousoutput
+# text/calendar; ~/scripts/vcalendar-filter;              copiousoutput
+
+
+# pdf
+application/pdf; evince %s
+image/pdf;zathura %s

@@ -51,7 +51,7 @@ remoteusereval = get_username("gmail")
 remotepasseval = get_password("gmail")
 sslcacertfile = /etc/ssl/certs/ca-certificates.crt
 ssl = yes
-ssl_versions = tls1_2
+ssl_version = tls1_2
 maxconnections = 5
 nametrans = lambda folder: re.sub('.*Spam$', 'Spam', 
                            re.sub('.*Drafts$', 'Drafts', 

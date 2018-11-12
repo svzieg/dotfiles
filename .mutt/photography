@@ -1,4 +1,5 @@
 set sendmail="msmtp -a photography"
+set signature="~/.mutt/signatures/default"
 
 #GPG
 set pgp_use_gpg_agent = yes

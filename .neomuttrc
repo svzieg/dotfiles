@@ -2,6 +2,7 @@
 set folder           = "~/mail"
 set header_cache     = ~/.mutt/cache/headers
 set message_cachedir = ~/.mutt/cache/bodies
+set alias_file=~/mail/contacts
 
 # {{{ Account settings
 # folder-hook "+Gmx/.*" source ~/.mutt/gmx
@@ -10,6 +11,8 @@ set message_cachedir = ~/.mutt/cache/bodies
 #folder-hook "+Gmx/.*" source ~/.mutt/gmx
 source ~/mail/notmuch-mailboxes
 source ~/mail/mailboxes
+
+source ~/mail/contacts
 
 
 # Mailinglists
@@ -26,15 +29,19 @@ alias f__3 Sven Ziegler <sven.ziegler@svenziegler.photography>
 alias f__4 Sven Ziegler <ziggo1879@gmail.com>
 macro compose <esc>f "<edit-from><kill-line>f__<tab><search>sven.ziegler@scheer-group.com<enter>"
 
-set from=svzieg@gmx.de
+#set from=$MUTT_SENDER
 send-hook  '~f .*svzieg@gmx.de.*'                         'source "~/.mutt/gmx"'
 send2-hook '~f .*svzieg@gmx.de.*'                         'source "~/.mutt/gmx"'
+
+send-hook "%C Familie "                                   'source "~/.mutt/gmx"'
 
 send-hook  '~f .*ziggo1879@gmail.com.*'                   'source "~/.mutt/gmail"'
 send2-hook '~f .*ziggo1879@gmail.com.*'                   'source "~/.mutt/gmail"'
 
 send-hook  '~f .*sven.ziegler@scheer-group.com.*'         'source "~/.mutt/work"'
 send2-hook '~f .*sven.ziegler@scheer-group.com.*'         'source "~/.mutt/work"'
+send-hook '%C Scheer'                           'source "~/.mutt/work"'
+send-hook '%C Egetrans'                           'source "~/.mutt/work"'
 
 send-hook  "-f *sven.ziegler@svenziegler.photography*"    'source "~/.mutt/photography"'
 send2-hook "-f *sven.ziegler@svenziegler.photography*"    'source "~/.mutt/photography"'

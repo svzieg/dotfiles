@@ -6,7 +6,8 @@
     // Choose the order of the modules
     "modules-left": ["sway/workspaces", "custom/spotify"],
     "modules-center": ["sway/window"],
-    "modules-right": ["pulseaudio", "network", "cpu", "memory", "battery", "clock"],
+    //"modules-right": ["pulseaudio", "network", "cpu", "memory", "battery", "clock"],
+    "modules-right": ["network", "cpu", "memory", "battery", "clock"],
     // Modules configuration
     "workspaces": {
         "format-icons": {
