@@ -1,0 +1,23 @@
+" Special
+let wallpaper  = "/home/svzieg/Downloads/archlinux.jpg"
+let background = "#1d1a11"
+let foreground = "#86bfde"
+let cursor     = "#86bfde"
+
+" Colors
+let color0  = "#1d1a11"
+let color1  = "#2A556C"
+let color2  = "#235C77"
+let color3  = "#434343"
+let color4  = "#266B8E"
+let color5  = "#2178A5"
+let color6  = "#1F86B7"
+let color7  = "#86bfde"
+let color8  = "#5d859b"
+let color9  = "#2A556C"
+let color10 = "#235C77"
+let color11 = "#434343"
+let color12 = "#266B8E"
+let color13 = "#2178A5"
+let color14 = "#1F86B7"
+let color15 = "#86bfde"

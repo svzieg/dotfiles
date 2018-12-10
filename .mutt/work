@@ -7,6 +7,7 @@ set pgp_use_gpg_agent = yes
 set pgp_timeout       = 3600
 set pgp_autosign      = yes
 set nm_record         = no # Wird vom Exchange verwaltet
+set record            = +Work/Sent
 
 # SMIME
 set crypt_autosign           = yes

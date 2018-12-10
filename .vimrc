@@ -17,6 +17,26 @@ if dein#load_state('~/.cache/dein')
    call dein#add('roxma/vim-hug-neovim-rpc')
  endif
 
+"{{{ ColorSchemes anpassungen  
+function! MyHighlights () abort
+   hi Normal ctermbg = None
+endfunction
+
+augroup ColorSchemes
+   au!
+   au ColorScheme * call MyHighlights()
+augroup END
+"}}}
+
+
+" {{{                        Autoreload
+"=========================================================================
+augroup AutoRefreshVimrc 
+    au!
+    autocmd BufWritePost ~/.vimrc nested source ~/.vimrc
+augroup END
+"}}}
+
 
 "{{{ Plugins
 "==========================================================================================
@@ -626,4 +646,5 @@ let g:jsdoc_param_description_separator=' - '
 let g:jsdoc_enable_es6=0
 
 "}}}
+
 

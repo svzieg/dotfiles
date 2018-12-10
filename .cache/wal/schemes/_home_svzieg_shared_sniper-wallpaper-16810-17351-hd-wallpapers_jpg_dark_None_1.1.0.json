@@ -1,0 +1,27 @@
+{
+    "wallpaper": "/home/svzieg/shared/sniper-wallpaper-16810-17351-hd-wallpapers.jpg",
+    "alpha": "100",
+    "special": {
+        "background": "#0f0d0b",
+        "foreground": "#e5e8e6",
+        "cursor": "#e5e8e6"
+    },
+    "colors": {
+        "color0": "#0f0d0b",
+        "color1": "#7C817F",
+        "color2": "#8A867A",
+        "color3": "#9E9A8F",
+        "color4": "#B5B5AE",
+        "color5": "#C2C1BA",
+        "color6": "#D0D3D0",
+        "color7": "#e5e8e6",
+        "color8": "#a0a2a1",
+        "color9": "#7C817F",
+        "color10": "#8A867A",
+        "color11": "#9E9A8F",
+        "color12": "#B5B5AE",
+        "color13": "#C2C1BA",
+        "color14": "#D0D3D0",
+        "color15": "#e5e8e6"
+    }
+}

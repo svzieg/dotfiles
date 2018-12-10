@@ -1,0 +1,27 @@
+{
+    "wallpaper": "/home/svzieg/shared/Nano-Wallpapers-3.jpg",
+    "alpha": "100",
+    "special": {
+        "background": "#f9faf9",
+        "foreground": "#070E13",
+        "cursor": "#070E13"
+    },
+    "colors": {
+        "color0": "#f9faf9",
+        "color1": "#54696B",
+        "color2": "#75847C",
+        "color3": "#36758A",
+        "color4": "#6D8F91",
+        "color5": "#3BAAC6",
+        "color6": "#9CA9A2",
+        "color7": "#070E13",
+        "color8": "#828681",
+        "color9": "#54696B",
+        "color10": "#75847C",
+        "color11": "#36758A",
+        "color12": "#6D8F91",
+        "color13": "#3BAAC6",
+        "color14": "#9CA9A2",
+        "color15": "#070E13"
+    }
+}

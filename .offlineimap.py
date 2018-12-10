@@ -28,13 +28,16 @@ if __name__ == "__main__":
         print("Usage: %s <repository> <username>")
         sys.exit(0)
     repo, username = sys.argv[1:]
-    password = getpass.getpass("Enter password for user '%s': " % username)
-    password_confirmation = getpass.getpass("Confirm password: ")
-    if password != password_confirmation:
-        print ("Error: password confirmation does not match")
-        sys.exit(1)
-    smtp_host = raw_input("Enter smtp host: [%s] " % ("smtp." + username[username.find('@') + 1 :]))
-    if smtp_host == '':
-        smtp_host = "smtp." +username[username.find('@') + 1: ]
-    
-    set_credentials(repo, username, password, smtp_host)
+    if username != "GET":
+        password = getpass.getpass("Enter password for user '%s': " % username)
+        password_confirmation = getpass.getpass("Confirm password: ")
+        if password != password_confirmation:
+            print ("Error: password confirmation does not match")
+            sys.exit(1)
+        smtp_host = raw_input("Enter smtp host: [%s] " % ("smtp." + username[username.find('@') + 1 :]))
+        if smtp_host == '':
+            smtp_host = "smtp." +username[username.find('@') + 1: ]
+
+        set_credentials(repo, username, password, smtp_host)
+    else: 
+        print(get_username(repo), get_password(repo))

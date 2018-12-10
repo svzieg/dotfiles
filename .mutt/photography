@@ -5,6 +5,8 @@ set signature="~/.mutt/signatures/default"
 set pgp_use_gpg_agent = yes
 set pgp_timeout       = 3600
 set pgp_autosign      = yes
+set nm_record         = yes # Wird vom Exchange verwaltet
+set record            = +Photography/Sent
 
 # SMIME
 set crypt_autosign           = yes

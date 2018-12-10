@@ -1,5 +1,6 @@
 [general]
 pythonfile = ~/.offlineimap.py
+# accounts = Gmail, Gmx, Photography, Work
 accounts = Gmail, Gmx, Photography, Work
 sslcacertfile = /etc/ssl/certs/ca-certificates.crt
 

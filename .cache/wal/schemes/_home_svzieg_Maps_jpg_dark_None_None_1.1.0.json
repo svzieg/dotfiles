@@ -1,0 +1,27 @@
+{
+    "wallpaper": "/home/svzieg/Maps.jpg",
+    "alpha": "100",
+    "special": {
+        "background": "#0c420e",
+        "foreground": "#dfe0dd",
+        "cursor": "#dfe0dd"
+    },
+    "colors": {
+        "color0": "#0c420e",
+        "color1": "#B8CDB3",
+        "color2": "#DBD4AB",
+        "color3": "#CFE9B7",
+        "color4": "#F5E9B0",
+        "color5": "#B5DBED",
+        "color6": "#AADAFE",
+        "color7": "#dfe0dd",
+        "color8": "#9c9c9a",
+        "color9": "#B8CDB3",
+        "color10": "#DBD4AB",
+        "color11": "#CFE9B7",
+        "color12": "#F5E9B0",
+        "color13": "#B5DBED",
+        "color14": "#AADAFE",
+        "color15": "#dfe0dd"
+    }
+}

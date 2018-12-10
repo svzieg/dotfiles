@@ -1,0 +1,21 @@
+set $wallpaper /home/svzieg/Downloads/archlinux.jpg
+
+set $background #1d1a11
+set $foreground #86bfde
+
+set $color0 #1d1a11
+set $color1 #2A556C
+set $color2 #235C77
+set $color3 #434343
+set $color4 #266B8E
+set $color5 #2178A5
+set $color6 #1F86B7
+set $color7 #86bfde
+set $color8 #5d859b
+set $color9 #2A556C
+set $color10 #235C77
+set $color11 #434343
+set $color12 #266B8E
+set $color13 #2178A5
+set $color14 #1F86B7
+set $color15 #86bfde

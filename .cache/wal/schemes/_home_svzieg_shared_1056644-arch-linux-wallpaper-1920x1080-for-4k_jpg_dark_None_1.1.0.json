@@ -1,0 +1,27 @@
+{
+    "wallpaper": "/home/svzieg/shared/1056644-arch-linux-wallpaper-1920x1080-for-4k.jpg",
+    "alpha": "100",
+    "special": {
+        "background": "#041E2A",
+        "foreground": "#dfe3e5",
+        "cursor": "#dfe3e5"
+    },
+    "colors": {
+        "color0": "#041E2A",
+        "color1": "#5C7985",
+        "color2": "#6F8893",
+        "color3": "#7C96A1",
+        "color4": "#97AAB1",
+        "color5": "#ADBCC3",
+        "color6": "#B8C5CA",
+        "color7": "#dfe3e5",
+        "color8": "#9c9ea0",
+        "color9": "#5C7985",
+        "color10": "#6F8893",
+        "color11": "#7C96A1",
+        "color12": "#97AAB1",
+        "color13": "#ADBCC3",
+        "color14": "#B8C5CA",
+        "color15": "#dfe3e5"
+    }
+}

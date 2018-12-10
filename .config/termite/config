@@ -1,10 +1,10 @@
 [options]
-#allow_bold = true
+allow_bold = true
 #audible_bell = false
 #clickable_url = true
-#dynamic_title = true
+dynamic_title = true
 font = Inconsolata 12
-#fullscreen = true
+fullscreen = true
 #geometry = 640x480
 #icon_name = terminal
 #mouse_autohide = false
@@ -15,13 +15,13 @@ font = Inconsolata 12
 scrollback_lines = 10000
 #search_wrap = true
 #urgent_on_bell = true
-#hyperlinks = false
+hyperlinks = true
 
 # $BROWSER is used by default if set, with xdg-open as a fallback
 #browser = xdg-open
 
 # "system", "on" or "off"
-#cursor_blink = system
+cursor_blink = system
 
 # "block", "underline" or "ibeam"
 #cursor_shape = block
@@ -47,64 +47,28 @@ scrollback_lines = 10000
 #foreground = #dcdccc
 #foreground_bold = #ffffff
 #background = #3f3f3f
-foreground=   #d8dee8
-background=   #2f343f
 
-# 20% background transparency (requires a compositor)
-#background = rgba(63, 63, 63, 0.8)
+background = #1d1a11
+foreground = #86bfde
+cursor     = #86bfde
 
-# If unset, will reverse foreground and background
-highlight = #2f2f2f
+color0  = #1d1a11
+color1  = #2A556C
+color2  = #235C77
+color3  = #434343
+color4  = #266B8E
+color5  = #2178A5
+color6  = #1F86B7
+color7  = #86bfde
+color8  = #5d859b
+color9  = #2A556C
+color10 = #235C77
+color11 = #434343
+color12 = #266B8E
+color13 = #2178A5
+color14 = #1F86B7
+color15 = #86bfde
 
-# Colors from color0 to color254 can be set
-color0 = #3f3f3f
-color1 = #705050
-color2 = #60b48a
-color3 = #dfaf8f
-color4 = #506070
-color5 = #dc8cc3
-color6 = #8cd0d3
-color7 = #dcdccc
-color8 = #709080
-color9 = #dca3a3
-color10 = #c3bf9f
-color11 = #f0dfaf
-color12 = #94bff3
-color13 = #ec93d3
-color14 = #93e0e3
-color15 = #ffffff
-
-# black
-color0  = #4b5262
-color8  = #434a5a
-
-# red
-color1  = #bf616a
-color9  = #b3555e
-
-# green
-color2  = #a3be8c
-color10 = #93ae7c
-
-# yellow
-color3  = #ebcb8b
-color11 = #dbbb7b
-
-# blue
-color4  = #81a1c1
-color12 = #7191b1
-
-# magenta
-color5  = #b48ead
-color13 = #a6809f
-
-# cyan
-color6  = #89d0bA
-color14 = #7dbba8
-
-# white
-color7  = #e5e9f0
-color15 = #d1d5dc
 
 [hints]
 #font = Monospace 12

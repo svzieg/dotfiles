@@ -1,0 +1,24 @@
+wallpaper: "/home/svzieg/Downloads/archlinux.jpg"
+
+special:
+    background: "#1d1a11"
+    foreground: "#86bfde"
+    cursor: "#86bfde"
+
+colors:
+    color0: "#1d1a11"
+    color1: "#2A556C"
+    color2: "#235C77"
+    color3: "#434343"
+    color4: "#266B8E"
+    color5: "#2178A5"
+    color6: "#1F86B7"
+    color7: "#86bfde"
+    color8: "#5d859b"
+    color9: "#2A556C"
+    color10: "#235C77"
+    color11: "#434343"
+    color12: "#266B8E"
+    color13: "#2178A5"
+    color14: "#1F86B7"
+    color15: "#86bfde"

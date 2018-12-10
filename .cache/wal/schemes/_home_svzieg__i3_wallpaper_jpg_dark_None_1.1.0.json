@@ -1,0 +1,27 @@
+{
+    "wallpaper": "/home/svzieg/.i3/wallpaper.jpg",
+    "alpha": "100",
+    "special": {
+        "background": "#181016",
+        "foreground": "#e2dcd0",
+        "cursor": "#e2dcd0"
+    },
+    "colors": {
+        "color0": "#181016",
+        "color1": "#9E695A",
+        "color2": "#94867A",
+        "color3": "#CC9373",
+        "color4": "#687C84",
+        "color5": "#A59D90",
+        "color6": "#CAB79F",
+        "color7": "#e2dcd0",
+        "color8": "#9e9a91",
+        "color9": "#9E695A",
+        "color10": "#94867A",
+        "color11": "#CC9373",
+        "color12": "#687C84",
+        "color13": "#A59D90",
+        "color14": "#CAB79F",
+        "color15": "#e2dcd0"
+    }
+}
