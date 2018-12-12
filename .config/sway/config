@@ -84,7 +84,7 @@ bindsym $mod+s exec rofi -show ssh
 
 #exec --no-startup-id volumeicon
 #bindsym $mod+Ctrl+m exec terminal -e 'alsamixer'
-exec --no-startup-id pulseaudio --start
+#exec --no-startup-id pulseaudio --start
 exec --no-startup-id pulseeffects --gapplication-service
 
 # exec --no-startup-id offlineimap

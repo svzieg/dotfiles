@@ -9,13 +9,20 @@
     //"modules-right": ["pulseaudio", "network", "cpu", "memory", "battery", "clock"],
     "modules-right": ["network", "cpu", "memory", "battery", "clock"],
     // Modules configuration
-    "workspaces": {
+    "sway/workspaces": {
+        "disable-scroll": true,
+        "all-outputs": false,
+        "format": "{name}: {icon}",
         "format-icons": {
-            "1": "",
-            "2": "",
-            "3": "",
-            "4": "",
-            "5": ""
+            "1":"",
+            "2":"",
+            "3":"",
+            "6":"",
+            "7":"",
+            "8":"",
+            "urgent": "",
+            "focused": "",
+            "default": ""
         }
     },
     "cpu": {

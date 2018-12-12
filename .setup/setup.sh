@@ -8,3 +8,6 @@ do
   sh "$file"
   echo "executed initscript: $file"
 done
+
+
+sudo cp sway-neo /usr/bin/

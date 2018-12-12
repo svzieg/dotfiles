@@ -21,7 +21,7 @@ alternates "ziggo1879@gmail.com|sven.ziegler@svenziegler.photography|sven.ziegle
 
 
 # unfortunately these don't have access to info like subjects or senders
-set new_mail_command="notify-send 'New email' '%n new message(s)' &"
+set new_mail_command="dunstify 'New email' '%n new message(s)' &"
 
 alias f__1 Sven Ziegler <svzieg@gmx.de>
 alias f__2 Sven Ziegler <sven.ziegler@scheer-group.com>
@@ -300,6 +300,9 @@ color   attach_headers     brightmagenta   default    "         There is no indi
 color   attach_headers     brightmagenta   default    "can't handle these multiple signatures"
 color   attach_headers     brightmagenta   default    "signature verification suppressed"
 color   attach_headers     brightmagenta   default    "invalid node with packet of type"
+
+# Color the unread messages
+color index brightblue black "new"
 
 
 
