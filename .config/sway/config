@@ -97,8 +97,8 @@ bindsym $mod+Ctrl+i exec nm-connection-editor
 ################################################################################################
 
 # Screen brightness controls
-# bindsym Ctrl + Mod1 + Up exec "xbacklight -inc 10; notify-send 'brightness up'"
-# bindsym Ctrl + Mod1 + Down exec "xbacklight -dec 10; notify-send 'brightness down'"
+bindsym Ctrl + Mod1 + Up exec "light -A 10; dunstify 'brightness $(light)%'"
+bindsym Ctrl + Mod1 + Down exec "light -U 10; dunstify 'brightness $(light)%'"
 
 # Start Applications
 bindsym $mod+Ctrl+b exec terminal -e 'bmenu'
@@ -394,7 +394,7 @@ exec --no-startup-id compton -b
 # exec --no-startup-id conky -c ~/.config/conky/.conkyrc
 # exec --no-startup-id start_conky_green
 # exec --no-startup-id xautolock -time 10
-exec --no-startup-id mako
+exec_always --no-startup-id mako --default-timeout 5000 --font "Inconsolata 12" --text-color "$fg" --background-color "$bg" --border-color "$c1" --format "<b>%a</b>\n%s\n%b"
 # exec --no-startup-id owncloud 
 # exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 
