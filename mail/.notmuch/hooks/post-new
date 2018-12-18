@@ -6,11 +6,11 @@ export start=""
 
 
 # Spam detection, enable if ready
-# for mid in $(notmuch search --output=messages tag:new); do
-#     if notmuch show --format=raw "$mid" 2>/dev/null | awk '!NF{exit 1} /^X-Spam_bar: \+\+\+\+\+\+\+\+/ {exit 0}'; then
-#     notmuch tag -new +spam "$mid"
-#     fi
-# done
+ for mid in $(notmuch search --output=messages tag:new); do
+     if notmuch show --format=raw "$mid" 2>/dev/null | awk '!NF{exit 1} /^X-Spam_bar: \+\+\+\+\+\+\+\+/ {exit 0}'; then
+     notmuch tag -new +spam "$mid"
+     fi
+ done
 
 
 
@@ -23,7 +23,7 @@ newCounter="$(notmuch count tag:new)"
 
 
 ## notmuch tag -inbox -new +spam -- tag:new and folder:".*(s|S)pam.*"
-# notmuch tag -inbox -new +spam -- tag:inbox and folder:".*(s|S)pam.*"
+notmuch tag -inbox -new +spam -- tag:new and X-Spam_bar:" "
 
 # tag all messages from "me" as sent and remove tags inbox and unread
 notmuch tag -new -inbox +sent -- tag:new and from:svzieg@gmx.de or from:sven.ziegler@scheer-group.com or from:sven.ziegler@svenziegler.photography or from:ziggo1879@gmail.com
