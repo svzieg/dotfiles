@@ -231,9 +231,9 @@ bindsym $mod+a focus parent
 
 # Workspace Settings
 workspace $ws1 output eDP-1
-workspace $ws2 output VGA-1
+workspace $ws2 output DP-1
 workspace $ws3 output HDMI-A-1
-workspace $ws5 output VGA-1
+workspace $ws5 output DP-1
 workspace $ws7 output eDP-1
 workspace $ws8 output eDP-1
 
@@ -251,6 +251,8 @@ bindsym $mod+8 workspace $ws8
 #navigate workspaces next / previous
 bindsym $mod+Ctrl+Right workspace next
 bindsym $mod+Ctrl+Left workspace prev
+bindsym Alt+Ctrl+Left move workspace to output left
+bindsym Alt+Ctrl+Right move workspace to output right
 
 # Move focused container to workspace
 bindsym $mod+Ctrl+1 move container to workspace $ws1
@@ -476,3 +478,12 @@ mode "$mode_gaps_outer" {
 
 
 include ~/.config/sway/config.d/*
+
+
+
+
+# Devices
+input "1102:4639:DELL0817:00_044E:121F_Touchpad" {
+    tap enabled
+    natural_scroll enabled
+}
