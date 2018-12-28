@@ -57,6 +57,8 @@ export XKB_DEFAULT_OPTIONS=grp:alt_shift_toggle
 
 # If running trom tty1 start sway
 if [ $(tty) = "/dev/tty1" ]; then
+	eval $(/usr/bin/gnome-keyring-daemon --start --components=pkcs11,secrets,ssh)
+	export SSH_AUTH_SOCK
 	sway-neo
 	exit 0
 fi

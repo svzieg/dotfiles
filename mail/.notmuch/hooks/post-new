@@ -6,11 +6,14 @@ export start=""
 
 
 # Spam detection, enable if ready
-# for mid in $(notmuch search --output=messages tag:new); do
-#     if notmuch show --format=raw "$mid" 2>/dev/null | awk '!NF{exit 1} /^X-Spam_bar: \+\+\+\+\+\+\+\+/ {exit 0}'; then
-#     notmuch tag -new +spam "$mid"
-#     fi
-# done
+ for mid in $(notmuch search --output=messages tag:new); do
+     if notmuch show --format=raw "$mid" 2>/dev/null | awk '!NF{exit 1} /^X-Spam_bar: \+\+\+\+\+\+\+\+/ {exit 0}'; then
+     notmuch tag -new +spam "$mid"
+     fi
+ done
+
+
+
 
 # Prüfe ob es neue Emails gibt. Wird später für die Benachrichtigung gebraucht
 newCounter="$(notmuch count tag:new)"
@@ -18,6 +21,9 @@ newCounter="$(notmuch count tag:new)"
 # retag wrong tagged tags (comment in)
 #notmuch tag -inbox -gmail -gmx -photography -work -sent +new -- 
 
+
+## notmuch tag -inbox -new +spam -- tag:new and folder:".*(s|S)pam.*"
+notmuch tag -inbox -new +spam -- tag:new and X-Spam_bar:" "
 
 # tag all messages from "me" as sent and remove tags inbox and unread
 notmuch tag -new -inbox +sent -- tag:new and from:svzieg@gmx.de or from:sven.ziegler@scheer-group.com or from:sven.ziegler@svenziegler.photography or from:ziggo1879@gmail.com
@@ -29,8 +35,8 @@ notmuch tag +inbox -- tag:new
 notmuch tag -inbox +newsletter -- tag:inbox and to:ziggo1879+newsletter@gmail.com
 notmuch tag -inbox +spam -- tag:inbox and to:ziggo1879+gewinn@gmail.com
 
-notmuch tag +archlinux -- from:arch-general-request@archlinux.org or from:arch-events-request@archlinux.org or from:arch-announce-request@archlinux.org
-notmuch tag +archlinux -- from:arch-general@archlinux.org or from:arch-events@archlinux.org or from:arch-announce@archlinux.org
+notmuch tag +archlinux +maillist -- from:arch-general-request@archlinux.org or from:arch-events-request@archlinux.org or from:arch-announce-request@archlinux.org
+notmuch tag +archlinux +maillist -- from:arch-general@archlinux.org or from:arch-events@archlinux.org or from:arch-announce@archlinux.org
 
 # add receiver tag
 notmuch tag +gmail --        tag:new and to:ziggo1879@gmail.com
@@ -42,6 +48,8 @@ notmuch tag +work --         tag:new and to:sven.ziegler@scheer-group.com
 notmuch tag +wiki --         tag:new and tag:work and from:wiki@e2ebridge.com
 notmuch tag +jira --         tag:new and tag:work and from:issues@e2ebridge.com
 notmuch tag +bpaas --        tag:new and tag:work and subject:".*(?i)bpaas.*"
+
+notmuch tag +robot --         tag:new and tag:work and from:"rpa.*"
 
 # delete all new tags
 notmuch tag -new -- tag:new

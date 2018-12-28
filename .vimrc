@@ -648,3 +648,26 @@ let g:jsdoc_enable_es6=0
 "}}}
 
 
+" {{{                        Helper Functions
+"=========================================================================
+
+function! JsonVersionMajorBump()
+    exe '/version'
+    normal www
+    exe "normal \<c-a>"
+endfunction
+
+function! JsonVersionMinorBump()
+    exe '/version'
+    normal wwwww
+    exe "normal \<c-a>"
+endfunction
+
+function! JsonVersionPatchBump()
+    exe '/version'
+    normal wwwwwww
+    exe "normal \<c-a>"
+endfunction
+
+"}}}
+

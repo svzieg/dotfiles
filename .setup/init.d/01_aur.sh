@@ -19,7 +19,11 @@ fi
 
 if [ $(which yaourt) ]
 then
-  yaourt -S --noconfirm brightnessctl dmenu2 pamac_aur davmail
+    yaourt -S --noconfirm $(cat packages)
+    sudo systemctl start NetworkManager
+    sudo systemctl enable NetworkManager
 else 
   >&2 echo "ACHTUNG: YAOURT nicht gefunden"
 fi
+
+
