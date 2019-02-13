@@ -26,7 +26,7 @@ augroup ColorSchemes
    au!
    au ColorScheme * call MyHighlights()
 augroup END
-"}}}
+"}}} 
 
 
 " {{{                        Autoreload
@@ -72,6 +72,7 @@ call dein#add( 'tpope/vim-dispatch')
 call dein#add( 'mileszs/ack.vim')
 call dein#add( 'craigemery/vim-autotag')
 call dein#add('Shougo/deoplete.nvim')
+call dein#add('vimwiki/vimwiki')
 
 "Syntax
 " call dein#add( 'sheerun/vim-polyglot'

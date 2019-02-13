@@ -102,17 +102,17 @@ bindsym Ctrl + Mod1 + Down exec "light -U 10; dunstify 'brightness $(light)%'"
 
 # Start Applications
 bindsym $mod+Ctrl+b exec terminal -e 'bmenu'
-bindsym $mod+F1 exec evolution
-bindsym $mod+F2 exec chromium
+bindsym $mod+F1 exec terminal -e 'neomutt'
+bindsym $mod+F2 exec qutebrowser
 bindsym $mod+F3 exec terminal -e 'ranger'
 # bindsym $mod+F3 exec ranger
 bindsym $mod+Shift+F3 exec gksu pcmanfm
 bindsym $mod+F5 exec terminal -e 'mocp'
 bindsym $mod+t exec --no-startup-id pkill compton
 bindsym $mod+Ctrl+t exec --no-startup-id compton -b
-bindsym $mod+Shift+d --release exec "killall dunst; exec notify-send 'restart dunst'"
-bindsym Print exec "scrot -e 'mv $f ~/Screenshots'; sleep 1; exec notify-send 'screenshot has been saved to ~/Screenshots'"
-bindsym $mod+Print --release exec "scrot -ue 'mv $f ~/Screenshots'; sleep 1; exec notify-send 'screenshot has been saved to ~/Screenshots'"
+bindsym $mod+Shift+d --release exec "killall mako; exec mako"
+bindsym Print exec "grim -e grim.png; sleep 1; exec notify-send 'screenshot has been saved to ~/Screenshots/$(date +\'%Y-%m-%d-%H%M%S_grim.png\')'"
+bindsym $mod+Print --release exec "grim -o $(swaymsg -t get_outputs | jq -r '.[] | select(.focused) | .name') ~/Screenshots/$(date +'%Y-%m-%d-%H%M%S_grim.png'); sleep 1; exec notify-send 'screenshot has been saved to ~/Screenshots/$(date +\'%Y-%m-%d-%H%M%S_grim.png\')"
 bindsym $mod+Shift+Print --release exec "notify-send 'selection will be saved to ~/Screenshots'; scrot -se 'mv $f ~/Screenshots'"
 bindsym $mod+Shift+h exec qpdfview i3_help.pdf
 bindsym $mod+Ctrl+x exec xkill
@@ -193,7 +193,7 @@ bindsym $mod+w layout tabbed
 bindsym $mod+e layout toggle split
 
 # toggle tiling / floating
-bindsym $mod+Shift+space floating toggle
+bindsym $mod+space floating toggle
 
 # change focus between tiling / floating windows
 bindsym $mod+space focus mode_toggle
@@ -389,6 +389,7 @@ exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 exec --no-startup-id nm-applet
 exec --no-startup-id xfce4-power-manager
 exec --no-startup-id pamac-tray
+exec --no-startup-id mako --default-timeout 10000
 #exec --no-startup-id clipit
 # exec --no-startup-id blueman
 exec_always --no-startup-id sbxkb

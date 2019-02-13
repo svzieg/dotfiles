@@ -42,6 +42,7 @@ send-hook  '~f .*sven.ziegler@scheer-group.com.*'         'source "~/.mutt/work"
 send2-hook '~f .*sven.ziegler@scheer-group.com.*'         'source "~/.mutt/work"'
 send-hook '%C Scheer'                           'source "~/.mutt/work"'
 send-hook '%C Egetrans'                           'source "~/.mutt/work"'
+send-hook '%C Schaeffler'                           'source "~/.mutt/work"'
 
 send-hook  "-f *sven.ziegler@svenziegler.photography*"    'source "~/.mutt/photography"'
 send2-hook "-f *sven.ziegler@svenziegler.photography*"    'source "~/.mutt/photography"'
@@ -100,7 +101,7 @@ ignore "X-Flags:"
 hdr_order "Date From To Cc"
 
 #set editor
-set editor="vim"
+set editor="nvim"
 
 set xterm_set_titles  = yes
 set sidebar_visible   = no
@@ -147,6 +148,12 @@ set spam_separator=", "
 # }}}
 
 
+# {{{ Macros
+#
+macro index tt "<modify-labels>!todo\n" "Toggle tag todo"
+#
+# }}}
+
 
 
 # --------------------------------------------------------------------------
@@ -186,7 +193,7 @@ set vfolder_format = "%6n(%6N) %f" # When set, NeoMutt will use the first virtua
 set virtual_spoolfile = yes # setup time window preferences
 # first setup the duration, and then the time unit of that duration
 # when set to 0 (the default) the search window feature is disable
-set nm_query_window_duration=4 
+set nm_query_window_duration=52
 set nm_query_window_timebase="week" 
 # use very high $read_inc to speed up reading hcache'd maildirs
 folder-hook . 'set read_inc=1000'
@@ -258,7 +265,7 @@ bind index,pager \` modify-labels
 # Now instead of using '%g' or '%J' in your $index_format, which lists all tags
 # in a non-deterministic order, you can something like the following which puts
 # a transformed tag name in a specific spot on the index line:
-set index_format='%4C %S %[%d.%m.%y] %-18.18n %?GF?%GF& ? %?GU?%GU& ? %?GR?%GR& ? %?GI?%GI& ? %s'
+set index_format='%4C %S %[%d.%m.%y] %-18.18n %?GF?%GF& ? %?Gt?%Gt& ? %?GU?%GU& ? %?GR?%GR& ? %?GI?%GI& ? %s'
 
 # The %G formatting sequence may display all tags including tags hidden by
 # nm_hidden_tags.

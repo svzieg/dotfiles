@@ -35,8 +35,8 @@ notmuch tag +inbox -- tag:new
 notmuch tag -inbox +newsletter -- tag:inbox and to:ziggo1879+newsletter@gmail.com
 notmuch tag -inbox +spam -- tag:inbox and to:ziggo1879+gewinn@gmail.com
 
-notmuch tag +archlinux +maillist -- from:arch-general-request@archlinux.org or from:arch-events-request@archlinux.org or from:arch-announce-request@archlinux.org
-notmuch tag +archlinux +maillist -- from:arch-general@archlinux.org or from:arch-events@archlinux.org or from:arch-announce@archlinux.org
+notmuch tag -inbox +archlinux +maillist -- from:arch-general-request@archlinux.org or from:arch-events-request@archlinux.org or from:arch-announce-request@archlinux.org
+notmuch tag -inbox +archlinux +maillist -- from:arch-general@archlinux.org or from:arch-events@archlinux.org or from:arch-announce@archlinux.org
 
 # add receiver tag
 notmuch tag +gmail --        tag:new and to:ziggo1879@gmail.com
