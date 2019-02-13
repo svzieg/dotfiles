@@ -1,0 +1,4 @@
+#!bash 
+name=$1
+
+cat node_modules/$name/package.json| jq -r '.version'

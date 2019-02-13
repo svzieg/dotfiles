@@ -32,24 +32,26 @@ notmuch tag -new -inbox +sent -- tag:new and from:svzieg@gmx.de or from:sven.zie
 
 # retag all "new" messages "inbox" and "unread"
 notmuch tag +inbox -- tag:new
-notmuch tag -inbox +newsletter -- tag:inbox and to:ziggo1879+newsletter@gmail.com
-notmuch tag -inbox +spam -- tag:inbox and to:ziggo1879+gewinn@gmail.com
+notmuch tag -inbox +newsletter -- to:ziggo1879+newsletter@gmail.com and not tag:newsletters
+notmuch tag -inbox +spam -- to:ziggo1879+gewinn@gmail.com and not tag:spam
 
-notmuch tag -inbox +archlinux +maillist -- from:arch-general-request@archlinux.org or from:arch-events-request@archlinux.org or from:arch-announce-request@archlinux.org
-notmuch tag -inbox +archlinux +maillist -- from:arch-general@archlinux.org or from:arch-events@archlinux.org or from:arch-announce@archlinux.org
+notmuch tag -inbox +archlinux +maillist -- from:arch-general-request@archlinux.org or from:arch-events-request@archlinux.org or from:arch-announce-request@archlinux.org and not tag:maillist
+notmuch tag -inbox +archlinux +maillist -- from:arch-general@archlinux.org or from:arch-events@archlinux.org or from:arch-announce@archlinux.org and not tag:maillist
 
 # add receiver tag
-notmuch tag +gmail --        tag:new and to:ziggo1879@gmail.com
-notmuch tag +gmx --          tag:new and to:svzieg@gmx.de
-notmuch tag +photography --  tag:new and to:sven.ziegler@svenziegler.photography
-notmuch tag +work --         tag:new and to:sven.ziegler@scheer-group.com
+notmuch tag +gmail --        tag:new and to:ziggo1879@gmail.com and not tag:gmail
+notmuch tag +gmx --          tag:new and to:svzieg@gmx.de and not tag:gmx
+notmuch tag +photography --  tag:new and to:sven.ziegler@svenziegler.photography and not tag:photography
+notmuch tag +work --         tag:new and to:sven.ziegler@scheer-group.com and not tag:work
 
 # add wiki, bugtracker tag
-notmuch tag +wiki --         tag:new and tag:work and from:wiki@e2ebridge.com
-notmuch tag +jira --         tag:new and tag:work and from:issues@e2ebridge.com
-notmuch tag +bpaas --        tag:new and tag:work and subject:".*(?i)bpaas.*"
+notmuch tag +wiki --         tag:new and tag:work and from:wiki@e2ebridge.com and not tag:wiki
+notmuch tag +jira --         tag:new and tag:work and from:issues@e2ebridge.com and not tag:jira
+notmuch tag +bpaas --        tag:new and tag:work and subject:".*(?i)bpaas.*" and not tag:bpaas
 
 notmuch tag +robot --         tag:new and tag:work and from:"rpa.*"
+notmuch tag +robot --         from:"rpa*@egetrans.com" and tag:work and not tag:robot
+notmuch tag +robot --         from:"belegroboter@lgi.de" and tag:work and not tag:robot
 
 # delete all new tags
 notmuch tag -new -- tag:new

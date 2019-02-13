@@ -111,8 +111,8 @@ bindsym $mod+F5 exec terminal -e 'mocp'
 bindsym $mod+t exec --no-startup-id pkill compton
 bindsym $mod+Ctrl+t exec --no-startup-id compton -b
 bindsym $mod+Shift+d --release exec "killall mako; exec mako"
-bindsym Print exec "grim -e grim.png; sleep 1; exec notify-send 'screenshot has been saved to ~/Screenshots/$(date +\'%Y-%m-%d-%H%M%S_grim.png\')'"
-bindsym $mod+Print --release exec "grim -o $(swaymsg -t get_outputs | jq -r '.[] | select(.focused) | .name') ~/Screenshots/$(date +'%Y-%m-%d-%H%M%S_grim.png'); sleep 1; exec notify-send 'screenshot has been saved to ~/Screenshots/$(date +\'%Y-%m-%d-%H%M%S_grim.png\')"
+bindsym Print exec "grim -e ~/Screenshots/$(date +'%Y-%m-%d-%H%M%S.png'); sleep 1; exec notify-send 'screenshot has been saved to ~/Screenshots/'"
+bindsym $mod+Print --release exec "grim -o $(swaymsg -t get_outputs | jq -r '.[] | select(.focused) | .name') ~/Screenshots/$(date +'%Y-%m-%d-%H%M%S.png'); sleep 1; exec notify-send 'screenshot has been saved to ~/Screenshots/'"
 bindsym $mod+Shift+Print --release exec "notify-send 'selection will be saved to ~/Screenshots'; scrot -se 'mv $f ~/Screenshots'"
 bindsym $mod+Shift+h exec qpdfview i3_help.pdf
 bindsym $mod+Ctrl+x exec xkill
