@@ -1,6 +1,6 @@
 # Created by newuser for 5.2
 # If you come from bash you might have to change your $PATH.
-export PATH=$PATH:/home/svzieg/Android/Sdk:/home/svzieg/Android/Sdk/tools:/home/svzieg/Android/Sdk/platform-tool:/home/svzieg/.gem/ruby/2.5.0/bins:/home/svzieg/.vagrant.d/gems/2.5.1/bins
+export PATH=$PATH:/opt/android-sdk/platform-tools:~/.local/bin
 
 # Path to your oh-my-zsh installation.
 export ZSH=/home/svzieg/.oh-my-zsh

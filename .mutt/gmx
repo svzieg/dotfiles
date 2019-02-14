@@ -9,6 +9,7 @@ set pgp_timeout       = 3600
 set pgp_autosign      = yes
 set nm_record         = yes
 set record            = +Gmx/Sent
+set trash             = +Gmx/Trash
 
 # SMIME
 set crypt_autosign           = yes

@@ -28,22 +28,26 @@ footer = "\n"
 [Account Gmail]
 localrepository = GmailLocal
 remoterepository = GmailRemote
-postsynchook = notmuch new
+presynchook = /home/svzieg/.local/bin/maildir-notmuch-sync pre /home/svzieg/mail/Gmail
+postsynchook = /home/svzieg/.local/bin/maildir-notmuch-sync post /home/svzieg/mail/Gmail
 
 [Account Gmx]
 localrepository = GmxLocal
 remoterepository = GmxRemote
-postsynchook = notmuch new
+presynchook = /home/svzieg/.local/bin/maildir-notmuch-sync pre /home/svzieg/mail/Gmx
+postsynchook = /home/svzieg/.local/bin/maildir-notmuch-sync post /home/svzieg/mail/Gmx
 
 [Account Work]
 localrepository = WorkLocal
 remoterepository = WorkRemote
-postsynchook = notmuch new
+presynchook = /home/svzieg/.local/bin/maildir-notmuch-sync pre /home/svzieg/mail/Work
+postsynchook = /home/svzieg/.local/bin/maildir-notmuch-sync post /home/svzieg/mail/Work
 
 [Account Photography]
 localrepository = PhotographyLocal
 remoterepository = PhotographyRemote
-postsynchook = notmuch new
+presynchook = /home/svzieg/.local/bin/maildir-notmuch-sync pre /home/svzieg/mail/Photography
+postsynchook = /home/svzieg/.local/bin/maildir-notmuch-sync post /home/svzieg/mail/Photography
 
 [Repository GmailRemote]
 type = Gmail
