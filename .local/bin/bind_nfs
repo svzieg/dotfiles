@@ -1,0 +1,5 @@
+#!bash
+
+sudo mkdir -p /run/media/nfs
+sudo mount raspberry:/nfs /run/media/nfs
+
