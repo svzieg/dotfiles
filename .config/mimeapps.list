@@ -58,3 +58,4 @@ application/xhtml_xml=vivaldi-stable.desktop;google-chrome.desktop;chromium.desk
 image/webp=vivaldi-stable.desktop;google-chrome.desktop;chromium.desktop;
 application/vnd.mozilla.xul+xml=firefox.desktop;
 text/mml=firefox.desktop;
+application/x-cd-image=org.gnome.FileRoller.desktop;
