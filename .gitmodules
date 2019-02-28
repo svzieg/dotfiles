@@ -1,3 +1,6 @@
 [submodule "programs/i3wm-themer"]
 	path = programs/i3wm-themer
 	url = https://github.com/unix121/i3wm-themer.git
+[submodule ".SpaceVim"]
+	path = .SpaceVim
+	url = ./.SpaceVim
