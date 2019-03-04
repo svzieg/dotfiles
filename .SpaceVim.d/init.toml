@@ -36,9 +36,53 @@ default_position = 'top'
 default_height = 30
 
 [[layers]]
+name = "denite"
+
+[[layers]]
 name = "fzf"
+enable = false
 
 [[layers]]
 name = "lang#javascript"
 auto_fix = true
 enable_flow_syntax = true
+
+[[layers]]
+  name = "lang#dockerfile"
+
+[[layers]]
+  name = "lang#html"
+
+[[layers]]
+  name = "VersionControl"
+  enable-gtm-status = true
+
+[[layers]]
+  name = "lang#latex"
+
+[[layers]]
+  name = "lang#markdown"
+
+[[layers]]
+  name = "lang#plantuml"
+
+  [[layers]]
+  name = "lang#python"
+  format-on-save = 1
+
+[[layers]]
+  name = "lang#sh"
+
+
+[[layers]]
+  name = "shell"
+  default_position = "top"
+  default_height = 30
+
+
+[[layers]]
+  name = "sudo"
+
+
+[[layers]]
+  name = "git"

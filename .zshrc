@@ -17,7 +17,7 @@ TERM=xterm-256color
 DISABLE_AUTO_UPDATE="false"
 
 # Uncomment the following line to enable command auto-correction.
-ENABLE_CORRECTION="false"
+ENABLE_CORRECTION="true"
 
 # Uncomment the following line if you want to disable marking untracked files
 # under VCS as dirty. This makes repository status check for large repositories
@@ -63,7 +63,7 @@ if [ $(tty) = "/dev/tty1" ]; then
 	exit 0
 fi
 alias dc="sudo docker-compose"
-alias yarn=yarn --ignore-enignes
+alias yarn=yarn --ignore-engines
 ###-begin-pm2-completion-###
 ### credits to npm for the completion file model
 #

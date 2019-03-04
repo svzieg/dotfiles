@@ -2,9 +2,10 @@
 ! Import Colour from ~/.xrdb
 ! ------------------------------------------------------------------------------
 
-#include ".xrdb/color/nord"
-#include ".xrdb/rofi/nord"
-#include ".xrdb/dmenu/nord"
+!#include ".xrdb/color/nord"
+#include ".cache/wal/colors.Xresources"
+!#include ".xrdb/rofi/nord"
+!#include ".xrdb/dmenu/nord"
 #include ".xrdb/fonts/monofur"
 
 ! ------------------------------------------------------------------------------
@@ -16,7 +17,7 @@ URxvt*letterSpace: 	    0
 URxvt.lineSpace: 		0
 URxvt*internalBorder:   24
 URxvt*externalBorder:   0
-URxvt*depth:            32
+!URxvt*depth:            32
 URxvt*saveline:         2000
 URxvt*termName:         rxvt-256color
 URxvt*iso14755:         false
@@ -33,7 +34,7 @@ URxvt.keysym.Shift-Up:	command:\033]720;1\007
 URxvt.keysym.Shift-Down:command:\033]721;1\007
 URxvt.keysym.M-s:       perl:keyboard-select:search
 URxvt.keysym.M-u:       perl:url-select:select_next
-URxvt.urlLauncher:      firefox
+URxvt.urlLauncher:      qutebrowser
 URxvt.underlineURLs:    true
 URxvt.urlButton:        1
 URxvt*buffered:         false          
@@ -48,5 +49,5 @@ Xft.lcdfilter: lcddefault
 Xft.hintstyle: hintslight
 Xft.hinting: 1
 Xft.antialias: 1
-Xft.rgba: rgb
+Xft.rgba: rgba
 

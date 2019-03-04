@@ -27,7 +27,7 @@ application/vnd.mozilla.xul+xml=firefox.desktop
 text/mml=firefox.desktop
 
 [Added Associations]
-image/jpeg=viewnior.desktop;gpicview.desktop;
+image/jpeg=eog.desktop;imv.desktop;viewnior.desktop;gpicview.desktop;
 image/png=gimp.desktop;eog.desktop;viewnior.desktop;gpicview.desktop;
 text/plain=mousepad.desktop;
 x-scheme-handler/mailto=userapp-Thunderbird.desktop;userapp-Evolution-Y3BG9Y.desktop;
@@ -51,7 +51,7 @@ application/x-extension-xht=qutebrowser.desktop;firefox-beta-bin.desktop;userapp
 application/octet-stream=org.gnome.gedit.desktop;
 application/json=mousepad.desktop;org.gnome.gedit.desktop;
 image/x-eps=inkscape.desktop;
-image/tiff=inkscape.desktop;
+image/tiff=imv.desktop;inkscape.desktop;
 video/x-matroska=vlc.desktop;
 text/xml=vivaldi-stable.desktop;google-chrome.desktop;chromium.desktop;firefox.desktop;
 application/xhtml_xml=vivaldi-stable.desktop;google-chrome.desktop;chromium.desktop;
