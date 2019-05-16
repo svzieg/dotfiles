@@ -44,8 +44,8 @@ send-hook '%C Scheer'                           'source "~/.mutt/work"'
 send-hook '%C Egetrans'                           'source "~/.mutt/work"'
 send-hook '%C Schaeffler'                           'source "~/.mutt/work"'
 
-send-hook  "-f *sven.ziegler@svenziegler.photography*"    'source "~/.mutt/photography"'
-send2-hook "-f *sven.ziegler@svenziegler.photography*"    'source "~/.mutt/photography"'
+send-hook  '~f .*sven.ziegler@svenziegler.photography.*'    'source "~/.mutt/photography"'
+send2-hook '~f .*sven.ziegler@svenziegler.photography.*'    'source "~/.mutt/photography"'
 
 # }}}
 
