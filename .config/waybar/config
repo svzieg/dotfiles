@@ -47,5 +47,9 @@
     "custom/spotify": {
         "format": " {}",
         "exec": "$HOME/.bin/mediaplayer.sh"
+    },
+    "tray": {
+      "icon-size": 1,
+      "spacing": 10
     }
 }

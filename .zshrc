@@ -17,7 +17,7 @@ TERM=xterm-256color
 DISABLE_AUTO_UPDATE="false"
 
 # Uncomment the following line to enable command auto-correction.
-ENABLE_CORRECTION="true"
+ENABLE_CORRECTION="false"
 
 # Uncomment the following line if you want to disable marking untracked files
 # under VCS as dirty. This makes repository status check for large repositories
@@ -54,8 +54,6 @@ export XKB_DEFAULT_VARIANT=neo,nodeadkeys
 export XKB_DEFAULT_OPTIONS=grp:alt_shift_toggle
 
 # Native Wayland support
-
-# If running trom tty1 start sway
 if [ $(tty) = "/dev/tty1" ]; then
 	eval $(/usr/bin/gnome-keyring-daemon --start --components=pkcs11,secrets,ssh)
 	export SSH_AUTH_SOCK
@@ -107,3 +105,11 @@ fi
 export PATH=/usr/bin/vendor_perl:$PATH
 export PATH=~/.npm/bin:$PATH
 export PATH=$PATH:~/.bin
+
+
+bindkey '^R' history-incremental-search-backward
+
+
+alias activate_anaconda="source /opt/anaconda/bin/activate root"
+alias deactivate_anaconda="source /opt/anaconda/bin/deactivate root"
+
