@@ -113,3 +113,27 @@ bindkey '^R' history-incremental-search-backward
 alias activate_anaconda="source /opt/anaconda/bin/activate root"
 alias deactivate_anaconda="source /opt/anaconda/bin/deactivate root"
 
+
+
+URGENT="!"
+OVERDUE="☠️"
+DUETODAY="😱"
+DUETOMORROW=""
+
+function task_indicator {
+    if [ `task +READY +OVERDUE count` -gt "0" ]; then
+        echo "$OVERDUE"
+    elif [ `task +READY +DUETODAY count` -gt "0" ]; then
+        echo "$DUETODAY"
+    elif [ `task +READY +DUETOMORROW count` -gt "0" ]; then
+        echo "$DUETOMORROW"
+    elif [ `task +READY urgency \> 10 count` -gt "0" ]; then
+        echo "$URGENT"
+    else
+        echo '$'
+    fi
+  }
+
+
+PS1="\$(task_indicator) "$PS1
+
