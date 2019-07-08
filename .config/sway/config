@@ -101,13 +101,13 @@ bindsym $mod+Ctrl+i exec nm-connection-editor
 # bindsym Ctrl + Mod1 + Down exec "light -U 10; dunstify 'brightness $(light)%'"
 
 # Start Applications
-bindsym $mod+Ctrl+b exec terminal -e 'bmenu'
-bindsym $mod+F1 exec terminal -e 'neomutt'
-bindsym $mod+F2 exec qutebrowser
-bindsym $mod+F3 exec terminal -e 'ranger'
+bindsym $mod+Ctrl+b exec termite -e 'bmenu'
+bindsym $mod+F1 exec termite -e 'neomutt'
+bindsym $mod+F2 exec chromium
+bindsym $mod+F3 exec termite -e 'vifm'
 # bindsym $mod+F3 exec ranger
 bindsym $mod+Shift+F3 exec gksu pcmanfm
-bindsym $mod+F5 exec terminal -e 'mocp'
+bindsym $mod+F5 exec termite -e 'mocp'
 bindsym $mod+t exec --no-startup-id pkill compton
 bindsym $mod+Ctrl+t exec --no-startup-id compton -b
 bindsym $mod+Shift+d --release exec "killall mako; exec mako"
