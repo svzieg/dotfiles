@@ -313,3 +313,9 @@ color index brightblue black "new"
 
 
 
+# Make sure that there are no spaces at the beginning of the line
+macro index,pager <F8> \
+"<enter-command>set my_old_pipe_decode=\$pipe_decode my_old_wait_key=\$wait_key nopipe_decode nowait_key<enter>\
+<pipe-message>notmuchtask --debug find-or-create-task<enter>\
+<enter-command>set pipe_decode=\$my_old_pipe_decode wait_key=\$my_old_wait_key<enter>" \
+"notmuchtask: assign mail to a task"

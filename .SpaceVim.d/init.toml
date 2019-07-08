@@ -43,10 +43,13 @@ default_position = 'top'
 default_height = 30
 [[layers]]
 name = "denite"
+enable = false
 
 [[layers]]
 name = "fzf"
-enable = false
+
+[[layers]]
+  name = "tools#zeal"
 
 [[layers]]
   name = "checkers"

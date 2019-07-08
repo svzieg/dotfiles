@@ -57,9 +57,14 @@ export XKB_DEFAULT_OPTIONS=grp:alt_shift_toggle
 if [ $(tty) = "/dev/tty1" ]; then
 	eval $(/usr/bin/gnome-keyring-daemon --start --components=pkcs11,secrets,ssh)
 	export SSH_AUTH_SOCK
-	sway-neo
+#  export QT_QPA_PLATFORM=wayland
+#  export QT_WAYLAND_DISABLE_WINDOWDECORATION="1"
+  export _JAVA_AWT_WM_NONREPARENTING=1
+	
+  sway-neo
 	exit 0
 fi
+
 alias dc="sudo docker-compose"
 alias yarn=yarn --ignore-engines
 ###-begin-pm2-completion-###
