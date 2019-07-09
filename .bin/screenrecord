@@ -1,0 +1,2 @@
+#!/usr/bin/bash
+wf-recorder -g "$(slurp)" -o ~/Screenrecords/$(date --iso-8601=s).mp4 

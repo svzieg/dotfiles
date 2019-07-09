@@ -1,0 +1,2 @@
+#!/usr/bin/bash
+grim -g "$(slurp)" ~/Screenshots/$(date --iso-8601=s).png - | wl-copy
