@@ -4,7 +4,7 @@ function! myspacevim#before() abort
   noremap ρ gk
   noremap ν gj
   noremap σ h
-  inoremap nr <ESC>
+"  inoremap nr <ESC>
 endfunction
 
 function! myspacevim#after() abort
