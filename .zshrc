@@ -39,12 +39,10 @@ source $ZSH/oh-my-zsh.sh
 export ANDROID_HOME=~/Android/Sdk
 export GRADLE_HOME=/opt/android-studio/gradle/gradle-3.2
 
-export EDITOR=vim
-alias ssh_build='ssh developer@dev1.scheer-group.com -p2245'
-alias mount_build='sudo sshfs -o allow_other,IdentityFile=/home/svzieg/.ssh/id_rsa,port=2245 developer@dev1.scheer-group.com:/home/developer /mnt/build/'
+export EDITOR=nvim
 
-alias config='/usr/bin/git --git-dir=/home/svzieg/.cfg/ --work-tree=/home/svzieg'
-compdef config='git'
+alias config='git --git-dir=/home/svzieg/.cfg/ --work-tree=/home/svzieg'
+#compdef config='git'
 
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 
@@ -66,7 +64,6 @@ if [ $(tty) = "/dev/tty1" ]; then
 fi
 
 alias dc="sudo docker-compose"
-alias yarn=yarn --ignore-engines
 ###-begin-pm2-completion-###
 ### credits to npm for the completion file model
 #
@@ -11214,5 +11211,10 @@ BASH_COMPLETION_EOF
 
 __kubectl_bash_source <(__kubectl_convert_bash_to_zsh)
 _complete kubectl 2>/dev/null
-alias k=kubectl
 export PATH=$PATH:~/.go/bin
+
+
+
+
+# Kubernetes Aliases
+source ~/.kubectl_aliases
