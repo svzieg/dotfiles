@@ -39,37 +39,44 @@ cursor_blink = system
 #scrollbar = off
 
 [colors]
-# If both of these are unset, cursor falls back to the foreground color,
-# and cursor_foreground falls back to the background color.
-#cursor = #dcdccc
-#cursor_foreground = #dcdccc
 
-#foreground = #dcdccc
-#foreground_bold = #ffffff
-#background = #3f3f3f
+# special
+foreground      = #c7d6e7
+foreground_bold = #c7d6e7
+cursor          = #c7d6e7
+background      = #191c23
 
-#background=#1c1916
-background=#282828
-foreground=#c6c5c4
-cursor=#c6c5c4
+# black
+color0  = #191c23
+color8  = #8b95a1
 
-# Colors
-color0=#1c1916
-color1=#785129
-color2=#9d6d3d
-color3=#aa875e
-color4=#c08548
-color5=#ca9c66
-color6=#e0bd8b
-color7=#c6c5c4
-color8=#545250
-color9=#785129
-color10=#9d6d3d
-color11=#aa875e
-color12=#c08548
-color13=#ca9c66
-color14=#e0bd8b
-color15=#c6c5c4
+# red
+color1  = #657c94
+color9  = #657c94
+
+# green
+color2  = #6f949a
+color10 = #6f949a
+
+# yellow
+color3  = #5295e3
+color11 = #5295e3
+
+# blue
+color4  = #6ba2e3
+color12 = #6ba2e3
+
+# magenta
+color5  = #939ca0
+color13 = #939ca0
+
+# cyan
+color6  = #8babac
+color14 = #8babac
+
+# white
+color7  = #c7d6e7
+color15 = #c7d6e7
 
 
 [hints]
