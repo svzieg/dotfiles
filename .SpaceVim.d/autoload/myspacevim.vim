@@ -4,12 +4,21 @@ function! myspacevim#before() abort
   noremap ρ gk
   noremap ν gj
   noremap σ h
+
+
+
+
+
 "  inoremap nr <ESC>
 endfunction
 
 function! myspacevim#after() abort
 
   set spell spelllang=en_us,de
+
+  augroup PythonBlack
+    autocmd BufWritePre *.py execute ':Black'
+  augroup END
 
 endfunction
 

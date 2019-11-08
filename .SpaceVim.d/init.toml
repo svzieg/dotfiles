@@ -27,12 +27,28 @@
     enable_neomake= true
     enable_ale = false
     
-#bootstrap_before = "myspacevim#before"
-#    bootstrap_after = "myspacevim#after" 
+     bootstrap_before = "myspacevim#before"
+     bootstrap_after = "myspacevim#after" 
 
 # add custom_plugins: https://github.com/mhartington/oceanic-next
 [[custom_plugins]]
   name = "mhartington/oceanic-next"
+  merged = 0
+
+
+# [[custom_plugins]]
+#   name= "tbodt/deoplete-tabnine"
+#   enable = false
+#   merged = 0
+
+
+[[custom_plugins]]
+  name= "jupyter-vim/jupyter-vim" 
+  merged = 0
+
+
+[[custom_plugins]]
+  name= 'psf/black'
   merged = 0
 
 # Enable autocomplete layer
@@ -40,6 +56,11 @@
 name = 'autocomplete'
 auto-completion-return-key-behavior = "complete"
 auto-completion-tab-key-behavior = "smart"
+
+
+[[layers]]
+  name = "lang#typescript"
+
 
 [[layers]]
   name = "colorscheme"
@@ -89,7 +110,7 @@ enable_flow_syntax = true
 
   [[layers]]
   name = "lang#python"
-  format-on-save = 1
+  format-on-save = 0
 
 [[layers]]
   name = "lang#sh"
