@@ -71,7 +71,7 @@ video/x-theora+ogg=org.gnome.Totem.desktop
 video/x-totem-stream=org.gnome.Totem.desktop
 
 [Added Associations]
-image/jpeg=eog.desktop;imv.desktop;viewnior.desktop;gpicview.desktop;
+image/jpeg=org.gnome.gThumb.desktop;org.kde.showfoto.desktop;eog.desktop;imv.desktop;viewnior.desktop;gpicview.desktop;
 image/png=gimp.desktop;eog.desktop;viewnior.desktop;gpicview.desktop;
 text/plain=mousepad.desktop;
 x-scheme-handler/mailto=userapp-Thunderbird.desktop;userapp-Evolution-Y3BG9Y.desktop;org.gnome.Evolution.desktop;
@@ -145,3 +145,4 @@ video/x-nsv=org.gnome.Totem.desktop;
 video/x-theora=org.gnome.Totem.desktop;
 video/x-theora+ogg=org.gnome.Totem.desktop;
 video/x-totem-stream=org.gnome.Totem.desktop;
+text/x-matlab=lyx.desktop;
