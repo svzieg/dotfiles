@@ -11,10 +11,12 @@ python-pip
 neovim
 ruby
 tmux
-fishermen
 base-devel
 yay
 gimp 
 htop
 spotify
 freeoffice
+opencl-amdgpu-pro-orca
+radeon-profile-git
+lyx
