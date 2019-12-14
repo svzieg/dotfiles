@@ -51,6 +51,11 @@
   name= 'psf/black'
   merged = 0
 
+
+[[custom_plugins]]
+  name='vimwiki/vimwiki'
+  merged = 0
+
 # Enable autocomplete layer
 [[layers]]
 name = 'autocomplete'
