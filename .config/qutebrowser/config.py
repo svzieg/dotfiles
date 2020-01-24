@@ -30,8 +30,7 @@ c.completion.shrink = True
 
 
 # Key Bindings
-config.bind('<Ctrl-,>', 'spawn --userscript qute-lastpass')
+config.bind('<Ctrl-,>', 'spawn --userscript qute-bitwarden')
 config.bind('<Ctrl-e>', 'edit-url')
-
 
 

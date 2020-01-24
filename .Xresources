@@ -4,7 +4,7 @@
 
 !#include ".xrdb/color/nord"
 #include ".cache/wal/colors.Xresources"
-!#include ".xrdb/rofi/nord"
+#include ".xrdb/rofi/nord"
 !#include ".xrdb/dmenu/nord"
 #include ".xrdb/fonts/monofur"
 
