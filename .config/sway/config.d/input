@@ -14,6 +14,11 @@ input 1:1:AT_Translated_Set_2_keyboard {
     xkb_options grp:alt_shift_toggle
 }
 
+input 16700:8209:Dell_Dell_Multimedia_Pro_Keyboard {
+    xkb_layout de,de
+    xkb_variant neo,nodeadkeys
+    xkb_options grp:alt_shift_toggle
+}
 
 
 input 1102:4639:DELL0817:00_044E:121F_Touchpad {
