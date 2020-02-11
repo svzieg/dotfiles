@@ -1,0 +1,23 @@
+#!conf
+# swaymsg -t get_inputs
+
+input 1130:181:CHERRY_Mechanical_Keyboard {
+    xkb_layout de,de
+    xkb_variant neo,nodeadkeys
+    xkb_options grp:alt_shift_toggle
+}
+
+
+input 1:1:AT_Translated_Set_2_keyboard {
+    xkb_layout de,de
+    xkb_variant neo,nodeadkeys
+    xkb_options grp:alt_shift_toggle
+}
+
+
+
+input 1102:4639:DELL0817:00_044E:121F_Touchpad {
+    tap enabled
+    natural_scroll enabled
+    dwt enabled
+}
