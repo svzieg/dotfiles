@@ -1,115 +1,141 @@
+/* Thank you to u/Krudjan for sharing their dotfiles, I used
+   https://gitlab.com/Krudjan/dotfiles/tree/master/waybar/.config/waybar
+   as a reference when writing this */
 
 {
-    "layer": "bottom",
-    "position": "top",
-    "height": 30,
-
-    "modules-left": ["sway/workspaces", "sway/mode"],
-    "modules-center": ["sway/window"],
-    "modules-right": [ "custom/spotify", "custom/weather", "custom/mail", "custom/storage", "backlight", "pulseaudio", "network", "idle_inhibitor", "battery", "tray", "clock"],
+    "layer": "top", // Waybar at top layer
+    // "position": "bottom", // Waybar at the bottom of your screen
+    "height": 25, // Waybar height
+    // "width": 1280, // Waybar width
+    // Choose the order of the modules
+    "modules-left": ["custom/menu","custom/arrow10","sway/workspaces","custom/block0","custom/arrow0","sway/mode"],
+    "modules-center": [],
+    "modules-right": ["custom/arrow9","tray","idle_inhibitor","custom/arrow1","pulseaudio","custom/arrow2","cpu","custom/arrow3","memory","custom/arrow8","custom/vpn","custom/arrow4","custom/pacman","custom/arrow5","network","custom/bluetooth","custom/arrow6","battery","custom/arrow7","clock"],
+    "gtk-layer-shell": true,
+    // Modules configuration
+     "sway/workspaces": {
+         "disable-scroll": true,
+         "format": "{name}"
+     },
     "sway/mode": {
-        "format": " {}"
-    },
-    "sway/workspaces": {
-        "format": "{name}",
-        "disable-scroll": true
-    },
-    "sway/window": {
-        "max-length": 80,
-        "tooltip": false
+        "format": "!"
     },
     "clock": {
-        "format": "{:%a %d %b %H:%M}",
-        "tooltip": false
+	    "format": "{:%a, %b %-d %H:%M}"
+    },
+    "cpu": {
+        "format": "{usage}% "
+    },
+    "memory": {
+        "format": "{}% ",
+	"on-click": "kitty -e htop"
     },
     "battery": {
-        "format": "{capacity}% {icon}",
-        "format-alt": "{time} {icon}",
-        "format-icons": ["", "", "", "", ""],
-        "format-charging": "{capacity}% ",
-        "interval": 30,
-        "states": {
-            "warning": 25,
-            "critical": 10
+    "bat": "BAT0",
+    "interval": 60,
+    "states": {
+        "warning": 30,
+        "critical": 15
         },
-        "tooltip": false
+        "format": "{capacity}% {icon}",
+        "format-icons": ["", "", "", "", ""],
+        "max-length": 25
+    },
+    "custom/vpn": {
+    "interval": 5,
+    "format": "{}",
+    "return-type": "json",
+    "exec": "~/.config/waybar/modules/vpn.sh",
+    "on-click": "env XDG_CURRENT_DESKTOP=GNOME gnome-control-center network" 
     },
     "network": {
-        "format": "{icon}",
-        "format-alt": "{ipaddr}/{cidr} {icon}",
-        "format-alt-click": "click-right",
-        "format-icons": {
-            "wifi": ["", "", ""],
-            "ethernet": [""],
-            "disconnected": [""]
-        },
-        "on-click": "termite -e nmtui",
-    "tooltip": false
+        "format-wifi": "",
+        "format-ethernet": "",
+        "format-disconnected": "",
+        "on-click": "env XDG_CURRENT_DESKTOP=GNOME gnome-control-center wifi" 
+    },
+    "custom/bluetooth": {
+        "format": "",
+        "interval": 5,
+        "return-type": "json",
+        "exec": "~/.config/waybar/modules/bluetooth.sh",
+        "on-click": "blueberry"
     },
     "pulseaudio": {
-        "format": "{icon}",
-        "format-alt": "{volume} {icon}",
-        "format-alt-click": "click-right",
-        "format-muted": "",
+        "scroll-step": 5,
+        "format": "{volume}% {icon}",
+        "format-bluetooth": "{volume}% {icon}",
+        "format-muted": "",
         "format-icons": {
-            "phone": [" ", " ", " ", " "],
-            "default": ["", "", "", ""]
+            "headphones": "",
+            "handsfree": "",
+            "headset": "",
+            "phone": "",
+            "portable": "",
+            "car": "",
+            "default": ["", ""]
         },
-        "scroll-step": 10,
-        "on-click": "pavucontrol",
+        "on-click": "pavucontrol"
+    },
+    "custom/pacman": {
+        "format": "{} ",
+        "interval": 3600,                     // every hour
+        "exec": "pamac checkupdates -a -q | wc -l",       // # of updates
+        "on-click": "pamac-manager", // update system
         "tooltip": false
     },
-    "custom/spotify": {
-        "interval": 1,
-        "return-type": "json",
-        "exec": "~/.config/waybar/modules/spotify.sh",
-        "exec-if": "pgrep spotify",
-        "escape": true
-    },
-    "custom/storage": {
-        "format": "{} ",
-        "format-alt": "{percentage}% ",
-        "format-alt-click": "click-right",
-        "return-type": "json",
-        "interval": 60,
-        "exec": "~/.config/waybar/modules/storage.sh"
-    },
-    "backlight": {
-        "format": "{icon}",
-        "format-alt": "{percent}% {icon}",
-        "format-alt-click": "click-right",
-        "format-icons": ["", ""],
-        "on-scroll-down": "light -A 1",
-        "on-scroll-up": "light -U 1"
-    },
-    "custom/weather": {
-        "format": "{}",
-        "format-alt": "{alt}: {}",
-        "format-alt-click": "click-right",
-        "interval": 1800,
-        "return-type": "json",
-        "exec": "~/.config/waybar/modules/weather.sh",
-        "exec-if": "ping wttr.in -c1"
+    "tray": {
+        "icon-size": 21,
+        "spacing": 10
+                
     },
     "idle_inhibitor": {
         "format": "{icon}",
         "format-icons": {
-            "activated": "",
-            "deactivated": ""
-        },
-        "tooltip": false
+           "activated": "",
+           "deactivated": ""                                         
+        }                
     },
-    "custom/mail": {
-        "format": "",
-        "format-alt": "{alt} ",
-        "format-alt-click": "click-right",
-        "interval": 60,
-        "return-type": "json",
-        "exec": "~/.config/waybar/modules/mail.sh",
-        "tooltip": false
+    "custom/menu": {
+         "format": "",
+         "on-click": "sgtk-menu -y 25",
+         "tooltip": false
+     },
+    "custom/block0": {
+        "format": "█"
     },
-    "tray": {
-        "icon-size": 18,
-        "spacing": 10
-    }
+    "custom/arrow0": {
+        "format": ""
+    },
+    "custom/arrow1": {
+        "format": ""
+    },
+    "custom/arrow2": {
+        "format": ""
+    },
+    "custom/arrow3": {
+        "format": ""
+    },
+    "custom/arrow4": {
+        "format": ""
+    },
+    "custom/arrow5": {
+        "format": ""
+    },
+    "custom/arrow6": {
+        "format": ""
+    },
+    "custom/arrow7": {
+        "format": ""
+    },
+    "custom/arrow8": {
+        "format": ""
+    },
+    "custom/arrow9": {
+        "format": ""
+    },
+    "custom/arrow10": {
+         "format": ""
+     }
+
 }
