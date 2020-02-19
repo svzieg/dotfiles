@@ -27,7 +27,7 @@
 
 # Your preferred application launcher
 # Note: it'es recommended that you pass the final command to sway
-    set $menu wofi --show=run
+    set $menu rofi -show run
 
 # Your prefered locking mechanism, chose between gdbus -> gdm and swaylock
 #

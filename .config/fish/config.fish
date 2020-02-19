@@ -1,6 +1,6 @@
 #!/usr/bin/env fish
 
-set -gx PATH /home/svzieg/.bin /home/svzieg/bin /home/svzieg/.npm/bin /usr/bin/vendor_perl $PATH 
+set -gx PATH /home/svzieg/.bin /home/svzieg/bin /home/svzieg/.npm/bin /usr/bin/vendor_perl /home/svzieg/.local/bin $PATH 
 set -gx EDITOR (which nvim)   
 
 
