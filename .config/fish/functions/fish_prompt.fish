@@ -1,1 +1,1 @@
-/home/svzieg/.local/share/omf/themes/budspencer/fish_prompt.fish
+/home/svzieg/.local/share/omf/themes/dangerous/fish_prompt.fish

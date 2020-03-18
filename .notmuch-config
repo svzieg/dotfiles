@@ -32,8 +32,8 @@ path=/home/svzieg/mail
 
 [user]
 name=Sven Ziegler
-primary_email=svzieg@gmx.de
-other_email=sven.ziegler@photography;sven.ziegler@svenziegler.photography;sven.ziegler@scheer-group.com;ziggo1879@gmail.com;
+primary_email=sven.ziegler@scheer-group.com
+other_email=sven.ziegler@photography;sven.ziegler@scheer-group.com;ziggo1879@gmail.com;svzieg@gmx.de;
 
 # Configuration for "notmuch new"
 #

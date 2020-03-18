@@ -22,8 +22,10 @@
     statusline_separator = "arrow"
     statusline_inactive_separator = "arrow"
     buffer_index_type = 4
+
     enable_tabline_filetype_icon = true
     enable_statusline_display_mode = false
+
     enable_neomake= true
     enable_ale = false
     
@@ -31,10 +33,10 @@
      bootstrap_after = "myspacevim#after" 
 
 # add custom_plugins: https://github.com/mhartington/oceanic-next
-[[custom_plugins]]
-  name = "mhartington/oceanic-next"
-  merged = 0
-
+# [[custom_plugins]]
+#   name = "mhartington/oceanic-next"
+#   merged = 0
+#
 
 # [[custom_plugins]]
 #   name= "tbodt/deoplete-tabnine"
@@ -42,14 +44,14 @@
 #   merged = 0
 
 
-[[custom_plugins]]
-  name= "jupyter-vim/jupyter-vim" 
-  merged = 0
+# [[custom_plugins]]
+#   name= "jupyter-vim/jupyter-vim"
+#   merged = 0
 
 
-[[custom_plugins]]
-  name= 'psf/black'
-  merged = 0
+# [[custom_plugins]]
+#   name= 'psf/black'
+#   merged = 0
 
 
 [[custom_plugins]]
@@ -59,8 +61,9 @@
 # Enable autocomplete layer
 [[layers]]
 name = 'autocomplete'
-auto-completion-return-key-behavior = "complete"
+auto-completion-return-key-behavior = "nil"
 auto-completion-tab-key-behavior = "smart"
+auto_completion_complete_with_key_sequence = "nr"
 
 
 [[layers]]
@@ -95,6 +98,8 @@ enable_flow_syntax = true
 [[layers]]
   name = "lang#dockerfile"
 
+[[layers]]
+  name = "lang#go"
 
 
 [[layers]]

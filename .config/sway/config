@@ -27,7 +27,7 @@
 
 # Your preferred application launcher
 # Note: it'es recommended that you pass the final command to sway
-    set $menu rofi -show run
+    set $menu dmenu_path | wofi --show drun -i | xargs swaymsg exec --
 
 # Your prefered locking mechanism, chose between gdbus -> gdm and swaylock
 #
