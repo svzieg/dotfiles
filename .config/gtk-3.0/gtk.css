@@ -1,5 +1,4 @@
-VteTerminal, vte-terminal {
-	padding: 0px 16px 16px 16px;
+.window-frame {
+  box-shadow: none;
+  margin: 0;
 }
-
-/*  padding: top, right, bottom, left*/

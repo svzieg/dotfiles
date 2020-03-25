@@ -9,6 +9,7 @@ set -x GO111MODULE on
 
 
  alias config="git --git-dir=/home/svzieg/.cfg/ --work-tree=/home/svzieg"
+ alias lg=lazygit
 
 
 
