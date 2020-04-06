@@ -19,43 +19,47 @@ message = Tag all Messages from Archlinux Mailing List
 query = from:arch-general-request@archlinux.org or from:arch-events-request@archlinux.org or from:arch-announce-request@archlinux.org or from:arch-general@archlinux.org or from:arch-events@archlinux.org or from:arch-announce@archlinux.org 
 tags = +maillist
 
-
 [Filter.2]
+message = Tag all Messages for newsletter 
+query = from:Freeletics or from:RiskyBreakfast
+tags = +newsletter
+
+[Filter.3]
 message = Tag all Messages To Google
 query = to:ziggo1879@gmail.com and NOT tag:sent
 tags = +gmail;+new
 
-[Filter.3]
+[Filter.4]
 message = Tag all Messages To GMX
 query = to:svzieg@gmx.de  and NOT tag:sent
 tags = +gmx;+new
 
-[Filter.4]
+[Filter.5]
 message = Tag all Messages Work
 query = to:sven.ziegler@scheer-group.com  and NOT tag:sent
 tags = +scheer;+new
 
-[Filter.5]
+[Filter.6]
 message = Tag all Messages Photography
 query = to:sven.ziegler@svenziegler.photography  and NOT tag:sent
 tags = +photography;+new
 
-[Filter.6]
+[Filter.7]
 message = Tag all Ticket Mails
 query = from:issues@e2ebridge.com
 tags = +ticket
 
-[Filter.7]
+[Filter.8]
 message = Tag all Documentation Mails
 query = from:wiki@e2ebridge.com
 tags = +documentation
 
-[Filter.8]
+[Filter.9]
 message = Tag all CI Mails
 query = from:products@scheer-group.com
 tags = +ci
 
-[Filter.9]
+[Filter.10]
 message = Tag all Robot Mails
 query = 'from:.*rpa.* or from:.*robot.*'
 tags = +robot
@@ -66,11 +70,20 @@ tags = +robot
 
 
 [MailMover]
-folders = Photography/INBOX Photography/Spam Photography/Todo Gmx/INBOX Gmx/Spam Gmx/Todo
+folders = Photography/INBOX Photography/Spam Photography/Todo Gmx/INBOX Gmx/Spam Gmx/Todo Gmail/INBOX Gmail/Todo Gmail/Spam Work/INBOX Work/Todo Work/Spam
 
 Photography/INBOX = 'tag:spam':Photography/Spam  'tag:todo':Photography/Todo 'tag:archive':Photography/Archive   'tag:trash':Photography/Trash
 Photography/Todo = 'NOT tag:todo':Photography/INBOX  'NOT tag:todo and tag:archive':Photography/Archive   'NOT tag:todo and tag:trash':Photography/Trash
 Photography/Spam = 'NOT tag:spam AND tag:inbox':Photography/INBOX   'NOT tag:spam':Photography/Archive
+
 Gmx/INBOX = 'tag:spam':Gmx/Spam  'tag:todo':Gmx/Todo 'tag:archive':Gmx/Archive   'tag:trash':Gmx/Trash
 Gmx/Todo = 'NOT tag:todo':Gmx/INBOX  'NOT tag:todo and tag:archive':Gmx/Archive   'NOT tag:todo and tag:trash':Gmx/Trash
-Gmx/Spam = 'NOT (tag:spam or tag:gmx/spam ) AND tag:inbox':Gmx/INBOX   'NOT tag:spam':Gmx/Archive
+Gmx/Spam = 'NOT (tag:spam or tag:gmx/spam ) AND tag:inbox':Gmx/INBOX   'NOT (tag:spam or tag:gmx/spam )':Gmx/Archive
+
+Gmail/INBOX = 'tag:spam':Gmail/Spam  'tag:todo':Gmail/Todo 'tag:archive':Gmail/Archive   'tag:trash':Gmail/Trash
+Gmail/Todo = 'NOT tag:todo':Gmail/INBOX  'NOT tag:todo and tag:archive':Gmail/Archive   'NOT tag:todo and tag:trash':Gmail/Trash
+Gmail/Spam = 'NOT (tag:spam or tag:gmx/spam ) AND tag:inbox':Gmail/INBOX   'NOT (tag:spam or tag:gmx/spam )':Gmail/Archive
+
+Work/INBOX = 'tag:spam':Work/Spam  'tag:todo':Work/Todo 'tag:archive':Work/Archive   'tag:trash':Work/Trash
+Work/Todo = 'NOT tag:todo':Work/INBOX  'NOT tag:todo and tag:archive':Work/Archive   'NOT tag:todo and tag:trash':Work/Trash
+Work/Spam = 'NOT (tag:spam or tag:gmx/spam ) AND tag:inbox':Work/INBOX   'NOT (tag:spam or tag:gmx/spam )':Work/Archive
