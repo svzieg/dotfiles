@@ -49,9 +49,9 @@
 #   merged = 0
 
 
-[[custom_plugins]]
-  name= 'skammer/vim-css-color'
-  merged = 0
+# [[custom_plugins]]
+  # name= 'skammer/vim-css-color'
+  # merged = 0
 
 
 [[custom_plugins]]
@@ -112,8 +112,8 @@ enable_flow_syntax = true
 [[layers]]
   name = "lang#latex"
 
-[[layers]]
-  name = "lang#markdown"
+# [[layers]]
+  # name = "lang#markdown"
 
 [[layers]]
   name = "lang#plantuml"
