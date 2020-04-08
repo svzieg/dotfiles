@@ -1,18 +1,16 @@
 [colors]
-
-
 background_i3wmthemer 	= ${xrdb:background}
 foreground_i3wmthemer 	= ${xrdb:foreground}
-color00_i3wmthemer	      = ${xrdb:color0}
+color00_i3wmthemer	    = ${xrdb:color0}
 color01_i3wmthemer      = ${xrdb:color1}
-color02_i3wmthemer	      = ${xrdb:color2}
-color03_i3wmthemer	      = ${xrdb:color3}
-color04_i3wmthemer	      = ${xrdb:color4}
-color05_i3wmthemer	      = ${xrdb:color5}
-color06_i3wmthemer	      = ${xrdb:color6}
-color07_i3wmthemer	      = ${xrdb:color7}
-color08_i3wmthemer	      = ${xrdb:color8}
-color09_i3wmthemer	      = ${xrdb:color9}
+color02_i3wmthemer	    = ${xrdb:color2}
+color03_i3wmthemer	    = ${xrdb:color3}
+color04_i3wmthemer	    = ${xrdb:color4}
+color05_i3wmthemer	    = ${xrdb:color5}
+color06_i3wmthemer	    = ${xrdb:color6}
+color07_i3wmthemer	    = ${xrdb:color7}
+color08_i3wmthemer	    = ${xrdb:color8}
+color09_i3wmthemer	    = ${xrdb:color9}
 color10_i3wmthemer	    = ${xrdb:color10}
 color11_i3wmthemer	    = ${xrdb:color11}
 color12_i3wmthemer	    = ${xrdb:color12}
@@ -46,25 +44,24 @@ padding-right = 0
 module-margin-left = 0
 module-margin-right = 0
 
-font-0 = FontAwesome:size=11;1
-font-1 = monofur:fontformat=truetype:size=11;1
-font-2 = monofur:fontformat=truetype:size=11;1
+font-0 = roboto:pixelsize=13 
+font-1 = fontawesome:pixelsize=13 
+font-2 = dejavusans:pixelsize=13 
+font-3 = unifont:pixelsize=13
 
 modules-left = i3 xwindow
-modules-center = date
-modules-right = cpu battery musicinfo
+modules-center = date checkupdates
+modules-right = cpu memory battery wireless-network wired-network vpn-isrunning 
 
 tray-position = right
 tray-padding = 9
-tray-transparent = false
 tray-offset-y = 0%
 tray-offset-x = 0%
 tray-maxsize = 18
 tray-detached = false
 tray-background = ${colors.background_i3wmthemer}
 
-wm-restack = i3
-
+;wm-restack = i3
 ;override-redirect = true
 
 
@@ -228,9 +225,14 @@ ramp-4 = 🌑
 
 ; Only applies if <bar> is used
 bar-width = 10
+bar-load-width = 10
 bar-indicator = |
 bar-fill = ─
 bar-empty = ─
+
+; ========================================================================
+;                       CPU
+; ========================================================================
 
 [module/cpu]
 type = internal/cpu
@@ -244,7 +246,7 @@ interval = 2
 ;   <bar-load>
 ;   <ramp-load>
 ;   <ramp-coreload>
-; format = <label> 
+format = <ramp-coreload>
 format-padding = 2
 
 ; Available tokens:
@@ -253,15 +255,102 @@ format-padding = 2
 ;   %percentage-core[1-9]% - load percentage for specific core
 label = CPU %percentage%%
 
-; ramp-coreload-0 = ▁
-; ramp-coreload-1 = ▂
-; ramp-coreload-2 = ▃
-; ramp-coreload-3 = ▄
-; ramp-coreload-4 = ▅
-; ramp-coreload-5 = ▆
-; ramp-coreload-6 = ▇
-; ramp-coreload-7 = █
+ramp-coreload-0 = ▁
+ramp-coreload-1 = ▂
+ramp-coreload-2 = ▃
+ramp-coreload-3 = ▄
+ramp-coreload-4 = ▅
+ramp-coreload-5 = ▆
+ramp-coreload-6 = ▇
+ramp-coreload-7 = █
 
+; ========================================================================
+;                       Memory
+; ========================================================================
+[module/memory]
+type = internal/memory
+
+; Seconds to sleep between updates
+; Default: 1
+interval = 3
+; Available tags:
+;   <label> (default)
+;   <bar-used>
+;   <bar-free>
+;   <ramp-used>
+;   <ramp-free>
+;   <bar-swap-used>
+;   <bar-swap-free>
+;   <ramp-swap-used>
+;   <ramp-swap-free>
+format = <label> <ramp-used>  
+
+; Available tokens:
+;   %percentage_used% (default)
+;   %percentage_free%
+;   %gb_used%
+;   %gb_free%
+;   %gb_total%
+;   %mb_used%
+;   %mb_free%
+;   %mb_total%
+;   %percentage_swap_used%
+;   %percentage_swap_free%
+;   %mb_swap_total%
+;   %mb_swap_free%
+;   %mb_swap_used%
+;   %gb_swap_total%
+;   %gb_swap_free%
+;   %gb_swap_used%
+
+label = RAM %gb_used%/%gb_free%
+
+; Only applies if <bar-used> is used
+bar-used-indicator =
+bar-used-width = 50
+bar-used-foreground-0 = #55aa55
+bar-used-foreground-1 = #557755
+bar-used-foreground-2 = #f5a70a
+bar-used-foreground-3 = #ff5555
+bar-used-fill = ▐
+bar-used-empty = ▐
+bar-used-empty-foreground = #444444
+
+; Only applies if <ramp-used> is used
+ramp-used-0 = ▁
+ramp-used-1 = ▂
+ramp-used-2 = ▃
+ramp-used-3 = ▄
+ramp-used-4 = ▅
+ramp-used-5 = ▆
+ramp-used-6 = ▇
+ramp-used-7 = █
+
+; Only applies if <ramp-free> is used
+ramp-free-0 = ▁
+ramp-free-1 = ▂
+ramp-free-2 = ▃
+ramp-free-3 = ▄
+ramp-free-4 = ▅
+ramp-free-5 = ▆
+ramp-free-6 = ▇
+ramp-free-7 = █
+
+; ========================================================================
+;                       Network
+; ========================================================================
+
+[module/wired-network]
+type = internal/network
+interface = enp0s31f6
+
+[module/wireless-network]
+type = internal/network
+interface = wlp2s0
+
+; ========================================================================
+;                       XWindow
+; ========================================================================
 
 [module/xwindow]
 type = internal/xwindow
@@ -277,3 +366,22 @@ format-padding = 4
 label = Window: %title%
 label-maxlen = 50
 
+[module/vpn-isrunning]
+type = custom/script
+exec = ~/.config/polybar/scripts/vpn-nm-openconnect-is-running.sh 
+interval = 5
+
+[module/checkupdates]
+type = custom/script
+exec = ~/.config/polybar/scripts/checkupdates.sh 
+interval = 3600
+click-left = "alacritty -e yay -Syua" &
+format-underline = #FFFFFF
+format-prefix = "Updates: "
+format = <label>
+
+
+[module/network-networkmanager]
+type = custom/script
+exec = /usr/share/polybar/scripts/network-networkmanager.sh
+tail = true
