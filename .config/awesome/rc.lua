@@ -83,7 +83,7 @@ local editorgui         = "geany"
 local filemanager       = "thunar"
 local mailclient        = "geary"
 local mediaplayer       = "vlc"
-local scrlocker         = "slimlock"
+local scrlocker         = "i3lock -c 000000"
 local virtualmachine    = "virtualbox"
 
 
@@ -286,6 +286,10 @@ globalkeys = my_table.join(
               {description = "focus the next screen", group = "screen"}),
     awful.key({ modkey, "Control" }, "Left", function () awful.screen.focus_relative(-1) end,
               {description = "focus the previous screen", group = "screen"}),
+    awful.key({ modkey, "" }, "l", function () awful.util.spawn( scrlocker ) end,
+              {description = "lock screen", group = "screen"}),
+    awful.key({ modkey, "Shift" }, "l", function () awful.util.spawn( scrlocker ) end,
+              {description = "lock screen", group = "screen"}),
 
 
 
@@ -599,12 +603,14 @@ awful.rules.rules = {
           "Sxiv",
           "Unetbootin.elf",
           "Wpa_gui",
+          "Pavucontrol",
           "pinentry",
           "veromix",
           "xtightvncviewer"},
 
         name = {
           "Event Tester",  -- xev.
+          "pamac-manager",
         },
         role = {
           "AlarmWindow",  -- Thunderbird's calendar.
@@ -612,7 +618,11 @@ awful.rules.rules = {
           "Preferences",
           "setup",
         }
-      }, properties = { floating = true }},
+      }, properties = { 
+        floating = true, 
+        placement = awful.placement.centered
+        }
+      },
 
 
 
@@ -675,7 +685,8 @@ awful.rules.rules = {
     { rule = { class = "Xfce4-settings-manager" },
           properties = { floating = false } },
 
-
+    -- TODO automatic assign the right tag for the common applications
+    -- probably with awesome-shifty
 
 }
 -- }}}
