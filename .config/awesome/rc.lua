@@ -73,7 +73,7 @@ local chosen_theme = themes[6]
 local theme_path = string.format("%s/.config/awesome/themes/%s/theme.lua", os.getenv("HOME"), chosen_theme)
 
 -- This is used later as the default terminal and editor to run.
-local browser = "vimb"
+local browser = string.format("%s/.bin/tabbed -c vimb -e", os.getenv("HOME"))
 local terminal =  "alacritty"
 local filemanager = terminal .. "-e ranger"
 local editor = terminal .. "-e nvim"
