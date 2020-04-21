@@ -331,6 +331,8 @@ globalkeys = my_table.join(
               {description = "launch Browser", group = "launcher"}),
     awful.key({ modkey,           }, "e", function () awful.spawn(filemanager)            end,
               {description = "launch filemanager", group = "launcher"}),
+    awful.key({ altkey,  "Ctrl"         }, "m", function () awful.spawn("pavucontrol")            end,
+              {description = "launch pavucontrol", group = "launcher"}),
     
     awful.key({ modkey, "Control" }, "r", awesome.restart,
               {description = "reload awesome", group = "awesome"}),
@@ -598,7 +600,7 @@ awful.rules.rules = {
           "MessageWin",  -- kalarm.
           "Oblogout",
           "Peek",
-          "Skype",
+ --          "Skype",
           "System-config-printer.py",
           "Sxiv",
           "Unetbootin.elf",

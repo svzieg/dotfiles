@@ -14,55 +14,59 @@ query = folder:Gmail/Spam or folder:Gmx/Spam or folder:Photography/Spam or folde
 folder_lowercases = true
 
 
+
 [Filter.1]
-message = Tag all Messages from Archlinux Mailing List
-query = from:arch-general-request@archlinux.org or from:arch-events-request@archlinux.org or from:arch-announce-request@archlinux.org or from:arch-general@archlinux.org or from:arch-events@archlinux.org or from:arch-announce@archlinux.org 
-tags = +maillist
-
-[Filter.2]
-message = Tag all Messages for newsletter 
-query = from:Freeletics or from:RiskyBreakfast
-tags = +newsletter
-
-[Filter.3]
 message = Tag all Messages To Google
 query = to:ziggo1879@gmail.com and NOT tag:sent
 tags = +gmail;+new
 
-[Filter.4]
+[Filter.2]
 message = Tag all Messages To GMX
-query = to:svzieg@gmx.de  and NOT tag:sent
+query = to:svzieg@gmx.de  and NOT tag:sent 
 tags = +gmx;+new
 
-[Filter.5]
+[Filter.3]
 message = Tag all Messages Work
 query = to:sven.ziegler@scheer-group.com  and NOT tag:sent
 tags = +scheer;+new
 
-[Filter.6]
+[Filter.4]
 message = Tag all Messages Photography
 query = to:sven.ziegler@svenziegler.photography  and NOT tag:sent
 tags = +photography;+new
 
-[Filter.7]
+
+[Filter.10]
+message = Tag all Messages from Archlinux Mailing List
+query = from:arch-general-request@archlinux.org or from:arch-events-request@archlinux.org or from:arch-announce-request@archlinux.org or from:arch-general@archlinux.org or from:arch-events@archlinux.org or from:arch-announce@archlinux.org or from:archlinux.org
+tags = +maillist
+
+[Filter.11]
+message = Tag all Messages for newsletter 
+query = Freeletics or RiskyBreakfast
+tags = +newsletter
+
+
+[Filter.40]
 message = Tag all Ticket Mails
 query = from:issues@e2ebridge.com
 tags = +ticket
 
-[Filter.8]
+[Filter.41]
 message = Tag all Documentation Mails
 query = from:wiki@e2ebridge.com
 tags = +documentation
 
-[Filter.9]
+[Filter.42]
 message = Tag all CI Mails
 query = from:products@scheer-group.com
 tags = +ci
 
-[Filter.10]
+[Filter.80]
 message = Tag all Robot Mails
 query = 'from:.*rpa.* or from:.*robot.*'
 tags = +robot
+
 
 
 [InboxFilter]
@@ -82,8 +86,8 @@ Gmx/Spam = 'NOT (tag:spam or tag:gmx/spam ) AND tag:inbox':Gmx/INBOX   'NOT (tag
 
 Gmail/INBOX = 'tag:spam':Gmail/Spam  'tag:todo':Gmail/Todo 'tag:archive':Gmail/Archive   'tag:trash':Gmail/Trash
 Gmail/Todo = 'NOT tag:todo':Gmail/INBOX  'NOT tag:todo and tag:archive':Gmail/Archive   'NOT tag:todo and tag:trash':Gmail/Trash
-Gmail/Spam = 'NOT (tag:spam or tag:gmx/spam ) AND tag:inbox':Gmail/INBOX   'NOT (tag:spam or tag:gmx/spam )':Gmail/Archive
+Gmail/Spam = 'NOT (tag:spam or tag:gmail/spam ) AND tag:inbox':Gmail/INBOX   'NOT (tag:spam or tag:gmail/spam )':Gmail/Archive
 
 Work/INBOX = 'tag:spam':Work/Spam  'tag:todo':Work/Todo 'tag:archive':Work/Archive   'tag:trash':Work/Trash
 Work/Todo = 'NOT tag:todo':Work/INBOX  'NOT tag:todo and tag:archive':Work/Archive   'NOT tag:todo and tag:trash':Work/Trash
-Work/Spam = 'NOT (tag:spam or tag:gmx/spam ) AND tag:inbox':Work/INBOX   'NOT (tag:spam or tag:gmx/spam )':Work/Archive
+Work/Spam = 'NOT (tag:spam or tag:work/spam ) AND tag:inbox':Work/INBOX   'NOT (tag:spam or tag:work/spam )':Work/Archive
