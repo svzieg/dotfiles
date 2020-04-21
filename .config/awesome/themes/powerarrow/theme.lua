@@ -9,6 +9,8 @@ local gears = require("gears")
 local lain  = require("lain")
 local awful = require("awful")
 local wibox = require("wibox")
+local http_request = require('http.request')
+local json = require('cjson')
 
 local math, string, os = math, string, os
 local my_table = awful.util.table or gears.table -- 4.{0,1} compatibility
@@ -161,40 +163,71 @@ theme.volume = lain.widget.alsabar({
 })
 
 -- MPD
-local musicplr = "urxvt -title Music -g 130x34-320+16 -e ncmpcpp"
-local mpdicon = wibox.widget.imagebox(theme.widget_music)
-mpdicon:buttons(my_table.join(
-    awful.button({ modkey }, 1, function () awful.spawn.with_shell(musicplr) end),
+local musicplr = "tidal-hifi"
+
+local function mpc(action, type) 
+  local tidal_api = "http://localhost:47836"
+
+  local headers, stream  = assert(http_request.new_from_uri(tidal_api.. "/" .. action):go())
+  local body = assert(stream:get_body_as_string())
+
+  if (headers:get ":status" == "200") then
+    if (type == "json") then
+      return json.decode(body)
+    end
+    return body
+  end 
+
+  if (type == "json") then
+    return json.decode("{}")
+  end
+  return body
+end
+
+local mpd_buttons = my_table.join(
+    -- awful.button({ modkey }, 1, function () awful.spawn.with_shell(musicplr) end),
     --[[awful.button({ }, 1, function ()
         awful.spawn.with_shell("mpc prev")
         theme.mpd.update()
     end),
     --]]
-    awful.button({ }, 2, function ()
-        awful.spawn.with_shell("mpc toggle")
-        theme.mpd.update()
+    awful.button({ }, 1, function ()
+        if (pcall(mpc, "playpause")) then
+          theme.mpd.update()
+        else 
+          awful.spawn.with_shell(musicplr)
+        end
     end),
-    awful.button({ modkey }, 3, function () awful.spawn.with_shell("pkill ncmpcpp") end),
+    -- awful.button({ modkey }, 3, function () awful.spawn.with_shell("pkill ncmpcpp") end),
     awful.button({ }, 3, function ()
-        awful.spawn.with_shell("mpc stop")
+        mpc("pause")
         theme.mpd.update()
-    end)))
+    end))
+local mpdicon = wibox.widget.imagebox(theme.widget_music)
+
 theme.mpd = lain.widget.mpd({
     settings = function()
-        if mpd_now.state == "play" then
-            artist = " " .. mpd_now.artist .. " "
-            title  = mpd_now.title  .. " "
+        local status, mit = pcall(mpc, "current", "json")
+
+        if (status ~= nil) then
+          if (mit.status == "playing") then
+            local artist = " " .. mit.artist .. " "
+            local title  = mit.title  .. " "
             mpdicon:set_image(theme.widget_music_on)
             widget:set_markup(markup.font(theme.font, markup("#FFFFFF", artist) .. " " .. title))
-        elseif mpd_now.state == "pause" then
-            widget:set_markup(markup.font(theme.font, " mpd paused "))
-            mpdicon:set_image(theme.widget_music_pause)
-        else
-            widget:set_text("")
-            mpdicon:set_image(theme.widget_music)
+          elseif (mit.status == "paused") then
+              widget:set_markup(markup.font(theme.font, " tidal paused "))
+              mpdicon:set_image(theme.widget_music_pause)
+          else
+              widget:set_text("")
+              mpdicon:set_image(theme.widget_music)
+          end
         end
-    end
+      end
 })
+
+mpdicon:buttons(mpd_buttons)
+theme.mpd.widget:buttons(mpd_buttons)
 
 -- MEM
 local memicon = wibox.widget.imagebox(theme.widget_mem)
@@ -285,8 +318,36 @@ local bat = lain.widget.bat({
 })
 
 -- ALSA volume
+
+local volume = {}
+volume.cmd = "pactl"
+volume.channel = "@DEFAULT_SINK@"
+local volume_Buttons = my_table.join(
+    awful.button({}, 1, function() -- left click
+        awful.spawn(string.format("%s -e alsamixer", terminal))
+    end),
+    awful.button({}, 2, function() -- middle click
+        os.execute(string.format("%s set-sink-volume %s 100%%", volume.cmd, volume.channel))
+        theme.volume.update()
+    end),
+    awful.button({}, 3, function() -- right click
+        os.execute(string.format("%s set-sink-mute %s toggle", volume.cmd, volume.togglechannel or volume.channel))
+        theme.volume.update()
+    end),
+    awful.button({}, 4, function() -- scroll up
+        os.execute(string.format("%s set-sink-volume %s +1%%", volume.cmd, volume.channel))
+        theme.volume.update()
+    end),
+    awful.button({}, 5, function() -- scroll down
+        os.execute(string.format("%s set-sink-volume %s -1%%", volume.cmd, volume.channel))
+        theme.volume.update()
+    end)
+)
+
+
 local volicon = wibox.widget.imagebox(theme.widget_vol)
 theme.volume = lain.widget.alsa({
+
     settings = function()
         if volume_now.status == "off" then
             volicon:set_image(theme.widget_vol_mute)
@@ -301,6 +362,11 @@ theme.volume = lain.widget.alsa({
         widget:set_markup(markup.font(theme.font, " " .. volume_now.level .. "% "))
     end
 })
+
+-- apply the button on both, icon and text
+volicon:buttons(volume_Buttons)
+theme.volume.widget:buttons(volume_Buttons)
+
 
 -- Net
 local neticon = wibox.widget.imagebox(theme.widget_net)
@@ -339,7 +405,7 @@ end
 function theme.at_screen_connect(s)
     -- Quake application
    -- s.quake = lain.util.quake({ app = awful.util.terminal })
-   s.quake = lain.util.quake({ app = "termite", height = 0.50, argname = "--name %s" })
+   s.quake = lain.util.quake({ app = "alacritty", height = 0.50, argname = "--name %s" })
 
 
 

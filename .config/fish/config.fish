@@ -41,3 +41,6 @@ end
 # and not set -q TMUX
 #     tmux
 # end
+export LUA_PATH='/usr/share/lua/5.3/?.lua;/usr/share/lua/5.3/?/init.lua;/usr/lib/lua/5.3/?.lua;/usr/lib/lua/5.3/?/init.lua;./?.lua;./?/init.lua;/home/svzieg/.luarocks/share/lua/5.3/?.lua;/home/svzieg/.luarocks/share/lua/5.3/?/init.lua'
+export LUA_CPATH='/usr/lib/lua/5.3/?.so;/usr/lib/lua/5.3/loadall.so;./?.so;/home/svzieg/.luarocks/lib/lua/5.3/?.so'
+export PATH='/home/svzieg/.luarocks/bin:/usr/bin/vendor_perl:/home/svzieg/.bin:/home/svzieg/.yarn/bin:/home/svzieg/.local/bin:/home/svzieg/go/bin:/home/svzieg/.go/bin:/home/svzieg/.SpaceVim/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/lib/jvm/default/bin:/usr/bin/site_perl:/usr/bin/core_perl:/usr/local/kubebuilder/bin/'
