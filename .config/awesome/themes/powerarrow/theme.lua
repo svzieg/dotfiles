@@ -9,7 +9,6 @@ local gears = require("gears")
 local lain  = require("lain")
 local awful = require("awful")
 local wibox = require("wibox")
-local http_request = require('http.request')
 local json = require('cjson')
 
 local math, string, os = math, string, os
@@ -19,6 +18,7 @@ local theme                                     = {}
 theme.dir                                       = os.getenv("HOME") .. "/.config/awesome/themes/powerarrow"
 theme.wallpaper                                 = theme.dir .. "/wall.png"
 theme.font                                      = "Noto Sans Regular 11"
+theme.mono_font                                 = "Noto Mono 11"
 theme.taglist_font                              = "Noto Sans Regular 14"
 theme.fg_normal                                 = "#FEFEFE"
 theme.fg_focus                                  = "#7b88d3"
@@ -126,12 +126,12 @@ theme.cal = lain.widget.cal({
 
 
 -- Taskwarrior
---local task = wibox.widget.imagebox(theme.widget_task)
---lain.widget.contrib.task.attach(task, {
+local taskicon = wibox.widget.imagebox(theme.widget_task)
+local task = lain.widget.contrib.task.attach(taskicon, {
     -- do not colorize output
---    show_cmd = "task | sed -r 's/\\x1B\\[([0-9]{1,2}(;[0-9]{1,2})?)?[mGK]//g'"
---})
---task:buttons(gears.table.join(awful.button({}, 1, lain.widget.contrib.task.prompt)))
+    show_cmd = "task | sed -r 's/\\x1B\\[([0-9]{1,2}(;[0-9]{1,2})?)?[mGK]//g'"
+})
+taskicon:buttons(gears.table.join(awful.button({}, 1, lain.widget.contrib.task.prompt)))
 
 
 
@@ -165,24 +165,11 @@ theme.volume = lain.widget.alsabar({
 -- MPD
 local musicplr = "tidal-hifi"
 
-local function mpc(action, type) 
+local function mpc(action, cb) 
   local tidal_api = "http://localhost:47836"
-
-  local headers, stream  = assert(http_request.new_from_uri(tidal_api.. "/" .. action):go())
-  local body = assert(stream:get_body_as_string())
-
-  if (headers:get ":status" == "200") then
-    if (type == "json") then
-      return json.decode(body)
-    end
-    return body
-  end 
-
-  if (type == "json") then
-    return json.decode("{}")
-  end
-  return body
+  awful.spawn.easy_async_with_shell("curl -s " .. tidal_api .. "/" .. action, cb)
 end
+
 
 local mpd_buttons = my_table.join(
     -- awful.button({ modkey }, 1, function () awful.spawn.with_shell(musicplr) end),
@@ -192,37 +179,53 @@ local mpd_buttons = my_table.join(
     end),
     --]]
     awful.button({ }, 1, function ()
-        if (pcall(mpc, "playpause")) then
-          theme.mpd.update()
-        else 
-          awful.spawn.with_shell(musicplr)
-        end
+        mpc("playpause", function(out, err, reason, exit_code) 
+          if (exit_code == 0) then
+            theme.mpd.update()
+          else 
+            awful.spawn.with_shell(musicplr)
+          end
+        end)
     end),
     -- awful.button({ modkey }, 3, function () awful.spawn.with_shell("pkill ncmpcpp") end),
     awful.button({ }, 3, function ()
-        mpc("pause")
-        theme.mpd.update()
+        mpc("pause", function(out, err, reason, exit_code) 
+          if (exit_code == 0) then
+            theme.mpd.update()
+          else 
+            awful.spawn.with_shell(musicplr)
+          end
+        end)
     end))
 local mpdicon = wibox.widget.imagebox(theme.widget_music)
 
 theme.mpd = lain.widget.mpd({
     settings = function()
-        local status, mit = pcall(mpc, "current", "json")
-
-        if (status ~= nil) then
-          if (mit.status == "playing") then
-            local artist = " " .. mit.artist .. " "
-            local title  = mit.title  .. " "
-            mpdicon:set_image(theme.widget_music_on)
-            widget:set_markup(markup.font(theme.font, markup("#FFFFFF", artist) .. " " .. title))
-          elseif (mit.status == "paused") then
-              widget:set_markup(markup.font(theme.font, " tidal paused "))
-              mpdicon:set_image(theme.widget_music_pause)
-          else
-              widget:set_text("")
-              mpdicon:set_image(theme.widget_music)
+        mpc("current", function(out, err, reason, exit_code) 
+          -- on error set empty text and exit
+          if (exit_code ~= 0 or out == "") then
+            widget:set_text("")
+            mpdicon:set_image(theme.widget_music)
+            return 
           end
-        end
+
+          -- otherwise parse output as json
+          local mit = json.decode(out)
+          if (mit.status ~= nil) then
+            if (mit.status == "playing") then
+              local artist = " " .. mit.artist .. " "
+              local title  = mit.title  .. " "
+              mpdicon:set_image(theme.widget_music_on)
+              widget:set_markup(markup.font(theme.font, markup("#FFFFFF", artist) .. " " .. title))
+            elseif (mit.status == "paused") then
+                widget:set_markup(markup.font(theme.font, " tidal paused "))
+                mpdicon:set_image(theme.widget_music_pause)
+            else
+                widget:set_text("")
+                mpdicon:set_image(theme.widget_music)
+            end
+          end
+        end)
       end
 })
 
@@ -372,7 +375,7 @@ theme.volume.widget:buttons(volume_Buttons)
 local neticon = wibox.widget.imagebox(theme.widget_net)
 local net = lain.widget.net({
     settings = function()
-        widget:set_markup(markup.fontfg(theme.font, "#FEFEFE", " " .. net_now.received .. " ↓↑ " .. net_now.sent .. " "))
+        widget:set_markup(markup.fontfg(theme.mono_font, "#FEFEFE", string.format("%5s ↓↑%5s ", net_now.received, net_now.sent)))
     end
 })
 
@@ -433,7 +436,7 @@ function theme.at_screen_connect(s)
     s.mytaglist = awful.widget.taglist(s, awful.widget.taglist.filter.all, awful.util.taglist_buttons)
 
     -- Create a tasklist widget
-    --s.mytasklist = awful.widget.tasklist(s, awful.widget.tasklist.filter.currenttags, awful.util.tasklist_buttons)
+    s.mytasklist = awful.widget.tasklist(s, awful.widget.tasklist.filter.currenttags, awful.util.tasklist_buttons)
 
     -- Create the wibox
     s.mywibox = awful.wibar({ position = "top", screen = s, height = 22, bg = theme.bg_normal, fg = theme.fg_normal })
@@ -485,7 +488,9 @@ function theme.at_screen_connect(s)
             wibox.container.background(wibox.container.margin(wibox.widget { nil, neticon, net.widget, layout = wibox.layout.align.horizontal }, 3, 3), "#C0C0A2"),
             arrow("#C0C0A2", "#777E76"),
             wibox.container.background(wibox.container.margin(clock, 4, 8), "#777E76"),
-            arrow("#777E76", "alpha"),
+            arrow("#777E76", "#343434"),
+            wibox.container.background(wibox.container.margin(wibox.widget { taskicon, task, layout = wibox.layout.align.horizontal }, 3, 3), "#343434"),
+            arrow("#343434", "alpha"),
             --]]
             s.mylayoutbox,
         },
