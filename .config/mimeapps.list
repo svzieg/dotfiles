@@ -1,15 +1,13 @@
 [Default Applications]
-x-scheme-handler/http=userapp-Pale Moon.desktop
-x-scheme-handler/https=userapp-Pale Moon.desktop
-x-scheme-handler/ftp=userapp-Pale Moon.desktop
-x-scheme-handler/chrome=userapp-Pale Moon.desktop
-text/html=userapp-Pale Moon.desktop
-application/x-extension-htm=userapp-Pale Moon.desktop
-application/x-extension-html=userapp-Pale Moon.desktop
-application/x-extension-shtml=userapp-Pale Moon.desktop
-application/xhtml+xml=userapp-Pale Moon.desktop
-application/x-extension-xhtml=userapp-Pale Moon.desktop
-application/x-extension-xht=userapp-Pale Moon.desktop
+x-scheme-handler/http=qutebrowser.desktop
+x-scheme-handler/https=qutebrowser.desktop
+text/html=qutebrowser.desktop
+application/x-extension-htm=qutebrowser.desktop
+application/x-extension-html=qutebrowser.desktop
+application/x-extension-shtml=qutebrowser.desktop
+application/xhtml+xml=qutebrowser.desktop
+application/x-extension-xhtml=qutebrowser.desktop
+application/x-extension-xht=qutebrowser.desktop
 image/jpeg=viewnior.desktop;gpicview.desktop;
 image/png=viewnior.desktop;gpicview.desktop;
 text/plain=mousepad.desktop

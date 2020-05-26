@@ -19,12 +19,16 @@ settings:
     global: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko)
       Chrome/69.0.3497.128 Safari/537.36
   content.notifications:
+    https://user.gearbest.com: false
     https://www.reddit.com: false
   editor.command:
     global:
     - gvim
-    - -g
-    - -fn
-    - Arial
     - -f
-    - '{}'
+    - '{file}'
+    - -c
+    - normal {line}G{column0}l
+  statusbar.hide:
+    global: false
+  tabs.show:
+    global: always

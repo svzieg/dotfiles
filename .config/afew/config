@@ -44,7 +44,7 @@ tags = +maillist
 [Filter.11]
 message = Tag all Messages for newsletter 
 query = Freeletics or RiskyBreakfast
-tags = +newsletter
+tags = +newsletters
 
 
 [Filter.40]
@@ -74,20 +74,24 @@ tags = +robot
 
 
 [MailMover]
-folders = Photography/INBOX Photography/Spam Photography/Todo Gmx/INBOX Gmx/Spam Gmx/Todo Gmail/INBOX Gmail/Todo Gmail/Spam Work/INBOX Work/Todo Work/Spam
+folders = Photography/INBOX Photography/Spam Photography/Todo Photography/Drafts Gmx/INBOX Gmx/Spam Gmx/Drafts Gmx/Todo Gmail/INBOX Gmail/Todo Gmail/Spam Gmail/Drafts Work/INBOX Work/Todo Work/Spam Work/Drafts
 
 Photography/INBOX = 'tag:spam':Photography/Spam  'tag:todo':Photography/Todo 'tag:archive':Photography/Archive   'tag:trash':Photography/Trash
 Photography/Todo = 'NOT tag:todo':Photography/INBOX  'NOT tag:todo and tag:archive':Photography/Archive   'NOT tag:todo and tag:trash':Photography/Trash
 Photography/Spam = 'NOT tag:spam AND tag:inbox':Photography/INBOX   'NOT tag:spam':Photography/Archive
+Photography/Drafts = 'tag:archive':Photography/Archive   'tag:trash':Photography/Trash
 
 Gmx/INBOX = 'tag:spam':Gmx/Spam  'tag:todo':Gmx/Todo 'tag:archive':Gmx/Archive   'tag:trash':Gmx/Trash
 Gmx/Todo = 'NOT tag:todo':Gmx/INBOX  'NOT tag:todo and tag:archive':Gmx/Archive   'NOT tag:todo and tag:trash':Gmx/Trash
 Gmx/Spam = 'NOT (tag:spam or tag:gmx/spam ) AND tag:inbox':Gmx/INBOX   'NOT (tag:spam or tag:gmx/spam )':Gmx/Archive
+Gmx/Drafts = 'tag:archive':Gmx/Archive   'tag:trash':Gmx/Trash
 
 Gmail/INBOX = 'tag:spam':Gmail/Spam  'tag:todo':Gmail/Todo 'tag:archive':Gmail/Archive   'tag:trash':Gmail/Trash
 Gmail/Todo = 'NOT tag:todo':Gmail/INBOX  'NOT tag:todo and tag:archive':Gmail/Archive   'NOT tag:todo and tag:trash':Gmail/Trash
 Gmail/Spam = 'NOT (tag:spam or tag:gmail/spam ) AND tag:inbox':Gmail/INBOX   'NOT (tag:spam or tag:gmail/spam )':Gmail/Archive
+Gmail/Drafts = 'tag:archive':Gmail/Archive   'tag:trash':Gmail/Trash
 
 Work/INBOX = 'tag:spam':Work/Spam  'tag:todo':Work/Todo 'tag:archive':Work/Archive   'tag:trash':Work/Trash
 Work/Todo = 'NOT tag:todo':Work/INBOX  'NOT tag:todo and tag:archive':Work/Archive   'NOT tag:todo and tag:trash':Work/Trash
 Work/Spam = 'NOT (tag:spam or tag:work/spam ) AND tag:inbox':Work/INBOX   'NOT (tag:spam or tag:work/spam )':Work/Archive
+Work/Drafts = 'tag:archive':Work/Archive   'tag:trash':Work/Trash

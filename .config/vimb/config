@@ -4,12 +4,15 @@ set home-page=file:///home/svzieg/.surf/html/homepage.html
 # Path to the default download directory. If no download directory is set,
 # download will be written into current directory. The following pattern will
 # be expanded if the download is started '~/', '~user', '$VAR' and '${VAR}'.
-# set download-path=~/tmp/
+#
+set download-use-external=true
+set download-path=~/Downloads/
+set download-command=/usr/share/doc/aria2/xmlrpc/aria2rpc addUri %s
 
 # Command with placeholder '%s' called if form field is opened with $EDITOR to
 # spawn the editor-like `x-terminal-emulator -e vim %s'. To use Gvim as the
 # editor, it's necessary to call it with `-f' to run it in the foreground.
-set editor-command=termite -e "nvim %s"
+set editor-command=alacritty -e "nvim %s"
 
 # If enabled the inputbox will be hidden whenever it contains no text.
 set input-autohide=true
@@ -57,6 +60,8 @@ shortcut-add g=https://encrypted.google.com/search?q=$0
 shortcut-add y=http://www.youtube.com/results?search_query=$0
 shortcut-add s=https://www.startpage.com/do/dsearch?query=$0
 
+shortcut-add downloads=http://localhost:9100
+
 # Set the shortcut as the default, that is the shortcut to be used if no
 # shortcut is given and the string to open is not an URI.
 shortcut-default duck
@@ -66,6 +71,8 @@ shortcut-default duck
 nmap + zI
 nmap - zO
 nmap = zz
+
+nmap ,d o downloads <CR>
 
 # GUI color settings
 # Color scheme: Base16 Eighties (https://github.com/chriskempson/base16)

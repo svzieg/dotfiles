@@ -19,10 +19,11 @@ config.load_autoconfig()
 #
 # Override Autoconfig below
 #
+c.editor.command = ["alacritty", "-e", "nvim", "-f", "{file}"]
 
 
 # Tab Settings
-c.tabs.position = "right"
+c.tabs.position = "top"
 
 
 # Completion Settings 
@@ -34,3 +35,6 @@ config.bind('<Ctrl-,>', 'spawn --userscript qute-bitwarden')
 config.bind('<Ctrl-e>', 'edit-url')
 
 
+config.bind('xx',  "config-cycle statusbar.hide ;; config-cycle tabs.show always switching")
+config.bind('xt',  "config-cycle tabs.show always switching")
+config.bind('xb',  "config-cycle statusbar.hide")

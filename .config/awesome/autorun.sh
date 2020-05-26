@@ -14,8 +14,8 @@ fi
 if (command -v start-pulseaudio-x11 && ! pgrep pulseaudio); then
     start-pulseaudio-x11 &
 fi
-if (command -v /usr/lib/mate-polkit/polkit-mate-authentication-agent-1 && ! pgrep polkit-mate-aut) ; then
-    /usr/lib/mate-polkit/polkit-mate-authentication-agent-1 &
+if (command -v /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 && ! pgrep polkit-gnome) ; then
+    /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
 fi
 if (command -v  xfce4-power-manager && ! pgrep xfce4-power-man) ; then
     xfce4-power-manager &
@@ -42,3 +42,6 @@ run compton --shadow-exclude '!focused'
 run blueman-applet
 run msm_notifier
 
+if (command -v  aria2c) ; then
+    run aria2c --enable-rpc --rpc-listen-all 
+fi

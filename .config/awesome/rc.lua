@@ -64,18 +64,15 @@ local chosen_theme = themes[0]
 local theme_path = string.format("%s/.config/awesome/themes/powerarrow/theme.lua", os.getenv("HOME"), chosen_theme)
 
 -- This is used later as the default terminal and editor to run.
-local browser = string.format("%s/.bin/tabbed -c vimb -e", os.getenv("HOME"))
+local browser = "firejail qutebrowser"
 local terminal =  "alacritty"
 local filemanager = terminal .. "-e ranger"
 local editor = terminal .. "-e nvim"
 
 
 local editorgui         = "geany"
-local filemanager       = "thunar"
-local mailclient        = "geary"
 local mediaplayer       = "vlc"
 local scrlocker         = "i3lock -c 000000"
-local virtualmachine    = "virtualbox"
 
 
 
@@ -660,6 +657,12 @@ awful.rules.rules = {
     { rule = { class = "Gimp*", role = "gimp-image-window" },
           properties = { maximized = true } },
 
+    { rule = { class = "Vimb", role = "Vimb" },
+          properties = { maximized = false } },
+
+    { rule = { class = "qutebrowser"},
+          properties = { maximized = false } },
+    
     { rule = { class = "inkscape" },
           properties = { maximized = true } },
 
@@ -670,10 +673,10 @@ awful.rules.rules = {
           properties = { maximized = true } },
 
     { rule = { class = "VirtualBox Manager" },
-          properties = { maximized = true } },
+          properties = { maximized = false } },
 
     { rule = { class = "VirtualBox Machine" },
-          properties = { maximized = true } },
+          properties = { maximized = false } },
 
     { rule = { class = "Xfce4-settings-manager" },
           properties = { floating = false } },
