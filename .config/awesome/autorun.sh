@@ -21,6 +21,11 @@ if (command -v  xfce4-power-manager && ! pgrep xfce4-power-man) ; then
     xfce4-power-manager &
 fi
 
+if (command -v  pulseeffects  && ! pgrep pulseeffects) ; then
+    pulseeffects  --gapplication-service &
+fi
+
+
 run xfsettingsd
 run nm-applet
 run blueberry-tray
