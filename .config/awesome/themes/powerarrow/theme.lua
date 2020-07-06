@@ -156,12 +156,6 @@ theme.mail = lain.widget.imap({
 })
 --]]
 
--- ALSA volume
-theme.volume = lain.widget.alsabar({
-    --togglechannel = "IEC958,3",
-    notification_preset = { font = theme.font, fg = theme.fg_normal },
-})
-
 -- MPD
 local musicplr = "tidal-hifi"
 
@@ -321,6 +315,11 @@ local bat = lain.widget.bat({
 })
 
 -- ALSA volume
+
+theme.volume = lain.widget.alsabar({
+    --togglechannel = "IEC958,3",
+    notification_preset = { font = theme.font, fg = theme.fg_normal },
+})
 
 local volume = {}
 volume.cmd = "pactl"

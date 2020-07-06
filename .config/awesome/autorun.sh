@@ -28,7 +28,6 @@ fi
 
 run xfsettingsd
 run nm-applet
-run blueberry-tray
 
 run light-locker
 run xcape -e 'Super_L=Super_L|Control_L|Escape'
@@ -46,7 +45,3 @@ fi
 run compton --shadow-exclude '!focused'
 run blueman-applet
 run msm_notifier
-
-if (command -v  aria2c) ; then
-    run aria2c --enable-rpc --rpc-listen-all 
-fi

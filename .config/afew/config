@@ -17,23 +17,28 @@ folder_lowercases = true
 
 [Filter.1]
 message = Tag all Messages To Google
-query = to:ziggo1879@gmail.com and NOT tag:sent
+query = to:ziggo1879@gmail.com and NOT tag:sent and NOT tag:gmail/sent and NOT tag:gmx/sent and not tag:work/sent and not tag:photography/sent
 tags = +gmail;+new
 
 [Filter.2]
 message = Tag all Messages To GMX
-query = to:svzieg@gmx.de  and NOT tag:sent 
+query = to:svzieg@gmx.de  and NOT tag:sent  and NOT tag:gmail/sent and NOT tag:gmx/sent and not tag:work/sent and not tag:photography/sent
 tags = +gmx;+new
 
 [Filter.3]
 message = Tag all Messages Work
-query = to:sven.ziegler@scheer-group.com  and NOT tag:sent
+query = to:sven.ziegler@scheer-group.com  and NOT tag:sent and NOT tag:gmail/sent and NOT tag:gmx/sent and not tag:work/sent and not tag:photography/sent
 tags = +scheer;+new
 
 [Filter.4]
 message = Tag all Messages Photography
-query = to:sven.ziegler@svenziegler.photography  and NOT tag:sent
+query = to:sven.ziegler@svenziegler.photography  and NOT tag:sent and NOT tag:gmail/sent and NOT tag:gmx/sent and not tag:work/sent and not tag:photography/sent
 tags = +photography;+new
+
+[Filter.5]
+message = Tag all Send Messages 
+query = tag:gmail/sent or tag:gmx/sent or tag:work/sent or tag:photography/sent
+tags = +sent;
 
 
 [Filter.10]

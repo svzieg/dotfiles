@@ -615,6 +615,13 @@ awful.rules.rules = {
       },
 
 
+    { rule_any = {_NET_WM_WINDOW_TYPE = {"_NET_WM_WINDOW_TYPE_NOTIFICATION"}  }, 
+      properties = {
+        floating = true,
+        focus = false,
+      }
+    },
+
 
     -- Add titlebars to normal clients and dialogs
     { rule_any = {type = { "normal", "dialog" } },

@@ -1,6 +1,6 @@
 #!/usr/bin/env fish
 
-set -gx PATH /usr/bin/vendor_perl  /home/svzieg/.bin /home/svzieg/.yarn/bin  /home/svzieg/.local/bin ~/go/bin ~/.go/bin ~/.SpaceVim/bin  $PATH  /usr/local/kubebuilder/bin/
+set -gx PATH /usr/bin/vendor_perl  /home/svzieg/.bin /home/svzieg/.yarn/bin /home/svzieg/.gem/ruby/2.7.0/bin /home/svzieg/.local/bin ~/go/bin ~/.go/bin ~/.SpaceVim/bin  $PATH  /usr/local/kubebuilder/bin/
 set -gx EDITOR (which nvim)   
 
 set -x GOPATH ~/.go

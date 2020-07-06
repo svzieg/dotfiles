@@ -103,7 +103,10 @@ enable_flow_syntax = true
 
 
 [[layers]]
-  name = "lang#html"
+  name = "lang#html"  
+
+[[layers]]
+  name = "lang#ruby"
 
 [[layers]]
   name = "VersionControl"
