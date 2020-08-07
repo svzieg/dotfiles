@@ -1,17 +1,12 @@
-Pas-Forms https://demo.scheer-solutions.com/auth/pas-forms/app/cockpit/?status=417
-pas-forms Admin App https://demo.scheer-solutions.com/pas-forms/app/admin
 Scheer Demo Orchestrator https://demo-rpa-orchestrator.scheer-group.com/Account/Login?returnUrl=%2F
-DEV1 https://dev1.scheer-group.com/bpaas-test/app/bpaas-cockpit#/cockpit
-DEV1 - Admin https://dev1.scheer-group.com/bpaas-test/app/admin/#/user-users
-pas-forms https://demo.scheer-solutions.com/pas-forms/app/cockpit#/cockpit
-cloud linode https://cloud.linode.com/
+DEV1 https://dev1.scheer-group.com/pas-test/app/bpaas-cockpit#/cockpit
+DEV1 - Admin https://dev1.scheer-group.com/pas-test/app/admin/#/user-users
 Homeassistant http://192.168.178.59:8123/lovelace
 wiki https://wiki.e2ebridge.com/#all-updates
 support https://support.e2ebridge.com/
 jira https://support.e2ebridge.com/secure/Dashboard.jspa
-PAS Doku https://doc.scheer-pas.com/display/HOME
-pas https://demo-cluster.scheer-group.com/bpaas/app/cockpit#/cockpit
+PAS Doc https://doc.scheer-pas.com/display/HOME
+pas cluster https://demo-cluster.scheer-group.com/bpaas/app/cockpit#/cockpit
 pas-demo https://demo.scheer-solutions.com/pas-demo/app/cockpit
-sway-dotfiles https://github.com/simon-bueler/dotfiles
 timetracking https://support.e2ebridge.com/browse/EED-173
 mail https://outlook.office.com/mail/inbox
