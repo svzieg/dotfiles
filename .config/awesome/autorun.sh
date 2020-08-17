@@ -45,3 +45,7 @@ fi
 run compton --shadow-exclude '!focused'
 run blueman-applet
 run msm_notifier
+
+if [ -f ~/.screenlayout/default.sh ] ; then
+   ~/.screenlayout/default.sh &
+fi
