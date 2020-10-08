@@ -28,6 +28,24 @@ function! myspacevim#before() abort
 
 
   call SpaceVim#plugins#tasks#reg_provider(funcref('s:make_tasks'))
+
+  augroup PythonBlack
+    au!
+    autocmd BufWritePre *.py execute ':Black'
+  augroup END
+
+  augroup TemplateFileType
+    au!
+    autocmd BufRead,BufNewFile *.template setfiletype template
+  augroup END
+
+  let g:neoformat_typescriptreact_prettier = {
+        \ 'exe': 'prettier',
+        \ 'args': ['--stdin', '--stdin-filepath', '"%:p"', '--parser', 'typescript'],
+        \ 'stdin': 1
+        \ }
+  let g:neoformat_enabled_typescriptreact = ['tsfmt', 'prettier']
+
 "  inoremap nr <ESC>
 endfunction
 
@@ -48,10 +66,17 @@ function! myspacevim#after() abort
                   \ '.mkd': 'markdown',
                   \ '.wiki': 'media'}
 
-  augroup PythonBlack
-    autocmd BufWritePre *.py execute ':Black'
-  augroup END
 
+  let g:UltiSnipsSnippetDirectories=['~/.SpaceVim.d/UltiSnips']
+  let g:UltiSnipsEnableSnipMate="1"
+
+
+  " let g:neoformat_typescriptreact_prettier = call neoformat#formatters#reacttypescript#prettier()
+  " let g:neoformat_typescriptreact_tsfmt = call neoformat#formatters#reacttypescript#tsfmt()
+  " let g:neoformat_typescriptreact_tslint= call neoformat#formatters#reacttypescript#tslint()
+  " let g:neoformat_typescriptreact_eslint_d= call neoformat#formatters#reacttypescript#eslint_d()
+  " let g:neoformat_typescriptreact_clangformat= call neoformat#formatters#reacttypescript#clangformat()
+  " let g:neoformat_enabled_typescriptreact = call neoformat#formatters#reacttypescript#enabled()
 endfunction
 
 function! s:make_tasks() abort
@@ -92,3 +117,4 @@ endfunction
 " endfunction
 "
 "
+

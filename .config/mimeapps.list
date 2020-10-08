@@ -1,13 +1,13 @@
 [Default Applications]
-x-scheme-handler/http=qutebrowser.desktop
-x-scheme-handler/https=qutebrowser.desktop
-text/html=qutebrowser.desktop
-application/x-extension-htm=qutebrowser.desktop
-application/x-extension-html=qutebrowser.desktop
-application/x-extension-shtml=qutebrowser.desktop
-application/xhtml+xml=qutebrowser.desktop
-application/x-extension-xhtml=qutebrowser.desktop
-application/x-extension-xht=qutebrowser.desktop
+x-scheme-handler/http=firefox.desktop
+x-scheme-handler/https=firefox.desktop
+text/html=firefox.desktop
+application/x-extension-htm=firefox.desktop
+application/x-extension-html=firefox.desktop
+application/x-extension-shtml=firefox.desktop
+application/xhtml+xml=firefox.desktop
+application/x-extension-xhtml=firefox.desktop
+application/x-extension-xht=firefox.desktop
 image/jpeg=viewnior.desktop;gpicview.desktop;
 image/png=viewnior.desktop;gpicview.desktop;
 text/plain=mousepad.desktop
@@ -19,9 +19,10 @@ x-scheme-handler/msteams=teams.desktop
 
 [Added Associations]
 image/jpeg=viewnior.desktop;gpicview.desktop;
-image/png=viewnior.desktop;gpicview.desktop;
+image/png=gimp.desktop;viewnior.desktop;gpicview.desktop;
 text/plain=mousepad.desktop;
 x-scheme-handler/mailto=userapp-Thunderbird.desktop;
 message/rfc822=userapp-Thunderbird.desktop;
 application/pdf=epdfview.desktop;org.gnome.Evince.desktop;
 application/x-bittorrent=deluge.desktop;
+image/svg+xml=viewnior.desktop;

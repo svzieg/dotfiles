@@ -54,8 +54,8 @@ tags = +newsletters
 
 [Filter.40]
 message = Tag all Ticket Mails
-query = from:issues@e2ebridge.com
-tags = +ticket
+query = from:issues@e2ebridge.com or from:issues-e2e@scheer-group.com
+tags = +tickets
 
 [Filter.41]
 message = Tag all Documentation Mails

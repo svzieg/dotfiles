@@ -11,6 +11,8 @@ local awful = require("awful")
 local wibox = require("wibox")
 local json = require('cjson')
 
+local helpers  = require("lain.helpers")
+
 local math, string, os = math, string, os
 local my_table = awful.util.table or gears.table -- 4.{0,1} compatibility
 
@@ -161,7 +163,7 @@ local musicplr = "tidal-hifi"
 
 local function mpc(action, cb) 
   local tidal_api = "http://localhost:47836"
-  awful.spawn.easy_async_with_shell("curl -s " .. tidal_api .. "/" .. action, cb)
+  helpers.async("curl -s " .. tidal_api .. "/" .. action, cb)
 end
 
 
@@ -173,7 +175,7 @@ local mpd_buttons = my_table.join(
     end),
     --]]
     awful.button({ }, 1, function ()
-        mpc("playpause", function(out, err, reason, exit_code) 
+        mpc("playpause", function(out, exit_code) 
           if (exit_code == 0) then
             theme.mpd.update()
           else 
@@ -183,7 +185,7 @@ local mpd_buttons = my_table.join(
     end),
     -- awful.button({ modkey }, 3, function () awful.spawn.with_shell("pkill ncmpcpp") end),
     awful.button({ }, 3, function ()
-        mpc("pause", function(out, err, reason, exit_code) 
+        mpc("pause", function(out, exit_code) 
           if (exit_code == 0) then
             theme.mpd.update()
           else 
@@ -195,10 +197,9 @@ local mpdicon = wibox.widget.imagebox(theme.widget_music)
 
 theme.mpd = lain.widget.mpd({
     settings = function()
-        mpc("current", function(out, err, reason, exit_code) 
+        mpc("current", function(out, exit_code) 
           -- on error set empty text and exit
           if (exit_code ~= 0 or out == "") then
-            widget:set_text("")
             mpdicon:set_image(theme.widget_music)
             return 
           end
@@ -210,13 +211,13 @@ theme.mpd = lain.widget.mpd({
               local artist = " " .. mit.artist .. " "
               local title  = mit.title  .. " "
               mpdicon:set_image(theme.widget_music_on)
-              widget:set_markup(markup.font(theme.font, markup("#FFFFFF", artist) .. " " .. title))
+              widget:set_text(mit.artist .. " - " .. mit.title)
             elseif (mit.status == "paused") then
-                widget:set_markup(markup.font(theme.font, " tidal paused "))
                 mpdicon:set_image(theme.widget_music_pause)
+                widget:set_text(" paused ")
             else
-                widget:set_text("")
                 mpdicon:set_image(theme.widget_music)
+                widget:set_text("")
             end
           end
         end)
