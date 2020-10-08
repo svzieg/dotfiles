@@ -46,6 +46,27 @@ function! myspacevim#before() abort
         \ }
   let g:neoformat_enabled_typescriptreact = ['tsfmt', 'prettier']
 
+
+  " run low resource heavy autoformatter automatically
+  augroup fmt
+    autocmd!
+    autocmd BufWritePre *.yaml Neoformat
+    autocmd BufWritePre *.yml Neoformat
+    autocmd BufWritePre *.json undojoin | Neoformat
+    autocmd BufWritePre *.py undojoin | Neoformat
+    autocmd BufWritePre *.cmd undojoin | Neoformat
+    autocmd BufWritePre *.sh undojoin | Neoformat
+    autocmd BufWritePre *.bash undojoin | Neoformat
+    autocmd BufWritePre *.fish undojoin | Neoformat
+    autocmd BufWritePre *.css undojoin | Neoformat
+    autocmd BufWritePre *.html undojoin | Neoformat
+    autocmd BufWritePre *.js undojoin | Neoformat
+    autocmd BufWritePre *.jsx undojoin | Neoformat
+    autocmd BufWritePre *.ts undojoin | Neoformat
+    autocmd BufWritePre *.tsx undojoin | Neoformat
+  augroup END
+
+
 "  inoremap nr <ESC>
 endfunction
 
