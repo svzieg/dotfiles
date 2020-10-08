@@ -16,6 +16,7 @@ message/rfc822=userapp-Thunderbird.desktop
 application/pdf=org.gnome.Evince.desktop
 application/x-bittorrent=deluge.desktop
 x-scheme-handler/msteams=teams.desktop
+x-scheme-handler/etcher=balena-etcher-electron.desktop
 
 [Added Associations]
 image/jpeg=viewnior.desktop;gpicview.desktop;
@@ -26,3 +27,4 @@ message/rfc822=userapp-Thunderbird.desktop;
 application/pdf=epdfview.desktop;org.gnome.Evince.desktop;
 application/x-bittorrent=deluge.desktop;
 image/svg+xml=viewnior.desktop;
+application/octet-stream=org.gnome.gedit.desktop;

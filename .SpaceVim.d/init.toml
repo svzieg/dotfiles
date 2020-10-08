@@ -59,10 +59,18 @@
   name='vimwiki/vimwiki'
   merged = 0
 
+# [[custom_plugins]]
+  # name='maxmellon/vim-jsx-pretty'
+  # merged = 0
+
+# [[custom_plugins]]
+  # name='yuezk/vimjs'
+  # merged = 0
+
 # Enable autocomplete layer
 [[layers]]
 name = 'autocomplete'
-auto-completion-return-key-behavior = "nil"
+auto-completion-return-key-behavior = "smart"
 auto-completion-tab-key-behavior = "smart"
 auto_completion_complete_with_key_sequence = "nil"
 
