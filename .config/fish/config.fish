@@ -11,7 +11,7 @@ set -gx GO111MODULE on
 
 
 function config
-  git --git-dir=/home/svzieg/.cfg/ --work-tree=/home/svzieg
+  git --git-dir=/home/svzieg/.cfg/ --work-tree=/home/svzieg $argv[1..-1]
 end 
 
 function lg
