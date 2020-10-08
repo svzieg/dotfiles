@@ -4,3 +4,6 @@
 [submodule ".SpaceVim"]
 	path = .SpaceVim
 	url = ./.SpaceVim
+[submodule "/home/svzieg/.tmux"]
+	path = /home/svzieg/.tmux
+	url = https://github.com/gpakosz/.tmux.git
