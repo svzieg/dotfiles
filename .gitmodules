@@ -7,3 +7,6 @@
 [submodule "/home/svzieg/.tmux"]
 	path = /home/svzieg/.tmux
 	url = https://github.com/gpakosz/.tmux.git
+[submodule "/home/svzieg/.config/fish/fish-kubectl-completions"]
+	path = /home/svzieg/.config/fish/fish-kubectl-completions
+	url = https://github.com/evanlucas/fish-kubectl-completions
