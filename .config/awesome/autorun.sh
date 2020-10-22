@@ -52,6 +52,6 @@ fi
 
 
 ## for each output enable tearfree if possible
-if (command -v akw && command -v xrandr); then
+if (command -v awk && command -v xrandr); then
   xrandr --current |  awk '/ connected/ { print "xrandr --output "$1" --set TearFree on" }' | sh &
 fi
