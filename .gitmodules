@@ -10,3 +10,75 @@
 [submodule ".config/fish/fish-kubectl-completions"]
 	path = .config/fish/fish-kubectl-completions
 	url = https://github.com/evanlucas/fish-kubectl-completions
+[submodule "/home/svzieg/.local/share/nvim/site/pack/git-plugins/start/ultisnips"]
+	path = /home/svzieg/.local/share/nvim/site/pack/git-plugins/start/ultisnips
+	url = https://github.com/SirVer/ultisnips
+[submodule "onedark.vim"]
+	path = onedark.vim
+	url = https://github.com/joshdick/onedark.vim
+[submodule ".local/share/nvim/site/pack/git-plugins/opt/onedark.vim"]
+	path = .local/share/nvim/site/pack/git-plugins/opt/onedark.vim
+	url = https://github.com/joshdick/onedark.vim
+[submodule ".local/share/nvim/site/pack/git-plugins/start/yats.vim"]
+	path = .local/share/nvim/site/pack/git-plugins/start/yats.vim
+	url = https://github.com/HerringtonDarkholme/yats.vim
+[submodule ".local/share/nvim/site/pack/git-plugins/opt/nvim-typescript"]
+	path = .local/share/nvim/site/pack/git-plugins/opt/nvim-typescript
+	url = https://github.com/mhartington/nvim-typescript
+[submodule ".local/share/nvim/site/pack/git-plugins/opt/vim-go"]
+	path = .local/share/nvim/site/pack/git-plugins/opt/vim-go
+	url = https://github.com/fatih/vim-go
+[submodule ".local/share/nvim/site/pack/git-plugins/start/vim-fugitive"]
+	path = .local/share/nvim/site/pack/git-plugins/start/vim-fugitive
+	url = https://github.com/tpope/vim-fugitive
+[submodule ".local/share/nvim/site/pack/git-plugins/start/vim-gitgutter"]
+	path = .local/share/nvim/site/pack/git-plugins/start/vim-gitgutter
+	url = https://github.com/airblade/vim-gitgutter
+[submodule ".local/share/nvim/site/pack/git-plugins/opt/denite.nvim"]
+	path = .local/share/nvim/site/pack/git-plugins/opt/denite.nvim
+	url = https://github.com/Shougo/denite.nvim
+[submodule ".local/share/nvim/site/pack/git-plugins/start/vim-sensible"]
+	path = .local/share/nvim/site/pack/git-plugins/start/vim-sensible
+	url = https://github.com/tpope/vim-sensible
+[submodule ".local/share/nvim/site/pack/git-plugins/opt/vim-dadbod"]
+	path = .local/share/nvim/site/pack/git-plugins/opt/vim-dadbod
+	url = https://github.com/tpope/vim-dadbod
+[submodule ".local/share/nvim/site/pack/git-plugins/opt/vim-projectionist"]
+	path = .local/share/nvim/site/pack/git-plugins/opt/vim-projectionist
+	url = https://github.com/tpope/vim-projectionist
+[submodule ".local/share/nvim/site/pack/git-plugins/start/vim-fish"]
+	path = .local/share/nvim/site/pack/git-plugins/start/vim-fish
+	url = https://github.com/dag/vim-fish
+[submodule ".local/share/nvim/site/pack/git-plugins/opt/vim-dispatch"]
+	path = .local/share/nvim/site/pack/git-plugins/opt/vim-dispatch
+	url = https://github.com/tpope/vim-dispatch
+[submodule ".local/share/nvim/site/pack/git-plugins/opt/vim-dotenv"]
+	path = .local/share/nvim/site/pack/git-plugins/opt/vim-dotenv
+	url = https://github.com/tpope/vim-dotenv
+[submodule ".local/share/nvim/site/pack/git-plugins/opt/vim-vinegar"]
+	path = .local/share/nvim/site/pack/git-plugins/opt/vim-vinegar
+	url = https://github.com/tpope/vim-vinegar
+[submodule ".local/share/nvim/site/pack/git-plugins/opt/vimwiki"]
+	path = .local/share/nvim/site/pack/git-plugins/opt/vimwiki
+	url = https://github.com/vimwiki/vimwiki
+[submodule ".local/share/nvim/site/pack/git-plugins/opt/vim-repeat"]
+	path = .local/share/nvim/site/pack/git-plugins/opt/vim-repeat
+	url = https://github.com/tpope/vim-repeat
+[submodule ".local/share/nvim/site/pack/git-plugins/opt/vim-speeddating"]
+	path = .local/share/nvim/site/pack/git-plugins/opt/vim-speeddating
+	url = https://github.com/tpope/vim-speeddating
+[submodule ".local/share/nvim/site/pack/git-plugins/opt/vim-commentary"]
+	path = .local/share/nvim/site/pack/git-plugins/opt/vim-commentary
+	url = https://github.com/tpope/vim-commentary
+[submodule ".local/share/nvim/site/pack/git-plugins/opt/vim-surround"]
+	path = .local/share/nvim/site/pack/git-plugins/opt/vim-surround
+	url = https://github.com/tpope/vim-surround
+[submodule ".local/share/nvim/site/pack/git-plugins/opt/ultisnips"]
+	path = .local/share/nvim/site/pack/git-plugins/opt/ultisnips
+	url = https://github.com/SirVer/ultisnips
+[submodule ".local/share/nvim/site/pack/git-plugins/opt/ale"]
+	path = .local/share/nvim/site/pack/git-plugins/opt/ale
+	url = https://github.com/dense-analysis/ale.git
+[submodule ".local/share/nvim/site/pack/git-plugins/opt/lightline.vim"]
+	path = .local/share/nvim/site/pack/git-plugins/opt/lightline.vim
+	url = https://github.com/itchyny/lightline.vim

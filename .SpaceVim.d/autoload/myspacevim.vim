@@ -1,5 +1,5 @@
 function! myspacevim#before() abort
-"  let g:neomake_enabled_html_makers = ['eslint_d']
+  "  let g:neomake_enabled_html_makers = ['eslint_d']
   noremap τ l
   noremap ρ gk
   noremap ν gj
@@ -7,7 +7,7 @@ function! myspacevim#before() abort
 
 
   set conceallevel=2
-    
+
   let g:GPGFilePattern = '*.\(gpg\|asc\|pgp\)\(.wiki\)\='
 
 
@@ -18,15 +18,15 @@ function! myspacevim#before() abort
 
   " let g:neoformat_verbose = 1
 
- let g:vimwiki_list = [{
-	\ 'path': '~/vimwiki',
-	\ 'template_path': '~/vimwiki/templates/',
-	\ 'template_default': 'default',
-	\ 'syntax': 'markdown',
-	\ 'ext': '.md',
-	\ 'path_html': '~/vimwiki/site_html/',
-	\ 'custom_wiki2html': 'vimwiki_markdown',
-	\ 'template_ext': '.tpl'}] 
+  let g:vimwiki_list = [{
+        \ 'path': '~/vimwiki',
+        \ 'template_path': '~/vimwiki/templates/',
+        \ 'template_default': 'default',
+        \ 'syntax': 'markdown',
+        \ 'ext': '.md',
+        \ 'path_html': '~/vimwiki/site_html/',
+        \ 'custom_wiki2html': 'vimwiki_markdown',
+        \ 'template_ext': '.tpl'}] 
 
 
   call SpaceVim#plugins#tasks#reg_provider(funcref('s:make_tasks'))
@@ -82,11 +82,11 @@ function! myspacevim#after() abort
   let g:indentLine_concealcursor = ''
 
   let g:vimwiki_list = [{'path': '~/vimwiki/',
-                      \ 'syntax': 'markdown', 'ext': '.md'}]
-  
+        \ 'syntax': 'markdown', 'ext': '.md'}]
+
   let g:vimwiki_ext2syntax = {'.md': 'markdown',
-                  \ '.mkd': 'markdown',
-                  \ '.wiki': 'media'}
+        \ '.mkd': 'markdown',
+        \ '.wiki': 'media'}
 
 
   let g:UltiSnipsSnippetDirectories=['~/.SpaceVim.d/UltiSnips']
@@ -102,28 +102,28 @@ function! myspacevim#after() abort
 endfunction
 
 function! s:make_tasks() abort
-    if filereadable('Makefile')
-        let subcmd = filter(readfile('Makefile', ''), "v:val=~#'.'")
-        if !empty(subcmd)
-            let commands = split(subcmd[0])[1:]
-            let conf = {}
-            for cmd in commands
-                call extend(conf, {
-                            \ cmd : {
-                            \ 'command': 'make',
-                            \ 'args' : [cmd],
-                            \ 'isDetected' : 1,
-                            \ 'detectedName' : 'make:'
-                            \ }
-                            \ })
-            endfor
-            return conf
-        else
-            return {}
-        endif
+  if filereadable('Makefile')
+    let subcmd = filter(readfile('Makefile', ''), "v:val=~#'.'")
+    if !empty(subcmd)
+      let commands = split(subcmd[0])[1:]
+      let conf = {}
+      for cmd in commands
+        call extend(conf, {
+              \ cmd : {
+              \ 'command': 'make',
+              \ 'args' : [cmd],
+              \ 'isDetected' : 1,
+              \ 'detectedName' : 'make:'
+              \ }
+              \ })
+      endfor
+      return conf
     else
-        return {}
+      return {}
     endif
+  else
+    return {}
+  endif
 endfunction
 
 

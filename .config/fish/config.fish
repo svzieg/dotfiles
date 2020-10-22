@@ -67,3 +67,139 @@ function fish_mode_prompt --description 'Displays the current mode'
         printf " "
     end
 end
+
+
+
+function nvim_build_scripts
+    set cwd (pwd)
+    cd_nvim_plugin_dir opt
+
+    # typescript-nvim 
+    cd nvim-typescript
+    ./install.sh
+    cd ..
+
+    cd deoplete-go
+    make
+    cd ..
+
+    cd $cwd
+end
+
+function nvim_list_plugins
+    ls /home/svzieg/.local/share/nvim/site/pack/git-plugins/*/
+end
+
+
+function cd_nvim_plugin_dir
+    mkdir -p /home/svzieg/.local/share/nvim/site/pack/git-plugins/$argv[1]
+    cd /home/svzieg/.local/share/nvim/site/pack/git-plugins/$argv[1]
+end
+
+
+function nvim_mv_plugin
+    if test "$argv[1]" != "" && test "$argv[2]" != "" && test "$argv[3]" != ""
+        set cwd (pwd)
+        cd_nvim_plugin_dir $argv[1]
+        cd $argv[3]
+        set upstreamURL (git remote get-url origin)
+        cd $cwd
+
+        if test "$upstreamURL" != ""
+            config rm -f /home/svzieg/.local/share/nvim/site/pack/git-plugins/$argv[1]/$argv[3]
+
+            if test "$argv[2]" = "start"
+                nvim_add_start_plugin $upstreamURL
+            else
+                nvim_add_opt_plugin $upstreamURL
+            end
+        end
+    else
+        echo "cannot delete root directory, you have to speciy a plugin"
+    end
+end
+
+function nvim_rm_start_plugin
+    if test "$argv[1]" != ""
+        config rm -f /home/svzieg/.local/share/nvim/site/pack/git-plugins/start/$argv[1]
+    else
+        echo "cannot delete root directory, you have to speciy a plugin"
+    end
+end
+
+
+function nvim_rm_opt_plugin
+    if test "$argv[1]" != ""
+        config rm -f /home/svzieg/.local/share/nvim/site/pack/git-plugins/opt/$argv[1]
+    else
+        echo "cannot delete root directory, you have to speciy a plugin"
+    end
+end
+
+function nvim_add_opt_plugin
+    echo "add new opt Plugin: $argv[1]"
+    set cwd (pwd)
+    cd_nvim_plugin_dir opt
+    if test "$argv[2]" != ""
+        config submodule add --branch $argv[2] $argv[1]
+    else
+        config submodule add $argv[1]
+    end
+    cd $cwd
+end
+
+function nvim_add_start_plugin
+    echo "add new start Plugin: $argv[1]"
+    set cwd (pwd)
+    cd_nvim_plugin_dir start
+    if test "$argv[2]" != ""
+        config submodule add --branch $argv[2] $argv[1]
+    else
+        config submodule add $argv[1]
+    end
+    cd $cwd
+end
+
+
+# Kubernetes aliases
+
+alias k kubectl
+alias kd 'k describe'
+alias kg 'k get'
+alias kgyaml 'k get -o yaml'
+alias kgyml 'k get -o yaml'
+alias kaf 'k apply -f'
+alias kdel 'k delete'
+alias ke 'k edit'
+alias kccc 'k config current-context'
+alias kcdc 'k config delete-context'
+alias kcsc 'k config set-context'
+alias kcuc 'k config use-context'
+alias kdd 'kd deployment'
+alias kdeld 'kdel deployment'
+alias kdeli 'kdel ingress'
+alias kdelp 'kdel pods'
+alias kdels 'kdel svc'
+alias kdelsec 'kdel secret'
+alias kdi 'kd ingress'
+alias kdp 'kd pods'
+alias kds 'kd svc'
+alias kdsec 'kd secret'
+alias ked 'ke deployment'
+alias kei 'ke ingress'
+alias kep 'ke pods'
+alias kes 'ke svc'
+alias keti 'k exec -ti'
+alias kgd 'kg deployment'
+alias kgi 'kg ingress'
+alias kgp 'kg pods'
+alias kgrs 'kg rs'
+alias kgs 'kg svc'
+alias kgsec 'kg secret'
+alias kl 'k logs'
+alias klf 'k logs -f'
+alias krh 'k rollout history'
+alias krsd 'k rollout status deployment'
+alias kru 'k rollout undo'
+alias kr 'k rollout restart'
+alias ksd 'k scale deployment'
