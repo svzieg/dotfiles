@@ -1,0 +1,12 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhistcnt =1
+let g:netrw_dirhist_1='/home/svzieg/.go/src/platform-operator/api/v1alpha1'
+let g:netrw_dirhist_0='/tmp'
+let g:netrw_dirhist_9='/home/svzieg/.go/src/pas.scheer-group.com/config-templater'
+let g:netrw_dirhist_8='/tmp'
+let g:netrw_dirhist_7='/'
+let g:netrw_dirhist_6='/home'
+let g:netrw_dirhist_5='/home/svzieg'
+let g:netrw_dirhist_4='/home/svzieg/.go/src/pas.scheer-group.com/config-templater'
+let g:netrw_dirhist_3='/home/svzieg/.go/src/pas.scheer-group.com'
+let g:netrw_dirhist_2='/home/svzieg/.go/src/pas.scheer-group.com/config-templater'
