@@ -249,20 +249,20 @@ augroup fmt
   set smartindent
   autocmd!
   autocmd BufRead,BufWritePre *.vim  call init#intent()
-  autocmd BufRead,BufWritePre *.yaml Neoformat
-  autocmd BufRead,BufWritePre *.yml Neoformat
-  autocmd BufRead,BufWritePre *.json undojoin | Neoformat
-  autocmd BufRead,BufWritePre *.py undojoin | Neoformat
-  autocmd BufRead,BufWritePre *.cmd undojoin | Neoformat
-  autocmd BufRead,BufWritePre *.sh undojoin | Neoformat
-  autocmd BufRead,BufWritePre *.bash undojoin | Neoformat
-  autocmd BufRead,BufWritePre *.fish undojoin | Neoformat
-  autocmd BufRead,BufWritePre *.css undojoin | Neoformat
-  autocmd BufRead,BufWritePre *.html undojoin | Neoformat
-  autocmd BufRead,BufWritePre *.js  Neoformat
-  autocmd BufRead,BufWritePre *.jsx  Neoformat
-  autocmd BufRead,BufWritePre *.ts Neoformat
-  autocmd BufRead,BufWritePre *.tsx  Neoformat
+  autocmd BufRead,BufWritePre *.yaml ALEFix
+  autocmd BufRead,BufWritePre *.yml ALEFix
+  autocmd BufRead,BufWritePre *.json undojoin | ALEFix
+  autocmd BufRead,BufWritePre *.py undojoin | ALEFix
+  autocmd BufRead,BufWritePre *.cmd undojoin | ALEFix
+  autocmd BufRead,BufWritePre *.sh undojoin | ALEFix
+  autocmd BufRead,BufWritePre *.bash undojoin | ALEFix
+  autocmd BufRead,BufWritePre *.fish undojoin | ALEFix
+  autocmd BufRead,BufWritePre *.css undojoin | ALEFix
+  autocmd BufRead,BufWritePre *.html undojoin | ALEFix
+  autocmd BufRead,BufWritePre *.js  ALEFix
+  autocmd BufRead,BufWritePre *.jsx  ALEFix
+  autocmd BufRead,BufWritePre *.ts ALEFix
+  autocmd BufRead,BufWritePre *.tsx  ALEFix
 augroup END
 
 function! init#intent()  
