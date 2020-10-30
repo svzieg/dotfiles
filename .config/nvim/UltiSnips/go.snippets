@@ -3,3 +3,25 @@ if ${1:exp} {
 	$2
 } $3
 endsnippet
+
+
+
+global !p
+import re
+
+def abbr(string):
+	m = re.search('([a-zA-Z])', string)
+	if m is not None:
+		return m.group(0) 
+	return "_"
+endglobal
+
+snippet sg "Setter Getter" b 
+func (`!p snip.rv=abbr(t[1]).lower()` ${1:Target}) ${2:Property}() ${3:Type} {
+	return `!p snip.rv=abbr(t[1]).lower()`.`!p snip.rv=t[2].lower()`
+}
+
+func (`!p snip.rv=abbr(t[1]).lower()` *$1) Set$2(`!p snip.rv=t[3][0]` $3 {
+	`!p snip.rv=abbr(t[1]).lower()`.`!p snip.rv=t[2].lower()` = `!p snip.rv=abbr(t[3])`
+}
+endsnippet

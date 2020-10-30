@@ -1,8 +1,11 @@
 
-packadd! onedark.vim
-
 packadd! ale
 packadd! lightline.vim
+
+
+" add lsp for nvim 
+" TRY again in nvim 0.5
+" packadd nvim-lspconfig
 
 packadd! denite.nvim
 
@@ -25,6 +28,9 @@ packadd! ultisnips
 
 packadd! vimwiki
 packadd! tagbar
+
+packadd! vim-smoothie
+packadd! vim-startify
 
 nmap <F8> :TagbarToggle<CR>
 
@@ -62,7 +68,15 @@ noremap <C-p> :ALEPrevious <cr>
 noremap Y yy
 
 syntax on
-colorscheme onedark
+
+packadd! onedark.vim
+packadd! nord-vim
+packadd! ayu-vim
+
+colorscheme nord
+" let ayucolor="light"  " for light version of theme
+" let ayucolor="mirage" " for mirage version of theme
+" let ayucolor="dark"   " for dark version of theme
 
 " Default Vim Settings for most usecases
 " URL: http://vim.wikia.com/wiki/Example_vimrc
@@ -159,7 +173,6 @@ set autoindent
 " While this behaviour deviates from that of Vi, it does what most users
 " coming from other editors would expect.
 set nostartofline
-
 " Display the cursor position on the last line of the screen or in the status
 " line of a window
 set ruler
@@ -227,15 +240,38 @@ nnoremap <C-L> :nohl<CR><C-L>
 
 "------------------------------------------------------------
 
+" create directory if not exists
+augroup BWCCreateDir
+  autocmd!
+  autocmd BufWritePre * if expand("<afile>")!~#'^\w\+:/' && !isdirectory(expand("%:h")) | execute "silent! !mkdir -p ".shellescape(expand('%:h'), 1) | redraw! | endif
+augroup END
 
-" Use ale completion
+
+
+" Use auto completion
+" packadd! deoplete.nvim
+" packadd! deoplete-docker
+
+" call deoplete#custom#option('omni_patterns', {
+"       \ 'go': '[^. *\t]\.\w*',
+" \})
+" <TAB>: completion.
+
+inoremap <silent><expr> <Tab> pumvisible() ? "\<C-n>" : "\<TAB>"
+
+let g:deoplete#enable_at_startup = 0
 let g:ale_completion_enabled = 1
+" Use ALE and also some plugin 'foobar' as completion sources for all code.
+" call deoplete#custom#source('ale', 'dup', v:true)
+
+
 
 " default ale linter
-let g:ale_lint_on_text_changed = 1
+let g:ale_lint_on_text_changed = 0
 let g:ale_lint_on_insert_leave = 0
 let g:ale_lint_on_save = 1
 let g:ale_open_list = 1
+let g:ale_fix_on_save = 1
 
 " Lightline Configuration 
 let g:lightline = {
@@ -302,8 +338,8 @@ inoremap <expr> {<Enter> <SID>CloseBracket()
 " - https://github.com/Valloric/YouCompleteMe
 " - https://github.com/nvim-lua/completion-nvim
 let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<c-j>"
-let g:UltiSnipsJumpBackwardTrigger="<c-k>"
+let g:UltiSnipsJumpForwardTrigger="<c-n>"
+let g:UltiSnipsJumpBackwardTrigger="<c-b>"
 
 " If you want :UltiSnipsEdit to split your window.
 let g:UltiSnipsEditSplit="vertical"
