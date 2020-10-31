@@ -1,5 +1,4 @@
 
-packadd! ale
 packadd! lightline.vim
 
 
@@ -24,7 +23,6 @@ packadd! vim-speeddating
 packadd! vim-commentary
 packadd! vim-surround
 
-packadd! ultisnips
 
 packadd! vimwiki
 packadd! tagbar
@@ -60,8 +58,6 @@ noremap <leader>b :Denite buffer <cr>
 
 
 
-noremap <C-n> :ALENext <cr>
-noremap <C-p> :ALEPrevious <cr>
 
 
 
@@ -247,31 +243,94 @@ augroup BWCCreateDir
 augroup END
 
 
+packadd! neomake
+" When writing a buffer (no delay), and on normal mode changes (after 750ms).
+call neomake#configure#automake('nw', 750)
+let g:neomake_open_list = 2
 
+noremap <C-n> :NeomakeNextLoclist <cr>
+noremap <C-p> :NeomakePrevLoclist <cr>
+
+
+
+packadd! neoformat
+
+" packadd! ale
+" " default ale linter
+" let g:ale_lint_on_text_changed = 0
+" let g:ale_lint_on_insert_leave = 0
+" let g:ale_lint_on_save = 0
+" let g:ale_open_list = 0
+" let g:ale_fix_on_save = 0
+
+
+packadd! deoplete.nvim
+packadd! deoplete-docker
 " Use auto completion
-" packadd! deoplete.nvim
-" packadd! deoplete-docker
 
-" call deoplete#custom#option('omni_patterns', {
-"       \ 'go': '[^. *\t]\.\w*',
-" \})
 " <TAB>: completion.
-
 inoremap <silent><expr> <Tab> pumvisible() ? "\<C-n>" : "\<TAB>"
 
+
+" Enable deoplete when InsertEnter.
 let g:deoplete#enable_at_startup = 0
-let g:ale_completion_enabled = 1
+augroup aucmpl
+  au!
+  autocmd InsertEnter * call deoplete#enable()
+  autocmd InsertEnter * call echodoc#enable()
+augroup END
+
+
+
+" Snippets
+packadd! ultisnips
+" packadd! deoppet.nvim
+packadd! neosnippet.vim
+packadd! neosnippet-snippets
+
+" imap <C-k>  <Plug>(deoppet_expand)
+" imap <expr><Tab>  deoppet#expandable() ?
+"       \ "\<Plug>(deoppet_expand)" : "\<Tab>"
+" imap <C-f>  <Plug>(deoppet_jump_forward)
+" imap <C-b>  <Plug>(deoppet_jump_backward)
+" xmap <C-l>  <Plug>(deoppet_select_text)
+" xmap <C-x>  <Plug>(deoppet_cut_text)
+
+" call deoppet#initialize()
+" call deoppet#custom#option('snippets_dirs',
+"       \ globpath(&runtimepath, 'neosnippets', 1, 1))
+
+" Plugin key-mappings.
+" Note: It must be "imap" and "smap".  It uses <Plug> mappings.
+imap <C-k>     <Plug>(neosnippet_expand_or_jump)
+smap <C-k>     <Plug>(neosnippet_expand_or_jump)
+xmap <C-k>     <Plug>(neosnippet_expand_target)
+
+" SuperTab like snippets behavior.
+" Note: It must be "imap" and "smap".  It uses <Plug> mappings.
+"imap <expr><TAB>
+" \ pumvisible() ? "\<C-n>" :
+" \ neosnippet#expandable_or_jumpable() ?
+" \    "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+      \ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+
+" For conceal markers.
+if has('conceal')
+  set conceallevel=2 concealcursor=niv
+endif
+
+
+" let g:ale_completion_enabled = 1
 " Use ALE and also some plugin 'foobar' as completion sources for all code.
 " call deoplete#custom#source('ale', 'dup', v:true)
 
+packadd! echodoc.vim
+" Or, you could use neovim's virtual virtual text feature.
+" let g:echodoc#enable_at_startup = 1
+set noshowmode " disable the --INSERT-- --VISUAL-- showmode, lightline will do that
+let g:echodoc#type = 'echo'
 
-
-" default ale linter
-let g:ale_lint_on_text_changed = 0
-let g:ale_lint_on_insert_leave = 0
-let g:ale_lint_on_save = 1
-let g:ale_open_list = 1
-let g:ale_fix_on_save = 1
 
 " Lightline Configuration 
 let g:lightline = {
@@ -284,20 +343,21 @@ augroup fmt
   set smartindent
   autocmd!
   autocmd BufRead,BufWritePre *.vim  call init#intent()
-  autocmd BufRead,BufWritePre *.yaml ALEFix
-  autocmd BufRead,BufWritePre *.yml ALEFix
-  autocmd BufRead,BufWritePre *.json undojoin | ALEFix
-  autocmd BufRead,BufWritePre *.py undojoin | ALEFix
-  autocmd BufRead,BufWritePre *.cmd undojoin | ALEFix
-  autocmd BufRead,BufWritePre *.sh undojoin | ALEFix
-  autocmd BufRead,BufWritePre *.bash undojoin | ALEFix
-  autocmd BufRead,BufWritePre *.fish undojoin | ALEFix
-  autocmd BufRead,BufWritePre *.css undojoin | ALEFix
-  autocmd BufRead,BufWritePre *.html undojoin | ALEFix
-  autocmd BufRead,BufWritePre *.js  ALEFix
-  autocmd BufRead,BufWritePre *.jsx  ALEFix
-  autocmd BufRead,BufWritePre *.ts ALEFix
-  autocmd BufRead,BufWritePre *.tsx  ALEFix
+  autocmd BufRead,BufWritePre *.yaml Neoformat
+  autocmd BufRead,BufWritePre *.yml Neoformat
+  autocmd BufRead,BufWritePre *.go undojoin | Neoformat
+  autocmd BufRead,BufWritePre *.json undojoin | Neoformat
+  autocmd BufRead,BufWritePre *.py undojoin | Neoformat
+  autocmd BufRead,BufWritePre *.cmd undojoin | Neoformat
+  autocmd BufRead,BufWritePre *.sh undojoin | Neoformat
+  autocmd BufRead,BufWritePre *.bash undojoin | Neoformat
+  autocmd BufRead,BufWritePre *.fish undojoin | Neoformat
+  autocmd BufRead,BufWritePre *.css undojoin | Neoformat
+  autocmd BufRead,BufWritePre *.html undojoin | Neoformat
+  autocmd BufRead,BufWritePre *.js  Neoformat
+  autocmd BufRead,BufWritePre *.jsx  Neoformat
+  autocmd BufRead,BufWritePre *.ts Neoformat
+  autocmd BufRead,BufWritePre *.tsx  Neoformat
 augroup END
 
 function! init#intent()  

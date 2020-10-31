@@ -103,3 +103,21 @@
 [submodule ".local/share/nvim/site/pack/git-plugins/opt/deoplete-docker"]
 	path = .local/share/nvim/site/pack/git-plugins/opt/deoplete-docker
 	url = https://github.com/deoplete-plugins/deoplete-docker
+[submodule ".local/share/nvim/site/pack/git-plugins/opt/neomake"]
+	path = .local/share/nvim/site/pack/git-plugins/opt/neomake
+	url = https://github.com/neomake/neomake
+[submodule ".local/share/nvim/site/pack/git-plugins/opt/echodoc.vim"]
+	path = .local/share/nvim/site/pack/git-plugins/opt/echodoc.vim
+	url = https://github.com/Shougo/echodoc.vim
+[submodule ".local/share/nvim/site/pack/git-plugins/opt/neoformat"]
+	path = .local/share/nvim/site/pack/git-plugins/opt/neoformat
+	url = https://github.com/sbdchd/neoformat
+[submodule ".local/share/nvim/site/pack/git-plugins/opt/deoppet.nvim"]
+	path = .local/share/nvim/site/pack/git-plugins/opt/deoppet.nvim
+	url = https://github.com/Shougo/deoppet.nvim
+[submodule ".local/share/nvim/site/pack/git-plugins/opt/neosnippet-snippets"]
+	path = .local/share/nvim/site/pack/git-plugins/opt/neosnippet-snippets
+	url = https://github.com/Shougo/neosnippet-snippets
+[submodule ".local/share/nvim/site/pack/git-plugins/opt/neosnippet.vim"]
+	path = .local/share/nvim/site/pack/git-plugins/opt/neosnippet.vim
+	url = https://github.com/Shougo/neosnippet.vim

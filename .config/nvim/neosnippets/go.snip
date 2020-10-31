@@ -1,0 +1,14 @@
+snippet     settergetter
+abbr        func(t Target) Property() FieldType -- func(t *Target) SetProperty(field FieldType) 
+alias       sg
+options     head
+  // $3 gets the '$3' property from the $2.
+  func (${1:t} ${2:Target}) ${3:Property}() ${4:int} {
+    return $1.${5:field}
+  }
+  
+  // Set$3 sets the '$3' property of $2.
+  func ($1 *$2) Set$3($5 $4) {
+  	$1.$5 = $5
+  }
+
