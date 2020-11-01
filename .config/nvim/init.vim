@@ -25,13 +25,41 @@ packadd! vim-surround
 
 
 packadd! vimwiki
-packadd! tagbar
 
 packadd! vim-smoothie
 packadd! vim-startify
 
-nmap <F8> :TagbarToggle<CR>
 
+
+
+let g:projectionist_heuristics = {
+      \ "package.json": {
+      \   "node_modules/bin/*": {"type": "command"}
+      \ },
+      \ "package.json&yarn.lock": {
+      \   "*": {"make": "yarn"}
+      \ },
+      \ "package.json&package-json.lock": {
+      \   "*": {"make": "yarn"}
+      \ },
+      \ "lib/heroku/&init.rb": {
+      \   "lib/heroku/command/*.rb": {"type": "command"}
+      \ },
+      \ "etc/rbenv.d/|bin/rbenv-*": {
+      \   "bin/rbenv-*": {"type": "command"},
+      \   "etc/rbenv.d/*.bash": {"type": "hook"}
+      \ }}
+
+
+packadd! defx.nvim
+nmap <F8> :Defx<CR>
+silent! nunmap <buffer> -
+nmap - :Defx `expand('%:p:h')` -search=`expand('%:p')`<CR>
+autocmd FileType defx call defx_settings#defx_init()
+
+
+packadd! tagbar
+nmap <F8> :TagbarToggle<CR>
 
 " Define mappings
 
@@ -55,13 +83,6 @@ endfunction
 
 noremap <leader><leader> :Denite file/rec <cr>
 noremap <leader>b :Denite buffer <cr>
-
-
-
-
-
-
-noremap Y yy
 
 syntax on
 
@@ -264,6 +285,14 @@ packadd! neoformat
 " let g:ale_fix_on_save = 0
 
 
+
+packadd! echodoc.vim
+" Or, you could use neovim's virtual virtual text feature.
+" let g:echodoc#enable_at_startup = 1
+set noshowmode " disable the --INSERT-- --VISUAL-- showmode, lightline will do that
+let g:echodoc#type = 'echo'
+
+
 packadd! deoplete.nvim
 packadd! deoplete-docker
 " Use auto completion
@@ -325,11 +354,6 @@ endif
 " Use ALE and also some plugin 'foobar' as completion sources for all code.
 " call deoplete#custom#source('ale', 'dup', v:true)
 
-packadd! echodoc.vim
-" Or, you could use neovim's virtual virtual text feature.
-" let g:echodoc#enable_at_startup = 1
-set noshowmode " disable the --INSERT-- --VISUAL-- showmode, lightline will do that
-let g:echodoc#type = 'echo'
 
 
 " Lightline Configuration 
