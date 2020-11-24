@@ -32,11 +32,11 @@ font:
     style: Bold
 
   italic:
-    family:  Fira Code
+    family: Fira Code
     style: Italic
 
   bold_italic:
-    family:  Fira Code
+    family: Fira Code
     style: Bold Italic
 
   size: 11
@@ -51,50 +51,99 @@ font:
 
 draw_bold_text_with_bright_colors: true
 
-# Oxide colors
+# Nord colors
 colors:
   primary:
-    foreground: '#B0C5C8'
-    background: '#31363b'
-    bright_foreground: '#f3f4f5'
-
+    background: "#2e3440"
+    foreground: "#d8dee9"
+    dim_foreground: "#a5abb6"
   cursor:
-    text: '#212121'
-    cursor: '#c0c5ce'
-
+    text: "#2e3440"
+    cursor: "#d8dee9"
+  vi_mode_cursor:
+    text: "#2e3440"
+    cursor: "#d8dee9"
+  selection:
+    text: CellForeground
+    background: "#4c566a"
+  search:
+    matches:
+      foreground: CellBackground
+      background: "#88c0d0"
+    bar:
+      background: "#434c5e"
+      foreground: "#d8dee9"
   normal:
-    black:   '#212121'
-    red:     '#e57373'
-    green:   '#a6bc69'
-    yellow:  '#fac863'
-    blue:    '#6699cc'
-    magenta: '#c594c5'
-    cyan:    '#5fb3b3'
-    white:   '#c0c5ce'
-
+    black: "#3b4252"
+    red: "#bf616a"
+    green: "#a3be8c"
+    yellow: "#ebcb8b"
+    blue: "#81a1c1"
+    magenta: "#b48ead"
+    cyan: "#88c0d0"
+    white: "#e5e9f0"
   bright:
-    black:   '#5c5c5c'
-    red:     '#e57373'
-    green:   '#a6bc69'
-    yellow:  '#fac863'
-    blue:    '#6699cc'
-    magenta: '#c594c5'
-    cyan:    '#5fb3b3'
-    white:   '#f3f4f5'
+    black: "#4c566a"
+    red: "#bf616a"
+    green: "#a3be8c"
+    yellow: "#ebcb8b"
+    blue: "#81a1c1"
+    magenta: "#b48ead"
+    cyan: "#8fbcbb"
+    white: "#eceff4"
+  dim:
+    black: "#373e4d"
+    red: "#94545d"
+    green: "#809575"
+    yellow: "#b29e75"
+    blue: "#68809a"
+    magenta: "#8c738c"
+    cyan: "#6d96a5"
+    white: "#aeb3bb"
+
+  # # Oxide colors
+  # colors:
+  #   primary:
+  #     foreground: "#B0C5C8"
+  #     background: "#31363b"
+  #     bright_foreground: "#f3f4f5"
+
+  #   cursor:
+  #     text: "#212121"
+  #     cursor: "#c0c5ce"
+
+  #   normal:
+  #     black: "#212121"
+  #     red: "#e57373"
+  #     green: "#a6bc69"
+  #     yellow: "#fac863"
+  #     blue: "#6699cc"
+  #     magenta: "#c594c5"
+  #     cyan: "#5fb3b3"
+  #     white: "#c0c5ce"
+
+  #   bright:
+  #     black: "#5c5c5c"
+  #     red: "#e57373"
+  #     green: "#a6bc69"
+  #     yellow: "#fac863"
+  #     blue: "#6699cc"
+  #     magenta: "#c594c5"
+  #     cyan: "#5fb3b3"
+  #     white: "#f3f4f5"
 
   indexed_colors: []
 
 bell:
   animation: EaseOutExpo
   duration: 0
-  color: '#ffffff'
+  color: "#ffffff"
 
 background_opacity: 1.0
 
 selection:
   semantic_escape_chars: ",│`|:\"' ()[]{}<>\t"
   save_to_clipboard: false
-
 
 cursor:
   style: Block
@@ -122,23 +171,23 @@ mouse_bindings:
   - { mouse: Middle, action: PasteSelection }
 
 key_bindings:
-  - { key: V,        mods: Control|Shift, action: Paste            }
-  - { key: C,        mods: Control|Shift, action: Copy             }
-  - { key: Insert,   mods: Shift,         action: PasteSelection   }
-  - { key: Key0,     mods: Control,       action: ResetFontSize    }
-  - { key: Equals,   mods: Control,       action: IncreaseFontSize }
-  - { key: Add,      mods: Control,       action: IncreaseFontSize }
-  - { key: Subtract, mods: Control,       action: DecreaseFontSize }
-  - { key: Minus,    mods: Control,       action: DecreaseFontSize }
-  - { key: Return,   mods: Alt,           action: ToggleFullscreen }
-  - { key: Paste,                         action: Paste            }
-  - { key: Copy,                          action: Copy             }
-  - { key: L,        mods: Control,       action: ClearLogNotice   }
-  - { key: L,        mods: Control,       chars: "\x0c"            }
-  - { key: PageUp,   mods: Shift,         action: ScrollPageUp,   mode: ~Alt }
-  - { key: PageDown, mods: Shift,         action: ScrollPageDown, mode: ~Alt }
-  - { key: Home,     mods: Shift,         action: ScrollToTop,    mode: ~Alt }
-  - { key: End,      mods: Shift,         action: ScrollToBottom, mode: ~Alt }
+  - { key: V, mods: Control|Shift, action: Paste }
+  - { key: C, mods: Control|Shift, action: Copy }
+  - { key: Insert, mods: Shift, action: PasteSelection }
+  - { key: Key0, mods: Control, action: ResetFontSize }
+  - { key: Equals, mods: Control, action: IncreaseFontSize }
+  - { key: Add, mods: Control, action: IncreaseFontSize }
+  - { key: Subtract, mods: Control, action: DecreaseFontSize }
+  - { key: Minus, mods: Control, action: DecreaseFontSize }
+  - { key: Return, mods: Alt, action: ToggleFullscreen }
+  - { key: Paste, action: Paste }
+  - { key: Copy, action: Copy }
+  - { key: L, mods: Control, action: ClearLogNotice }
+  - { key: L, mods: Control, chars: "\x0c" }
+  - { key: PageUp, mods: Shift, action: ScrollPageUp, mode: ~Alt }
+  - { key: PageDown, mods: Shift, action: ScrollPageDown, mode: ~Alt }
+  - { key: Home, mods: Shift, action: ScrollToTop, mode: ~Alt }
+  - { key: End, mods: Shift, action: ScrollToBottom, mode: ~Alt }
 
 debug:
   render_timer: false

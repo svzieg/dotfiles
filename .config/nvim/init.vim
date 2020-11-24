@@ -2,6 +2,7 @@
 packadd! lightline.vim
 
 
+
 " add lsp for nvim 
 " TRY again in nvim 0.5
 " packadd nvim-lspconfig
@@ -25,9 +26,37 @@ packadd! vim-surround
 
 
 packadd! vimwiki
+let g:vimwiki_list = [{'path': '~/vimwiki/',
+      \ 'syntax': 'markdown', 'ext': '.md',
+      \ 'path_html': '~/vimwiki_html'}]
+autocmd BufEnter diary.md :VimwikiDiaryGenerateLinks
+
+let s:vimwiki_fold_blank_lines = 0  " set to 1 to fold blank lines
+let s:vimwiki_header_type = '#'     " set to '=' for wiki syntax
+
+function! Fold(lnum)
+  let fold_level = strlen(matchstr(getline(a:lnum), '^' . s:vimwiki_header_type . '\+'))
+  if (fold_level)
+    return '>' . fold_level  " start a fold level
+  endif
+  if getline(a:lnum) =~? '\v^\s*$'
+    if (strlen(matchstr(getline(a:lnum + 1), '^' . s:vimwiki_header_type . '\+')) > 0 && !g:vimwiki_fold_blank_lines)
+      return '-1' " don't fold last blank line before header
+    endif
+  endif
+  return '=' " return previous fold level
+endfunction
+
+
+
+set conceallevel=2
+set concealcursor=
+
+
 
 packadd! vim-smoothie
 packadd! vim-startify
+
 
 
 
@@ -312,10 +341,18 @@ augroup END
 
 
 " Snippets
-packadd! ultisnips
+" packadd! ultisnips
 " packadd! deoppet.nvim
 packadd! neosnippet.vim
 packadd! neosnippet-snippets
+" fix missing syntax 
+autocmd BufNewFile,BufRead *.snip,*.snippets set filetype=neosnippet
+function! s:edit_snippet() 
+  let extension =  expand('%:e')
+  execute "vs ~/.config/nvim/neosnippets/" . extension . ".snip"
+endfunction
+
+command! SnippetEdit call s:edit_snippet()
 
 " imap <C-k>  <Plug>(deoppet_expand)
 " imap <expr><Tab>  deoppet#expandable() ?
@@ -358,7 +395,14 @@ endif
 
 " Lightline Configuration 
 let g:lightline = {
-      \ 'colorscheme': 'onedark',
+      \ 'colorscheme': 'nord',
+      \ 'active': {
+      \   'left': [ [ 'mode', 'paste' ],
+      \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
+      \ },
+      \ 'component_function': {
+      \   'gitbranch': 'FugitiveHead'
+      \ },
       \ }
 
 
@@ -378,6 +422,7 @@ augroup fmt
   autocmd BufRead,BufWritePre *.fish undojoin | Neoformat
   autocmd BufRead,BufWritePre *.css undojoin | Neoformat
   autocmd BufRead,BufWritePre *.html undojoin | Neoformat
+  autocmd BufRead,BufWritePre *.rb undojoin | Neoformat
   autocmd BufRead,BufWritePre *.js  Neoformat
   autocmd BufRead,BufWritePre *.jsx  Neoformat
   autocmd BufRead,BufWritePre *.ts Neoformat

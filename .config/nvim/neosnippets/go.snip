@@ -1,14 +1,175 @@
+snippet     errw
+abbr        a new errorwrapper for fucntional operations
+options     head
+  // Apply$1 returns an error.
+  func (e errorWrapper) Apply${1:Interface}($1) error {
+    return e.err
+  }
+  
+  ${0:TARGET}
+
 snippet     settergetter
 abbr        func(t Target) Property() FieldType -- func(t *Target) SetProperty(field FieldType) 
 alias       sg
 options     head
-  // $3 gets the '$3' property from the $2.
+  // $3 gets the '$5' property from the $2.
   func (${1:t} ${2:Target}) ${3:Property}() ${4:int} {
     return $1.${5:field}
   }
   
-  // Set$3 sets the '$3' property of $2.
+  // Set$3 sets the '$5' property of $2.
   func ($1 *$2) Set$3($5 $4) {
-  	$1.$5 = $5
+    $1.$5 = $5
+  }
+  ${0:TARGET}
+
+snippet     settergettererror
+abbr        func(t Target) Property() FieldType -- func(t *Target) SetProperty(field FieldType) 
+alias       sge
+options     head
+
+  // validate$3 validets the $3 property.
+  func ($1 $2) validate$3($5 $4) bool {
+    return true
   }
 
+
+  // $3 gets the '$5' property from the $2.
+  func (${1:t} ${2:Target}) ${3:Property}() ${4:int} {
+    return $1.${5:field}
+  }
+  
+  // Set$3 sets the '$5' property of $2.
+  func ($1 *$2) Set$3($5 $4) error {
+    if !$1.validate$3($5) {
+      return fmt.Errorf("$3 %v is not valid", $5)
+    }
+
+
+    $1.$5 = $5
+    return nil
+  }
+  ${0:TARGET}
+
+
+snippet     settergetterarray
+abbr        func(t Target) Property() FieldType -- func(t *Target) SetProperty(field FieldType) 
+alias       sga
+options     head
+  // $3s gets the '$5' property from the $2.
+  func (${1:t} ${2:Target}) ${3:Property}s() []${4:int} {
+    return $1.${5:field}
+  }
+  
+  // Set$3s sets the '$5' property of $2.
+  func ($1 *$2) Set$3s($5 []$4) {
+    $1.$5 = $5
+  }
+
+  // Add$3 adds a '$5'.
+  func ($1 *$2) Add$3($5 $4) {
+    $1.$5 = append($1.$5, $5)
+  }
+  
+  // Adds$3 adds '$5'.
+  func ($1 *$2) Add$3s($5 ...$4) {
+    $1.$5 = append($1.$5, $5...)
+  }
+  ${0:TARGET}
+
+snippet     settergetterarrayerror
+abbr        func(t Target) Property() FieldType -- func(t *Target) SetProperty(field FieldType) 
+alias       sgae
+options     head
+
+  // validate$3 validets the $3 property.
+  func ($1 $2) validate$3($7 $4) bool {
+    return true
+  }
+
+  // $3s gets the '$5' property from the $2.
+  func ($1 $2) $6() []$4 {
+    return $1.$5
+  }
+  
+  // Set$6s sets the '$5' property of $2.
+  func ($1 *$2) Set${6:$3s}($5 []$4) error {
+    for _,e := range $5 {
+      if !$1.validate$3(e) {
+        return fmt.Errorf("$3 %v is not valid", e)
+      }
+    }
+
+    $1.$5 = $5
+
+    return nil
+  }
+
+  // Add$3 adds a '$5'.
+  func (${1:t} *${2:target}) Add${3:Property}(${7:$5} ${4:int})  error {
+    if !$1.validate$3($7) {
+      return fmt.Errorf("$3 %v is not valid", $7)
+    }
+
+    $1.${5:field} = append($1.$5, $7)
+
+    return nil
+  }
+  
+  // Add$6 adds '$5'.
+  func ($1 *$2) Add$6($5 ...$4)  error {
+    for _,e := range $5 {
+      if !$1.validate$3(e) {
+        return fmt.Errorf("$3 %v is not valid", e)
+      }
+    }
+
+    $1.$5 = append($1.$5, $5...)
+
+    return nil
+  }
+  ${0:TARGET}
+
+
+
+snippet     interface
+abbr        type xxxx interface{} with documentation
+alias       intf
+options     head
+  // $1 an interface for ${3:TODO}.
+  type ${1:Interface} interface {
+    ${2:Test()}
+  }
+  ${0:TARGET}
+
+snippet     struct
+abbr        type xxxx interface{} with documentation
+alias       st
+options     head
+  // $1 a type for $3.
+  type ${1:Struct} struct {
+    $2
+  }
+  ${0:TARGET}
+
+
+
+snippet     optionStruct
+abbr        option struct which can be used to generate multiple apply functions for function options
+alias       ost
+options     head
+  // internal $1 struct which gets used with the "With${3}" functions.
+  type ${1:Struct} struct {
+    $1 ${2:string}
+  }
+  ${0:TARGET}
+
+
+snippet     docuSeperation
+abbr        option struct which can be used to generate multiple apply functions for function options
+alias       docs
+options     head
+  // -----------------------------------------------------------------
+  //				${1:Seperator}
+  // -----------------------------------------------------------------
+  ${0:TARGET}

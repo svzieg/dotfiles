@@ -1,21 +1,11 @@
 
-let g:ale_linters = {'go': ['gometalinter', 'gopls', 'revive', 'govet', 'gofmt']}
-let g:ale_go_gometalinter_options="--fast"
-let g:ale_go_gopls_options="--remote=auto"
+" set foldmethod=syntax
+" set foldnestmax=4
 
-let g:ale_fixers = {'go': ['gofmt', 'prettier']}
-
+let g:go_imports_autosave=0
+let g:go_mod_fmt_autosave=1
 
 call deoplete#custom#option('omni_patterns', {'go': '[^. *\t]\.\w*'})
-
-let g:projectionist_heuristics = {
-      \   "bin/*": {
-      \     "bin/*": {
-      \        "type": "command",
-      \     },
-      \   }
-      \ }
-
 
 
 let g:neomake_go_golangci_lint_exe = "golangci-lint"
@@ -24,11 +14,13 @@ let g:neomake_go_golangci_lint_args = [
       \   '--out-format=line-number', 
       \   '--print-issued-lines=false',
       \   '--tests',
+      \   '--fast',
       \   '--concurrency=3',
       \   '--exclude-use-default=false',
       \   '-E', 'gofmt',
       \   '-E', 'golint',
       \   '-E', 'nestif',
+      \   '-E', 'nlreturn',
       \   '-E', 'maligned',
       \   '-E', 'goimports',
       \   '-E', 'godox',
