@@ -338,6 +338,11 @@ augroup aucmpl
   autocmd InsertEnter * call echodoc#enable()
 augroup END
 
+call deoplete#custom#option({
+      \ 'auto_complete_delay': 200,
+      \ 'smart_case': v:true,
+      \ })
+
 
 
 " Snippets

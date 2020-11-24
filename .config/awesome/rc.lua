@@ -61,7 +61,8 @@ local themes = {
 local chosen_theme = themes[0]
 
 
-local theme_path = string.format("%s/.config/awesome/themes/powerarrow/theme.lua", os.getenv("HOME"), chosen_theme)
+-- local theme_path = string.format("%s/.config/awesome/themes/powerarrow/theme.lua", os.getenv("HOME"), chosen_theme)
+local theme_path = string.format("%s/.config/awesome/themes/copland/theme.lua", os.getenv("HOME"), chosen_theme)
 
 -- This is used later as the default terminal and editor to run.
 local browser = "firejail qutebrowser"
