@@ -342,6 +342,8 @@ call deoplete#custom#option({
       \ 'auto_complete_delay': 200,
       \ 'smart_case': v:true,
       \ })
+" https://github.com/Shougo/deoplete.nvim/issues/41
+set completeopt+=noinsert
 
 
 
