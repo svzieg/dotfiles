@@ -18,5 +18,3 @@ engines.wikipedia = function (arg)
 end
 
 
-webview.enable_webgl = 1
-webview.enable_dns_prefetching = 1
