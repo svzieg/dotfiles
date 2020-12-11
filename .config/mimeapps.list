@@ -1,13 +1,13 @@
 [Default Applications]
-x-scheme-handler/http=firefox.desktop
-x-scheme-handler/https=firefox.desktop
-text/html=firefox.desktop
-application/x-extension-htm=firefox.desktop
-application/x-extension-html=firefox.desktop
-application/x-extension-shtml=firefox.desktop
-application/xhtml+xml=firefox.desktop
-application/x-extension-xhtml=firefox.desktop
-application/x-extension-xht=firefox.desktop
+x-scheme-handler/http=luakit.desktop
+x-scheme-handler/https=luakit.desktop
+text/html=luakit.desktop
+application/x-extension-htm=luakit.desktop
+application/x-extension-html=luakit.desktop
+application/x-extension-shtml=luakit.desktop
+application/xhtml+xml=luakit.desktop
+application/x-extension-xhtml=luakit.desktop
+application/x-extension-xht=luakit.desktop
 image/jpeg=viewnior.desktop;gpicview.desktop;
 image/png=viewnior.desktop;gpicview.desktop;
 text/plain=mousepad.desktop
@@ -17,6 +17,7 @@ application/pdf=org.gnome.Evince.desktop
 application/x-bittorrent=deluge.desktop
 x-scheme-handler/msteams=teams.desktop
 x-scheme-handler/etcher=balena-etcher-electron.desktop
+x-scheme-handler/tg=userapp-Telegram Desktop-YR6VU0.desktop
 
 [Added Associations]
 image/jpeg=viewnior.desktop;gpicview.desktop;
@@ -24,7 +25,8 @@ image/png=gimp.desktop;viewnior.desktop;gpicview.desktop;
 text/plain=mousepad.desktop;
 x-scheme-handler/mailto=userapp-Thunderbird.desktop;
 message/rfc822=userapp-Thunderbird.desktop;
-application/pdf=epdfview.desktop;org.gnome.Evince.desktop;
+application/pdf=gimp.desktop;epdfview.desktop;org.gnome.Evince.desktop;
 application/x-bittorrent=deluge.desktop;
 image/svg+xml=viewnior.desktop;
 application/octet-stream=org.gnome.gedit.desktop;
+x-scheme-handler/tg=userapp-Telegram Desktop-YR6VU0.desktop;
