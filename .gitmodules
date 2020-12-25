@@ -121,6 +121,6 @@
 [submodule ".local/share/nvim/site/pack/git-plugins/opt/defx.nvim"]
 	path = .local/share/nvim/site/pack/git-plugins/opt/defx.nvim
 	url = https://github.com/Shougo/defx.nvim
-[submodule "/home/svzieg/.tmux/plugins/tpm"]
+[submodule ".tmux/plugins/tpm"]
 	path = .tmux/plugins/tpm
 	url = https://github.com/tmux-plugins/tpm
