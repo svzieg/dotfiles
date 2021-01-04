@@ -10,11 +10,14 @@ local lain  = require("lain")
 local awful = require("awful")
 local wibox = require("wibox")
 local dpi   = require("beautiful.xresources").apply_dpi
-local json = require('cjson')
+-- local json = require('cjson')
 local helpers  = require("lain.helpers")
 
 local awesome, client, os = awesome, client, os
 local my_table = awful.util.table or gears.table -- 4.{0,1} compatibility
+
+local cpu_widget = require("awesome-wm-widgets.cpu-widget.cpu-widget")
+local fs_widget = require("awesome-wm-widgets.fs-widget.fs-widget")
 
 
 local font = {}
@@ -198,98 +201,97 @@ theme.mail = lain.widget.imap({
 --]]
 
 
--- MPD
-local musicplr = "tidal-hifi"
+---- MPD
+--local musicplr = "tidal-hifi"
 
-local function mpc(action, cb) 
-  local tidal_api = "http://localhost:47836"
-  helpers.async("curl -s " .. tidal_api .. "/" .. action, cb)
-end
+--local function mpc(action, cb) 
+--  local tidal_api = "http://localhost:47836"
+--  -- helpers.async("curl -s " .. tidal_api .. "/" .. action, cb)
+--end
 
 
-local mpd_buttons = my_table.join(
-    -- awful.button({ modkey }, 1, function () awful.spawn.with_shell(musicplr) end),
-    --[[awful.button({ }, 1, function ()
-        awful.spawn.with_shell("mpc prev")
-        theme.mpd.update()
-    end),
-    --]]
-    awful.button({ }, 1, function ()
-        mpc("playpause", function(out, exit_code) 
-          if (exit_code == 0) then
-            theme.mpd.update()
-          else 
-            awful.spawn.with_shell(musicplr)
-          end
-        end)
-    end),
-    -- awful.button({ modkey }, 3, function () awful.spawn.with_shell("pkill ncmpcpp") end),
-    awful.button({ }, 3, function ()
-        mpc("pause", function(out, exit_code) 
-          if (exit_code == 0) then
-            theme.mpd.update()
-          else 
-            awful.spawn.with_shell(musicplr)
-          end
-        end)
-    end))
-local mpdicon = wibox.widget.imagebox(theme.widget_music)
+--local mpd_buttons = my_table.join(
+--    -- awful.button({ modkey }, 1, function () awful.spawn.with_shell(musicplr) end),
+--    --[[awful.button({ }, 1, function ()
+--        awful.spawn.with_shell("mpc prev")
+--        theme.mpd.update()
+--    end),
+--    --]]
+--    awful.button({ }, 1, function ()
+--        mpc("playpause", function(out, exit_code) 
+--          if (exit_code == 0) then
+--            theme.mpd.update()
+--          else 
+--            awful.spawn.with_shell(musicplr)
+--          end
+--        end)
+--    end),
+--    -- awful.button({ modkey }, 3, function () awful.spawn.with_shell("pkill ncmpcpp") end),
+--    awful.button({ }, 3, function ()
+--        mpc("pause", function(out, exit_code) 
+--          if (exit_code == 0) then
+--            theme.mpd.update()
+--          else 
+--            awful.spawn.with_shell(musicplr)
+--          end
+--        end)
+--    end))
+--local mpdicon = wibox.widget.imagebox(theme.widget_music)
 
-theme.mpd = lain.widget.mpd({
-    settings = function()
-        mpc("current", function(out, exit_code) 
-          -- on error set empty text and exit
-          if (exit_code ~= 0 or out == "") then
-            mpdicon:set_image(theme.widget_music)
-            return 
-          end
+--theme.mpd = lain.widget.mpd({
+--    settings = function()
+--        mpc("current", function(out, exit_code) 
+--          -- on error set empty text and exit
+--          if (exit_code ~= 0 or out == "") then
+--            mpdicon:set_image(theme.widget_music)
+--            return 
+--          end
 
-          -- otherwise parse output as json
-          local mit = json.decode(out)
-          if (mit.status ~= nil) then
-            if (mit.status == "playing") then
-              local artist = " " .. mit.artist .. " "
-              local title  = mit.title  .. " "
-              mpdicon:set_image(theme.widget_music_on)
-              widget:set_text(mit.artist .. " - " .. mit.title)
-            elseif (mit.status == "paused") then
-                mpdicon:set_image(theme.widget_music_pause)
-                widget:set_text(" paused ")
-            else
-                mpdicon:set_image(theme.widget_music)
-                widget:set_text("")
-            end
-          end
-        end)
-      end
-})
+--          -- otherwise parse output as json
+--          local mit = json.decode(out)
+--          if (mit.status ~= nil) then
+--            if (mit.status == "playing") then
+--              local artist = " " .. mit.artist .. " "
+--              local title  = mit.title  .. " "
+--              mpdicon:set_image(theme.widget_music_on)
+--              widget:set_text(mit.artist .. " - " .. mit.title)
+--            elseif (mit.status == "paused") then
+--                mpdicon:set_image(theme.widget_music_pause)
+--                widget:set_text(" paused ")
+--            else
+--                mpdicon:set_image(theme.widget_music)
+--                widget:set_text("")
+--            end
+--          end
+--        end)
+--      end
+--})
+-- mpdicon:buttons(mpd_buttons)
+-- theme.mpd.widget:buttons(mpd_buttons)
 
-mpdicon:buttons(mpd_buttons)
-theme.mpd.widget:buttons(mpd_buttons)
+ -- MPD
+ local mpdicon = wibox.widget.imagebox()
+ theme.mpd = lain.widget.mpd({
+     settings = function()
+         if mpd_now.state == "play" then
+             title = mpd_now.title
+             artist  = " " .. mpd_now.artist  .. markup("#777777", " <span font='" .. font.sans .. " 2'> </span>|<span font='" .. font.sans .. " 5'> </span>")
+             mpdicon:set_image(theme.play)
+         elseif mpd_now.state == "pause" then
+             title = "mpd "
+             artist  = "paused" .. markup("#777777", " |<span font='" .. font.sans .. " 5'> </span>")
+             mpdicon:set_image(theme.pause)
+         else
+             title  = ""
+             artist = ""
+             mpdicon._private.image = nil
+             mpdicon:emit_signal("widget::redraw_needed")
+             mpdicon:emit_signal("widget::layout_changed")
+         end
 
--- -- MPD
--- local mpdicon = wibox.widget.imagebox()
--- theme.mpd = lain.widget.mpd({
---     settings = function()
---         if mpd_now.state == "play" then
---             title = mpd_now.title
---             artist  = " " .. mpd_now.artist  .. markup("#777777", " <span font='" .. font.sans .. " 2'> </span>|<span font='" .. font.sans .. " 5'> </span>")
---             mpdicon:set_image(theme.play)
---         elseif mpd_now.state == "pause" then
---             title = "mpd "
---             artist  = "paused" .. markup("#777777", " |<span font='" .. font.sans .. " 5'> </span>")
---             mpdicon:set_image(theme.pause)
---         else
---             title  = ""
---             artist = ""
---             mpdicon._private.image = nil
---             mpdicon:emit_signal("widget::redraw_needed")
---             mpdicon:emit_signal("widget::layout_changed")
---         end
-
---         widget:set_markup(markup.font(theme.font, markup(blue, title) .. artist))
---     end
--- })
+         widget:set_markup(markup.font(theme.font, markup(blue, title) .. artist))
+     end
+ })
 
 -- Battery
 local baticon = wibox.widget.imagebox(theme.bat)
@@ -341,30 +343,19 @@ local batwidget = wibox.container.margin(batbg, dpi(2), dpi(7), dpi(4), dpi(4))
 
 -- /home fs
 local fsicon = wibox.widget.imagebox(theme.disk)
-local fsbar = wibox.widget {
-    forced_height    = dpi(1),
-    forced_width     = dpi(59),
-    color            = theme.fg_normal,
-    background_color = theme.bg_normal,
-    margins          = 1,
-    paddings         = 1,
-    ticks            = true,
-    ticks_size       = dpi(6),
-    widget           = wibox.widget.progressbar,
-}
-theme.fs = lain.widget.fs {
-    notification_preset = { fg = theme.fg_normal, bg = theme.bg_normal, font = "" .. font.sans .. " 10.5" },
-    settings  = function()
-        if fs_now["/home"].percentage < 90 then
-            fsbar:set_color(theme.fg_normal)
-        else
-            fsbar:set_color("#EB8F8F")
-        end
-        fsbar:set_value(fs_now["/home"].percentage / 100)
-    end
-}
-local fsbg = wibox.container.background(fsbar, "#474747", gears.shape.rectangle)
-local fswidget = wibox.container.margin(fsbg, dpi(2), dpi(7), dpi(4), dpi(4))
+-- local fsbar = wibox.widget {
+--     forced_height    = dpi(1),
+--     forced_width     = dpi(59),
+--     color            = theme.fg_normal,
+--     background_color = theme.bg_normal,
+--     margins          = 1,
+--     paddings         = 1,
+--     ticks            = true,
+--     ticks_size       = dpi(6),
+--     widget           = wibox.widget.progressbar,
+-- }
+-- local fsbg = wibox.container.background(fsbar, "#474747", gears.shape.rectangle)
+-- local fswidget = wibox.container.margin(fs_widget(), dpi(2), dpi(7), dpi(4), dpi(4))
 
 -- ALSA volume bar
 local volicon = wibox.widget.imagebox(theme.vol)
@@ -478,6 +469,7 @@ function theme.at_screen_connect(s)
     s.mywibox = awful.wibar({ position = "top", screen = s, height = dpi(18), bg = theme.bg_normal, fg = theme.fg_normal })
 
     -- Add widgets to the wibox
+    local mpris_widget = require("awesome-wm-widgets.mpris-widget")
     s.mywibox:setup {
         layout = wibox.layout.align.horizontal,
         { -- Left widgets
@@ -505,11 +497,15 @@ function theme.at_screen_connect(s)
             baticon,
             batwidget,
             bar_spr,
-            fsicon,
-            fswidget,
-            bar_spr,
+            -- fswidget,
+            mpris_widget,
             volicon,
             volumewidget,
+            bar_spr,
+            fsicon,
+            fs_widget(),
+            bar_spr,
+            cpu_widget(),
             bar_spr,
             mytextclock,
         },

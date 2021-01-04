@@ -124,3 +124,6 @@
 [submodule "/home/svzieg/.tmux/plugins/tpm"]
 	path = .tmux/plugins/tpm
 	url = https://github.com/tmux-plugins/tpm
+[submodule "/home/svzieg/.config/awesome/awesome-wm-widgets"]
+	path = /home/svzieg/.config/awesome/awesome-wm-widgets
+	url = https://github.com/streetturtle/awesome-wm-widgets
