@@ -15,19 +15,17 @@
     set $up k
     set $right l
     # Your preferred terminal emulator
-      set $term kitty
+      set $term alacritty
 
 ### Include theme
 #
     include themes/manjaro
 
-### Include user configurations
-#
-    include config.d/*
 
 # Your preferred application launcher
 # Note: it'es recommended that you pass the final command to sway
-    set $menu dmenu_path | wofi --show drun -i | xargs swaymsg exec --
+    set $menu /usr/bin/rofi -show drun -modi drun | xargs swaymsg exec --
+    set $pass passmenu
 
 # Your prefered locking mechanism, chose between gdbus -> gdm and swaylock
 #
@@ -59,6 +57,9 @@
 
     # Start your launcher
     bindsym $mod+d exec $menu
+
+# Start password manager
+    bindsym $mod+Comma exec $pass
 
     # Drag floating windows by holding down $mod and left mouse button.
     # Resize them with right mouse button + $mod.
@@ -216,10 +217,10 @@ bindsym $mod+r mode "resize"
     bindsym Shift+XF86AudioRaiseVolume exec pamixer -i 1
 
     # Playback setting.
-    bindsym XF86AudioPlay exec playerctl play-pause
-    bindsym XF86AudioStop exec playerctl stop
-    bindsym XF86AudioNext exec playerctl next
-    bindsym XF86AudioPrev exec playerctl previous
+    bindsym XF86AudioPlay exec playerctl -i chromium play-pause
+    bindsym XF86AudioStop exec playerctl -i chromium stop
+    bindsym XF86AudioNext exec playerctl -i chromium  next
+    bindsym XF86AudioPrev exec playerctl -i chromium  previous
     bindsym $mod+Shift+Return exec $filemanager
 
     # Sreen brightness controls
@@ -243,14 +244,6 @@ bar {
 }
 
 
-# Autostart:
+### Include user configurations
 #
-#
-exec dbus-daemon --session --address=unix:path=$XDG_RUNTIME_DIR/bus
-exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
-exec mako
-exec flashfocus
-#exec blueberry
-exec nm-applet
-exec sh ~/.config/sway/scripts/keyring.sh
-include /etc/sway/config.d/*
+include config.d/*

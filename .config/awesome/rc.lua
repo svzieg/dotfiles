@@ -400,9 +400,9 @@ globalkeys = my_table.join(
 
 
     -- ALSA volume control
-    awful.key({ }, "XF86AudioPlay", function () awful.util.spawn("playerctl play-pause") end),
-    awful.key({ }, "XF86AudioNext", function () awful.util.spawn("playerctl next") end),
-    awful.key({ }, "XF86AudioPrev", function () awful.util.spawn("playerctl prev") end),
+    awful.key({ }, "XF86AudioPlay", function () awful.util.spawn("playerctl -i chromium play-pause") end),
+    awful.key({ }, "XF86AudioNext", function () awful.util.spawn("playerctl -i chromium next") end),
+    awful.key({ }, "XF86AudioPrev", function () awful.util.spawn("playerctl -i chromium prev") end),
 
     --awful.key({ modkey1 }, "Up",
     awful.key({ }, "XF86AudioRaiseVolume",
