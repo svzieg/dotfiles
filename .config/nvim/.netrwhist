@@ -1,5 +1,8 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhistcnt =9
+let g:netrw_dirhistcnt =2
+let g:netrw_dirhist_2='/home/svzieg/.config/kitty'
+let g:netrw_dirhist_1='/home/svzieg/.config/systemd'
+let g:netrw_dirhist_0='/home/svzieg/.config'
 let g:netrw_dirhist_9='/'
 let g:netrw_dirhist_8='/home'
 let g:netrw_dirhist_7='/home/svzieg'
@@ -7,6 +10,3 @@ let g:netrw_dirhist_6='/home/svzieg/.config/nvim'
 let g:netrw_dirhist_5='/'
 let g:netrw_dirhist_4='/home'
 let g:netrw_dirhist_3='/home/svzieg'
-let g:netrw_dirhist_2='/home/svzieg/.go/src/test'
-let g:netrw_dirhist_1='/home/svzieg/.go/src/platform-operator/api/v1alpha1'
-let g:netrw_dirhist_0='/home/svzieg/.go/src/platform-operator/api'

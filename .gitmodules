@@ -127,3 +127,6 @@
 [submodule "/home/svzieg/.config/awesome/awesome-wm-widgets"]
 	path = /home/svzieg/.config/awesome/awesome-wm-widgets
 	url = https://github.com/streetturtle/awesome-wm-widgets
+[submodule "/home/svzieg/.config/i3blocks"]
+	path = /home/svzieg/.config/i3blocks
+	url = https://github.com/vivien/i3blocks-contrib
