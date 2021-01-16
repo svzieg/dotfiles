@@ -121,12 +121,12 @@
 [submodule ".local/share/nvim/site/pack/git-plugins/opt/defx.nvim"]
 	path = .local/share/nvim/site/pack/git-plugins/opt/defx.nvim
 	url = https://github.com/Shougo/defx.nvim
-[submodule "/home/svzieg/.tmux/plugins/tpm"]
+[submodule ".tmux/plugins/tpm"]
 	path = .tmux/plugins/tpm
 	url = https://github.com/tmux-plugins/tpm
-[submodule "/home/svzieg/.config/awesome/awesome-wm-widgets"]
-	path = /home/svzieg/.config/awesome/awesome-wm-widgets
+[submodule ".config/awesome/awesome-wm-widgets"]
+	path = .config/awesome/awesome-wm-widgets
 	url = https://github.com/streetturtle/awesome-wm-widgets
-[submodule "/home/svzieg/.config/i3blocks"]
-	path = /home/svzieg/.config/i3blocks
+[submodule ".config/i3blocks-contrib"]
+	path = .config/i3blocks-contrib
 	url = https://github.com/vivien/i3blocks-contrib
