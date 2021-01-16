@@ -29,8 +29,12 @@ alias       sge
 options     head
 
   // validate$3 validets the $3 property.
-  func ($1 $2) validate$3($5 $4) bool {
-    return true
+  func ($1 $2) validate$3($5 $4) error {
+    if false {
+      return fmt.Errorf("$3 %v is not valid", $5)
+    }
+
+    return nil
   }
 
 
@@ -41,8 +45,8 @@ options     head
   
   // Set$3 sets the '$5' property of $2.
   func ($1 *$2) Set$3($5 $4) error {
-    if !$1.validate$3($5) {
-      return fmt.Errorf("$3 %v is not valid", $5)
+    if err := $1.validate$3($5); err != nil {
+      return error.Wrap(err, "setting $3 failed, %v is not valid", $5)
     }
 
 
@@ -83,8 +87,13 @@ alias       sgae
 options     head
 
   // validate$3 validets the $3 property.
-  func ($1 $2) validate$3($7 $4) bool {
-    return true
+  func ($1 $2) validate$3($7 $4) error {
+    if false {
+      return fmt.Errorf("$3 %v is not valid", $7)
+    }
+
+    return nil
+
   }
 
   // $3s gets the '$5' property from the $2.
@@ -95,8 +104,8 @@ options     head
   // Set$6s sets the '$5' property of $2.
   func ($1 *$2) Set${6:$3s}($5 []$4) error {
     for _,e := range $5 {
-      if !$1.validate$3(e) {
-        return fmt.Errorf("$3 %v is not valid", e)
+      if err := $1.validate$3(e); err != nil {
+        return errors.Wrap(err, "could not set $5 of $2")
       }
     }
 
@@ -107,8 +116,8 @@ options     head
 
   // Add$3 adds a '$5'.
   func (${1:t} *${2:target}) Add${3:Property}(${7:$5} ${4:int})  error {
-    if !$1.validate$3($7) {
-      return fmt.Errorf("$3 %v is not valid", $7)
+    if err := $1.validate$3($7); err != nil {
+        return errors.Wrap(err, "could not add $5 of $2")
     }
 
     $1.${5:field} = append($1.$5, $7)
@@ -119,8 +128,8 @@ options     head
   // Add$6 adds '$5'.
   func ($1 *$2) Add$6($5 ...$4)  error {
     for _,e := range $5 {
-      if !$1.validate$3(e) {
-        return fmt.Errorf("$3 %v is not valid", e)
+      if err := $1.validate$3(e); err != nil {
+        return errors.Wrap(err, "could not add $5 of $2")
       }
     }
 

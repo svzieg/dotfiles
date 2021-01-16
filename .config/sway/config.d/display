@@ -1,6 +1,6 @@
 #!conf
 # Konfigurationsdatei für die Displayausgabe
-output eDP-1 pos 0 0
+output eDP-1 pos 2560 0
 output 'Dell Inc. DELL P2418D MY3ND91J21YT' resolution 2560x1440 position 1920 0
 output DP-1 resolution 2560x1440 position 4480 0
 
