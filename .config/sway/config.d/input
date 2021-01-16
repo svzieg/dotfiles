@@ -1,6 +1,11 @@
 #!conf
 # swaymsg -t get_inputs
 
+input * {
+    xkb_layout de,de
+    xkb_variant neo,nodeadkeys
+    xkb_options grp:alt_shift_toggle
+}
 input 1130:181:CHERRY_Mechanical_Keyboard {
     xkb_layout de,de
     xkb_variant neo,nodeadkeys
