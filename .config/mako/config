@@ -4,10 +4,10 @@ default-timeout=7777
 anchor=top-center
 max-visible=3
 
-font=Fira Mono 9
+font=Fira Sans 9
 border-size=1
-background-color=#2F3D44
-border-color=#1ABC9C
+background-color=#2E3440
+border-color=#81A1C1
 margin=10
 padding=15
 width=800

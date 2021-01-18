@@ -26,8 +26,9 @@ font pango:Fira Code Regular 11
 
 # Your preferred application launcher
 # Note: it'es recommended that you pass the final command to sway
-    set $menu /usr/bin/rofi -show drun -modi drun | xargs swaymsg exec --
-    set $pass passmenu
+    set $menu /usr/bin/wofi --show run --modi run,drun | xargs swaymsg exec --
+# need --type since pass -c cannot copy password in wayland
+    set $pass passmenu --type
 
 # Your prefered locking mechanism, chose between gdbus -> gdm and swaylock
 #
