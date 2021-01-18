@@ -13,13 +13,25 @@ password_files=( "$prefix"/**/*.gpg )
 password_files=( "${password_files[@]#"$prefix"/}" )
 password_files=( "${password_files[@]%.gpg}" )
 
-password=$(printf '%s\n' "${password_files[@]}" | rofi -dmenu -i "$@")
+
+if [ -z $WAYLAND_DISPLAY ]; then
+  echo "using rofi to show"
+  password=$(printf '%s\n' "${password_files[@]}" | rofi -dmenu -i "$@")
+else 
+  echo "using wofi to show"
+  password=$(printf '%s\n' "${password_files[@]}" | wofi --dmenu -i "$@")
+fi
 
 [[ -n $password ]] || exit
 
 if [[ $typeit -eq 0 ]]; then
 	pass show -c "$password" 2>/dev/null
 else
-	pass show "$password" | { IFS= read -r pass; printf %s "$pass"; } |
-		xdotool type --clearmodifiers --file -
+  if [ -z $WAYLAND_DISPLAY ]; then
+    echo "using Xorg copy mechanism"
+	  pass show "$password" | { IFS= read -r pass; printf %s "$pass"; } | xdotool type --clearmodifiers --file -
+  else 
+    echo "using wayland copy mechanism"
+	  pass show "$password" | { IFS= read -r pass; printf %s "$pass"; } | wl-copy
+  fi
 fi

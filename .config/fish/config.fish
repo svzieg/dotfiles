@@ -8,6 +8,7 @@ set -gx EDITOR (which nvim)
 set -gx GOPATH ~/go
 set -gx GO111MODULE on
 
+kitty + complete setup fish | source
 
 
 function config
