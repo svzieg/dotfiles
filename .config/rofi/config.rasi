@@ -1,0 +1,19 @@
+configuration {
+	width: 30;
+	lines: 6;
+	columns: 2;
+	font: "Envy Code R 10";
+	show-icons: true;
+	line-margin: 10;
+	theme: "nord";
+	color-normal: "#2f343f, #d8dee8, #2f343f, #2f343f, #bf616a";
+	color-urgent: "#2f343f, #ebcb8b, #2f343f, #2f343f, #ebcb8b";
+	color-active: "#2f343f, #b48ead, #2f343f, #2f343f, #93e5cc";
+	color-window: "#2f343f, #2f343f, #2f343f";
+	display-window: "";
+	display-run: "";
+	display-ssh: "";
+	display-drun: "";
+	display-combi: "";
+}
+@import "/usr/share/rofi/themes/Arc-Dark.rasi"

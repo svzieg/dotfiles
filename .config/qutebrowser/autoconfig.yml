@@ -19,10 +19,12 @@ settings:
     global: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko)
       Chrome/69.0.3497.128 Safari/537.36
   content.notifications:
+    https://calendar.google.com: false
     https://login.gearbest.com: false
     https://user.gearbest.com: false
     https://www.reddit.com: false
   content.register_protocol_handler:
+    https://calendar.google.com?cid=%25s: false
     https://mail.google.com?extsrc=mailto&url=%25s: false
   editor.command:
     global:
@@ -31,7 +33,7 @@ settings:
     - '{file}'
     - -c
     - normal {line}G{column0}l
-  statusbar.hide:
-    global: false
-  tabs.show:
+  statusbar.show:
     global: always
+  tabs.show:
+    global: switching

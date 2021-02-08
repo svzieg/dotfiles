@@ -29,7 +29,7 @@ if [[ $typeit -eq 0 ]]; then
 else
   if [ -z $WAYLAND_DISPLAY ]; then
     echo "using Xorg copy mechanism"
-	  pass show "$password" | { IFS= read -r pass; printf %s "$pass"; } | xdotool type --clearmodifiers --file -
+	  pass -c "$password" 
   else 
     echo "using wayland copy mechanism"
 	  pass show "$password" | { IFS= read -r pass; printf %s "$pass"; } | wl-copy

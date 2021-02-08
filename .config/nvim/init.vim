@@ -294,12 +294,26 @@ augroup END
 
 
 packadd! neomake
-" When writing a buffer (no delay), and on normal mode changes (after 750ms).
-call neomake#configure#automake('nw', 750)
-let g:neomake_open_list = 2
+function! MyOnBattery()
+  if has('macunix')
+    return match(system('pmset -g batt'), "Now drawing from 'Battery Power'") != -1
+  elseif has('unix')
+    return readfile('/sys/class/power_supply/AC/online') == ['0']
+  endif
+  return 0
+endfunction
 
-noremap <C-n> :NeomakeNextLoclist <cr>
-noremap <C-p> :NeomakePrevLoclist <cr>
+if MyOnBattery()
+  call neomake#configure#automake('w')
+else
+  call neomake#configure#automake('nw', 1000)
+endif
+
+let g:neomake_open_list = 0
+
+noremap <C-i> :lopen <cr>
+noremap <C-n> :lnext <cr>
+noremap <C-p> :lprev <cr>
 
 
 
@@ -400,15 +414,25 @@ endif
 
 
 
+function NeomakeIndicator() abort
+  let stats = []
+  let lcounts = neomake#statusline#LoclistCounts()
+  for key in sort(keys(lcounts))
+    call add(stats, printf("%s: %s", key, lcounts[key]))
+  endfor
+  return join(stats, "|")
+endfunction
+
 " Lightline Configuration 
 let g:lightline = {
       \ 'colorscheme': 'nord',
       \ 'active': {
       \   'left': [ [ 'mode', 'paste' ],
-      \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
+      \             [ 'issues', 'gitbranch', 'readonly', 'filename', 'modified' ] ]
       \ },
       \ 'component_function': {
-      \   'gitbranch': 'FugitiveHead'
+      \   'gitbranch': 'FugitiveHead',
+      \   'issues' : 'NeomakeIndicator'
       \ },
       \ }
 
