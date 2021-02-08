@@ -36,9 +36,9 @@ bindsym $mod+Return exec $terminal
 bindsym $mod+Shift+x kill
 
 # start program launcher"
-bindsym $mod+d exec --no-startup-id "rofi -show run -modi drun,run -theme -font 'Fira Code 11'"
+bindsym $mod+d exec --no-startup-id "rofi -show run -modi drun,run -font 'Fira Code 11'"
 bindsym $mod+j exec --no-startup-id "rofi -show ssh -font 'Fira Code 11'"
-bindsym $mod+comma exec passmenu
+bindsym $mod+comma exec ~/.bin/passmenu
 
 # launch categorized menu
 # bindsym $mod+z exec --no-startup-id morc_menu
@@ -407,9 +407,21 @@ bindsym $mod+w exec "$terminal -e nvim /home/svzieg/vimwiki/index.md"
 
 # Autostart applications
 exec --no-startup-id clipit
-exec_always --no-startup-id ff-theme-util
+exec xfsettingsd
+exec nm-applet
+exec thunar --daemon
+exec pa-applet
+exec pamac-tray 
+exec system-config-printer-applet
+exec blueman-applet
+exec msm_notifier
+
+exec gnome-keyring-daemon --daemonize --login
+exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
+
+
+# exec_always --no-startup-id ff-theme-util
 exec_always --no-startup-id fix_xcursor
+exec_always ~/.screenlayout/default.sh
 
 exec --no-startup-id xautolock -time 10 -locker blurlock
-
-exec_always ~/.config/awesome/autorun.sh
