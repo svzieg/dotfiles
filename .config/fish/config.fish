@@ -20,6 +20,10 @@ function lg
 end
 
 
+function ssh
+    kitty +kitten ssh $argv[1..-1]
+end
+
 function dockerv
     docker -H vagrantguest:2375 $argv[1..-1]
 end
@@ -208,3 +212,4 @@ alias krsd 'k rollout status deployment'
 alias kru 'k rollout undo'
 alias kr 'k rollout restart'
 alias ksd 'k scale deployment'
+starship init fish | source

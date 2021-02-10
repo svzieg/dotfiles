@@ -24,6 +24,9 @@ packadd! vim-speeddating
 packadd! vim-commentary
 packadd! vim-surround
 
+" {{ Syntax Highlight }}
+packadd! vim-css-color
+
 
 packadd! vimwiki
 let g:vimwiki_list = [{'path': '~/vimwiki/',

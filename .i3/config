@@ -424,4 +424,6 @@ exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 exec_always --no-startup-id fix_xcursor
 exec_always ~/.screenlayout/default.sh
 
+
 exec --no-startup-id xautolock -time 10 -locker blurlock
+exec_always nitrogen --restore
