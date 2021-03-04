@@ -1,12 +1,11 @@
 #!/usr/bin/env fish
-
-set -gx PATH /home/svzieg/.luarocks/bin /usr/bin/vendor_perl /home/svzieg/.bin /home/svzieg/.yarn/bin /home/svzieg/.gem/ruby/2.7.0/bin /home/svzieg/.local/bin ~/go/bin ~/.krew/bin ~/.SpaceVim/bin ~/.garden/bin $PATH /usr/local/kubebuilder/bin/
+set -gx PATH /home/svzieg/.luarocks/bin /usr/bin/vendor_perl /home/svzieg/.bin /home/svzieg/.yarn/bin /home/svzieg/.npm/bin /home/svzieg/.gem/ruby/2.7.0/bin /home/svzieg/.local/bin ~/go/bin ~/.krew/bin ~/.SpaceVim/bin ~/.garden/bin $PATH /usr/local/kubebuilder/bin/
 set -gx LUA_PATH '/home/svzieg/.luarocks/share/lua/5.3/?.lua;/home/svzieg/.luarocks/share/lua/5.3/?/init.lua;;'
 set -gx LUA_CPATH '/usr/lib/lua/5.3/loadall.so;./?.so;/home/svzieg/.luarocks/lib/lua/5.3/?.so;;'
 set -gx EDITOR (which nvim)
 
 set -gx GOPATH ~/go
-set -gx GO111MODULE on
+set -gx GO111MODULE auto
 
 kitty + complete setup fish | source
 

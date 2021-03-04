@@ -37,8 +37,9 @@ bindsym $mod+Shift+x kill
 
 # start program launcher"
 bindsym $mod+d exec --no-startup-id "rofi -show run -modi drun,run -font 'Fira Code 11'"
-bindsym $mod+j exec --no-startup-id "rofi -show ssh -font 'Fira Code 11'"
+#bindsym $mod+j exec --no-startup-id "rofi -show ssh -font 'Fira Code 11'"
 bindsym $mod+comma exec ~/.bin/passmenu
+bindsym $mod+j exec "~/.bin/passmenu -o"
 
 # launch categorized menu
 # bindsym $mod+z exec --no-startup-id morc_menu

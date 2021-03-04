@@ -20,6 +20,7 @@ settings:
       Chrome/69.0.3497.128 Safari/537.36
   content.notifications:
     https://calendar.google.com: false
+    https://gitlab.scheer-group.com: false
     https://login.gearbest.com: false
     https://user.gearbest.com: false
     https://www.reddit.com: false
