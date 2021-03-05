@@ -1,0 +1,8 @@
+configuration {
+	display-window: "";
+	display-run: "";
+	display-ssh: "";
+	display-drun: "";
+	display-combi: "";
+}
+@import "/usr/share/rofi/themes/Arc-Dark.rasi"

@@ -3,35 +3,70 @@
 shopt -s nullglob globstar
 
 typeit=0
-if [[ $1 == "--type" ]]; then
-	typeit=1
-	shift
-fi
+opt=0
 
+
+title=Password
 prefix=${PASSWORD_STORE_DIR-~/.password-store}
-password_files=( "$prefix"/**/*.gpg )
+
+while getopts "to" opt; do
+    case "$1" in
+    -t)
+        typeit=1
+        ;;
+    -o)
+        otp=1
+				title=OTP
+				subfolder=/.otp
+        ;;
+    esac
+done
+
+
+password_files=( "$prefix$subfolder"/**/*.gpg )
 password_files=( "${password_files[@]#"$prefix"/}" )
 password_files=( "${password_files[@]%.gpg}" )
 
 
 if [ -z $WAYLAND_DISPLAY ]; then
   echo "using rofi to show"
-  password=$(printf '%s\n' "${password_files[@]}" | rofi -dmenu -i "$@")
+  password=$(printf '%s\n' "${password_files[@]}" | rofi -dmenu  -window-title $title -i "$@")
 else 
   echo "using wofi to show"
-  password=$(printf '%s\n' "${password_files[@]}" | wofi --dmenu -i "$@")
+  password=$(printf '%s\n' "${password_files[@]}" | wofi --dmenu  -window-title $title -i "$@")
 fi
 
 [[ -n $password ]] || exit
 
 if [[ $typeit -eq 0 ]]; then
-	pass show -c "$password" 2>/dev/null
+		if [[ $otp -eq 0 ]]; then
+    	echo "copy password"
+	  	pass -c "$password" 
+		else 
+    	echo "copy otp"
+	  	pass otp -c "$password" 
+		fi
 else
   if [ -z $WAYLAND_DISPLAY ]; then
     echo "using Xorg copy mechanism"
-	  pass show "$password" | { IFS= read -r pass; printf %s "$pass"; } | xdotool type --clearmodifiers --file -
+
+		if [[ $otp -eq 0 ]]; then
+    	echo "copy password"
+	  	pass -c "$password" 
+		else 
+    	echo "copy otp"
+	  	pass otp -c "$password" 
+		fi
   else 
     echo "using wayland copy mechanism"
-	  pass show "$password" | { IFS= read -r pass; printf %s "$pass"; } | wl-copy
+		if [[ $otp -eq 0 ]]; then
+    	echo "copy password"
+	  	pass show "$password" | { IFS= read -r pass; printf %s "$pass"; } | wl-copy
+		else 
+    	echo "copy otp"
+	  	pass opt show "$password" | { IFS= read -r pass; printf %s "$pass"; } | wl-copy
+		fi
   fi
 fi
+
+

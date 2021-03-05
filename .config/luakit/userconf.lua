@@ -1,5 +1,11 @@
 local settings = require "settings"
 
+
+
+-- need hunspell to check language for
+luakit.enable_spell_checking = true
+luakit.spell_checking_languages = { "de_DE", "en_GB" }
+
 settings.window.home_page = "manjaro.org"
 
 local engines = settings.window.search_engines

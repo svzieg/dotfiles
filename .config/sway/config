@@ -12,6 +12,7 @@ font pango:Fira Code Regular 11
 
     # Logo key. Use Mod1 for Alt.
     set $mod Mod4
+    set $alt Mod1
     # Home row direction keys, like vim
     set $left h
     set $down j
@@ -26,13 +27,13 @@ font pango:Fira Code Regular 11
 
 # Your preferred application launcher
 # Note: it'es recommended that you pass the final command to sway
-    set $menu /usr/bin/wofi --show run --modi run,drun | xargs swaymsg exec --
+    set $menu /usr/bin/wofi --show run --modi run | xargs swaymsg exec --
 # need --type since pass -c cannot copy password in wayland
-    set $pass passmenu --type
+    set $pass ~/.bin/passmenu --type
 
 # Your prefered locking mechanism, chose between gdbus -> gdm and swaylock
 #
-      set $locking sh ~/.config/sway/scripts/lock.sh
+      set $locking swaylock -c 000000
 
 ### Idle configuration
 #
@@ -218,12 +219,13 @@ bindsym $mod+r mode "resize"
     bindsym Shift+XF86AudioLowerVolume exec pamixer -d 1
     bindsym XF86AudioRaiseVolume exec pamixer -i 5
     bindsym Shift+XF86AudioRaiseVolume exec pamixer -i 1
+    bindsym Ctrl+$alt+m exec pavucontrol
 
     # Playback setting.
-    bindsym XF86AudioPlay exec playerctl -i chromium play-pause
-    bindsym XF86AudioStop exec playerctl -i chromium stop
-    bindsym XF86AudioNext exec playerctl -i chromium  next
-    bindsym XF86AudioPrev exec playerctl -i chromium  previous
+    bindsym XF86AudioPlay exec playerctl play-pause
+    bindsym XF86AudioStop exec playerctl stop
+    bindsym XF86AudioNext exec playerctl next
+    bindsym XF86AudioPrev exec playerctl previous
     bindsym $mod+Shift+Return exec $filemanager
 
     # Sreen brightness controls
