@@ -4,10 +4,20 @@ set -gx LUA_PATH '/home/svzieg/.luarocks/share/lua/5.3/?.lua;/home/svzieg/.luaro
 set -gx LUA_CPATH '/usr/lib/lua/5.3/loadall.so;./?.so;/home/svzieg/.luarocks/lib/lua/5.3/?.so;;'
 set -gx EDITOR (which nvim)
 
+
+if test (echo (which pack)) != ""
+    source (pack completion --shell fish)
+end
+
+
+
 set -gx GOPATH ~/go
 set -gx GO111MODULE auto
 
 kitty + complete setup fish | source
+
+
+
 
 
 function config

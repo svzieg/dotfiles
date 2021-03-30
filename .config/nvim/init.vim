@@ -14,6 +14,7 @@ packadd! vim-dadbod
 packadd! vim-go
 
 packadd! nvim-typescript
+packadd! vim-node-inspect
 
 packadd! vim-projectionist
 packadd! vim-dispatch
@@ -59,6 +60,49 @@ set concealcursor=
 
 packadd! vim-smoothie
 packadd! vim-startify
+
+
+
+
+" If, like me, you only have 2 hands and 10 fingers, you probably don't like Ctrl-Shift-F keys. 
+" Also, if you're running in a terminal, there's a real possibility of terminfo being wrong for shifted-F-keys, particularly if your TERM is screen-256color. 
+" If these issues (number of hands, TERM variables) are unfixable, try the following mappings, by adding the following before loading vimspector:
+" https://github.com/puremourning/vimspector#human-mode
+" Key	Function	API
+" F5	When debugging, continue. Otherwise start debugging.	vimspector#Continue()
+" F3	Stop debugging.	vimspector#Stop()
+" F4	Restart debugging with the same configuration.	vimspector#Restart()
+" F6	Pause debuggee.	vimspector#Pause()
+" F9	Toggle line breakpoint on the current line.	vimspector#ToggleBreakpoint()
+" <leader>F9	Toggle conditional line breakpoint on the current line.	vimspector#ToggleBreakpoint( { trigger expr, hit count expr } )
+" F8	Add a function breakpoint for the expression under cursor	vimspector#AddFunctionBreakpoint( '<cexpr>' )
+" <leader>F8	Run to Cursor	vimspector#RunToCursor()
+" F10	Step Over	vimspector#StepOver()
+" F11	Step Into	vimspector#StepInto()
+" F12	Step out of current function scope	vimspector#StepOut()
+let g:vimspector_enable_mappings = 'HUMAN'
+
+packadd! vimspector
+" mnemonic 'di' = 'debug inspect' (pick your own, if you prefer!)
+
+" for normal mode - the word under the cursor
+nmap <Leader>di <Plug>VimspectorBalloonEval
+" for visual mode, the visually selected text
+xmap <Leader>di <Plug>VimspectorBalloonEval
+
+
+" F7  Eval
+nmap F7 VimspectorEval
+
+" change the sign priority so that vim-gitgutter doesn't ovewrite the
+" breakpoint sign of vimspector
+let g:vimspector_sign_priority = {
+      \    'vimspectorBP':         999,
+      \    'vimspectorBPCond':     999,
+      \    'vimspectorBPDisabled': 999,
+      \    'vimspectorPC':         999,
+      \    'vimspectorPCBP':       999,
+      \ }
 
 
 
