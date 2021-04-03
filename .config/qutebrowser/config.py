@@ -31,6 +31,8 @@ c.tabs.show = "multiple"
 # Completion Settings
 c.completion.shrink = True
 
+c.spellcheck.languages = ["en-US", "de-DE"]
+
 
 # Key Bindings
 config.bind("<Ctrl-,>", "spawn --userscript qute-bitwarden")

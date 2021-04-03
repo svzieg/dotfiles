@@ -133,3 +133,9 @@
 [submodule ".local/share/nvim/site/pack/git-plugins/opt/vim-css-color"]
 	path = .local/share/nvim/site/pack/git-plugins/opt/vim-css-color
 	url = https://github.com/ap/vim-css-color.git
+[submodule ".local/share/nvim/site/pack/git-plugins/opt/vimspector"]
+	path = .local/share/nvim/site/pack/git-plugins/opt/vimspector
+	url = https://github.com/puremourning/vimspector
+[submodule ".local/share/nvim/site/pack/git-plugins/opt/vim-node-inspect"]
+	path = .local/share/nvim/site/pack/git-plugins/opt/vim-node-inspect
+	url = https://github.com/eliba2/vim-node-inspect

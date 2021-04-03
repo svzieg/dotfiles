@@ -1,5 +1,7 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhistcnt =6
+let g:netrw_dirhistcnt =8
+let g:netrw_dirhist_8='/home/svzieg/WebstormProjects/vagrant-boxes/one-vagrant/mnt/service-repository/config'
+let g:netrw_dirhist_7='/home/svzieg/.kube/cache'
 let g:netrw_dirhist_6='/home/svzieg'
 let g:netrw_dirhist_5='/home/svzieg/test'
 let g:netrw_dirhist_4='/home/svzieg/.config/rofi'
@@ -8,5 +10,3 @@ let g:netrw_dirhist_2='/home/svzieg/.config/kitty'
 let g:netrw_dirhist_1='/home/svzieg/.config/systemd'
 let g:netrw_dirhist_0='/home/svzieg/.config'
 let g:netrw_dirhist_9='/'
-let g:netrw_dirhist_8='/home'
-let g:netrw_dirhist_7='/home/svzieg'
