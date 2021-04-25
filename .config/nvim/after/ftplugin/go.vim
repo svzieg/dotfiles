@@ -21,7 +21,7 @@ let g:neomake_go_golangci_lint_args = [
       \   '-E', 'golint',
       \   '-E', 'nestif',
       \   '-E', 'nlreturn',
-      \   '-E', 'maligned',
+      "\   '-E', 'maligned',
       \   '-E', 'goimports',
       \   '-E', 'godox',
       \   '-E', 'godot',

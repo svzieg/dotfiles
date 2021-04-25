@@ -501,7 +501,7 @@ augroup fmt
   autocmd BufRead,BufWritePre *.bash undojoin | Neoformat
   autocmd BufRead,BufWritePre *.fish undojoin | Neoformat
   autocmd BufRead,BufWritePre *.css undojoin | Neoformat
-  autocmd BufRead,BufWritePre *.html undojoin | Neoformat
+  "autocmd BufRead,BufWritePre *.html undojoin | Neoformat
   autocmd BufRead,BufWritePre *.rb undojoin | Neoformat
   autocmd BufRead,BufWritePre *.js  Neoformat
   autocmd BufRead,BufWritePre *.jsx  Neoformat

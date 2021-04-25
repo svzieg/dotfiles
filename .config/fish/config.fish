@@ -29,7 +29,7 @@ function lg
 end
 
 
-function ssh
+function kssh
     kitty +kitten ssh $argv[1..-1]
 end
 
@@ -49,9 +49,9 @@ end
 
 # Jira shortcuts 
 function track_dev_time
-    defaultset time_spend $argv[1] "8h"
+    defaultset time_spend $argv[1] 8h
     defaultset comment $argv[2] "."
-    defaultset ticket $argv[3] "EED-173"
+    defaultset ticket $argv[3] EED-173
 
     echo "jira worklog add --noedit $ticket -T $time_spend -m $comment $argv[4..-1]"
     jira worklog add --noedit $ticket -T $time_spend -m $comment $argv[4..-1]
@@ -66,7 +66,7 @@ end
 
 function fish_mode_prompt --description 'Displays the current mode'
     # Do nothing if not in vi mode
-    if test "$fish_key_bindings" = "fish_vi_key_bindings"
+    if test "$fish_key_bindings" = fish_vi_key_bindings
         switch $fish_bind_mode
             case default
                 set_color --bold red
@@ -126,7 +126,7 @@ function nvim_mv_plugin
         if test "$upstreamURL" != ""
             config rm -f /home/svzieg/.local/share/nvim/site/pack/git-plugins/$argv[1]/$argv[3]
 
-            if test "$argv[2]" = "start"
+            if test "$argv[2]" = start
                 nvim_add_start_plugin $upstreamURL
             else
                 nvim_add_opt_plugin $upstreamURL
