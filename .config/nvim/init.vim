@@ -1,35 +1,85 @@
+" add Plugin Manager here
+packadd! vim-plug
 
-packadd! lightline.vim
+" Specify a directory for plugins
+" - For Neovim: stdpath('data') . '/plugged'
+" - Avoid using standard Vim directory names like 'plugin'
+call plug#begin('~/.vim/plugged')
 
+" Make sure you use single quotes
+Plug 'tpope/vim-sensible'
 
+" Status-Bar
+Plug 'itchyny/lightline.vim'
 
-" add lsp for nvim 
-" TRY again in nvim 0.5
-" packadd nvim-lspconfig
-
-packadd! denite.nvim
-
-packadd! vim-dadbod
-
-packadd! vim-go
-
-packadd! nvim-typescript
-packadd! vim-node-inspect
-
-packadd! vim-projectionist
-packadd! vim-dispatch
-packadd! vim-vinegar
-packadd! vim-dotenv
-packadd! vim-repeat
-packadd! vim-speeddating
-packadd! vim-commentary
-packadd! vim-surround
-
-" {{ Syntax Highlight }}
-packadd! vim-css-color
+" Database connection
+Plug 'tpope/vim-dadbod'
 
 
-packadd! vimwiki
+" Project settings
+Plug 'tpope/vim-projectionist'
+Plug 'tpope/vim-dispatch'
+Plug 'tpope/vim-vinegar'
+Plug 'tpope/vim-dotenv'
+Plug 'tpope/vim-fugitive'
+Plug 'airblade/vim-gitgutter'
+Plug 'tpope/vim-repeat'
+Plug 'psliwka/vim-smoothie' "smooth scrooling
+Plug 'mhinz/vim-startify' "fancy start
+Plug 'https://github.com/puremourning/vimspector'
+Plug 'neomake/neomake'
+Plug 'sbdchd/neoformat'
+"Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'neoclide/coc.nvim', { 'branch': 'master', 'do': 'yarn install --frozen-lockfile' }
+
+
+if has('nvim')
+  Plug 'Shougo/defx.nvim', { 'do': ':UpdateRemotePlugins' }
+  Plug 'Shougo/denite.nvim', { 'do': ':UpdateRemotePlugins' }
+
+else
+  Plug 'Shougo/denite.nvim'
+  Plug 'Shougo/defx.nvim'
+  Plug 'roxma/nvim-yarp'
+  Plug 'roxma/vim-hug-neovim-rpc'
+endif
+
+
+" Snippets
+Plug 'SirVer/ultisnips' " Track the engine.
+Plug 'honza/vim-snippets' " Snippets are separated from the engine. Add this if you want them:
+
+" General Text Settings
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-commentary'
+
+" css 
+
+" markdown
+Plug 'vimwiki/vimwiki'
+
+
+" Golang
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+
+" Typescript and Javascript
+Plug 'HerringtonDarkholme/yats.vim'
+Plug 'mhartington/nvim-typescript', {'do': './install.sh'}
+
+
+" Syntax Highlight
+Plug 'https://github.com/joshdick/onedark.vim'
+Plug 'https://github.com/arcticicestudio/nord-vim'
+Plug 'https://github.com/ayu-theme/ayu-vim'
+Plug 'skammer/vim-css-color'
+
+" Initialize plugin system
+call plug#end()
+
+
+
+
+
 let g:vimwiki_list = [{'path': '~/vimwiki/',
       \ 'syntax': 'markdown', 'ext': '.md',
       \ 'path_html': '~/vimwiki_html'}]
@@ -57,13 +107,8 @@ set conceallevel=2
 set concealcursor=
 
 
-
-packadd! vim-smoothie
-packadd! vim-startify
-
-
-
-
+" VimSpector Settings 
+"
 " If, like me, you only have 2 hands and 10 fingers, you probably don't like Ctrl-Shift-F keys. 
 " Also, if you're running in a terminal, there's a real possibility of terminfo being wrong for shifted-F-keys, particularly if your TERM is screen-256color. 
 " If these issues (number of hands, TERM variables) are unfixable, try the following mappings, by adding the following before loading vimspector:
@@ -82,7 +127,6 @@ packadd! vim-startify
 " F12	Step out of current function scope	vimspector#StepOut()
 let g:vimspector_enable_mappings = 'HUMAN'
 
-packadd! vimspector
 " mnemonic 'di' = 'debug inspect' (pick your own, if you prefer!)
 
 " for normal mode - the word under the cursor
@@ -161,6 +205,22 @@ noremap <leader><leader> :Denite file/rec <cr>
 noremap <leader>b :Denite buffer <cr>
 
 syntax on
+
+"Use 24-bit (true-color) mode in Vim/Neovim when outside tmux.
+"If you're using tmux version 2.2 or later, you can remove the outermost $TMUX check and use tmux's 24-bit color support
+"(see < http://sunaku.github.io/tmux-24bit-color.html#usage > for more information.)
+if (empty($TMUX))
+  if (has("nvim"))
+    "For Neovim 0.1.3 and 0.1.4 < https://github.com/neovim/neovim/pull/2198 >
+    let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+  endif
+  "For Neovim > 0.1.5 and Vim > patch 7.4.1799 < https://github.com/vim/vim/commit/61be73bb0f965a895bfb064ea3e55476ac175162 >
+  "Based on Vim patch 7.4.1770 (`guicolors` option) < https://github.com/vim/vim/commit/8a633e3427b47286869aa4b96f2bfc1fe65b25cd >
+  " < https://github.com/neovim/neovim/wiki/Following-HEAD#20160511 >
+  if (has("termguicolors"))
+    set termguicolors
+  endif
+endif
 
 packadd! onedark.vim
 packadd! nord-vim
@@ -340,7 +400,7 @@ augroup BWCCreateDir
 augroup END
 
 
-packadd! neomake
+
 function! MyOnBattery()
   if has('macunix')
     return match(system('pmset -g batt'), "Now drawing from 'Battery Power'") != -1
@@ -365,8 +425,6 @@ noremap <C-n> :lnext <cr>
 noremap <C-p> :lprev <cr>
 
 
-
-packadd! neoformat
 
 " packadd! ale
 " " default ale linter
