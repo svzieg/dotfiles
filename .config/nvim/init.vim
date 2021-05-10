@@ -1,6 +1,3 @@
-" add Plugin Manager here
-packadd! vim-plug
-
 " Specify a directory for plugins
 " - For Neovim: stdpath('data') . '/plugged'
 " - Avoid using standard Vim directory names like 'plugin'
@@ -15,7 +12,6 @@ Plug 'itchyny/lightline.vim'
 " Database connection
 Plug 'tpope/vim-dadbod'
 
-
 " Project settings
 Plug 'tpope/vim-projectionist'
 Plug 'tpope/vim-dispatch'
@@ -27,27 +23,27 @@ Plug 'tpope/vim-repeat'
 Plug 'psliwka/vim-smoothie' "smooth scrooling
 Plug 'mhinz/vim-startify' "fancy start
 Plug 'https://github.com/puremourning/vimspector'
-Plug 'neomake/neomake'
+"Plug 'neomake/neomake' " can be removed in favor of coc
 Plug 'sbdchd/neoformat'
+Plug 'preservim/tagbar'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
+Plug 'Shougo/echodoc.vim'
+Plug 'josa42/vim-lightline-coc'
+
 "Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'neoclide/coc.nvim', { 'branch': 'master', 'do': 'yarn install --frozen-lockfile' }
-
+"Plug 'fatih/vim-go'
 
 if has('nvim')
   Plug 'Shougo/defx.nvim', { 'do': ':UpdateRemotePlugins' }
-  Plug 'Shougo/denite.nvim', { 'do': ':UpdateRemotePlugins' }
 
 else
-  Plug 'Shougo/denite.nvim'
   Plug 'Shougo/defx.nvim'
   Plug 'roxma/nvim-yarp'
   Plug 'roxma/vim-hug-neovim-rpc'
 endif
 
-
-" Snippets
-Plug 'SirVer/ultisnips' " Track the engine.
-Plug 'honza/vim-snippets' " Snippets are separated from the engine. Add this if you want them:
 
 " General Text Settings
 Plug 'tpope/vim-surround'
@@ -60,7 +56,7 @@ Plug 'vimwiki/vimwiki'
 
 
 " Golang
-Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+" Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 
 " Typescript and Javascript
 Plug 'HerringtonDarkholme/yats.vim'
@@ -75,6 +71,11 @@ Plug 'skammer/vim-css-color'
 
 " Initialize plugin system
 call plug#end()
+
+
+noremap <C-l> :CocList <cr>
+noremap <C-n> :CocNext <cr>
+noremap <C-p> :CocPrev <cr>
 
 
 
@@ -103,8 +104,11 @@ endfunction
 
 
 
-set conceallevel=2
-set concealcursor=
+" For conceal markers.
+if has('conceal')
+  set conceallevel=2 concealcursor=niv
+  set concealcursor=
+endif
 
 
 " VimSpector Settings 
@@ -171,38 +175,21 @@ let g:projectionist_heuristics = {
       \ }}
 
 
-packadd! defx.nvim
+" defx.nvim
 nmap <F8> :Defx<CR>
 silent! nunmap <buffer> -
 nmap - :Defx `expand('%:p:h')` -search=`expand('%:p')`<CR>
 autocmd FileType defx call defx_settings#defx_init()
 
 
-packadd! tagbar
+" tagbar
 nmap <F8> :TagbarToggle<CR>
 
 " Define mappings
 
-" packadd! denite-fzf
-
-autocmd FileType denite call s:denite_my_settings()
-function! s:denite_my_settings() abort
-  nnoremap <silent><buffer><expr> <CR>
-        \ denite#do_map('do_action')
-  nnoremap <silent><buffer><expr> d
-        \ denite#do_map('do_action', 'delete')
-  nnoremap <silent><buffer><expr> p
-        \ denite#do_map('do_action', 'preview')
-  nnoremap <silent><buffer><expr> q
-        \ denite#do_map('quit')
-  nnoremap <silent><buffer><expr> i
-        \ denite#do_map('open_filter_buffer')
-  nnoremap <silent><buffer><expr> <Space>
-        \ denite#do_map('toggle_select').'j'
-endfunction
-
-noremap <leader><leader> :Denite file/rec <cr>
-noremap <leader>b :Denite buffer <cr>
+" fzf
+noremap <leader><leader> :Files <cr>
+noremap <leader>b :Buffers <cr>
 
 syntax on
 
@@ -221,10 +208,6 @@ if (empty($TMUX))
     set termguicolors
   endif
 endif
-
-packadd! onedark.vim
-packadd! nord-vim
-packadd! ayu-vim
 
 colorscheme nord
 " let ayucolor="light"  " for light version of theme
@@ -389,7 +372,7 @@ map Y y$
 
 " Map <C-L> (redraw screen) to also turn off search highlighting until the
 " next search
-nnoremap <C-L> :nohl<CR><C-L>
+" nnoremap <C-L> :nohl<CR><C-L>
 
 "------------------------------------------------------------
 
@@ -399,128 +382,15 @@ augroup BWCCreateDir
   autocmd BufWritePre * if expand("<afile>")!~#'^\w\+:/' && !isdirectory(expand("%:h")) | execute "silent! !mkdir -p ".shellescape(expand('%:h'), 1) | redraw! | endif
 augroup END
 
-
-
-function! MyOnBattery()
-  if has('macunix')
-    return match(system('pmset -g batt'), "Now drawing from 'Battery Power'") != -1
-  elseif has('unix')
-    if filereadable('/sys/class/power_supply/AC/online')
-      return readfile('/sys/class/power_supply/AC/online') == ['0']
-    endif
-  endif
-  return 0
-endfunction
-
-if MyOnBattery()
-  call neomake#configure#automake('w')
-else
-  call neomake#configure#automake('nw', 1000)
-endif
-
-let g:neomake_open_list = 0
-
-noremap <C-i> :lopen <cr>
-noremap <C-n> :lnext <cr>
-noremap <C-p> :lprev <cr>
-
-
-
-" packadd! ale
-" " default ale linter
-" let g:ale_lint_on_text_changed = 0
-" let g:ale_lint_on_insert_leave = 0
-" let g:ale_lint_on_save = 0
-" let g:ale_open_list = 0
-" let g:ale_fix_on_save = 0
-
-
-
-packadd! echodoc.vim
+" echodoc.vim
 " Or, you could use neovim's virtual virtual text feature.
 " let g:echodoc#enable_at_startup = 1
 set noshowmode " disable the --INSERT-- --VISUAL-- showmode, lightline will do that
 let g:echodoc#type = 'echo'
 
-
-packadd! deoplete.nvim
-packadd! deoplete-docker
-" Use auto completion
-
-" <TAB>: completion.
-inoremap <silent><expr> <Tab> pumvisible() ? "\<C-n>" : "\<TAB>"
-
-
-" Enable deoplete when InsertEnter.
-let g:deoplete#enable_at_startup = 0
-augroup aucmpl
-  au!
-  autocmd InsertEnter * call deoplete#enable()
-  autocmd InsertEnter * call echodoc#enable()
-augroup END
-
-call deoplete#custom#option({
-      \ 'auto_complete_delay': 200,
-      \ 'smart_case': v:true,
-      \ })
-" https://github.com/Shougo/deoplete.nvim/issues/41
-set completeopt+=noinsert
-
-
-
-" Snippets
-" packadd! ultisnips
-" packadd! deoppet.nvim
-packadd! neosnippet.vim
-packadd! neosnippet-snippets
-" fix missing syntax 
-autocmd BufNewFile,BufRead *.snip,*.snippets set filetype=neosnippet
-function! s:edit_snippet() 
-  let extension =  expand('%:e')
-  execute "vs ~/.config/nvim/neosnippets/" . extension . ".snip"
-endfunction
-
-command! SnippetEdit call s:edit_snippet()
-
-" imap <C-k>  <Plug>(deoppet_expand)
-" imap <expr><Tab>  deoppet#expandable() ?
-"       \ "\<Plug>(deoppet_expand)" : "\<Tab>"
-" imap <C-f>  <Plug>(deoppet_jump_forward)
-" imap <C-b>  <Plug>(deoppet_jump_backward)
-" xmap <C-l>  <Plug>(deoppet_select_text)
-" xmap <C-x>  <Plug>(deoppet_cut_text)
-
-" call deoppet#initialize()
-" call deoppet#custom#option('snippets_dirs',
-"       \ globpath(&runtimepath, 'neosnippets', 1, 1))
-
-" Plugin key-mappings.
-" Note: It must be "imap" and "smap".  It uses <Plug> mappings.
-imap <C-k>     <Plug>(neosnippet_expand_or_jump)
-smap <C-k>     <Plug>(neosnippet_expand_or_jump)
-xmap <C-k>     <Plug>(neosnippet_expand_target)
-
-" SuperTab like snippets behavior.
-" Note: It must be "imap" and "smap".  It uses <Plug> mappings.
-"imap <expr><TAB>
-" \ pumvisible() ? "\<C-n>" :
-" \ neosnippet#expandable_or_jumpable() ?
-" \    "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
-smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
-      \ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
-
-" For conceal markers.
-if has('conceal')
-  set conceallevel=2 concealcursor=niv
-endif
-
-
 " let g:ale_completion_enabled = 1
 " Use ALE and also some plugin 'foobar' as completion sources for all code.
 " call deoplete#custom#source('ale', 'dup', v:true)
-
-
-
 function NeomakeIndicator() abort
   let stats = []
   let lcounts = neomake#statusline#LoclistCounts()
@@ -535,37 +405,38 @@ let g:lightline = {
       \ 'colorscheme': 'nord',
       \ 'active': {
       \   'left': [ [ 'mode', 'paste' ],
-      \             [ 'issues', 'gitbranch', 'readonly', 'filename', 'modified' ] ]
+      \             [ 'issues', 'gitbranch', 'readonly', 'filename', 'modified' ],
+      \             [  'coc_info', 'coc_hints', 'coc_errors', 'coc_warnings', 'coc_ok' ], [ 'coc_status'  ]]
       \ },
       \ 'component_function': {
       \   'gitbranch': 'FugitiveHead',
-      \   'issues' : 'NeomakeIndicator'
       \ },
       \ }
 
+" \   'issues' : 'NeomakeIndicator'
 
 " run low resource heavy autoformatter automatically
-augroup fmt
-  set smartindent
-  autocmd!
-  autocmd BufRead,BufWritePre *.vim  call init#intent()
-  autocmd BufRead,BufWritePre *.yaml Neoformat
-  autocmd BufRead,BufWritePre *.yml Neoformat
-  autocmd BufRead,BufWritePre *.go undojoin | Neoformat
-  autocmd BufRead,BufWritePre *.json undojoin | Neoformat
-  autocmd BufRead,BufWritePre *.py undojoin | Neoformat
-  autocmd BufRead,BufWritePre *.cmd undojoin | Neoformat
-  autocmd BufRead,BufWritePre *.sh undojoin | Neoformat
-  autocmd BufRead,BufWritePre *.bash undojoin | Neoformat
-  autocmd BufRead,BufWritePre *.fish undojoin | Neoformat
-  autocmd BufRead,BufWritePre *.css undojoin | Neoformat
-  "autocmd BufRead,BufWritePre *.html undojoin | Neoformat
-  autocmd BufRead,BufWritePre *.rb undojoin | Neoformat
-  autocmd BufRead,BufWritePre *.js  Neoformat
-  autocmd BufRead,BufWritePre *.jsx  Neoformat
-  autocmd BufRead,BufWritePre *.ts Neoformat
-  autocmd BufRead,BufWritePre *.tsx  Neoformat
-augroup END
+"augroup fmt
+"  set smartindent
+"  autocmd!
+"  autocmd BufRead,BufWritePre *.vim  call init#intent()
+"  autocmd BufRead,BufWritePre *.yaml Neoformat
+"  autocmd BufRead,BufWritePre *.yml Neoformat
+"  autocmd BufRead,BufWritePre *.go undojoin | Neoformat
+"  autocmd BufRead,BufWritePre *.json undojoin | Neoformat
+"  autocmd BufRead,BufWritePre *.py undojoin | Neoformat
+"  autocmd BufRead,BufWritePre *.cmd undojoin | Neoformat
+"  autocmd BufRead,BufWritePre *.sh undojoin | Neoformat
+"  autocmd BufRead,BufWritePre *.bash undojoin | Neoformat
+"  autocmd BufRead,BufWritePre *.fish undojoin | Neoformat
+"  autocmd BufRead,BufWritePre *.css undojoin | Neoformat
+"  "autocmd BufRead,BufWritePre *.html undojoin | Neoformat
+"  autocmd BufRead,BufWritePre *.rb undojoin | Neoformat
+"  autocmd BufRead,BufWritePre *.js  Neoformat
+"  autocmd BufRead,BufWritePre *.jsx  Neoformat
+"  autocmd BufRead,BufWritePre *.ts Neoformat
+"  autocmd BufRead,BufWritePre *.tsx  Neoformat
+"augroup END
 
 function! init#intent()  
   execute "normal gg=G".line(".")."G" 
@@ -598,31 +469,38 @@ endfunction
 inoremap <expr> {<Enter> <SID>CloseBracket()
 
 
+" snippets
+" Use <C-l> for trigger snippet expand.
+imap <C-l> <Plug>(coc-snippets-expand)
 
+" Use <C-j> for select text for visual placeholder of snippet.
+vmap <C-j> <Plug>(coc-snippets-select)
 
+" Use <C-j> for jump to next placeholder, it's default of coc.nvim
+let g:coc_snippet_next = '<c-j>'
 
-" Trigger configuration. You need to change this to something other than <tab> if you use one of the following:
-" - https://github.com/Valloric/YouCompleteMe
-" - https://github.com/nvim-lua/completion-nvim
-let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<c-n>"
-let g:UltiSnipsJumpBackwardTrigger="<c-b>"
+" Use <C-k> for jump to previous placeholder, it's default of coc.nvim
+let g:coc_snippet_prev = '<c-k>'
 
-" If you want :UltiSnipsEdit to split your window.
-let g:UltiSnipsEditSplit="vertical"
+" Use <C-j> for both expand and jump (make expand higher priority.)
+imap <C-j> <Plug>(coc-snippets-expand-jump)
 
+" Use <leader>x for convert visual selected code to snippet
+xmap <leader>x  <Plug>(coc-convert-snippet)
 
-call denite#custom#var('file_rec', 'command', ['rg', '--files', '--glob', '!.git'])
-call denite#custom#var('grep', 'command', ['rg', '--threads', '1'])
-call denite#custom#var('grep', 'recursive_opts', [])
-call denite#custom#var('grep', 'final_opts', [])
-call denite#custom#var('grep', 'separator', ['--'])
-call denite#custom#var('grep', 'default_opts', ['--vimgrep', '--no-heading'])  
+" Make <tab> used for trigger completion, completion confirm, snippet expand and jump like VSCode.
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? coc#_select_confirm() :
+      \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
 
-autocmd FileType denite-filter call s:denite_filter_my_settings()
-function! s:denite_filter_my_settings() abort
-  imap <silent><buffer> <C-o> <Plug>(denite_filter_quit)
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
+
+let g:coc_snippet_next = '<tab>'
 
 
 
