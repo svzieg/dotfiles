@@ -417,7 +417,7 @@ exec system-config-printer-applet
 exec blueman-applet
 exec msm_notifier
 
-exec gnome-keyring-daemon --daemonize --login
+exec export $(gnome-keyring-daemon --start --daemonize --login)
 exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 
 

@@ -27,7 +27,7 @@ font pango:Fira Code Regular 11
 
 # Your preferred application launcher
 # Note: it'es recommended that you pass the final command to sway
-    set $menu /usr/bin/wofi --show run --modi run | xargs swaymsg exec --
+    set $menu rofi -show run -modi drun,run -font 'Fira Code 11' | xargs swaymsg exec --
 # need --type since pass -c cannot copy password in wayland
     set $pass ~/.bin/passmenu
 
@@ -284,5 +284,5 @@ client.background       #2E3440#############################
 #
 include config.d/*
 
-exec_always ~/.config/awesome/autorun.sh
+# exec_always ~/.config/awesome/autorun.sh
 
