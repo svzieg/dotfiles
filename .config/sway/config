@@ -27,9 +27,9 @@ font pango:Fira Code Regular 11
 
 # Your preferred application launcher
 # Note: it'es recommended that you pass the final command to sway
-    set $menu /usr/bin/wofi --show run --modi run | xargs swaymsg exec --
+    set $menu rofi -show run -modi drun,run -font 'Fira Code 11' | xargs swaymsg exec --
 # need --type since pass -c cannot copy password in wayland
-    set $pass ~/.bin/passmenu --type
+    set $pass ~/.bin/passmenu
 
 # Your prefered locking mechanism, chose between gdbus -> gdm and swaylock
 #
@@ -63,7 +63,8 @@ font pango:Fira Code Regular 11
     bindsym $mod+d exec $menu
 
 # Start password manager
-    bindsym $mod+Comma exec $pass
+    bindsym $mod+Comma exec $pass -t
+    # bindsym $mod+j exec $pass -o
 
     # Drag floating windows by holding down $mod and left mouse button.
     # Resize them with right mouse button + $mod.
@@ -283,5 +284,5 @@ client.background       #2E3440#############################
 #
 include config.d/*
 
-exec_always ~/.config/awesome/autorun.sh
+# exec_always ~/.config/awesome/autorun.sh
 

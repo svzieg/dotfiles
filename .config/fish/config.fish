@@ -1,5 +1,5 @@
 #!/usr/bin/env fish
-set -gx PATH /home/svzieg/.luarocks/bin /usr/bin/vendor_perl /home/svzieg/.bin /home/svzieg/.yarn/bin /home/svzieg/.npm/bin /home/svzieg/.gem/ruby/2.7.0/bin /home/svzieg/.local/bin ~/go/bin ~/.krew/bin ~/.SpaceVim/bin ~/.garden/bin $PATH /usr/local/kubebuilder/bin/
+set -gx PATH /home/svzieg/.luarocks/bin /usr/bin/vendor_perl /home/svzieg/.bin /home/svzieg/.yarn/bin /home/svzieg/.npm/bin /home/svzieg/.gem/ruby/2.7.0/bin /home/svzieg/.local/bin ~/go/bin ~/.krew/bin ~/.SpaceVim/bin ~/.garden/bin /home/svzieg/.gem/ruby/3.0.0/bin $PATH /usr/local/kubebuilder/bin/
 set -gx LUA_PATH '/home/svzieg/.luarocks/share/lua/5.3/?.lua;/home/svzieg/.luarocks/share/lua/5.3/?/init.lua;;'
 set -gx LUA_CPATH '/usr/lib/lua/5.3/loadall.so;./?.so;/home/svzieg/.luarocks/lib/lua/5.3/?.so;;'
 set -gx EDITOR (which nvim)
@@ -29,7 +29,7 @@ function lg
 end
 
 
-function ssh
+function kssh
     kitty +kitten ssh $argv[1..-1]
 end
 
@@ -49,9 +49,9 @@ end
 
 # Jira shortcuts 
 function track_dev_time
-    defaultset time_spend $argv[1] "8h"
+    defaultset time_spend $argv[1] 8h
     defaultset comment $argv[2] "."
-    defaultset ticket $argv[3] "EED-173"
+    defaultset ticket $argv[3] EED-173
 
     echo "jira worklog add --noedit $ticket -T $time_spend -m $comment $argv[4..-1]"
     jira worklog add --noedit $ticket -T $time_spend -m $comment $argv[4..-1]
@@ -66,7 +66,7 @@ end
 
 function fish_mode_prompt --description 'Displays the current mode'
     # Do nothing if not in vi mode
-    if test "$fish_key_bindings" = "fish_vi_key_bindings"
+    if test "$fish_key_bindings" = fish_vi_key_bindings
         switch $fish_bind_mode
             case default
                 set_color --bold red
@@ -126,7 +126,7 @@ function nvim_mv_plugin
         if test "$upstreamURL" != ""
             config rm -f /home/svzieg/.local/share/nvim/site/pack/git-plugins/$argv[1]/$argv[3]
 
-            if test "$argv[2]" = "start"
+            if test "$argv[2]" = start
                 nvim_add_start_plugin $upstreamURL
             else
                 nvim_add_opt_plugin $upstreamURL

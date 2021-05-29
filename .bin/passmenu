@@ -33,7 +33,7 @@ if [ -z $WAYLAND_DISPLAY ]; then
   password=$(printf '%s\n' "${password_files[@]}" | rofi -dmenu  -window-title $title -i "$@")
 else 
   echo "using wofi to show"
-  password=$(printf '%s\n' "${password_files[@]}" | wofi --dmenu  -window-title $title -i "$@")
+  password=$(printf '%s\n' "${password_files[@]}" | rofi -dmenu  -window-title $title -i "$@")
 fi
 
 [[ -n $password ]] || exit
