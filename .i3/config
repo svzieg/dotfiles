@@ -67,9 +67,17 @@ bindsym $mod+F3 exec $terminal -e 'ranger'
 # bindsym $mod+F3 exec ranger
 bindsym $mod+Shift+F3 exec pcmanfm_pkexec
 bindsym $mod+F5 exec $terminal -e 'mocp'
+
+
+# force changing keyboard layout
+bindsym $mod+F12 exec "setxkbmap 'de(neo)'"
+bindsym $mod+F11 exec "setxkbmap 'de'"
+
+
+
 #bindsym $mod+t exec --no-startup-id pkill compton
 bindsym $mod+Ctrl+t exec --no-startup-id compton -b
-bindsym $mod+Shift+d --release exec "killall dunst; exec notify-send 'restart dunst'"
+bindsym $mod+Shift+d --release exec "killall dunst; systemctl --user start dunst && exec notify-send 'restart dunst'"
 bindsym Print exec --no-startup-id i3-scrot
 bindsym $mod+Print --release exec --no-startup-id i3-scrot -w
 bindsym $mod+Shift+Print --release exec --no-startup-id i3-scrot -s
@@ -426,5 +434,9 @@ exec_always --no-startup-id fix_xcursor
 exec_always ~/.screenlayout/default.sh
 
 
+
+
+
+exec --no-startup-id dunst
 exec --no-startup-id xautolock -time 10 -locker blurlock
 exec_always nitrogen --restore

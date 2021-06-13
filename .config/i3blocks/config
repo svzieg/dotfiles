@@ -53,6 +53,11 @@ separator=false
 #INTERFACE=eth0
 interval=5
 
+[key_layout]
+command=$SCRIPT_DIR/key_layout/key_layout
+label=
+interval=30
+
 
 # OpenVPN support
 #
