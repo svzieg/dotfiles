@@ -286,3 +286,4 @@ include config.d/*
 
 # exec_always ~/.config/awesome/autorun.sh
 
+exec systemctl --user import-environment
