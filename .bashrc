@@ -142,3 +142,7 @@ export LUA_CPATH='/usr/lib/lua/5.3/?.so;/usr/lib/lua/5.3/loadall.so;./?.so;/home
 export PATH='/home/svzieg/.luarocks/bin:/usr/bin/vendor_perl:/home/svzieg/.bin:/home/svzieg/.yarn/bin:/home/svzieg/.local/bin:/home/svzieg/go/bin:/home/svzieg/.go/bin:/home/svzieg/.SpaceVim/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/lib/jvm/default/bin:/usr/bin/site_perl:/usr/bin/core_perl:/usr/local/kubebuilder/bin/'
 
 complete -C /usr/bin/mcli mcli
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
