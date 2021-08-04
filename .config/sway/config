@@ -244,24 +244,25 @@ bindsym $mod+r mode "resize"
 #
 # Read `man 5 sway-bar` for more information about this section.
 bar {
-    status_command SCRIPT_DIR=~/.config/i3blocks-contrib i3blocks
-    position top
-    height 25
+    swaybar_command waybar
+    # status_command SCRIPT_DIR=~/.config/i3blocks-contrib i3blocks
+    # position top
+    # height 25
 
-    font pango:Fira Code Regular 10
+    # font pango:Fira Code Regular 10
 
 
-  colors {
-    background #2E3440
-    statusline #ECEFF4
-    separator  #4C566A
+  # colors {
+    # background #2E3440
+    # statusline #ECEFF4
+    # separator  #4C566A
 
-    focused_workspace  #4C7899 #285577 #ECEFF4
-    active_workspace   #3B4252 #3B4252 #ECEFF4
-    inactive_workspace #3B4252 #3B4252 #888888
-    urgent_workspace   #3B4252 #BF616A #ECEFF4
-    binding_mode       #3B4252 #D08770 #ECEFF4
-  }
+    # focused_workspace  #4C7899 #285577 #ECEFF4
+    # active_workspace   #3B4252 #3B4252 #ECEFF4
+    # inactive_workspace #3B4252 #3B4252 #888888
+    # urgent_workspace   #3B4252 #BF616A #ECEFF4
+    # binding_mode       #3B4252 #D08770 #ECEFF4
+  # }
 
 }
 

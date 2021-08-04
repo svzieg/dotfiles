@@ -59,7 +59,7 @@
         "interval": 5,
         "return-type": "json",
         "exec": "~/.config/waybar/modules/bluetooth.sh",
-        "on-click": "blueberry"
+        "on-click": "blueman-manager"
     },
     "pulseaudio": {
         "scroll-step": 5,
