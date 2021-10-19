@@ -27,7 +27,7 @@ font pango:Fira Code Regular 11
 
 # Your preferred application launcher
 # Note: it'es recommended that you pass the final command to sway
-    set $menu rofi -show run -modi drun,run -font 'Fira Code 11' | xargs swaymsg exec --
+    set $menu wofi --show run --font 'Fira Code 11' | xargs swaymsg exec --
 # need --type since pass -c cannot copy password in wayland
     set $pass ~/.bin/passmenu
 
@@ -268,23 +268,31 @@ bar {
 
 
 # Theme colors
-# class                 border  bground text    indicator child_border
-client.focused          #2E3440 #434C5E #88C0D0 #2E9EF4   #2E3440
-client.focused_inactive #2E3440 #2E3440 #888888 #484E50   #2E3440
-client.unfocused        #2E3440 #2E3440 #E5E9F0 #292D2E   #2E3440
-client.urgent           #2F343A #BF616A #ECEFF4 #BF616A   #2E3440
-client.placeholder      #2E3440 #3B4252 #ECEFF4 #2E3440   #2E3440
+## Window decoration
+# class                 border  backgr. text    indicator child_border
+client.focused          #88c0d0 #434c5e #eceff4 #8fbcbb   #88c0d0
+client.focused_inactive #88c0d0 #2e3440 #d8dee9 #4c566a   #4c566a
+client.unfocused        #88c0d0 #2e3440 #d8dee9 #4c566a   #4c566a
+client.urgent           #ebcb8b #ebcb8b #2e3440 #8fbcbb   #ebcb8b
 
-client.background       #2E3440#############################
 ### settings for i3-gaps: ###
 #############################
 
 
 
-### Include user configurations
+### Include user configuraTions
 #
 include config.d/*
 
 # exec_always ~/.config/awesome/autorun.sh
 
+exec eval $(gnome-keyring-daemon --start)
+exec export SSH_AUTH_SOCK
+exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
+
+exec_always --no-startup-id fix_xcursor
+
 exec systemctl --user import-environment
+
+
+exec_always ~/.bin/import-gsettings 

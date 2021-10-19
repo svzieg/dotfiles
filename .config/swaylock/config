@@ -1,0 +1,37 @@
+ignore-empty-password
+disable-caps-lock-text
+image=~/.config/wallpaper.png
+font=Calvin and Hobbes
+
+text-ver-color=2e3440
+text-wrong-color=2e3440
+text-clear-color=2e3440
+inside-color=eceff4
+inside-ver-color=e5e9f0
+inside-wrong-color=bf616a
+inside-clear-color=ebcb8b
+inside-caps-lock-color=eceff4
+ring-color=3b4252
+ring-ver-color=3b4252
+ring-wrong-color=3b4252
+ring-clear-color=3b4252
+line-color=434c5e
+line-clear-color=434c5e
+line-wrong-color=434c5e
+line-ver-color=434c5e
+key-hl-color=8fbcbb
+bs-hl-color=8fbcbb
+caps-lock-bs-hl-color=ebcb8b
+caps-lock-key-hl-color=ebcb8b
+separator-color=434c5e
+
+scaling=fill
+indicator
+clock
+timestr=%I:%M %p
+datestr=%A, %d %B
+indicator-x-position=1600
+indicator-y-position=925
+indicator-radius=350
+font-size=125
+text-color=2e3440

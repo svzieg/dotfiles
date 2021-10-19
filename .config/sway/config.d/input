@@ -31,3 +31,16 @@ input 1102:4639:DELL0817:00_044E:121F_Touchpad {
     natural_scroll enabled
     dwt enabled
 }
+
+
+input 1241:41119:E-Signal_USB_Gaming_Mouse_Keyboard {
+    tap enabled
+    natural_scroll enabled
+    dwt enabled
+}
+
+input "type:mouse" {
+    accel_profile "flat"
+    pointer_accel 0
+}
+

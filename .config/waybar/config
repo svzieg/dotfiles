@@ -1,144 +1,103 @@
-/* Thank you to u/Krudjan for sharing their dotfiles, I used
-   https://gitlab.com/Krudjan/dotfiles/tree/master/waybar/.config/waybar
-   as a reference when writing this */
-
 {
-    "layer": "top", // Waybar at top layer
-    // "position": "bottom", // Waybar at the bottom of your screen
-    "height": 25, // Waybar height
-    // "width": 1280, // Waybar width
-    // Choose the order of the modules
-    "modules-left": ["custom/menu","custom/space","sway/workspaces","sway/mode"],
-    "modules-center": [],
-    "modules-right": ["custom/space","tray","idle_inhibitor","custom/space","pulseaudio","custom/space","cpu","custom/space","memory","custom/space","custom/vpn","custom/space","custom/pacman","custom/space","network","custom/bluetooth","custom/space","battery","custom/space","clock"],
-    "gtk-layer-shell": true,
+    "position": "top", 
+    "height": 30,
+    "modules-left": ["sway/workspaces"],
+    "modules-right": ["pulseaudio", "network", "battery", "idle_inhibitor", "custom/pacman", "tray", "custom/date", "clock", "custom/power"],
     // Modules configuration
-     "sway/workspaces": {
-         "disable-scroll": true,
-         "format": "{name}"
+	"sway/workspaces": {
+		"disable-scroll": true,
+		"all-outputs": false,
+		"format": "{icon}",
+	 	/* "persistent_workspaces": { */
+	 	/* 	"1": [], */
+	 	/* 	"2": [], */
+	 	/* 	"3": [], */
+	 	/* 	"4": [], */
+	 	/* 	"5": [], */
+	 	/* 	"6": [], */
+	 	/* 	"7": [], */
+	 	/* 	"8": [], */
+	 	/* 	"9": [], */
+	 	/* 	"10": [] */
+	/* }, */
+         	/* "format-icons": { */
+             		/* "1": "󰋜", */
+             		/* "2": "󰈹", */
+             		/* "3": "󰠮", */
+             		/* "4": "󰭹", */
+             		/* "5": "󱓷", */
+             		/* "6": "󱇧", */
+             		/* "7": "󰊢", */
+             		/* "8": "󰖲", */
+             		/* "9": "󰕧", */
+             		/* "10": "󰝚" */
+         /* } */
      },
-    "sway/mode": {
-        "format": "!"
-    },
-    "clock": {
-	    "format": "{:%a, %b %-d %H:%M}"
-    },
-    "cpu": {
-        "format": "{usage}% "
-    },
-    "memory": {
-        "format": "{}% ",
-	"on-click": "kitty -e htop"
-    },
-    "battery": {
-    "bat": "BAT0",
-    "interval": 60,
-    "states": {
-        "warning": 30,
-        "critical": 15
-        },
-        "format": "{capacity}% {icon}",
-        "format-icons": ["", "", "", "", ""],
-        "max-length": 25
-    },
-    "custom/vpn": {
-    "interval": 5,
-    "format": "{}",
-    "return-type": "json",
-    "exec": "~/.config/waybar/modules/vpn.sh",
-    "on-click": "env XDG_CURRENT_DESKTOP=GNOME gnome-control-center network" 
-    },
-    "network": {
-        "format-wifi": "",
-        "format-ethernet": "",
-        "format-disconnected": "",
-        "on-click": "env XDG_CURRENT_DESKTOP=GNOME gnome-control-center wifi" 
-    },
-    "custom/bluetooth": {
-        "format": "",
-        "interval": 5,
-        "return-type": "json",
-        "exec": "~/.config/waybar/modules/bluetooth.sh",
-        "on-click": "blueman-manager"
-    },
-    "pulseaudio": {
-        "scroll-step": 5,
-        "format": "{volume}% {icon}",
-        "format-bluetooth": "{volume}% {icon}",
-        "format-muted": "",
+	"custom/date": {
+    		"format": " {}",
+		"interval": 3600,
+		"exec": "~/.bin/waybar-date.sh"
+	},
+	"custom/power": {
+		"format": "⏻",
+		"on-click": "~/.bin/waybar-power.sh"
+	},
+	"clock": {
+		"format": " {:%H:%M}",
+        	"tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+        	"format-alt": "{:%Y-%m-%d}"
+	},
+	"battery": {
+        	"states": {
+            		"warning": 30,
+            		"critical": 15
+        	},
+        	"format": "{icon} {capacity}%",
+        	"format-charging": " {capacity}%",
+        	"format-plugged": " {capacity}%",
+        	"format-alt": "{time} {icon}",
+        	"format-full": " {capacity}%",
+        	"format-icons": ["", "", "", "", ""]
+	},
+	"network": {
+        	"format-wifi": "  {essid}",
+        	"format-ethernet": " {ifname}: {ipaddr}/{cidr}",
+        	"format-linked": "{ifname} (No IP) ",
+        	"format-disconnected": " Disconnected",
+        	"format-alt": "{ifname}: {ipaddr}/{cidr}"
+	},
+  "custom/pacman": {
+    "format": "{} ",
+    "interval": 3600,                     // every hour
+    "exec": "pamac checkupdates -a -q | wc -l",       // # of updates
+    "on-click": "pamac-manager", // update system
+    "tooltip": false
+  },
+  "tray": {
+    "icon-size": 21,
+    "spacing": 10
+
+  },
+  "idle_inhibitor": {
+    "icon-size": 21,
+    "format": "{icon}",
+    "format-icons": {
+      "activated": "",
+      "deactivated": ""                                         
+    }                
+  },
+	"pulseaudio": {
+		"format": "{icon}  {volume}%",
+        	"format-muted": " Muted",
         "format-icons": {
-            "headphones": "",
-            "handsfree": "",
+            "headphone": "",
+            "hands-free": "",
             "headset": "",
             "phone": "",
             "portable": "",
             "car": "",
-            "default": ["", ""]
+            "default": ["", "", ""]
         },
         "on-click": "pavucontrol"
-    },
-    "custom/pacman": {
-        "format": "{} ",
-        "interval": 3600,                     // every hour
-        "exec": "pamac checkupdates -a -q | wc -l",       // # of updates
-        "on-click": "pamac-manager", // update system
-        "tooltip": false
-    },
-    "tray": {
-        "icon-size": 21,
-        "spacing": 10
-                
-    },
-    "idle_inhibitor": {
-        "format": "{icon}",
-        "format-icons": {
-           "activated": "",
-           "deactivated": ""                                         
-        }                
-    },
-    "custom/menu": {
-         "format": "",
-         "on-click": "sgtk-menu -y 25",
-         "tooltip": false
-     },
-    "custom/space": {
-        "format": " "
-    },
-    "custom/block0": {
-        "format": "█"
-    },
-    "custom/arrow0": {
-        "format": ""
-    },
-    "custom/arrow1": {
-        "format": ""
-    },
-    "custom/arrow2": {
-        "format": ""
-    },
-    "custom/arrow3": {
-        "format": ""
-    },
-    "custom/arrow4": {
-        "format": ""
-    },
-    "custom/arrow5": {
-        "format": ""
-    },
-    "custom/arrow6": {
-        "format": ""
-    },
-    "custom/arrow7": {
-        "format": ""
-    },
-    "custom/arrow8": {
-        "format": ""
-    },
-    "custom/arrow9": {
-        "format": ""
-    },
-    "custom/arrow10": {
-         "format": ""
-     }
-
+    }
 }

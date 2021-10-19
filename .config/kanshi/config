@@ -1,0 +1,24 @@
+# Konfiguration für Arbeits-Laptop-Arbeit
+profile {
+    output eDP-1 position 5120,0 
+    output HDMI-A-1 mode 2560x1440 position 0,0
+    output DP-1 mode 2560x1440 position 2560,0
+}
+
+# Konfiguration für Arbeits-Laptop-Zuhause
+profile {
+    output eDP-1 position 2560,0 
+    output "BenQ Corporation BenQ PD3200Q N3K00117019" mode 2560x1440 position 0,0
+}
+
+
+# Konfiguration für PC-Zuhause
+profile {
+  output "BenQ Corporation BenQ PD3200Q N3K00117019" mode 2560x1440 position 0,0 
+  output "HannStar Display Corp HG216 732MH3JY00743" position 2560,0
+}
+
+# Laptop ohne irgendwas
+profile {
+  output eDP-1 position 0,0
+}

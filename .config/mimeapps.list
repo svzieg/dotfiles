@@ -63,6 +63,7 @@ video/x-nsv=org.gnome.Totem.desktop
 video/x-theora=org.gnome.Totem.desktop
 video/x-theora+ogg=org.gnome.Totem.desktop
 video/x-totem-stream=org.gnome.Totem.desktop
+application/octet-stream=org.keepassxc.KeePassXC.desktop
 
 [Added Associations]
 image/jpeg=viewnior.desktop;gpicview.desktop;
@@ -70,10 +71,10 @@ image/png=gimp.desktop;viewnior.desktop;gpicview.desktop;
 text/plain=mousepad.desktop;
 x-scheme-handler/mailto=userapp-Thunderbird.desktop;org.gnome.Evolution.desktop;
 message/rfc822=userapp-Thunderbird.desktop;
-application/pdf=gimp.desktop;epdfview.desktop;org.gnome.Evince.desktop;
+application/pdf=qpdfview.desktop;gimp.desktop;epdfview.desktop;org.gnome.Evince.desktop;
 application/x-bittorrent=deluge.desktop;
 image/svg+xml=viewnior.desktop;
-application/octet-stream=org.gnome.gedit.desktop;
+application/octet-stream=org.gnome.gedit.desktop;org.keepassxc.KeePassXC.desktop;
 x-scheme-handler/tg=userapp-Telegram Desktop-YR6VU0.desktop;userapp-Telegram Desktop-JYKP60.desktop;
 x-scheme-handler/http=firefox.desktop;
 text/html=firefox.desktop;

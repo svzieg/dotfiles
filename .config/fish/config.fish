@@ -4,6 +4,7 @@ set -gx LUA_PATH '/home/svzieg/.luarocks/share/lua/5.3/?.lua;/home/svzieg/.luaro
 set -gx LUA_CPATH '/usr/lib/lua/5.3/loadall.so;./?.so;/home/svzieg/.luarocks/lib/lua/5.3/?.so;;'
 set -gx EDITOR (which nvim)
 
+set -gx GOPRIVATE gitlab.scheer-group.com/PAS
 
 if test (echo (which pack)) != ""
     source (pack completion --shell fish)
@@ -12,10 +13,16 @@ end
 
 
 set -gx GOPATH ~/go
-set -gx GO111MODULE auto
+# on is needed for coc-go to work properly
+set -gx GO111MODULE on
 
 kitty + complete setup fish | source
 
+
+
+if  test (uname -n) = "sven-20x7003tge";
+  set -gx GITLAB_HOST gitlab.scheer-group.com
+end
 
 
 

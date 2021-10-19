@@ -1,100 +1,112 @@
 * {
-    border: none;
-    border-radius: 0;
-    font-family: "Ubuntu Nerd Font";
-    font-size: 13px;
-    min-height: 0;
+  border: none;
+  border-radius: 0;
+  font-family: "FiraCode Nerd Font";
+  font-size: 14px;
+  min-height: 0;
 }
 
 window#waybar {
-    background: transparent;
-    color: white;
+  background: #3b4252;
+  color: white;
 }
 
-#window {
-    font-weight: bold;
-    font-family: "Ubuntu";
-}
-/*
 #workspaces {
-    padding: 0 5px;
+  background-color: #4c566a;
+  margin: 5px;
+  margin-left: 10px;
+  border-radius: 5px;
 }
-*/
-
 #workspaces button {
-    padding: 0 5px;
-    background: transparent;
-    color: white;
-    border-top: 2px solid transparent;
+  padding: 0 10px;
+  color: #eceff4;
 }
 
 #workspaces button.focused {
-    color: #c9545d;
-    border-top: 2px solid #c9545d;
+  color: #2e3440;
+  background-color: #88c0d0;
+  border-radius: 5px;
 }
 
-#mode {
-    background: #64727D;
-    border-bottom: 3px solid white;
+#workspaces button:hover {
+  background-color: #5e81ac;
+  border-radius: 5px;
 }
 
-#clock, #battery, #cpu, #memory, #network, #pulseaudio, #custom-spotify, #tray, #mode {
-    padding: 0 3px;
-    margin: 0 2px;
+#custom-date,
+#clock,
+#battery,
+#pulseaudio,
+#network {
+  background-color: #4c566a;
+  padding: 0px 10px;
+  margin: 5px 0px;
+}
+
+#custom-date {
+  color: #8fbcbb;
+}
+
+#custom-power {
+  color: #2e3440;
+  background-color: #bf616a;
+  border-radius: 5px;
+  margin-right: 10px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  margin-left: 0px;
+  padding: 0px 10px;
 }
 
 #clock {
-    font-weight: bold;
+  color: #b48ead;
+  border-radius: 0px 5px 5px 0px;
+  margin-right: 10px;
 }
 
 #battery {
-}
-
-#battery icon {
-    color: red;
-}
-
-#battery.charging {
+  color: #a3be8c;
 }
 
 @keyframes blink {
-    to {
-        background-color: #ffffff;
-        color: black;
-    }
+  to {
+    background-color: #ffffff;
+    color: black;
+  }
 }
 
-#battery.warning:not(.charging) {
-    color: white;
-    animation-name: blink;
-    animation-duration: 0.5s;
-    animation-timing-function: linear;
-    animation-iteration-count: infinite;
-    animation-direction: alternate;
+#battery.charging {
+  color: #a3be8c;
 }
 
-#cpu {
-}
-
-#memory {
+#battery.critical:not(.charging) {
+  background-color: #f53c3c;
+  color: #ffffff;
+  animation-name: blink;
+  animation-duration: 0.5s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
 }
 
 #network {
-}
-
-#network.disconnected {
-    background: #f53c3c;
+  color: #d08770;
 }
 
 #pulseaudio {
+  color: #ebcb8b;
+  border-radius: 5px 0px 0px 5px;
 }
 
-#pulseaudio.muted {
-}
-
-#custom-spotify {
-    color: rgb(102, 220, 105);
+#idle_inhibitor {
+  font-size: 2em;
+  margin: 0 10px;
 }
 
 #tray {
+  margin: 0 10px;
+}
+
+#custom-pacman {
+  margin: 0 10px;
 }

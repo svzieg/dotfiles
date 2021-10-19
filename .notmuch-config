@@ -12,7 +12,7 @@
 #
 
 [database]
-path=/home/svzieg/mail
+path=/home/svzieg/.local/share/mail/
 
 # User configuration
 #
