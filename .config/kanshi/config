@@ -11,6 +11,11 @@ profile {
     output "BenQ Corporation BenQ PD3200Q N3K00117019" mode 2560x1440 position 0,0
 }
 
+profile {
+    output eDP-1 position 0,0 
+    output "Panasonic Industry Company Panasonic-TV 0x00000101" position 1920,0
+
+}
 
 # Konfiguration für PC-Zuhause
 profile {
