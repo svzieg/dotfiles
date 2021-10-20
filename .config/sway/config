@@ -27,7 +27,7 @@ font pango:Fira Code Regular 11
 
 # Your preferred application launcher
 # Note: it'es recommended that you pass the final command to sway
-    set $menu wofi --show run --font 'Fira Code 11' | xargs swaymsg exec --
+    set $menu wofi --show drun,run  --style "~/.config/wofi/style.css" --conf "~/.config/wofi/config" | xargs swaymsg exec --
 # need --type since pass -c cannot copy password in wayland
     set $pass ~/.bin/passmenu
 
@@ -285,14 +285,19 @@ client.urgent           #ebcb8b #ebcb8b #2e3440 #8fbcbb   #ebcb8b
 include config.d/*
 
 # exec_always ~/.config/awesome/autorun.sh
+exec_always export WLR_NO_HARDWARE_CURSORS=1
 
 exec eval $(gnome-keyring-daemon --start)
 exec export SSH_AUTH_SOCK
 exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 
-exec_always --no-startup-id fix_xcursor
-
 exec systemctl --user import-environment
+
+exec nm-applet --indicator
+exec thunar --daemon
+exec blueman-applet
+exec system-config-printer-applet
 
 
 exec_always ~/.bin/import-gsettings 
+
