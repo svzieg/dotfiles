@@ -1,5 +1,7 @@
 #!/usr/bin/env fish
-set -gx PATH /home/svzieg/.luarocks/bin /usr/bin/vendor_perl /home/svzieg/.bin /home/svzieg/.yarn/bin /home/svzieg/.npm/bin /home/svzieg/.gem/ruby/2.7.0/bin /home/svzieg/.local/bin ~/go/bin ~/.krew/bin ~/.SpaceVim/bin ~/.garden/bin /home/svzieg/.gem/ruby/3.0.0/bin $PATH /usr/local/kubebuilder/bin/ /usr/share/nvm
+
+set -gx PATH /home/svzieg/.luarocks/bin /usr/bin/vendor_perl /home/svzieg/.bin /home/svzieg/.yarn/bin /home/svzieg/.npm/bin /home/svzieg/.gem/ruby/2.7.0/bin /home/svzieg/.local/bin ~/go/bin ~/.krew/bin ~/.SpaceVim/bin ~/.garden/bin /home/svzieg/.gem/ruby/3.0.0/bin $PATH /usr/local/kubebuilder/bin/ /usr/share/nvm ~/programs/Analyzer/bin /home/svzieg/programs/Kui-linux-x64
+
 set -gx LUA_PATH '/home/svzieg/.luarocks/share/lua/5.3/?.lua;/home/svzieg/.luarocks/share/lua/5.3/?/init.lua;;'
 set -gx LUA_CPATH '/usr/lib/lua/5.3/loadall.so;./?.so;/home/svzieg/.luarocks/lib/lua/5.3/?.so;;'
 set -gx EDITOR (which nvim)
@@ -9,6 +11,7 @@ set -gx GOPRIVATE gitlab.scheer-group.com/PAS
 if test (echo (which pack)) != ""
     source (pack completion --shell fish)
 end
+
 
 
 
@@ -186,46 +189,4 @@ function nvim_add_start_plugin
 end
 
 
-# Kubernetes aliases
-
-alias k kubectl
-alias kd 'k describe'
-alias kg 'k get'
-alias kgyaml 'k get -o yaml'
-alias kgyml 'k get -o yaml'
-alias kaf 'k apply -f'
-alias kdel 'k delete'
-alias ke 'k edit'
-alias kccc 'k config current-context'
-alias kcdc 'k config delete-context'
-alias kcsc 'k config set-context'
-alias kcuc 'k config use-context'
-alias kdd 'kd deployment'
-alias kdeld 'kdel deployment'
-alias kdeli 'kdel ingress'
-alias kdelp 'kdel pods'
-alias kdels 'kdel svc'
-alias kdelsec 'kdel secret'
-alias kdi 'kd ingress'
-alias kdp 'kd pods'
-alias kds 'kd svc'
-alias kdsec 'kd secret'
-alias ked 'ke deployment'
-alias kei 'ke ingress'
-alias kep 'ke pods'
-alias kes 'ke svc'
-alias keti 'k exec -ti'
-alias kgd 'kg deployment'
-alias kgi 'kg ingress'
-alias kgp 'kg pods'
-alias kgrs 'kg rs'
-alias kgs 'kg svc'
-alias kgsec 'kg secret'
-alias kl 'k logs'
-alias klf 'k logs -f'
-alias krh 'k rollout history'
-alias krsd 'k rollout status deployment'
-alias kru 'k rollout undo'
-alias kr 'k rollout restart'
-alias ksd 'k scale deployment'
 starship init fish | source

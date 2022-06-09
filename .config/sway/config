@@ -33,7 +33,7 @@ font pango:Fira Code Regular 11
 
 # Your prefered locking mechanism, chose between gdbus -> gdm and swaylock
 #
-      set $locking swaylock -c 000000
+      set $locking swaylock 
 
 ### Idle configuration
 #
@@ -78,6 +78,7 @@ font pango:Fira Code Regular 11
 
     #sway lock
     bindsym Ctrl+Alt+l exec $locking
+    bindsym $mod+Shift+l exec $locking
 
     # Exit sway (logs you out of your Wayland session)
     bindsym $mod+Shift+e exec swaynag -t warning -m \
@@ -101,10 +102,10 @@ font pango:Fira Code Regular 11
     bindsym $mod+Right focus right
 
     # Move the focused window with the same, but add Shift
-    bindsym $mod+Shift+$left move left
-    bindsym $mod+Shift+$down move down
-    bindsym $mod+Shift+$up move up
-    bindsym $mod+Shift+$right move right
+    # bindsym $mod+Shift+$left move left
+    # bindsym $mod+Shift+$down move down
+    # bindsym $mod+Shift+$up move up
+    # bindsym $mod+Shift+$right move right
     # Ditto, with arrow keys
     bindsym $mod+Shift+Left move left
     bindsym $mod+Shift+Down move down
@@ -147,6 +148,9 @@ font pango:Fira Code Regular 11
     bindsym $mod+Shift+8 move container to workspace 8
     bindsym $mod+Shift+9 move container to workspace 9
     bindsym $mod+Shift+0 move container to workspace 10
+
+    bindsym $alt+Ctrl+Left move workspace to output left
+    bindsym $alt+Ctrl+Right  move workspace to output right
     # Note: workspaces can have any name you want, not just numbers.
     # We just use 1-10 as the default.
 #
@@ -234,10 +238,10 @@ bindsym $mod+r mode "resize"
     bindsym XF86MonBrightnessDown exec light -U 10 # decrease screen brightness
 
     # Screenshots
-    bindsym Print exec grim \"$HOME/Pictures/Screenshot_$(date +%Y%m%d)_$(date +%H%M%S).png"
+    bindsym Print exec grim \"$HOME/Bilder/Screenshot_$(date +%Y%m%d)_$(date +%H%M%S).png"
 
     # Part screenshot
-    bindsym Ctrl+Print exec slurp | grim -g - \"$HOME/Pictures/Screenshot_$(date +%Y%m%d)_$(date +%H%M%S).png"
+    bindsym Ctrl+Print exec slurp | grim -g - \"$HOME/Bilder/Screenshot_$(date +%Y%m%d)_$(date +%H%M%S).png"
 
 #
 # Status Bar:
@@ -280,23 +284,33 @@ client.urgent           #ebcb8b #ebcb8b #2e3440 #8fbcbb   #ebcb8b
 
 
 
+exec_always export WLR_NO_HARDWARE_CURSORS=1
+exec_always export XDG_CURRENT_DESKTOP=sway
+exec_always systemctl --user import-environment DISPLAY WAYLAND_DISPLAY SWAYSOCK XDG_CURRENT_DESKTOP
+exec_always hash dbus-update-activation-environment 2>/dev/null && \
+     dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK
+
+exec_always systemctl start --user xdg-desktop-portal
+exec_always systemctl start --user xdg-desktop-portal-wlr
 ### Include user configuraTions
 #
 include config.d/*
 
 # exec_always ~/.config/awesome/autorun.sh
-exec_always export WLR_NO_HARDWARE_CURSORS=1
 
 exec eval $(gnome-keyring-daemon --start)
 exec export SSH_AUTH_SOCK
 exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 
-exec systemctl --user import-environment
 
 exec nm-applet --indicator
 exec thunar --daemon
 exec blueman-applet
 exec system-config-printer-applet
+exec onedrive --monitor
+
+# easyeffects will only run ones
+exec_always easyeffects -w
 
 
 exec_always ~/.bin/import-gsettings 

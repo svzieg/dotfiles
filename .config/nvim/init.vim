@@ -30,6 +30,7 @@ Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'Shougo/echodoc.vim'
 Plug 'josa42/vim-lightline-coc'
+Plug 'marene/nvm.vim'
 
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
 "Plug 'neoclide/coc.nvim', {'branch': 'release'}

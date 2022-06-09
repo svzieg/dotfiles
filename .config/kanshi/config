@@ -1,29 +1,31 @@
 # Konfiguration für Arbeits-Laptop-Arbeit
-profile {
+profile "laptop-work"{
     output eDP-1 position 5120,0 
     output HDMI-A-1 mode 2560x1440 position 0,0
     output DP-1 mode 2560x1440 position 2560,0
 }
 
 # Konfiguration für Arbeits-Laptop-Zuhause
-profile {
+profile "laptop-home" {
     output eDP-1 position 2560,0 
     output "BenQ Corporation BenQ PD3200Q N3K00117019" mode 2560x1440 position 0,0
 }
 
-profile {
+profile "laptop-tv" {
     output eDP-1 position 0,0 
     output "Panasonic Industry Company Panasonic-TV 0x00000101" position 1920,0
 
 }
 
 # Konfiguration für PC-Zuhause
-profile {
+profile "workstation-home" {
   output "BenQ Corporation BenQ PD3200Q N3K00117019" mode 2560x1440 position 0,0 
   output "HannStar Display Corp HG216 732MH3JY00743" position 2560,0
 }
 
 # Laptop ohne irgendwas
-profile {
+profile "laptop-only" {
   output eDP-1 position 0,0
+  output HDMI-A-1 disable
+  output DP-1 disable
 }
