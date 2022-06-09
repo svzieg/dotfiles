@@ -310,7 +310,7 @@ exec system-config-printer-applet
 exec onedrive --monitor
 
 # easyeffects will only run ones
-exec_always easyeffects -w
+exec_always easyeffects --gapplication-service
 
 
 exec_always ~/.bin/import-gsettings 
