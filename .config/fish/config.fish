@@ -7,6 +7,7 @@ set -gx LUA_CPATH '/usr/lib/lua/5.3/loadall.so;./?.so;/home/svzieg/.luarocks/lib
 set -gx EDITOR (which nvim)
 
 set -gx GOPRIVATE gitlab.scheer-group.com/PAS
+set -gx TERM xterm-kitty
 
 if test (echo (which pack)) != ""
     source (pack completion --shell fish)
@@ -190,3 +191,7 @@ end
 
 
 starship init fish | source
+
+if  test -f /opt/asdf-vm/asdf.fish ;
+  source /opt/asdf-vm/asdf.fish
+end

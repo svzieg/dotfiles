@@ -21,7 +21,7 @@ font pango:Fira Code Regular 11
     set $up k
     set $right l
     # Your preferred terminal emulator
-      set $term kitty
+      set $term kitty --single-instance
 
 ### Include theme
 #
@@ -29,7 +29,7 @@ font pango:Fira Code Regular 11
 
 # Your preferred application launcher
 # Note: it'es recommended that you pass the final command to sway
-    set $menu wofi --show drun,run  --style "~/.config/wofi/style.css" --conf "~/.config/wofi/config" | xargs swaymsg exec --
+    set $menu wofi --show drun | xargs swaymsg exec --
 # need --type since pass -c cannot copy password in wayland
     set $pass ~/.bin/passmenu
 
@@ -245,10 +245,11 @@ bindsym $mod+r mode "resize"
     bindsym XF86MonBrightnessDown exec light -U 10 # decrease screen brightness
 
     # Screenshots
-    bindsym Print exec grim \"$HOME/Bilder/Screenshot_$(date +%Y%m%d)_$(date +%H%M%S).png"
+    bindsym Print exec grim - | swappy -f -
+    #grim \"$HOME/Bilder/Screenshot_$(date +%Y%m%d)_$(date +%H%M%S).png"
 
     # Part screenshot
-    bindsym Ctrl+Print exec slurp | grim -g - \"$HOME/Bilder/Screenshot_$(date +%Y%m%d)_$(date +%H%M%S).png"
+    bindsym Ctrl+Print exec grim -g "$(slurp)" - | swappy -f -
 
 #
 # Status Bar:
@@ -314,7 +315,7 @@ exec nm-applet --indicator
 exec thunar --daemon
 exec blueman-applet
 exec system-config-printer-applet
-exec onedrive --monitor
+exec onedrivegui
 
 # easyeffects will only run ones
 exec_always easyeffects --gapplication-service

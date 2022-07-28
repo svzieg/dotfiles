@@ -129,3 +129,4 @@ application/json=gvim.desktop;
 application/x-ole-storage=org.xfce.mousepad.desktop;org.gnome.Evolution.desktop;
 application/gzip=engrampa.desktop;
 application/x-yaml=org.xfce.mousepad.desktop;
+application/xml=nvim.desktop;
