@@ -113,6 +113,7 @@ show_items() {
 show_full_items() {
 	if item=$(
 		echo "$ITEMS" |
+			# jq -r ".[] | select( has( \"login\" )) | \"\\(.id): name: \\(.name), username: \\(.login.username)\"" |
 			jq -r ".[] | select( has( \"login\" )) | \"\\(.id): name: \\(.name), username: \\(.login.username)\"" |
 			menu
 	); then
@@ -558,5 +559,5 @@ get_session_key
 select_autotype_command
 select_copy_command
 load_items
-show_items
+show_full_items
 

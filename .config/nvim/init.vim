@@ -427,15 +427,27 @@ endfunction
 let g:lightline = {
       \ 'colorscheme': 'tokyonight',
       \ 'active': {
-        \   'left': [ [ 'mode', 'paste' ],
+        \   'left': [ 
+        \             [ 'mode', 'paste' ],
         \             [ 'issues', 'gitbranch', 'readonly', 'filename', 'modified' ],
-        \             [  'coc_info', 'coc_hints', 'coc_errors', 'coc_warnings', 'coc_ok' ], [ 'coc_status'  ]]
+        \             [  'coc_info', 'coc_hints', 'coc_errors', 'coc_warnings', 'coc_ok' ], [ 'coc_status'  ]
+        \           ],
+        \   'right': [ 
+        \             [ 'filetype', 'fileencoding', 'lineinfo', 'percent' ],
+        \             [ 'blame' ],
+        \           ]
         \ },
         \ 'component_function': {
           \   'gitbranch': 'FugitiveHead',
+          \   'blame': 'LightlineGitBlame',
           \ },
           \ }
 
+function! LightlineGitBlame() abort
+  let blame = get(b:, 'coc_git_blame', '')
+  " return blame
+  return winwidth(0) > 120 ? blame : ''
+endfunction
 " \   'issues' : 'NeomakeIndicator'
 
 " run low resource heavy autoformatter automatically
