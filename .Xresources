@@ -1,53 +1,80 @@
-! ------------------------------------------------------------------------------
-! Import Colour from ~/.xrdb
-! ------------------------------------------------------------------------------
+*.foreground:    #A9B1D6
+*.background:    #1A1B26
+*.cursorColor:   #A9B1D6
+*.highlightColor:#3A3F4B
 
-!#include ".xrdb/color/nord"
-#include ".cache/wal/colors.Xresources"
-#include ".xrdb/rofi/nord"
-!#include ".xrdb/dmenu/nord"
-#include ".xrdb/fonts/monofur"
+!*fading:                  40
+!*fadeColor:               S_base03
+!*pointerColorBackground:  S_base01
+!*pointerColorForeground:  S_base1
 
-! ------------------------------------------------------------------------------
-! URxvt configs
-! ------------------------------------------------------------------------------
+! Normal      Bright
+! --------    -------
+! 0 Black      8 Black
+! 1 Red        9 Red
+! 2 Yellow    10 Yellow
+! 3 Green     11 Green
+! 4 Blue      12 Blue
+! 5 Magenta   13 Magenta
+! 6 Cyan      14 Cyan
+! 7 White     15 White
 
-URxvt.geometry: 		72x18
-URxvt*letterSpace: 	    0
-URxvt.lineSpace: 		0
-URxvt*internalBorder:   24
-URxvt*externalBorder:   0
-!URxvt*depth:            32
-URxvt*saveline:         2000
-URxvt*termName:         rxvt-256color
-URxvt*iso14755:         false
-URxvt*scrollBar:        false
-URxvt*scrollBar_right:  false
-URxvt.perl-ext-common:  default,clipboard,url-select,keyboard-select
-URxvt.copyCommand:      xclip -i -selection clipboard
-URxvt.pasteCommand:     xclip -o -selection clipboard
-URxvt.keysym.M-c:       perl:clipboard:copy
-URxvt.keysym.M-v:       perl:clipboard:paste
-URxvt.keysym.M-C-v:     perl:clipboard:paste_escaped
-URxvt.keysym.M-Escape:  perl:keyboard-select:activate
-URxvt.keysym.Shift-Up:	command:\033]720;1\007
-URxvt.keysym.Shift-Down:command:\033]721;1\007
-URxvt.keysym.M-s:       perl:keyboard-select:search
-URxvt.keysym.M-u:       perl:url-select:select_next
-URxvt.urlLauncher:      qutebrowser
-URxvt.underlineURLs:    true
-URxvt.urlButton:        1
-URxvt*buffered:         false          
-URxvt.urgentOnBell: 	True
+! Black colours
+*.color0:        #1A1B26
+*.color8:        #4E5173
+! Red colours
+*.color1:        #F7768E
+*.color9:        #E06C75
+! Yellow colours
+*.color2:        #E0AF68
+*.color10:       #D19A66
+! Green colours
+*.color3:        #9ECE6A
+*.color11:       #98C379
+! Blue colours
+*.color4:        #7AA2F7
+*.color12:       #61AFEF
+! Magenta (pink, !green) colours
+*.color5:        #9A7ECC
+*.color13:       #C678DD
+! Cyan (blue + green)
+*.color6:        #4ABAAF
+*.color14:       #56B6C2
+! White colours
+*.color7:        #ACB0D0
+*.color15:       #ABB2BF
 
-! ------------------------------------------------------------------------------
-! Xft Font Configuration
-! ------------------------------------------------------------------------------
+! xterm.vt100.faceName:           Terminus:style=Regular:size=10
+! xterm.vt100.faceNameDoublesize: Cyberbit:style=Regular:size=10
 
-Xft.autohint: 0
-Xft.lcdfilter: lcddefault
-Xft.hintstyle: hintslight
-Xft.hinting: 1
-Xft.antialias: 1
-Xft.rgba: rgba
+XTerm.vt100.bellIsUrgent:          true
+XTerm.vt100.alternateScroll: true
+XTerm.vt100.selectToClipboard: true
+
+URxvt.scrollBar: false
+URxvt.perl-ext-common: default,selection-to-clipboard
+URxvt.clipboard.autocopy: true  ! sync primary and clipboard buffers
+URxvt.secondaryScreen:  1
+URxvt.secondaryScroll:  0
+URxvt.secondaryWheel:   1
+URxvt*urgentOnBell: true
+URxvt*scrollTtyOutput: false
+URxvt*scrollWithBuffer: true
+URxvt*scrollTtyKeypress: true
+URxvt.font: xft:Consolas:pixelsize=12, xft:Segoe UI Symbol:style=Regular:pixelsize=12, xft:Unifont:pixelsize=12
+URxvt.letterSpace : -2 ! Put characters slightly closer together
+URxvt.termName : rxvt-unicode-256color
+!Urxvt*termName:  screen-256color
+URxvt.iso14755 : false
+URxvt.iso14755_52: false
+
+! transparency in i3
+!URxvt.transparent: true
+!URxvt.shading:20
+
+Xft.dpi: 96
+Xft.Hinting: 1
+Xft.RGBA: rgb
+Xft.HintStyle: hintslight
+Xft.Antialias: 1
 

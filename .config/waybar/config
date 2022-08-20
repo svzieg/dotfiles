@@ -1,103 +1,127 @@
 {
-    "position": "top", 
-    "height": 30,
-    "modules-left": ["sway/workspaces"],
-    "modules-right": ["pulseaudio", "network", "battery", "idle_inhibitor", "custom/pacman", "tray", "custom/date", "clock", "custom/power"],
-    // Modules configuration
-	"sway/workspaces": {
-		"disable-scroll": true,
-		"all-outputs": false,
-		"format": "{icon}",
-	 	/* "persistent_workspaces": { */
-	 	/* 	"1": [], */
-	 	/* 	"2": [], */
-	 	/* 	"3": [], */
-	 	/* 	"4": [], */
-	 	/* 	"5": [], */
-	 	/* 	"6": [], */
-	 	/* 	"7": [], */
-	 	/* 	"8": [], */
-	 	/* 	"9": [], */
-	 	/* 	"10": [] */
-	/* }, */
-         	/* "format-icons": { */
-             		/* "1": "󰋜", */
-             		/* "2": "󰈹", */
-             		/* "3": "󰠮", */
-             		/* "4": "󰭹", */
-             		/* "5": "󱓷", */
-             		/* "6": "󱇧", */
-             		/* "7": "󰊢", */
-             		/* "8": "󰖲", */
-             		/* "9": "󰕧", */
-             		/* "10": "󰝚" */
-         /* } */
-     },
-	"custom/date": {
-    		"format": " {}",
-		"interval": 3600,
-		"exec": "~/.bin/waybar-date.sh"
-	},
-	"custom/power": {
-		"format": "⏻",
-		"on-click": "~/.bin/waybar-power.sh"
-	},
-	"clock": {
-		"format": " {:%H:%M}",
-        	"tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
-        	"format-alt": "{:%Y-%m-%d}"
-	},
-	"battery": {
-        	"states": {
-            		"warning": 30,
-            		"critical": 15
-        	},
-        	"format": "{icon} {capacity}%",
-        	"format-charging": " {capacity}%",
-        	"format-plugged": " {capacity}%",
-        	"format-alt": "{time} {icon}",
-        	"format-full": " {capacity}%",
-        	"format-icons": ["", "", "", "", ""]
-	},
-	"network": {
-        	"format-wifi": "  {essid}",
-        	"format-ethernet": " {ifname}: {ipaddr}/{cidr}",
-        	"format-linked": "{ifname} (No IP) ",
-        	"format-disconnected": " Disconnected",
-        	"format-alt": "{ifname}: {ipaddr}/{cidr}"
-	},
-  "custom/pacman": {
-    "format": "{} ",
-    "interval": 3600,                     // every hour
-    "exec": "pamac checkupdates -a -q | wc -l",       // # of updates
-    "on-click": "pamac-manager", // update system
-    "tooltip": false
-  },
-  "tray": {
-    "icon-size": 21,
-    "spacing": 10
-
-  },
-  "idle_inhibitor": {
-    "icon-size": 21,
-    "format": "{icon}",
-    "format-icons": {
-      "activated": "",
-      "deactivated": ""                                         
-    }                
-  },
-	"pulseaudio": {
-		"format": "{icon}  {volume}%",
-        	"format-muted": " Muted",
+    "layer": "top",
+    "position": "top",
+    "height": 40,
+    "modules-left": ["sway/workspaces", "sway/mode", "sway/window"],
+    "modules-center": ["clock"],
+    "modules-right": ["custom/recorder", "tray", "pulseaudio", "backlight", "temperature", "cpu", "memory", "battery", "network", "custom/powermenu"],
+    "sway/mode": {
+        "format": " {}"
+    },
+    "sway/workspaces": {
+        "disable-scroll": true,
+        "all-outputs": false,
+        "disable-markup": false,
+        "format": "{icon}",
         "format-icons": {
-            "headphone": "",
-            "hands-free": "",
-            "headset": "",
-            "phone": "",
-            "portable": "",
-            "car": "",
-            "default": ["", "", ""]
+            "1": "1 <span font='Font Awesome 5 Free 14'></span>",
+            "2": "2 <span font='Font Awesome 5 Free 14'></span>",
+            "3": "3 <span font='Font Awesome 5 Free 14'></span>",
+            "4": "4 <span font='Font Awesome 5 Free 14'></span>",
+            "5": "5 <span font='Font Awesome 5 Free 14'></span>",
+            "6": "6 <span font='Font Awesome 5 Free 14'></span>",
+            "7": "7 <span font='Font Awesome 5 Free 14'></span>",
+            "8": "8 <span font='Font Awesome 5 Free 14'></span>",
+            "9": "9 <span font='Font Awesome 5 Free 14'></span>",
+            "10": "0 <span font='Font Awesome 5 Free 14'></span>"
+        }
+    },
+    "tray": {
+        "icon-size": 20,
+        "spacing": 8
+    },
+    "sway/window": {
+        "max-length": 60,
+        "tooltip": false
+        // "format": "( {} )"
+    },
+    "clock": {
+        "format": "{:%a %d %b - %H:%M}",
+        "tooltip": false
+    },
+    "cpu": {
+        "interval": 5,
+        "format": "︁ {}%",
+        "max-length": 10
+    },
+    "memory": {
+        "interval": 15,
+        "format": "<span font='Font Awesome 5 Free 9'>︁</span> {used:0.1f}G/{total:0.1f}G",
+        "tooltip": false
+    },
+    "custom/powermenu": {
+        "return-type": "json",
+        "exec": "/home/marco/.config/waybar/modules/powermenu.sh",
+        "format": "<span font='Font Awesome 5 Free 9'>{icon}</span>  {}",
+        "format-icons": [""],
+        "interval": 3600,
+        "escape": true,
+        "on-click": "/home/marco/.config/wofi/wofi-power.sh"
+    },
+    "custom/recorder": {
+		"format": "!",
+		"return-type": "json",
+		"interval": 3,
+		"exec": "echo '{\"class\": \"recording\"}'",
+		"exec-if": "pgrep wf-recorder",
+        "tooltip": false,
+        "on-click": "killall -s SIGINT wf-recorder"
+	},
+    "battery": {
+        "format": "<span font='Font Awesome 5 Free 11'>{icon}</span> {capacity}%{time}",
+        "format-icons": ["", "", "", "", ""],
+        "format-time": " ({H}h{M}m)",
+        "format-charging": "<span font='Font Awesome 5 Free'></span>  <span font='Font Awesome 5 Free 11'>{icon}</span>  {capacity}% - {time}",
+        "format-full": "<span font='Font Awesome 5 Free'></span>  <span font='Font Awesome 5 Free 11'>{icon}</span>  Charged",
+        "interval": 15,
+        "states": {
+            "warning": 25,
+            "critical": 10
         },
-        "on-click": "pavucontrol"
+        "tooltip": false
+    },
+    "network": {
+        "format": "{icon}",
+        "format-alt": "<span font='Font Awesome 5 Free 10'>︁</span> ︁{ipaddr}/{cidr} {icon}",
+        "format-alt-click": "click-left",
+        "format-wifi": "<span font='Font Awesome 5 Free 10'></span> {essid} ({signalStrength}%)",
+        "format-ethernet": "<span font='Font Awesome 5 Free 10'>︁</span> {ifname}",
+        "format-disconnected": "⚠ Disconnected",
+        "tooltip": false
+    },
+    "pulseaudio": {
+        "format": "<span font='Font Awesome 5 Free 11'>{icon:2}</span>{volume}%",
+        "format-alt": "<span font='Font Awesome 5 Free 11'>{icon:2}</span>{volume}%",
+        "format-alt-click": "click-right",
+        "format-muted": "<span font='Font Awesome 5 Free 11'></span>",
+        "format-icons": {
+            "phone": [" ", " ", " ", " "],
+            "default": ["", "", "", ""]
+        },
+        "scroll-step": 2,
+        "on-click": "pavucontrol",
+        "tooltip": false
+    },
+    "backlight": {
+        "format": "{icon} {percent}%",
+        "format-alt": "{icon}",
+        "format-alt-click": "click-left",
+        "format-icons": ["", ""],
+        "on-scroll-up": "light -A 1",
+        "on-scroll-down": "light -U 1"
+    },
+    "temperature": {
+        "hwmon-path": "/sys/class/hwmon/hwmon2/temp1_input",
+        "critical-threshold": 75,
+        "interval": 5,
+        "format": "{icon} {temperatureC}°",
+        "tooltip": false,
+        "format-icons": [
+            "", // Icon: temperature-empty
+            "", // Icon: temperature-quarter
+            "", // Icon: temperature-half
+            "", // Icon: temperature-three-quarters
+            ""  // Icon: temperature-full
+        ]
     }
 }
