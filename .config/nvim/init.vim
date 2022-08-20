@@ -433,7 +433,8 @@ let g:lightline = {
         \             [  'coc_info', 'coc_hints', 'coc_errors', 'coc_warnings', 'coc_ok' ], [ 'coc_status'  ]
         \           ],
         \   'right': [ 
-        \             [ 'filetype', 'fileencoding', 'lineinfo', 'percent' ],
+        \             [ 'lineinfo', 'percent' ],
+        \             [ 'filetype', 'fileencoding'], 
         \             [ 'blame' ],
         \           ]
         \ },
