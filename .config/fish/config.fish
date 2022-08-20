@@ -16,6 +16,7 @@ end
 
 
 
+
 set -gx GOPATH ~/go
 # on is needed for coc-go to work properly
 set -gx GO111MODULE on
@@ -195,3 +196,7 @@ starship init fish | source
 if  test -f /opt/asdf-vm/asdf.fish ;
   source /opt/asdf-vm/asdf.fish
 end
+
+
+
+source ~/.config/fish/themes/fish_tokyonight_night.fish

@@ -1,3 +1,4 @@
+
 " Specify a directory for plugins
 " - For Neovim: stdpath('data') . '/plugged'
 " - Avoid using standard Vim directory names like 'plugin'
@@ -80,7 +81,7 @@ Plug 'tpope/vim-commentary'
 " css 
 
 " markdown
-Plug 'vimwiki/vimwiki'
+" Plug 'vimwiki/vimwiki'
 
 
 " Golang
@@ -95,6 +96,7 @@ Plug 'mhartington/nvim-typescript', {'do': './install.sh'}
 Plug 'https://github.com/joshdick/onedark.vim'
 Plug 'https://github.com/arcticicestudio/nord-vim'
 Plug 'https://github.com/ayu-theme/ayu-vim'
+Plug 'folke/tokyonight.nvim', { 'branch': 'main' }
 Plug 'skammer/vim-css-color'
 
 " Initialize plugin system
@@ -105,33 +107,16 @@ noremap <C-n> :CocNext <cr>
 noremap <C-p> :CocPrev <cr>
 
 
-let g:vimwiki_list = [{'path': '~/vimwiki/',
-      \ 'syntax': 'markdown', 'ext': '.md',
-      \ 'path_html': '~/vimwiki_html'}]
-autocmd BufEnter diary.md :VimwikiDiaryGenerateLinks
-
-let s:vimwiki_fold_blank_lines = 0  " set to 1 to fold blank lines
-let s:vimwiki_header_type = '#'     " set to '=' for wiki syntax
-
-function! Fold(lnum)
-  let fold_level = strlen(matchstr(getline(a:lnum), '^' . s:vimwiki_header_type . '\+'))
-  if (fold_level)
-    return '>' . fold_level  " start a fold level
-  endif
-  if getline(a:lnum) =~? '\v^\s*$'
-    if (strlen(matchstr(getline(a:lnum + 1), '^' . s:vimwiki_header_type . '\+')) > 0 && !g:vimwiki_fold_blank_lines)
-      return '-1' " don't fold last blank line before header
-    endif
-  endif
-  return '=' " return previous fold level
-endfunction
-
-
-
 " For conceal markers.
 if has('conceal')
   set conceallevel=2 concealcursor=niv
   set concealcursor=
+endif
+
+
+" neovim related settings
+if has('nvim') 
+  " :lua  require("nvim-tree").setup()
 endif
 
 
@@ -233,7 +218,21 @@ if (empty($TMUX))
   endif
 endif
 
-colorscheme nord
+" Example config in VimScript
+" let g:tokyonight_style = "day"
+" let g:tokyonight_style = "storm"
+let g:tokyonight_style = "night"
+let g:tokyonight_italic_functions = 1
+let g:tokyonight_sidebars = [ "qf", "vista_kind", "terminal", "packer" ]
+
+" Change the "hint" color to the "orange" color, and make the "error" color bright red
+let g:tokyonight_colors = {
+  \ 'hint': 'orange',
+  \ 'error': '#ff0000'
+\ }
+
+" Load the colorscheme
+colorscheme tokyonight
 " let ayucolor="light"  " for light version of theme
 " let ayucolor="mirage" " for mirage version of theme
 " let ayucolor="dark"   " for dark version of theme
@@ -426,7 +425,7 @@ endfunction
 
 " Lightline Configuration 
 let g:lightline = {
-      \ 'colorscheme': 'nord',
+      \ 'colorscheme': 'tokyonight',
       \ 'active': {
         \   'left': [ [ 'mode', 'paste' ],
         \             [ 'issues', 'gitbranch', 'readonly', 'filename', 'modified' ],
@@ -468,64 +467,66 @@ endfunction
 
 
 " helpres for autoclosing
-inoremap (. (<CR>)<C-c>O
-inoremap (. (<CR>)<C-c>O
-inoremap {. {<CR>}<C-c>O
-inoremap (; (<CR>);<C-c>O
-inoremap (, (<CR>),<C-c>O
-inoremap {; {<CR>};<C-c>O
-inoremap {, {<CR>},<C-c>O
-inoremap [; [<CR>];<C-c>O
-inoremap [, [<CR>],<C-c>O
+" inoremap (. (<CR>)<C-c>O
+" inoremap (. (<CR>)<C-c>O
+" inoremap {. {<CR>}<C-c>O
+" inoremap (; (<CR>);<C-c>O
+" inoremap (, (<CR>),<C-c>O
+" inoremap {; {<CR>};<C-c>O
+" inoremap {, {<CR>},<C-c>O
+" inoremap [; [<CR>];<C-c>O
+" inoremap [, [<CR>],<C-c>O
 
 "auto close {
-function! s:CloseBracket()
-  let line = getline('.')
-  if line =~# '^\s*\(struct\|class\|enum\) '
-    return "{\<Enter>};\<Esc>O"
-  elseif searchpair('(', '', ')', 'bmn', '', line('.'))
-    " Probably inside a function call. Close it off.
-    return "{\<Enter>});\<Esc>O"
-  else
-    return "{\<Enter>}\<Esc>O"
-  endif
-endfunction
-inoremap <expr> {<Enter> <SID>CloseBracket()
+" function! s:CloseBracket()
+"   let line = getline('.')
+"   if line =~# '^\s*\(struct\|class\|enum\) '
+"     return "{\<Enter>};\<Esc>O"
+"   elseif searchpair('(', '', ')', 'bmn', '', line('.'))
+"     " Probably inside a function call. Close it off.
+"     return "{\<Enter>});\<Esc>O"
+"   else
+"     return "{\<Enter>}\<Esc>O"
+"   endif
+" endfunction
+" inoremap <expr> {<Enter> <SID>CloseBracket()
 
 
-" snippets
-" Use <C-l> for trigger snippet expand.
-imap <C-l> <Plug>(coc-snippets-expand)
 
-" Use <C-j> for select text for visual placeholder of snippet.
-vmap <C-j> <Plug>(coc-snippets-select)
+" ==========================================================================
+" Coc Settings
+" ==========================================================================
 
-" Use <C-j> for jump to next placeholder, it's default of coc.nvim
-let g:coc_snippet_next = '<c-j>'
+" Some servers have issues with backup files, see #649.
+set nobackup
+set nowritebackup
 
-" Use <C-k> for jump to previous placeholder, it's default of coc.nvim
-let g:coc_snippet_prev = '<c-k>'
+" Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
+" delays and poor user experience.
+set updatetime=300
 
-" Use <C-j> for both expand and jump (make expand higher priority.)
-imap <C-j> <Plug>(coc-snippets-expand-jump)
-
-" Use <leader>x for convert visual selected code to snippet
-xmap <leader>x  <Plug>(coc-convert-snippet)
+" Always show the signcolumn, otherwise it would shift the text each time
+" diagnostics appear/become resolved.
+set signcolumn=yes
 
 " Use tab for trigger completion with characters ahead and navigate.
 " NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
 " other plugin before putting this into your config.
 inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
-      \ CheckBackspace() ? "\<TAB>" :
+      \ coc#pum#visible() ? coc#pum#next(1):
+      \ CheckBackspace() ? "\<Tab>" :
       \ coc#refresh()
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
+
+" Make <CR> to accept selected completion item or notify coc.nvim to format
+" <C-g>u breaks current undo, please make your own choice.
+inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
+                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
 function! CheckBackspace() abort
   let col = col('.') - 1
   return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
-
 
 " Use <c-space> to trigger completion.
 if has('nvim')
@@ -533,15 +534,6 @@ if has('nvim')
 else
   inoremap <silent><expr> <c-@> coc#refresh()
 endif
-
-
-" Make <CR> auto-select the first completion item and notify coc.nvim to
-" format on enter, <cr> could be remapped by other vim plugin
-inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
-                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
-
-
-let g:coc_snippet_next = '<tab>'
 
 " Use `[g` and `]g` to navigate diagnostics
 " Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
@@ -555,18 +547,15 @@ nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 
 " Use K to show documentation in preview window.
-nnoremap <silent> K :call <SID>show_documentation()<CR>
+nnoremap <silent> K :call ShowDocumentation()<CR>
 
-function! s:show_documentation()
-  if (index(['vim','help'], &filetype) >= 0)
-    execute 'h '.expand('<cword>')
-  elseif (coc#rpc#ready())
+function! ShowDocumentation()
+  if CocAction('hasProvider', 'hover')
     call CocActionAsync('doHover')
   else
-    execute '!' . &keywordprg . " " . expand('<cword>')
+    call feedkeys('K', 'in')
   endif
 endfunction
-
 
 " Highlight the symbol and its references when holding the cursor.
 autocmd CursorHold * silent call CocActionAsync('highlight')
@@ -596,6 +585,9 @@ nmap <leader>ac  <Plug>(coc-codeaction)
 " Apply AutoFix to problem on the current line.
 nmap <leader>qf  <Plug>(coc-fix-current)
 
+" Run the Code Lens action on the current line.
+nmap <leader>cl  <Plug>(coc-codelens-action)
+
 " Map function and class text objects
 " NOTE: Requires 'textDocument.documentSymbol' support from the language server.
 xmap if <Plug>(coc-funcobj-i)
@@ -623,13 +615,13 @@ nmap <silent> <C-s> <Plug>(coc-range-select)
 xmap <silent> <C-s> <Plug>(coc-range-select)
 
 " Add `:Format` command to format current buffer.
-command! -nargs=0 Format :call CocAction('format')
+command! -nargs=0 Format :call CocActionAsync('format')
 
 " Add `:Fold` command to fold current buffer.
 command! -nargs=? Fold :call     CocAction('fold', <f-args>)
 
 " Add `:OR` command for organize imports of the current buffer.
-command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
+command! -nargs=0 OR   :call     CocActionAsync('runCommand', 'editor.action.organizeImport')
 
 " Add (Neo)Vim's native statusline support.
 " NOTE: Please see `:h coc-status` for integrations with external plugins that
@@ -654,7 +646,29 @@ nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list.
 nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
 
+" -------------------------------------------------------------------------
+" Coc Snippets
+" ==========================================================================
+" Use <C-l> for trigger snippet expand.
+imap <C-l> <Plug>(coc-snippets-expand)
 
+" Use <C-j> for select text for visual placeholder of snippet.
+vmap <C-j> <Plug>(coc-snippets-select)
+
+" Use <C-j> for jump to next placeholder, it's default of coc.nvim
+let g:coc_snippet_next = '<c-j>'
+
+" Use <C-k> for jump to previous placeholder, it's default of coc.nvim
+let g:coc_snippet_prev = '<c-k>'
+
+" Use <C-j> for both expand and jump (make expand higher priority.)
+imap <C-j> <Plug>(coc-snippets-expand-jump)
+
+" Use <leader>x for convert visual selected code to snippet
+xmap <leader>x  <Plug>(coc-convert-snippet)
+
+:nmap <space>e <Cmd>CocCommand explorer<CR>
+" ===========================================================================
 
 " SearchRoot finds the first root directory of the file
 function! SearchRoot()
