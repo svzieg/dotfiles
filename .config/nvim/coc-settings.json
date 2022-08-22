@@ -12,5 +12,20 @@
       "args": ["server", "-m", "stream"],
       "filetypes": ["typescript", "typescriptreact", "graphql"]
     }
-  }
+  },
+  "eslint.enable": true,
+  "eslint.autoFixOnSave": true,
+  "coc.preferences.formatOnSaveFiletypes": [
+    "go",
+    "graphql",
+    "javascript",
+    "javascriptreact",
+    "json",
+    "css",
+    "rust",
+    "typescript",
+    "typescript.tsx",
+    "typescriptreact",
+    "yaml"
+  ]
 }
