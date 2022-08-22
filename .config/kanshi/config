@@ -1,15 +1,31 @@
-{
-  output eDP-1 enable mode 1920x1080@60.008Hz position 0,0
+# Konfiguration für Arbeits-Laptop-Arbeit
+profile "laptop-work"{
+    output eDP-1 position 5120,0 
+    output HDMI-A-1 mode 2560x1440 position 0,0
+    output DP-1 mode 2560x1440 position 2560,0
 }
 
-{
-  output "Samsung Electric Company U28E590 HTPH402827" mode 3840x2160@60.000Hz position 0,0
-  output eDP-1 enable mode 1920x1080@60.008Hz position 0,2160
+# Konfiguration für Arbeits-Laptop-Zuhause
+profile "laptop-home" {
+    output eDP-1 position 2560,0 
+    output "BenQ Corporation BenQ PD3200Q N3K00117019" mode 2560x1440 position 0,0
 }
 
-{
-  output "Goldstar Company Ltd LG ULTRAGEAR 103NTXR8Q458" mode 2560x1440@99.946Hz position 0,0
-  output eDP-1 enable mode 1920x1080@60.008Hz position 0,1440
+profile "laptop-tv" {
+    output eDP-1 position 0,0 
+    output "Panasonic Industry Company Panasonic-TV 0x00000101" position 1920,0
+
 }
 
+# Konfiguration für PC-Zuhause
+profile "workstation-home" {
+  output "BenQ Corporation BenQ PD3200Q N3K00117019" mode 2560x1440 position 0,0 
+  output "HannStar Display Corp HG216 732MH3JY00743" position 2560,0
+}
 
+# Laptop ohne irgendwas
+profile "laptop-only" {
+  output eDP-1 position 0,0
+  output HDMI-A-1 disable
+  output DP-1 disable
+}
