@@ -4,7 +4,7 @@
     "height": 40,
     "modules-left": ["sway/workspaces", "sway/mode", "sway/window"],
     "modules-center": ["clock"],
-    "modules-right": ["custom/recorder", "tray", "pulseaudio", "backlight", "temperature", "cpu", "memory", "battery", "network", "custom/powermenu"],
+    "modules-right": ["custom/recorder", "tray", "custom/pacman","idle_inhibitor",  "pulseaudio", "backlight", "temperature", "cpu", "memory", "battery", "network", "custom/powermenu"],
     "sway/mode": {
         "format": " {}"
     },
@@ -80,6 +80,22 @@
         },
         "tooltip": false
     },
+    
+   "custom/pacman": {
+     "format": "{} ",
+     "interval": 3600,                     // every hour
+     "exec": "pamac checkupdates -a -q | wc -l",       // # of updates
+     "on-click": "pamac-manager", // update system
+     "tooltip": false
+   },
+   "idle_inhibitor": {
+     "icon-size": 21,
+     "format": "{icon}",
+     "format-icons": {
+       "activated": "",
+       "deactivated": ""                                         
+     }                
+   },
     "network": {
         "format": "{icon}",
         "format-alt": "<span font='Font Awesome 5 Free 10'>︁</span> ︁{ipaddr}/{cidr} {icon}",
