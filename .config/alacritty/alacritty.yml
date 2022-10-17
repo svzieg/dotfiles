@@ -1,11 +1,153 @@
 env:
   TERM: xterm-256color
-  WINIT_X11_SCALE_FACTOR: "1"
+  #  WINIT_X11_SCALE_FACTOR: "1"
+
+schemes:
+  # Tokyo Night theme, based on both:
+  #   https://github.com/ghifarit53/tokyonight-vim
+  #   https://github.com/enkia/tokyo-night-vscode-theme
+  tokyo-night: &tokyo-night # Default colors
+    primary:
+      background: "0x1a1b26"
+      foreground: "0xc0caf5"
+
+    # Normal colors
+    normal:
+      black: "0x32344a"
+      red: "0xf7768e"
+      green: "0x9ece6a"
+      yellow: "0xe0af68"
+      blue: "0x7aa2f7"
+      magenta: "0xad8ee6"
+      cyan: "0x449dab"
+      white: "0x787c99"
+
+    # Bright colors
+    bright:
+      black: "0x444b6a"
+      red: "0xff7a93"
+      green: "0xb9f27c"
+      yellow: "0xff9e64"
+      blue: "0x7da6ff"
+      magenta: "0xbb9af7"
+      cyan: "0x0db9d7"
+      white: "0xacb0d0"
+
+  tokyo-night-storm: &tokyo-night-storm # Default colors
+    primary:
+      background: "0x24283b"
+      foreground: "0xa9b1d6"
+
+    # Normal colors
+    normal:
+      black: "0x32344a"
+      red: "0xf7768e"
+      green: "0x9ece6a"
+      yellow: "0xe0af68"
+      blue: "0x7aa2f7"
+      magenta: "0xad8ee6"
+      cyan: "0x449dab"
+      white: "0x9699a8"
+
+    # Bright colors
+    bright:
+      black: "0x444b6a"
+      red: "0xff7a93"
+      green: "0xb9f27c"
+      yellow: "0xff9e64"
+      blue: "0x7da6ff"
+      magenta: "0xbb9af7"
+      cyan: "0x0db9d7"
+      white: "0xacb0d0"
+
+  # Nord colors
+  nord: &nord
+    primary:
+      background: "#2e3440"
+      foreground: "#d8dee9"
+      dim_foreground: "#a5abb6"
+    cursor:
+      text: "#2e3440"
+      cursor: "#d8dee9"
+    vi_mode_cursor:
+      text: "#2e3440"
+      cursor: "#d8dee9"
+    selection:
+      text: CellForeground
+      background: "#4c566a"
+    search:
+      matches:
+        foreground: CellBackground
+        background: "#88c0d0"
+      bar:
+        background: "#434c5e"
+        foreground: "#d8dee9"
+    normal:
+      black: "#3b4252"
+      red: "#bf616a"
+      green: "#a3be8c"
+      yellow: "#ebcb8b"
+      blue: "#81a1c1"
+      magenta: "#b48ead"
+      cyan: "#88c0d0"
+      white: "#e5e9f0"
+    bright:
+      black: "#4c566a"
+      red: "#bf616a"
+      green: "#a3be8c"
+      yellow: "#ebcb8b"
+      blue: "#81a1c1"
+      magenta: "#b48ead"
+      cyan: "#8fbcbb"
+      white: "#eceff4"
+    dim:
+      black: "#373e4d"
+      red: "#94545d"
+      green: "#809575"
+      yellow: "#b29e75"
+      blue: "#68809a"
+      magenta: "#8c738c"
+      cyan: "#6d96a5"
+      white: "#aeb3bb"
+
+    # # Oxide colors
+    # colors:
+    #   primary:
+    #     foreground: "#B0C5C8"
+    #     background: "#31363b"
+    #     bright_foreground: "#f3f4f5"
+
+    #   cursor:
+    #     text: "#212121"
+    #     cursor: "#c0c5ce"
+
+    #   normal:
+    #     black: "#212121"
+    #     red: "#e57373"
+    #     green: "#a6bc69"
+    #     yellow: "#fac863"
+    #     blue: "#6699cc"
+    #     magenta: "#c594c5"
+    #     cyan: "#5fb3b3"
+    #     white: "#c0c5ce"
+
+    #   bright:
+    #     black: "#5c5c5c"
+    #     red: "#e57373"
+    #     green: "#a6bc69"
+    #     yellow: "#fac863"
+    #     blue: "#6699cc"
+    #     magenta: "#c594c5"
+    #     cyan: "#5fb3b3"
+    #     white: "#f3f4f5"
+
+    indexed_colors: []
 
 window:
+  opacity: 1.0
   dimensions:
-    columns: 80
-    lines: 24
+    columns: 100
+    lines: 85
 
   padding:
     x: 10
@@ -14,36 +156,34 @@ window:
   dynamic_padding: false
   dynamic_title: true
 
-  decorations: full
+  decorations: None
 
   startup_mode: Windowed
 
 scrolling:
-  history: 2500
+  history: 10000
   multiplier: 3
 
 font:
   normal:
-    family: Fira Code
+    family: Fira Code Nerd Font
     style: Regular
 
   bold:
-    family: Fira Code
+    family: Fira Code Nerd Font
     style: Bold
 
   italic:
-    family: Fira Code
+    family: Fira Code Nerd Font
     style: Italic
 
   bold_italic:
-    family: Fira Code
+    family: Fira Code Nerd Font
     style: Bold Italic
 
-  size: 11
-
   offset:
-    x: 0
-    y: 0
+    x: 0.9
+    y: -10.0
 
   glyph_offset:
     x: 0
@@ -51,95 +191,13 @@ font:
 
 draw_bold_text_with_bright_colors: true
 
-# Nord colors
-colors:
-  primary:
-    background: "#2e3440"
-    foreground: "#d8dee9"
-    dim_foreground: "#a5abb6"
-  cursor:
-    text: "#2e3440"
-    cursor: "#d8dee9"
-  vi_mode_cursor:
-    text: "#2e3440"
-    cursor: "#d8dee9"
-  selection:
-    text: CellForeground
-    background: "#4c566a"
-  search:
-    matches:
-      foreground: CellBackground
-      background: "#88c0d0"
-    bar:
-      background: "#434c5e"
-      foreground: "#d8dee9"
-  normal:
-    black: "#3b4252"
-    red: "#bf616a"
-    green: "#a3be8c"
-    yellow: "#ebcb8b"
-    blue: "#81a1c1"
-    magenta: "#b48ead"
-    cyan: "#88c0d0"
-    white: "#e5e9f0"
-  bright:
-    black: "#4c566a"
-    red: "#bf616a"
-    green: "#a3be8c"
-    yellow: "#ebcb8b"
-    blue: "#81a1c1"
-    magenta: "#b48ead"
-    cyan: "#8fbcbb"
-    white: "#eceff4"
-  dim:
-    black: "#373e4d"
-    red: "#94545d"
-    green: "#809575"
-    yellow: "#b29e75"
-    blue: "#68809a"
-    magenta: "#8c738c"
-    cyan: "#6d96a5"
-    white: "#aeb3bb"
-
-  # # Oxide colors
-  # colors:
-  #   primary:
-  #     foreground: "#B0C5C8"
-  #     background: "#31363b"
-  #     bright_foreground: "#f3f4f5"
-
-  #   cursor:
-  #     text: "#212121"
-  #     cursor: "#c0c5ce"
-
-  #   normal:
-  #     black: "#212121"
-  #     red: "#e57373"
-  #     green: "#a6bc69"
-  #     yellow: "#fac863"
-  #     blue: "#6699cc"
-  #     magenta: "#c594c5"
-  #     cyan: "#5fb3b3"
-  #     white: "#c0c5ce"
-
-  #   bright:
-  #     black: "#5c5c5c"
-  #     red: "#e57373"
-  #     green: "#a6bc69"
-  #     yellow: "#fac863"
-  #     blue: "#6699cc"
-  #     magenta: "#c594c5"
-  #     cyan: "#5fb3b3"
-  #     white: "#f3f4f5"
-
-  indexed_colors: []
+# normal dark theme
+colors: *tokyo-night
 
 bell:
   animation: EaseOutExpo
   duration: 0
   color: "#ffffff"
-
-background_opacity: 1.0
 
 selection:
   semantic_escape_chars: ",│`|:\"' ()[]{}<>\t"
@@ -161,7 +219,7 @@ mouse:
 
   hide_when_typing: false
 
-  url:
+  hints:
     launcher:
       program: xdg-open
 

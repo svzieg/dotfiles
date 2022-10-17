@@ -41,7 +41,7 @@
     },
     "cpu": {
         "interval": 5,
-        "format": "︁ {}%",
+        "format": "︁ {usage}% ",
         "max-length": 10
     },
     "memory": {
@@ -51,12 +51,12 @@
     },
     "custom/powermenu": {
         "return-type": "json",
-        "exec": "/home/marco/.config/waybar/modules/powermenu.sh",
+        "exec": "/home/svzieg/.config/waybar/modules/powermenu.sh",
         "format": "<span font='Font Awesome 5 Free 9'>{icon}</span>  {}",
         "format-icons": [""],
         "interval": 3600,
         "escape": true,
-        "on-click": "/home/marco/.config/wofi/wofi-power.sh"
+        "on-click": "/home/svzieg/.config/wofi/wofi-power.sh"
     },
     "custom/recorder": {
 		"format": "!",

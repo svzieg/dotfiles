@@ -65,6 +65,8 @@ video/x-theora+ogg=org.gnome.Totem.desktop
 video/x-totem-stream=org.gnome.Totem.desktop
 application/octet-stream=org.keepassxc.KeePassXC.desktop
 x-scheme-handler/ssh=firefox.desktop
+x-scheme-handler/tidal=tidal-hifi.desktop
+x-scheme-handler/bitwarden=Electron.desktop
 
 [Added Associations]
 image/jpeg=viewnior.desktop;gpicview.desktop;

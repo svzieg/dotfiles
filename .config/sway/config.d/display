@@ -17,4 +17,4 @@ set $laptop eDP-1
 bindswitch lid:on output $laptop disable
 bindswitch lid:off output $laptop enable
 
-exec kanshi
+exec_always pkill kanshi; exec kanshi

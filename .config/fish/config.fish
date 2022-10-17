@@ -15,7 +15,7 @@ end
 
 
 
-
+set -gx GOPATH ~/go
 
 set -gx GOPATH ~/go
 # on is needed for coc-go to work properly
@@ -34,6 +34,10 @@ end
 
 function config
     git --git-dir=/home/svzieg/.cfg/ --work-tree=/home/svzieg $argv[1..-1]
+end
+
+function lgconfig
+    lazygit -g /home/svzieg/.cfg -w ~/
 end
 
 function lg
