@@ -8,10 +8,10 @@ Switch to Next Keyboard Layout=Meta+Alt+K
 AboutApp=
 AboutKDE=
 Activate Next Tab=Ctrl+]; Ctrl+PgDown
-Activate Previous Tab=Ctrl+[; Ctrl+PgUp
+Activate Previous Tab=Ctrl+PgUp; Ctrl+[
 ActualSize=Ctrl+0
 AddBookmark=Ctrl+B
-Back=Back; Alt+Left
+Back=Alt+Left; Back
 BackwardWord=Ctrl+Left
 Begin=Ctrl+Home
 BeginningOfLine=Home
@@ -19,7 +19,7 @@ Clear=
 Close=Ctrl+W
 ConfigureNotifications=
 ConfigureToolbars=
-Copy=Ctrl+C; Ctrl+Ins
+Copy=Ctrl+Ins; Ctrl+C
 CreateFolder=F10
 Cut=Ctrl+X; Shift+Del
 DeleteFile=Shift+Del
@@ -38,7 +38,7 @@ FindPrev=Shift+F3
 FitToHeight=
 FitToPage=
 FitToWidth=
-Forward=Alt+Right; Forward
+Forward=Forward; Alt+Right
 ForwardWord=Ctrl+Right
 FullScreen=Ctrl+Shift+F
 Goto=
@@ -54,7 +54,7 @@ Next=PgDown
 NextCompletion=Ctrl+Down
 Open=Ctrl+O
 OpenRecent=
-Paste=Shift+Ins; Ctrl+V
+Paste=Ctrl+V; Shift+Ins
 Paste Selection=Ctrl+Shift+Ins
 Preferences=Ctrl+Shift+,
 PrevCompletion=Ctrl+Up
@@ -96,7 +96,7 @@ Toggle Screen Reader On and Off=Meta+Alt+S
 [kcm_touchpad][Global Shortcuts]
 Disable Touchpad=Touchpad Off
 Enable Touchpad=Touchpad On
-Toggle Touchpad=Meta+Ctrl+Zenkaku Hankaku; Touchpad Toggle
+Toggle Touchpad=Touchpad Toggle; Meta+Ctrl+Zenkaku Hankaku
 
 [kded5][Global Shortcuts]
 Show System Activity=Ctrl+Esc
@@ -113,12 +113,12 @@ decrease_microphone_volume=Microphone Volume Down
 decrease_volume=Volume Down
 increase_microphone_volume=Microphone Volume Up
 increase_volume=Volume Up
-mic_mute=Meta+Volume Mute; Microphone Mute
+mic_mute=Microphone Mute; Meta+Volume Mute
 mute=Volume Mute
 
 [ksmserver][Global Shortcuts]
 Halt Without Confirmation=
-Lock Session=Meta+L; Meta+Shift+L; Screensaver
+Lock Session=Meta+L; Screensaver; Meta+Shift+L
 Log Out=Ctrl+Alt+Del
 Log Out Without Confirmation=
 Reboot Without Confirmation=
@@ -199,7 +199,7 @@ Walk Through Windows of Current Application Alternative=
 Walk Through Windows of Current Application Alternative (Reverse)=
 Window Above Other Windows=
 Window Below Other Windows=
-Window Close=Meta+Shift+X; Alt+F4
+Window Close=Alt+F4; Meta+Shift+X
 Window Fullscreen=Meta+F
 Window Grow Horizontal=
 Window Grow Vertical=
@@ -212,9 +212,9 @@ Window Move=
 Window Move Center=
 Window No Border=
 Window On All Desktops=
-Window One Desktop Down=Ctrl+Alt+Shift+Down; Meta+Ctrl+Shift+Down
+Window One Desktop Down=Meta+Ctrl+Shift+Down; Ctrl+Alt+Shift+Down
 Window One Desktop Up=Ctrl+Alt+Shift+Up; Meta+Ctrl+Shift+Up
-Window One Desktop to the Left=Ctrl+Alt+Shift+Left; Meta+Ctrl+Shift+Left
+Window One Desktop to the Left=Meta+Ctrl+Shift+Left; Ctrl+Alt+Shift+Left
 Window One Desktop to the Right=Ctrl+Alt+Shift+Right; Meta+Ctrl+Shift+Right
 Window Operations Menu=Alt+F3
 Window Pack Down=
@@ -283,9 +283,14 @@ stopmedia=Media Stop
 [org.kde.dolphin.desktop][Global Shortcuts]
 _launch=Meta+E
 
+[org.kde.konsole.desktop][Global Shortcuts]
+NewTab=
+NewWindow=Meta+Return
+_launch=Ctrl+Alt+T
+
 [org.kde.krunner.desktop][Global Shortcuts]
 RunClipboard=Alt+Shift+F2
-_launch=Alt+F2; Search; Alt+Space
+_launch=Alt+F2; Alt+Space; Search
 
 [org.kde.plasma.emojier.desktop][Global Shortcuts]
 _launch=Meta+.
@@ -322,10 +327,11 @@ activate task manager entry 6=Meta+6
 activate task manager entry 7=Meta+7
 activate task manager entry 8=Meta+8
 activate task manager entry 9=Meta+9
+activate widget 103=
 activate widget 28=
 activate widget 5=Alt+F1
 activate widget 51=
-activate widget 74=
+activate widget 74=Meta+D
 clear-history=
 clipboard_action=Meta+Ctrl+X
 cycle-panels=Meta+Alt+P
