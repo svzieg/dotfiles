@@ -35,13 +35,13 @@ Color=129,167,86
 Color=158,206,106
 
 [Color3]
-Color=224,175,104
+Color=220,171,101
 
 [Color3Faint]
 Color=182,86,25
 
 [Color3Intense]
-Color=224,175,104
+Color=221,172,102
 
 [Color4]
 Color=122,162,247
@@ -90,7 +90,7 @@ Color=192,202,245
 
 [General]
 Anchor=0.5,0.5
-Blur=false
+Blur=true
 ColorRandomization=false
 Description=Tokio Night
 FillStyle=Tile
