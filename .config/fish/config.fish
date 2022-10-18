@@ -14,6 +14,13 @@ if test (echo (which pack)) != ""
 end
 
 
+set -gx GOVC_INSECURE 1
+set -gx GOVC_USERNAME u500132
+set -gx GOVC_URL vcenterscn.scheer.systems
+set -gx GOVC_DATASTORE opspstr020_VMware_PAS01
+set -gx GOVC_DATACENTER SCN
+set -gx GOVC_NETWORK 255-Pas-Test
+set -gx GOVC_FOLDER SCN/vm/PAS/Pas-Cluster
 
 set -gx GOPATH ~/go
 

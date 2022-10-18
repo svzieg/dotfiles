@@ -67,6 +67,7 @@ application/octet-stream=org.keepassxc.KeePassXC.desktop
 x-scheme-handler/ssh=firefox.desktop
 x-scheme-handler/tidal=tidal-hifi.desktop
 x-scheme-handler/bitwarden=Electron.desktop
+x-scheme-handler/insomnia=insomnia.desktop
 
 [Added Associations]
 image/jpeg=viewnior.desktop;gpicview.desktop;
