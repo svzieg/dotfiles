@@ -7,7 +7,7 @@ set -gx LUA_CPATH '/usr/lib/lua/5.3/loadall.so;./?.so;/home/svzieg/.luarocks/lib
 set -gx EDITOR (which nvim)
 
 set -gx GOPRIVATE gitlab.scheer-group.com/PAS
-set -gx TERM xterm-kitty
+#set -gx TERM xterm-kitty
 
 if test (echo (which pack)) != ""
     source (pack completion --shell fish)
@@ -21,6 +21,8 @@ set -gx GOVC_DATASTORE opspstr020_VMware_PAS01
 set -gx GOVC_DATACENTER SCN
 set -gx GOVC_NETWORK 255-Pas-Test
 set -gx GOVC_FOLDER SCN/vm/PAS/Pas-Cluster
+
+set -gx QT_QPA_PLATFORM wayland
 
 set -gx GOPATH ~/go
 

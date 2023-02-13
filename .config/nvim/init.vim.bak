@@ -47,6 +47,8 @@ else
   Plug 'roxma/vim-hug-neovim-rpc'
 endif
 
+Plug 'ldelossa/nvim-ide'
+
 
 " coc plugins:
 " Plug 'neoclide/coc-tsserver', {'do': 'yarn install --frozen-lockfile'}
