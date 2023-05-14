@@ -2,24 +2,32 @@
 # swaymsg -t get_inputs
 
 input * {
-    xkb_layout de,de
-    xkb_variant neo,nodeadkeys
-    xkb_options grp:alt_shift_toggle
-}
-input 1130:181:CHERRY_Mechanical_Keyboard {
+    repeat_delay 250
+    repeat_rate 50
     xkb_layout de,de
     xkb_variant neo,nodeadkeys
     xkb_options grp:alt_shift_toggle
 }
 
+input 1130:181:CHERRY_Mechanical_Keyboard {
+    repeat_delay 250
+    repeat_rate 50
+    xkb_layout de,de
+    xkb_variant neo,nodeadkeys
+    xkb_options grp:alt_shift_toggle
+}
 
 input 1:1:AT_Translated_Set_2_keyboard {
+    repeat_delay 250
+    repeat_rate 50
     xkb_layout de,de
     xkb_variant neo,nodeadkeys
     xkb_options grp:alt_shift_toggle
 }
 
 input 16700:8209:Dell_Dell_Multimedia_Pro_Keyboard {
+    repeat_delay 250
+    repeat_rate 50
     xkb_layout de,de
     xkb_variant neo,nodeadkeys
     xkb_options grp:alt_shift_toggle

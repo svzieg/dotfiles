@@ -30,7 +30,7 @@ set -gx GOPATH ~/go
 # on is needed for coc-go to work properly
 set -gx GO111MODULE on
 
-kitty + complete setup fish | source
+#kitty + complete setup fish | source
 
 
 

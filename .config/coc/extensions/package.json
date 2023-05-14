@@ -38,7 +38,7 @@
   },
   "disabled": [],
   "locked": [],
-  "lastUpdate": 1673348466729,
+  "lastUpdate": 1677144746221,
   "devDependencies": {
     "prettier": "^2.8.2",
     "rustywind": "^0.15.3"

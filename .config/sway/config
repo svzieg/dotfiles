@@ -252,7 +252,7 @@ bindsym Print exec grim - | swappy -f -
 #grim \"$HOME/Bilder/Screenshot_$(date +%Y%m%d)_$(date +%H%M%S).png"
 
 # Part screenshot
-bindsym Ctrl+Print exec grim -g "$(slurp)" - | swappy -f -
+bindsym Ctrl+Print exec grim -g "$(slurp)" - | swappy -f - -o ~/Bilder/Screenshot_$(date +%Y%m%d_%H%M%S).png
 
 #
 # Status Bar:
@@ -318,7 +318,7 @@ exec nm-applet --indicator
 exec thunar --daemon
 exec blueman-applet
 exec system-config-printer-applet
-exec onedrivegui
+#exec onedrivegui
 
 # easyeffects will only run ones
 exec_always easyeffects --gapplication-service
@@ -326,3 +326,5 @@ exec_always easyeffects --gapplication-service
 
 exec_always ~/.bin/import-gsettings 
 
+exec way-displays > /tmp/way-displays.${XDG_VTNR}.${USER}.log 2>&1
+exec wired
