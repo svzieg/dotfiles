@@ -1,0 +1,153 @@
+// Zed settings
+//
+// For information on how to configure Zed, see the Zed
+// documentation: https://zed.dev/docs/configuring-zed
+//
+// To see all of Zed's default settings without changing your
+// custom settings, run `zed: open default settings` from the
+// command palette (cmd-shift-p / ctrl-shift-p)
+{
+  "language_models": {
+    "openai_compatible": {
+      // Using Together AI as an example
+      "Local": {
+        "api_url": "http://localhost:1234/api/v0",
+        "available_models": [
+          {
+            "name": "default",
+            "max_tokens": 200000,
+            "max_output_tokens": 32000,
+            "max_completion_tokens": 200000,
+            "capabilities": {
+              "tools": true,
+              "images": false,
+              "parallel_tool_calls": false,
+              "prompt_cache_key": false,
+              "chat_completions": true,
+              "interleaved_reasoning": true,
+            },
+          },
+        ],
+      },
+    },
+  },
+  "telemetry": {
+    "diagnostics": false,
+    "metrics": false,
+  },
+  "project_panel": {
+    "dock": "left",
+  },
+  "outline_panel": {
+    "dock": "left",
+  },
+  "collaboration_panel": {
+    "dock": "left",
+  },
+  "git_panel": {
+    "dock": "left",
+  },
+  "buffer_font_family": "Fira Code",
+  "agent": {
+    "sidebar_side": "right",
+    "dock": "right",
+    "single_file_review": true,
+    "commit_message_model": {
+      "provider": "lmstudio",
+      "model": "default",
+    },
+    "tool_permissions": {
+      "default": "allow",
+      "tools": {
+        "terminal": {
+          "default": "allow",
+        },
+      },
+    },
+    "default_model": {
+      "provider": "Local",
+      "model": "default",
+      "enable_thinking": false,
+    },
+    "favorite_models": [
+      {
+        "provider": "copilot_chat",
+        "model": "claude-haiku-4.5",
+        "enable_thinking": false,
+      },
+      {
+        "provider": "copilot_chat",
+        "model": "claude-sonnet-4.6",
+        "enable_thinking": false,
+      },
+      {
+        "provider": "lmstudio",
+        "model": "qwen/qwen3.6-35b-a3b",
+        "enable_thinking": false,
+      },
+      {
+        "provider": "lmstudio",
+        "model": "qwen/qwen3.5-9b",
+        "enable_thinking": true,
+      },
+    ],
+    "model_parameters": [],
+  },
+
+  "edit_predictions": {
+    "provider": "copilot",
+    "codestral": {
+      "api_url": "https://codestral.mistral.ai",
+    },
+    "ollama": {
+      "api_url": "http://localhost:1234/api/v0",
+    },
+    "open_ai_compatible_api": {
+      "prompt_format": "infer",
+      "model": "mistralai/ministral-3-3b",
+      "api_url": "http://localhost:1234/api/v0",
+    },
+  },
+  "icon_theme": "Catppuccin Mocha",
+  "languages": {
+    "Helm": {
+      "format_on_save": "on",
+    },
+  },
+  "base_keymap": "VSCode",
+  "autosave": {
+    "after_delay": {
+      "milliseconds": 1000,
+    },
+  },
+  "buffer_font_fallbacks": [
+    "Droid Sans Mono",
+    "monospace",
+    "monospace",
+    "Symbols Nerd Font Mono",
+  ],
+
+  "agent_servers": {
+    "github-copilot-cli": {
+      "type": "registry",
+    },
+  },
+  "vim_mode": true,
+  "ui_font_size": 16,
+  "buffer_font_size": 15,
+  "theme": {
+    "mode": "system",
+    "light": "Catppuccin Latte",
+    "dark": "Catppuccin Mocha",
+  },
+  "file_types": {
+    "Helm": [
+      "**/templates/**/*.tpl",
+      "**/templates/**/*.yaml",
+      "**/templates/**/*.yml",
+      "**/helmfile.d/**/*.yaml",
+      "**/helmfile.d/**/*.yml",
+      "**/values*.yaml",
+    ],
+  },
+}
