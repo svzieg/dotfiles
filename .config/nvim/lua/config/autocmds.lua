@@ -11,6 +11,7 @@ local function augroup(name)
   return vim.api.nvim_create_augroup("lazyvim_custom_" .. name, { clear = true })
 end
 
+if not vim.g.vscode then
 -- Add LSP request cleanup on buffer leave
 vim.api.nvim_create_autocmd("BufLeave", {
   group = augroup("lsp_cleanup"),
@@ -28,9 +29,10 @@ vim.api.nvim_create_autocmd("BufLeave", {
 })
 
 -- Reduce LSP updates during insert mode
-vim.api.nvim_create_autocmd("InsertEnter", {
-  group = augroup("lsp_insert"),
-  callback = function()
-    vim.lsp.buf.clear_references()
-  end,
-})
+  vim.api.nvim_create_autocmd("InsertEnter", {
+    group = augroup("lsp_insert"),
+    callback = function()
+      vim.lsp.buf.clear_references()
+    end,
+  })
+end

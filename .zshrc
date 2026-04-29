@@ -95,3 +95,8 @@ compinit
 if [[ -f /home/linuxbrew/.linuxbrew/bin/brew ]]; then  eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv zsh)"; fi
 
 [[ "$TERM_PROGRAM" == "vscode" ]] && . "$(code --locate-shell-integration-path zsh)"
+
+# Added by LM Studio CLI (lms)
+export PATH="$PATH:/var/home/svzieg/.lmstudio/bin"
+# End of LM Studio CLI section
+

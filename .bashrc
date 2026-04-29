@@ -35,3 +35,7 @@ export MONGOMS_PLATFORM=linux
 export MONGOMS_DISTRO=rhel-9
 . "/home/svzieg/.deno/env"
 source /home/svzieg/.local/share/bash-completion/completions/deno.bash
+# Added by LM Studio CLI (lms)
+export PATH="$PATH:/var/home/svzieg/.lmstudio/bin"
+# End of LM Studio CLI section
+
