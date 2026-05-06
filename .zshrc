@@ -85,7 +85,6 @@ if which k0sctl > /dev/null 2>&1; then source <(k0sctl completion); fi
 if which flux > /dev/null 2>&1; then source <(flux completion zsh); fi
 
 
-if [[ -f "/home/svzieg/.deno/env" ]]; then . "/home/svzieg/.deno/env"; fi
 # Initialize zsh completions (added by deno install script)
 autoload -Uz compinit
 compinit
