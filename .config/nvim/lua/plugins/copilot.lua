@@ -1,4 +1,13 @@
 return {
+  { "pablopunk/pi.nvim", opts = { thinking = "minimal" } },
+  {
+    "carderne/pi-nvim",
+    config = function()
+      require("pi-nvim").setup({
+        debug = false, -- Enable debugging
+      })
+    end,
+  },
   {
     "zbirenbaum/copilot.lua",
     cmd = "Copilot",
