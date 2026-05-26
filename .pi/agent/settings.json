@@ -1,8 +1,8 @@
 {
-  "lastChangelogVersion": "0.75.3",
-  "defaultProvider": "lmstudio",
-  "defaultModel": "qwen/qwen3.6-35b-a3b",
-  "defaultThinkingLevel": "medium",
+  "lastChangelogVersion": "0.75.5",
+  "defaultProvider": "github-copilot",
+  "defaultModel": "claude-haiku-4.5",
+  "defaultThinkingLevel": "high",
   "packages": [
     "npm:context-mode",
     "npm:pi-subagents",
@@ -10,20 +10,26 @@
     "./extensions/lmstudio.ts",
     "npm:pi-intercom",
     "npm:pi-nvim",
-    "npm:pi-web-access"
+    "npm:pi-web-access",
+    "npm:pi-context",
+    "npm:pi-simplify",
+    "npm:@plannotator/pi-extension",
+    "npm:pi-continue",
+    "npm:pi-lens"
   ],
   "enabledModels": [
     "github-copilot/claude-sonnet-4.6",
     "github-copilot/claude-haiku-4.5",
-    "openrouter/minimax/minimax-m2.7",
-    "openrouter/moonshotai/kimi-k2.6",
     "openrouter/qwen/qwen3-coder",
     "openrouter/qwen/qwen3.6-plus",
     "openrouter/qwen/qwen3.6-flash",
-    "openrouter/xiaomi/mimo-v2.5-pro",
-    "openrouter/xiaomi/mimo-v2.5",
-    "github-copilot/gpt-5.4-mini",
-    "lmstudio/qwen/qwen3.6-35b-a3b"
+    "github-copilot/gpt-5-mini",
+    "lmstudio/qwen/qwen3.6-35b-a3b",
+    "lmstudio/google/gemma-4-26b-a4b",
+    "nano-gpt/xiaomi/mimo-v2.5",
+    "nano-gpt/xiaomi/mimo-v2.5-pro",
+    "nano-gpt/minimax/minimax-latest",
+    "nano-gpt/moonshotai/kimi-latest"
   ],
   "hideThinkingBlock": false
 }

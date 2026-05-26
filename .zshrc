@@ -47,6 +47,7 @@ if which eza > /dev/null; then
 fi
 
 alias nx='nice npx nx'
+#alias devcontainer='nice npx --package=devcontainers/cli -- devcontainer'
 alias yalc='nice npx yalc'
 #alias nvim='mise use node@24 && nice $(which nvim)'
 alias dive='nice docker run --rm -it -v /home/svzieg/.docker:/root/.docker:ro -v /var/run/docker.sock:/var/run/docker.sock  wagoodman/dive:latest'

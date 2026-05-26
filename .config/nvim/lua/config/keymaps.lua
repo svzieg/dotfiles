@@ -35,20 +35,21 @@ end, { desc = "Toggle pi terminal (horizontal)" })
 
 -- pi subagent workflows
 vim.keymap.set("n", "<leader>aw", function()
+  local pi = require("pi-nvim")
   local workflows = {
     {
       name = "Generate Commit Message",
       desc = "Generate a commit message from the current git diff",
       prompt = "Analyze the current git diff and generate a clear, conventional commit message. Include a brief summary and bullet points for the changes.",
       agent = "worker",
-      model = "",
+      model = "github-copilot/gpt-5-mini",
     },
     {
       name = "Parallel Code Review",
       desc = "Run 3 reviewers (correctness, tests, simplicity)",
       prompt = "Run a parallel code review of the current diff. Launch 3 fresh-context reviewer agents with distinct angles: correctness/regressions, tests/validation, and simplicity/maintainability. Synthesize their findings.",
       agent = "reviewer",
-      model = "",
+      model = "github-copilot/gpt-5-mini",
     },
     {
       name = "Parallel Research",
@@ -69,7 +70,7 @@ vim.keymap.set("n", "<leader>aw", function()
       desc = "Scout codebase + ask clarifying questions",
       prompt = "Gather context for this task by exploring relevant code areas. Then ask any clarifying questions needed before planning or implementation.",
       agent = "scout",
-      model = "",
+      model = "github-copilot/gpt-5-mini",
     },
     {
       name = "Plan Implementation",
@@ -103,27 +104,20 @@ vim.keymap.set("n", "<leader>aw", function()
       return item[1]
     end,
   }, function(choice)
-    if not choice then
-      return
-    end
-    if choice[3] == "" then
-      vim.ui.input({ prompt = "pi prompt: " }, function(input)
-        if input and #input > 0 then
-          vim.cmd("PiSend " .. vim.fn.shellescape(input))
-        end
-      end)
+    -- exit early if no choice or if required fields are missing (agent and prompt)
+    if not choice or choice[3] == "" or choice[4] == "" then
       return
     end
 
-    local full_prompt = choice[3]
-    if choice[4] ~= "" then
-      full_prompt = "[agent=" .. choice[4] .. "] " .. full_prompt
+    -- Build the subagent command
+    -- Format: /run scout[model=xxx] "task description"
+    local model_part = choice[5] ~= "" and string.format("[model=%s] ", choice[5]) or ""
+    local current_file = vim.fn.expand("%:p")
+    local task = choice[3]
+    if current_file ~= "" then
+      task = task .. "\n\n@" .. current_file
     end
-    if choice[5] ~= "" then
-      full_prompt = "[model=" .. choice[5] .. "] " .. full_prompt
-    end
-
-    vim.cmd("PiSend " .. vim.fn.shellescape(full_prompt))
+    local prompt = string.format('/run %s%s"%s"', choice[4], model_part, task)
+    pi.prompt(prompt)
   end)
 end, { desc = "pi workflow picker" })
-
