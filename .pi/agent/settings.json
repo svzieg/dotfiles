@@ -1,8 +1,8 @@
 {
   "lastChangelogVersion": "0.75.5",
-  "defaultProvider": "github-copilot",
-  "defaultModel": "claude-haiku-4.5",
-  "defaultThinkingLevel": "high",
+  "defaultProvider": "nano-gpt",
+  "defaultModel": "moonshotai/kimi-latest",
+  "defaultThinkingLevel": "medium",
   "packages": [
     "npm:context-mode",
     "npm:pi-subagents",
@@ -15,7 +15,8 @@
     "npm:pi-simplify",
     "npm:@plannotator/pi-extension",
     "npm:pi-continue",
-    "npm:pi-lens"
+    "npm:pi-lens",
+    "npm:pi-caveman"
   ],
   "enabledModels": [
     "github-copilot/claude-sonnet-4.6",
@@ -31,5 +32,6 @@
     "nano-gpt/minimax/minimax-latest",
     "nano-gpt/moonshotai/kimi-latest"
   ],
-  "hideThinkingBlock": false
+  "hideThinkingBlock": false,
+  "steeringMode": "one-at-a-time"
 }
