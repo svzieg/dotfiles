@@ -12,7 +12,7 @@ vim.opt.timeoutlen = vim.g.vscode and 1000 or 300
 vim.opt.clipboard = "unnamedplus"
 
 if os.getenv("WAYLAND_DISPLAY") and not os.getenv("SSH_CONNECTION") then
-  -- Local Wayland: wl-copy with timeout to prevent hang
+  -- Local Wayland only: wl-copy with timeout to prevent hang
   vim.g.clipboard = {
     name = "wl-copy",
     copy = {
@@ -25,9 +25,10 @@ if os.getenv("WAYLAND_DISPLAY") and not os.getenv("SSH_CONNECTION") then
     },
     cache_enabled = 0,
   }
-else
-  -- SSH / tmux / remote: use Neovim's built-in OSC52 provider.
-  -- It writes through the TUI (not /dev/tty directly) so tmux
-  -- intercepts and forwards the OSC52 sequence to the outer terminal.
+elseif not os.getenv("TMUX") then
+  -- SSH without tmux: force built-in OSC52
   vim.g.clipboard = "osc52"
 end
+-- When TMUX is set (SSH or not), leave g:clipboard unset so Neovim
+-- auto-detects the tmux provider (tmux load-buffer -w -).
+-- With tmux set-clipboard on, this forwards to the system clipboard.
