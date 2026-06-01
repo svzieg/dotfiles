@@ -1,8 +1,8 @@
 {
   "lastChangelogVersion": "0.75.5",
   "defaultProvider": "nano-gpt",
-  "defaultModel": "moonshotai/kimi-latest",
-  "defaultThinkingLevel": "medium",
+  "defaultModel": "xiaomi/mimo-v2.5",
+  "defaultThinkingLevel": "high",
   "packages": [
     "npm:context-mode",
     "npm:pi-subagents",
@@ -16,7 +16,8 @@
     "npm:@plannotator/pi-extension",
     "npm:pi-continue",
     "npm:pi-lens",
-    "npm:pi-caveman"
+    "npm:pi-caveman",
+    "npm:pi-rtk-rewrite"
   ],
   "enabledModels": [
     "github-copilot/claude-sonnet-4.6",
@@ -33,5 +34,154 @@
     "nano-gpt/moonshotai/kimi-latest"
   ],
   "hideThinkingBlock": false,
-  "steeringMode": "one-at-a-time"
+  "steeringMode": "one-at-a-time",
+  "subagents": {
+    "agentOverrides": {
+      "worker": {
+        "tools": [
+          "read",
+          "grep",
+          "find",
+          "ls",
+          "bash",
+          "edit",
+          "write",
+          "contact_supervisor",
+          "ctx_execute",
+          "ctx_execute_file",
+          "ctx_search",
+          "ctx_index",
+          "ctx_fetch_and_index",
+          "ctx_batch_execute",
+          "mcp"
+        ]
+      },
+      "scout": {
+        "tools": [
+          "read",
+          "grep",
+          "find",
+          "ls",
+          "bash",
+          "write",
+          "intercom",
+          "ctx_execute",
+          "ctx_execute_file",
+          "ctx_search",
+          "ctx_index",
+          "ctx_fetch_and_index",
+          "ctx_batch_execute",
+          "mcp"
+        ]
+      },
+      "reviewer": {
+        "tools": [
+          "read",
+          "grep",
+          "find",
+          "ls",
+          "bash",
+          "edit",
+          "write",
+          "intercom",
+          "ctx_execute",
+          "ctx_execute_file",
+          "ctx_search",
+          "ctx_index",
+          "ctx_fetch_and_index",
+          "ctx_batch_execute",
+          "mcp"
+        ]
+      },
+      "delegate": {
+        "tools": [
+          "read",
+          "grep",
+          "find",
+          "ls",
+          "bash",
+          "edit",
+          "write",
+          "contact_supervisor",
+          "ctx_execute",
+          "ctx_execute_file",
+          "ctx_search",
+          "ctx_index",
+          "ctx_fetch_and_index",
+          "ctx_batch_execute",
+          "mcp"
+        ]
+      },
+      "oracle": {
+        "tools": [
+          "read",
+          "grep",
+          "find",
+          "ls",
+          "bash",
+          "intercom",
+          "ctx_execute",
+          "ctx_execute_file",
+          "ctx_search",
+          "ctx_index",
+          "ctx_fetch_and_index",
+          "ctx_batch_execute",
+          "mcp"
+        ]
+      },
+      "planner": {
+        "tools": [
+          "read",
+          "grep",
+          "find",
+          "ls",
+          "write",
+          "intercom",
+          "ctx_execute",
+          "ctx_execute_file",
+          "ctx_search",
+          "ctx_index",
+          "ctx_fetch_and_index",
+          "ctx_batch_execute",
+          "mcp"
+        ]
+      },
+      "context-builder": {
+        "tools": [
+          "read",
+          "grep",
+          "find",
+          "ls",
+          "bash",
+          "write",
+          "web_search",
+          "intercom",
+          "ctx_execute",
+          "ctx_execute_file",
+          "ctx_search",
+          "ctx_index",
+          "ctx_fetch_and_index",
+          "ctx_batch_execute",
+          "mcp"
+        ]
+      },
+      "researcher": {
+        "tools": [
+          "read",
+          "write",
+          "web_search",
+          "fetch_content",
+          "get_search_content",
+          "intercom",
+          "ctx_execute",
+          "ctx_execute_file",
+          "ctx_search",
+          "ctx_index",
+          "ctx_fetch_and_index",
+          "ctx_batch_execute",
+          "mcp"
+        ]
+      }
+    }
+  }
 }
