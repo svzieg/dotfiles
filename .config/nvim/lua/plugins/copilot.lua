@@ -1,12 +1,17 @@
 return {
-  { "pablopunk/pi.nvim", opts = { thinking = "minimal" } },
   {
-    "carderne/pi-nvim",
-    config = function()
-      require("pi-nvim").setup({
-        debug = false, -- Enable debugging
-      })
-    end,
+    "coder/claudecode.nvim",
+    dependencies = { "folke/snacks.nvim" },
+    config = true,
+    keys = {
+      { "<leader>ac", "<cmd>ClaudeCode<cr>", desc = "Toggle Claude Code" },
+      { "<leader>af", "<cmd>ClaudeCodeFocus<cr>", desc = "Focus Claude Code" },
+      { "<leader>am", "<cmd>ClaudeCodeSelectModel<cr>", desc = "Select Claude model" },
+      { "<leader>av", "<cmd>ClaudeCodeSend<cr>", mode = "v", desc = "Send selection to Claude" },
+      { "<leader>aA", "<cmd>ClaudeCodeAdd<cr>", desc = "Add file to Claude context" },
+      { "<leader>ady", "<cmd>ClaudeCodeDiffAccept<cr>", desc = "Accept Claude diff" },
+      { "<leader>adn", "<cmd>ClaudeCodeDiffDeny<cr>", desc = "Deny Claude diff" },
+    },
   },
   {
     "zbirenbaum/copilot.lua",
