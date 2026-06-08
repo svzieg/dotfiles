@@ -49,7 +49,8 @@
   },
   "enabledPlugins": {
     "context-mode@context-mode": true,
-    "caveman@caveman": true
+    "caveman@caveman": true,
+    "playwright-skill@playwright-skill": true
   },
   "extraKnownMarketplaces": {
     "context-mode": {
@@ -68,6 +69,18 @@
       "source": {
         "source": "github",
         "repo": "anthropics/skills"
+      }
+    },
+    "fullstack-dev-skills": {
+      "source": {
+        "source": "github",
+        "repo": "jeffallan/claude-skills"
+      }
+    },
+    "playwright-skill": {
+      "source": {
+        "source": "github",
+        "repo": "lackeyjb/playwright-skill"
       }
     }
   },
