@@ -4,10 +4,17 @@
       "mcp__plugin_context-mode_context-mode__ctx_batch_execute",
       "mcp__plugin_context-mode_context-mode__ctx_execute_file",
       "mcp__plugin_context-mode_context-mode__ctx_execute",
+      "mcp__plugin_context-mode_context-mode__ctx_stats",
+      "mcp__plugin_context-mode_context-mode__ctx_doctor",
+      "mcp__plugin_context-mode_context-mode__ctx_search",
+      "mcp__plugin_context-mode_context-mode__ctx_index",
+      "mcp__plugin_context-mode_context-mode__ctx_purge",
+      "mcp__plugin_context-mode_context-mode__ctx_fetch_and_index",
       "WebSearch"
     ],
     "defaultMode": "auto"
   },
+  "model": "opus",
   "hooks": {
     "SessionStart": [
       {
@@ -37,6 +44,25 @@
             "command": "node \"$HOME/.claude/plugins/marketplaces/caveman/src/hooks/caveman-mode-tracker.js\"",
             "timeout": 5,
             "statusMessage": "Tracking caveman mode..."
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"$HOME/.claude/hooks/confirm-git-ops.sh\"",
+            "timeout": 5,
+            "statusMessage": "Checking git operation..."
+          },
+          {
+            "type": "command",
+            "command": "\"$HOME/.claude/hooks/confirm-outside-project.sh\"",
+            "timeout": 5,
+            "statusMessage": "Checking directory scope..."
           }
         ]
       }
@@ -84,6 +110,7 @@
     }
   },
   "effortLevel": "high",
+  "skipDangerousModePermissionPrompt": true,
   "theme": "auto",
   "editorMode": "normal",
   "autoCompactEnabled": true,

@@ -1,36 +1,20 @@
-# Code Cleanup Review
+# Code Cleanup
 
-Two-pass review of current diff: deslop + verbosity.
+Two-pass cleanup: deslop + verbosity. Uses the cleanup sub-agent for analysis.
 
-1. Run `git diff` to see unstaged, or `git diff --cached` for staged.
+## Instructions
 
-## Pass 1: Deslop (AI-slop patterns)
+1. Discover target: if `$ARGUMENTS` references a file or selection, review that. Otherwise run `git diff` (unstaged) or `git diff --cached` (staged).
 
-Flag and remove:
-- **Hedging filler**: "just", "simply", "basically", "actually", "in order to"
-- **Redundant modifiers**: "each and every", "various different", "completely finished"
-- **Verbose connectors**: "it is worth noting that", "as a matter of fact", "due to the fact that"
-- **Defensive over-commenting**: comments restating obvious code, paragraph-length docstrings on trivial helpers
-- **Sycophantic openings**: "Great question!", "Certainly!", "Of course!"
-- **Useless type re-assertions**: `const x: string = "foo"` where type obvious
-- **Dead code**: unused imports, unreferenced vars, commented-out blocks
+2. Spawn the cleanup sub-agent using the Agent tool (agentType: "cleanup") with prompt:
+"Two-pass cleanup review of the following changes.
 
-## Pass 2: Verbosity
+Pass 1 — Deslop: Flag and remove hedging filler ('just', 'simply', 'basically', 'actually', 'in order to'), redundant modifiers, verbose connectors, defensive over-commenting, sycophantic openings, useless type re-assertions, dead code.
 
-- Long function → extract helper if name improves clarity
-- Nested conditionals → early return / guard clauses
-- Repeated literal → constant
-- Over-abstraction: interfaces/types used once, single-implementer traits
-- Magic strings/numbers → named constants
-- Comments that rephrase code → delete
-- 3+ similar lines → consider loop/map/table
+Pass 2 — Verbosity: Long functions → extract helper. Nested conditionals → early return. Repeated literals → constants. Over-abstraction → simplify. Magic strings/numbers → named constants. Comments restating code → delete. 3+ similar lines → loop/map/table.
 
-## Output
+Output: path:line: severity (critical/warning/nit): problem. fix. Group by file, sort by line, end with count summary.
 
-For each finding:
-- `path:line: <severity>: <one-line problem>. <concrete fix>.`
-- Severities: `critical` (bug/correctness), `warning` (real smell), `nit` (style)
-- Group by file, sort by line number
-- End with summary count
+Target: [insert the diff or file content here]"
 
 $ARGUMENTS

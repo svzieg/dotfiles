@@ -7,6 +7,7 @@ return {
       integrations = {
         aerial = true,
         alpha = true,
+        blink_cmp = true,
         cmp = true,
         dashboard = true,
         flash = true,
@@ -42,6 +43,17 @@ return {
         treesitter_context = true,
         which_key = true,
       },
+      custom_highlights = function(colors)
+        return {
+          -- sidekick.nvim highlights
+          SidekickDiffAdd = { fg = colors.green },
+          SidekickDiffDelete = { fg = colors.red },
+          SidekickDiffChange = { fg = colors.yellow },
+          SidekickSignAdd = { fg = colors.green },
+          SidekickSignDelete = { fg = colors.red },
+          SidekickSignChange = { fg = colors.yellow },
+        }
+      end,
     },
     specs = {
       {
