@@ -6,16 +6,15 @@
       "mcp__plugin_context-mode_context-mode__ctx_execute",
       "WebSearch"
     ],
-    "defaultMode": "dontAsk"
+    "defaultMode": "auto"
   },
-  "model": "sonnet",
   "hooks": {
     "SessionStart": [
       {
         "hooks": [
           {
             "type": "command",
-            "command": "\"/var/home/svzieg/.local/share/mise/installs/node/24.13.1/bin/node\" \"/home/svzieg/.claude/hooks/caveman-activate.js\"",
+            "command": "node \"$HOME/.claude/plugins/marketplaces/caveman/src/hooks/caveman-activate.js\"",
             "timeout": 5,
             "statusMessage": "Loading caveman mode..."
           }
@@ -25,7 +24,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "\"/home/svzieg/.claude/hooks/context-mode-cache-heal.mjs\""
+            "command": "\"$HOME/.claude/hooks/context-mode-cache-heal.mjs\""
           }
         ]
       }
@@ -35,7 +34,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "\"/var/home/svzieg/.local/share/mise/installs/node/24.13.1/bin/node\" \"/home/svzieg/.claude/hooks/caveman-mode-tracker.js\"",
+            "command": "node \"$HOME/.claude/plugins/marketplaces/caveman/src/hooks/caveman-mode-tracker.js\"",
             "timeout": 5,
             "statusMessage": "Tracking caveman mode..."
           }
@@ -45,7 +44,7 @@
   },
   "statusLine": {
     "type": "command",
-    "command": "context-mode statusline"
+    "command": "\"$HOME/.claude/hooks/statusline.sh\""
   },
   "enabledPlugins": {
     "context-mode@context-mode": true,
@@ -87,5 +86,6 @@
   "effortLevel": "high",
   "theme": "auto",
   "editorMode": "normal",
+  "autoCompactEnabled": true,
   "skipAutoPermissionPrompt": true
 }
