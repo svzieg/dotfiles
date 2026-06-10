@@ -6,6 +6,13 @@ return {
     opts = {
       keymap = {
         ["<Tab>"] = {
+          function()
+            if require("minuet.virtualtext").action.is_visible() then
+              require("minuet.virtualtext").action.accept_line()
+              return true
+            end
+            return false
+          end,
           "snippet_forward",
           LazyVim.cmp.map({ "ai_nes" }, "<Tab>"),
           "fallback",

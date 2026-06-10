@@ -18,7 +18,9 @@ return {
       -- Claude shortcut not in the LazyVim extra defaults
       {
         "<leader>ac",
-        function() require("sidekick.cli").toggle({ name = "claude", focus = true }) end,
+        function()
+          require("sidekick.cli").toggle({ name = "claude", focus = true })
+        end,
         desc = "Sidekick Toggle Claude",
       },
     },
@@ -41,7 +43,7 @@ return {
             name = "LMStudio",
             end_point = "http://localhost:1234/v1/completions",
             stream = true,
-            model = "qwen2.5-coder-1.5b-instruct",
+            model = "qwen/qwen2.5-coder-14b",
             optional = {
               max_tokens = 256,
               top_p = 0.9,
@@ -49,11 +51,11 @@ return {
           },
 
           openai_compatible = {
-            api_key = "TERM",
+            api_key = "LMSTUDIO_API_KEY",
             name = "LMStudio",
             end_point = "http://localhost:1234/v1/chat/completions",
             stream = true,
-            model = "qwen2.5-coder-1.5b-instruct",
+            model = "qwen/qwen3.5-9b",
             optional = {
               reasoning_effort = "none",
               max_tokens = 256,
