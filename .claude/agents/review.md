@@ -3,7 +3,7 @@ name: review
 description: >
   Multi-agent code review. Spawns parallel sub-agents for correctness, security, and simplicity analysis.
   Use for "review this code", "review my diff", "review the changes". Invoke from Claude Code or via sidekick.
-model: inherit
+model: sonnet
 color: blue
 tools: ["Agent", "Read", "Grep", "Glob", "Bash"]
 ---
