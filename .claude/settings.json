@@ -75,7 +75,8 @@
   "enabledPlugins": {
     "context-mode@context-mode": true,
     "caveman@caveman": true,
-    "playwright-skill@playwright-skill": true
+    "playwright-skill@playwright-skill": true,
+    "gopls-lsp@claude-plugins-official": true
   },
   "extraKnownMarketplaces": {
     "context-mode": {

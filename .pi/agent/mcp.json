@@ -2,10 +2,6 @@
   "mcpServers": {
     "context-mode": {
       "command": "context-mode"
-    },
-    "playwright": {
-      "command": "docker",
-      "args": ["run", "-i", "--rm", "--network=host", "mcp/playwright"]
     }
   }
 }

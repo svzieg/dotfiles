@@ -1,43 +1,32 @@
 {
-  "lastChangelogVersion": "0.75.5",
-  "defaultProvider": "nano-gpt",
-  "defaultModel": "xiaomi/mimo-v2.5-pro",
+  "lastChangelogVersion": "0.80.2",
+  "defaultProvider": "neuralwatt",
+  "defaultModel": "glm-5.2-short",
   "defaultThinkingLevel": "high",
   "packages": [
     "npm:context-mode",
     "npm:pi-subagents",
     "npm:pi-mcp-adapter",
-    "./extensions/lmstudio.ts",
     "npm:pi-intercom",
-    "npm:pi-nvim",
     "npm:pi-web-access",
-    "npm:pi-context",
     "npm:pi-simplify",
-    "npm:@plannotator/pi-extension",
-    "npm:pi-continue",
     "npm:pi-lens",
     "npm:pi-caveman",
-    "npm:pi-rtk-rewrite"
+    "npm:pi-rtk-rewrite",
+    "npm:@aliou/pi-neuralwatt",
+    "npm:pi-puppeteer"
   ],
   "enabledModels": [
-    "github-copilot/claude-sonnet-4.6",
-    "github-copilot/claude-haiku-4.5",
-    "openrouter/qwen/qwen3-coder",
-    "openrouter/qwen/qwen3.6-plus",
-    "openrouter/qwen/qwen3.6-flash",
-    "github-copilot/gpt-5-mini",
-    "lmstudio/qwen/qwen3.6-35b-a3b",
-    "lmstudio/google/gemma-4-26b-a4b",
-    "nano-gpt/xiaomi/mimo-v2.5",
-    "nano-gpt/xiaomi/mimo-v2.5-pro",
-    "nano-gpt/minimax/minimax-latest",
-    "nano-gpt/moonshotai/kimi-latest"
+    "neuralwatt/glm-5.2",
+    "neuralwatt/glm-5.2-short",
+    "neuralwatt/kimi-k2.7-code"
   ],
   "hideThinkingBlock": false,
   "steeringMode": "one-at-a-time",
   "subagents": {
     "agentOverrides": {
       "worker": {
+        "thinking": "medium",
         "tools": [
           "read",
           "grep",
@@ -46,7 +35,6 @@
           "bash",
           "edit",
           "write",
-          "contact_supervisor",
           "ctx_execute",
           "ctx_execute_file",
           "ctx_search",
@@ -57,6 +45,7 @@
         ]
       },
       "scout": {
+        "thinking": "low",
         "tools": [
           "read",
           "grep",
@@ -64,17 +53,14 @@
           "ls",
           "bash",
           "write",
-          "intercom",
           "ctx_execute",
-          "ctx_execute_file",
           "ctx_search",
-          "ctx_index",
           "ctx_fetch_and_index",
-          "ctx_batch_execute",
-          "mcp"
+          "web_search"
         ]
       },
       "reviewer": {
+        "thinking": "high",
         "tools": [
           "read",
           "grep",
@@ -83,70 +69,40 @@
           "bash",
           "edit",
           "write",
-          "intercom",
           "ctx_execute",
-          "ctx_execute_file",
           "ctx_search",
-          "ctx_index",
-          "ctx_fetch_and_index",
-          "ctx_batch_execute",
           "mcp"
         ]
       },
       "delegate": {
+        "thinking": "medium",
         "tools": [
           "read",
-          "grep",
-          "find",
-          "ls",
-          "bash",
-          "edit",
-          "write",
-          "contact_supervisor",
           "ctx_execute",
-          "ctx_execute_file",
           "ctx_search",
-          "ctx_index",
-          "ctx_fetch_and_index",
-          "ctx_batch_execute",
           "mcp"
         ]
       },
       "oracle": {
+        "thinking": "high",
         "tools": [
           "read",
-          "grep",
-          "find",
-          "ls",
-          "bash",
-          "intercom",
-          "ctx_execute",
-          "ctx_execute_file",
           "ctx_search",
-          "ctx_index",
-          "ctx_fetch_and_index",
-          "ctx_batch_execute",
-          "mcp"
+          "intercom",
+          "ctx_execute"
         ]
       },
       "planner": {
+        "thinking": "high",
         "tools": [
           "read",
-          "grep",
-          "find",
-          "ls",
           "write",
-          "intercom",
-          "ctx_execute",
-          "ctx_execute_file",
           "ctx_search",
-          "ctx_index",
-          "ctx_fetch_and_index",
-          "ctx_batch_execute",
-          "mcp"
+          "ctx_execute_file"
         ]
       },
       "context-builder": {
+        "thinking": "medium",
         "tools": [
           "read",
           "grep",
@@ -155,33 +111,27 @@
           "bash",
           "write",
           "web_search",
-          "intercom",
           "ctx_execute",
-          "ctx_execute_file",
           "ctx_search",
-          "ctx_index",
           "ctx_fetch_and_index",
-          "ctx_batch_execute",
-          "mcp"
+          "ctx_batch_execute"
         ]
       },
       "researcher": {
+        "thinking": "high",
         "tools": [
           "read",
-          "write",
           "web_search",
           "fetch_content",
           "get_search_content",
-          "intercom",
           "ctx_execute",
           "ctx_execute_file",
           "ctx_search",
-          "ctx_index",
           "ctx_fetch_and_index",
-          "ctx_batch_execute",
-          "mcp"
+          "ctx_batch_execute"
         ]
       }
     }
-  }
+  },
+  "theme": "dark"
 }
