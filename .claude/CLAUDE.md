@@ -1,3 +1,5 @@
+@RTK.md
+
 # context-mode — MANDATORY routing rules
 
 context-mode MCP tools available. Rules protect context window from flooding. One unrouted command dumps 56 KB into context.
@@ -102,11 +104,11 @@ Default session model: `opus` (Claude Opus 4.8), pinned in `settings.json` (`"mo
 
 ### Available models (3 only)
 
-| Model | API ID | $/in MTok | $/out MTok | ctx | max out | extended thinking | adaptive thinking (effort) | latency |
-| --- | --- | ---: | ---: | ---: | ---: | :--: | :--: | --- |
-| Claude Opus 4.8 | `claude-opus-4-8` | $5 | $25 | 1M | 128k | ✗ | ✓ (defaults `high`) | moderate |
-| Claude Sonnet 4.6 | `claude-sonnet-4-6` | $3 | $15 | 1M | 128k | ✓ | ✓ | fast |
-| Claude Haiku 4.5 | `claude-haiku-4-5` | $1 | $5 | 200k | 64k | ✓ | ✗ | fastest |
+| Model             | API ID              | $/in MTok | $/out MTok |  ctx | max out | extended thinking | adaptive thinking (effort) | latency  |
+| ----------------- | ------------------- | --------: | ---------: | ---: | ------: | :---------------: | :------------------------: | -------- |
+| Claude Opus 4.8   | `claude-opus-4-8`   |        $5 |        $25 |   1M |    128k |         ✗         |    ✓ (defaults `high`)     | moderate |
+| Claude Sonnet 4.6 | `claude-sonnet-4-6` |        $3 |        $15 |   1M |    128k |         ✓         |             ✓              | fast     |
+| Claude Haiku 4.5  | `claude-haiku-4-5`  |        $1 |         $5 | 200k |     64k |         ✓         |             ✗              | fastest  |
 
 All 3: vision ✓, native tool-use / JSON ✓, multilingual ✓.
 
@@ -124,18 +126,18 @@ All 3: vision ✓, native tool-use / JSON ✓, multilingual ✓.
 
 ### Routing table
 
-| Role | Agent(s) | Model | Why |
-| --- | --- | --- | --- |
-| Orchestrator (main) | — | `opus` | Most capable; 1M ctx headroom for accumulating subagent returns; effort-tune. Pinned in `settings.json`. |
-| Worker: code-heavy / general fork (default) | `worker` (create); repin `cleanup`, `docs` | `sonnet` | Best speed/intelligence; 1M ctx; effort-tune + extended thinking. ~3× cheaper than Opus on output. |
-| Mechanical / test scaffold / recon / handoff | `scout` (create); `commit` | `haiku` | Cheapest + fastest; vision + tool-use. No adaptive thinking — skip for deduction. |
-| Analysis / review (standard) | `review`, `oracle` | `sonnet` | Parallel sub-agents need breadth + 1M ctx; effort-tune for adversarial angles. |
-| Deep-dive / long-horizon / security-critical / large blast-radius | one-off | `opus` | Highest capability; high-autonomy agentic coding. Override UP from `sonnet` when pattern-matching fails. |
-| Screenshot / vision / JSON handoff | simple→`haiku`, complex→`sonnet` | `haiku`/`sonnet` | All models have vision+json; Haiku for mechanical capture, Sonnet for interpretation. |
-| Test runner / invoke + parse / summarize | `tester` (create); no subagent if just Bash | `haiku` | Tool-use + code execution; mechanical invoke→parse→report. No deduction needed. |
-| Test authoring from clear spec | `tester` | `haiku` | Spec-driven boilerplate + assertions. |
-| Test authoring w/ edge-case / concurrency reasoning | `tester` | `sonnet` | Needs reasoning Haiku lacks (no adaptive thinking). Escalate from `haiku` if scaffolds miss edges. |
-| Failure root-cause diagnosis (test fail) | `tester`→`review` | `sonnet` (override `opus` if subtle) | Deduction required. Escalate to `opus` when pattern-matching fails or bug is subtle/security-critical. |
+| Role                                                              | Agent(s)                                    | Model                                | Why                                                                                                      |
+| ----------------------------------------------------------------- | ------------------------------------------- | ------------------------------------ | -------------------------------------------------------------------------------------------------------- |
+| Orchestrator (main)                                               | —                                           | `opus`                               | Most capable; 1M ctx headroom for accumulating subagent returns; effort-tune. Pinned in `settings.json`. |
+| Worker: code-heavy / general fork (default)                       | `worker` (create); repin `cleanup`, `docs`  | `sonnet`                             | Best speed/intelligence; 1M ctx; effort-tune + extended thinking. ~3× cheaper than Opus on output.       |
+| Mechanical / test scaffold / recon / handoff                      | `scout` (create); `commit`                  | `haiku`                              | Cheapest + fastest; vision + tool-use. No adaptive thinking — skip for deduction.                        |
+| Analysis / review (standard)                                      | `review`, `oracle`                          | `sonnet`                             | Parallel sub-agents need breadth + 1M ctx; effort-tune for adversarial angles.                           |
+| Deep-dive / long-horizon / security-critical / large blast-radius | one-off                                     | `opus`                               | Highest capability; high-autonomy agentic coding. Override UP from `sonnet` when pattern-matching fails. |
+| Screenshot / vision / JSON handoff                                | simple→`haiku`, complex→`sonnet`            | `haiku`/`sonnet`                     | All models have vision+json; Haiku for mechanical capture, Sonnet for interpretation.                    |
+| Test runner / invoke + parse / summarize                          | `tester` (create); no subagent if just Bash | `haiku`                              | Tool-use + code execution; mechanical invoke→parse→report. No deduction needed.                          |
+| Test authoring from clear spec                                    | `tester`                                    | `haiku`                              | Spec-driven boilerplate + assertions.                                                                    |
+| Test authoring w/ edge-case / concurrency reasoning               | `tester`                                    | `sonnet`                             | Needs reasoning Haiku lacks (no adaptive thinking). Escalate from `haiku` if scaffolds miss edges.       |
+| Failure root-cause diagnosis (test fail)                          | `tester`→`review`                           | `sonnet` (override `opus` if subtle) | Deduction required. Escalate to `opus` when pattern-matching fails or bug is subtle/security-critical.   |
 
 ### Escalation tiers (cost-ordered, pre-authorized)
 
@@ -184,6 +186,7 @@ Proceed? (y / pick other / adjust scope)
 ### Ad-hoc Task spawns (no matching agent)
 
 `Task` tool takes `subagent_type` only; model follows that agent's frontmatter. For one-offs with no fit:
+
 1. Prefer nearest existing agent with correct `model:` pin.
 2. If none, create a throwaway agent def (`~/.claude/agents/<role>-oneshot.md`) with the right `model:`, dispatch, delete after.
 

@@ -14,7 +14,6 @@
     ],
     "defaultMode": "auto"
   },
-  "model": "opus",
   "hooks": {
     "SessionStart": [
       {
@@ -63,6 +62,15 @@
             "command": "\"$HOME/.claude/hooks/confirm-outside-project.sh\"",
             "timeout": 5,
             "statusMessage": "Checking directory scope..."
+          }
+        ]
+      },
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "rtk hook claude"
           }
         ]
       }
@@ -115,5 +123,6 @@
   "theme": "auto",
   "editorMode": "normal",
   "autoCompactEnabled": true,
-  "skipAutoPermissionPrompt": true
+  "skipAutoPermissionPrompt": true,
+  "skipWorkflowUsageWarning": true
 }

@@ -43,7 +43,7 @@ return {
             name = "LMStudio",
             end_point = "http://localhost:1234/v1/completions",
             stream = true,
-            model = "qwen/qwen2.5-coder-14b",
+            model = vim.env.NVIM_FIM_MODEL or "qwen/qwen2.5-coder-14b",
             optional = {
               max_tokens = 256,
               top_p = 0.9,
@@ -55,7 +55,7 @@ return {
             name = "LMStudio",
             end_point = "http://localhost:1234/v1/chat/completions",
             stream = true,
-            model = "qwen/qwen3.5-9b",
+            model = vim.env.NVIM_CHAT_MODEL or "qwen/qwen3.5-9b",
             optional = {
               reasoning_effort = "none",
               max_tokens = 256,
