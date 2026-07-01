@@ -26,7 +26,7 @@ unset rc
 
 #kubectx and kubens
 export PATH=~/.kubectx:$PATH
-export EDITOR="code -w"
+export EDITOR="nvim"
 
 # mongodb
 export MONGOMS_ARCH=x64
@@ -38,4 +38,3 @@ export PATH="$PATH:/var/home/svzieg/.lmstudio/bin"
 # End of LM Studio CLI section
 
 source /usr/share/bash-completion/bash_completion
-
