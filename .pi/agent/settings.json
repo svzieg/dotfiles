@@ -1,7 +1,7 @@
 {
-  "lastChangelogVersion": "0.80.2",
+  "lastChangelogVersion": "0.80.3",
   "defaultProvider": "neuralwatt",
-  "defaultModel": "glm-5.2-short",
+  "defaultModel": "glm-5.2",
   "defaultThinkingLevel": "high",
   "packages": [
     "npm:context-mode",
@@ -14,18 +14,22 @@
     "npm:pi-caveman",
     "npm:pi-rtk-rewrite",
     "npm:@aliou/pi-neuralwatt",
-    "npm:pi-puppeteer"
+    "npm:pi-puppeteer",
+    "npm:@juicesharp/rpiv-ask-user-question"
   ],
   "enabledModels": [
     "neuralwatt/glm-5.2",
     "neuralwatt/glm-5.2-short",
-    "neuralwatt/kimi-k2.7-code"
+    "neuralwatt/kimi-k2.7-code",
+    "neuralwatt/qwen3.6-35b-fast",
+    "neuralwatt/kimi-k2.6"
   ],
   "hideThinkingBlock": false,
   "steeringMode": "one-at-a-time",
   "subagents": {
     "agentOverrides": {
       "worker": {
+        "model": "neuralwatt/glm-5.2-short",
         "thinking": "medium",
         "tools": [
           "read",
@@ -45,6 +49,7 @@
         ]
       },
       "scout": {
+        "model": "neuralwatt/qwen3.6-35b-fast",
         "thinking": "low",
         "tools": [
           "read",
@@ -75,6 +80,7 @@
         ]
       },
       "delegate": {
+        "model": "neuralwatt/qwen3.6-35b-fast",
         "thinking": "medium",
         "tools": [
           "read",
@@ -102,6 +108,7 @@
         ]
       },
       "context-builder": {
+        "model": "neuralwatt/qwen3.6-35b-fast",
         "thinking": "medium",
         "tools": [
           "read",
@@ -118,6 +125,7 @@
         ]
       },
       "researcher": {
+        "model": "neuralwatt/kimi-k2.6",
         "thinking": "high",
         "tools": [
           "read",
@@ -129,6 +137,149 @@
           "ctx_search",
           "ctx_fetch_and_index",
           "ctx_batch_execute"
+        ]
+      },
+      "sdd-explore": {
+        "model": "neuralwatt/qwen3.6-35b-fast",
+        "thinking": "low",
+        "tools": [
+          "read",
+          "grep",
+          "find",
+          "ls",
+          "bash",
+          "write",
+          "ctx_execute",
+          "ctx_execute_file",
+          "ctx_search",
+          "ctx_batch_execute"
+        ]
+      },
+      "sdd-proposal": {
+        "model": "neuralwatt/qwen3.6-35b",
+        "thinking": "high",
+        "tools": [
+          "read",
+          "grep",
+          "find",
+          "ls",
+          "bash",
+          "write",
+          "ctx_search",
+          "ctx_batch_execute"
+        ]
+      },
+      "sdd-spec": {
+        "model": "neuralwatt/qwen3.6-35b",
+        "thinking": "high",
+        "tools": [
+          "read",
+          "grep",
+          "find",
+          "ls",
+          "bash",
+          "write",
+          "ctx_search",
+          "ctx_batch_execute"
+        ]
+      },
+      "sdd-design": {
+        "model": "neuralwatt/qwen3.6-35b",
+        "thinking": "high",
+        "tools": [
+          "read",
+          "grep",
+          "find",
+          "ls",
+          "bash",
+          "write",
+          "ctx_search",
+          "ctx_batch_execute"
+        ]
+      },
+      "sdd-tasks": {
+        "model": "neuralwatt/qwen3.6-35b",
+        "thinking": "high",
+        "tools": [
+          "read",
+          "grep",
+          "find",
+          "ls",
+          "bash",
+          "write",
+          "ctx_search",
+          "ctx_batch_execute"
+        ]
+      },
+      "sdd-init": {
+        "model": "neuralwatt/qwen3.6-35b-fast",
+        "thinking": "low",
+        "tools": [
+          "read",
+          "write",
+          "bash",
+          "grep",
+          "find",
+          "ls"
+        ]
+      },
+      "sdd-apply": {
+        "model": "neuralwatt/glm-5.2",
+        "thinking": "high",
+        "tools": [
+          "read",
+          "grep",
+          "find",
+          "ls",
+          "bash",
+          "edit",
+          "write",
+          "ctx_execute",
+          "ctx_execute_file",
+          "ctx_search",
+          "ctx_index",
+          "ctx_batch_execute",
+          "mcp"
+        ]
+      },
+      "sdd-verify": {
+        "model": "neuralwatt/qwen3.6-35b",
+        "thinking": "high",
+        "tools": [
+          "read",
+          "grep",
+          "find",
+          "ls",
+          "bash",
+          "write",
+          "ctx_execute",
+          "ctx_execute_file",
+          "ctx_search",
+          "ctx_batch_execute"
+        ]
+      },
+      "sdd-sync": {
+        "model": "neuralwatt/qwen3.6-35b-fast",
+        "thinking": "low",
+        "tools": [
+          "read",
+          "grep",
+          "find",
+          "ls",
+          "bash",
+          "write"
+        ]
+      },
+      "sdd-archive": {
+        "model": "neuralwatt/qwen3.6-35b-fast",
+        "thinking": "low",
+        "tools": [
+          "read",
+          "grep",
+          "find",
+          "ls",
+          "bash",
+          "write"
         ]
       }
     }

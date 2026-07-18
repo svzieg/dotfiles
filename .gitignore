@@ -1,1 +1,3 @@
 .pi/agent/models.json
+# Local Pi runtime state
+.atl/
