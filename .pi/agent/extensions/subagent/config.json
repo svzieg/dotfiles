@@ -1,0 +1,6 @@
+{
+	"intercomBridge": {
+		"mode": "always",
+		"instructionFile": "~/.pi/agent/extensions/subagent/intercom-bridge.md"
+	}
+}
