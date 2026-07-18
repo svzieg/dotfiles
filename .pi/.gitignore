@@ -1,3 +1,19 @@
+# === Secrets (NEVER commit) ===
 agent/auth.json
+
+# === Caches / runtime state ===
 agent/mcp-cache.json
-agent/sessions/
+agent/mcp-npx-cache.json
+agent/run-history.jsonl
+agent/settings.json.bak-*
+agent/settings.json.backup
+agent/trust.json
+agent/bin/
+agent/npm/node_modules/
+agent/pi-pretty/
+agent/gentle-ai/
+agent/intercom/
+agent/skills/
+context-mode/
+skills/
+.pi-puppeteer/

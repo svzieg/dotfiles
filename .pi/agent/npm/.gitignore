@@ -1,0 +1,6 @@
+# Ignore everything, then allow config manifests only
+*
+!.gitignore
+!package.json
+!extensions/
+!extensions/lmstudio.ts

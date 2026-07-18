@@ -1,0 +1,62 @@
+{
+  "providers": {
+    "nano-gpt": {
+      "baseUrl": "https://nano-gpt.com/api/v1",
+      "api": "openai-completions",
+      "apiKey": "$NANO_GPT_API_KEY",
+      "models": [
+        {
+          "id": "minimax/minimax-latest",
+          "name": "MiniMax M2.7 (NanoGPT)",
+          "reasoning": true,
+          "input": ["text"],
+          "defaultThinkingLevel": "medium",
+          "contextWindow": 204800,
+          "maxTokens": 131100
+        },
+        {
+          "id": "moonshotai/kimi-latest",
+          "name": "Kimi K2.6 (NanoGPT)",
+          "reasoning": true,
+          "input": ["text", "image"],
+          "defaultThinkingLevel": "medium",
+          "contextWindow": 262144,
+          "maxTokens": 65500
+        },
+        {
+          "id": "xiaomi/mimo-v2.5",
+          "name": "Xiaomi MiMo V2.5 (NanoGPT)",
+          "reasoning": true,
+          "input": ["text", "image"],
+          "defaultThinkingLevel": "medium",
+          "contextWindow": 1000000,
+          "maxTokens": 131100
+        },
+        {
+          "id": "xiaomi/mimo-v2.5-pro",
+          "name": "Xiaomi MiMo V2.5 Pro (NanoGPT)",
+          "reasoning": true,
+          "input": ["text"],
+          "defaultThinkingLevel": "medium",
+          "contextWindow": 1000000,
+          "maxTokens": 131100
+        }
+      ]
+    },
+    "lmstudio": {
+      "baseUrl": "http://localhost:1234/v1",
+      "api": "openai-completions",
+      "apiKey": "lm-studio",
+      "models": [
+        {
+          "id": "qwen/qwen3.6-35b-a3b",
+          "input": ["text", "image"]
+        },
+        {
+          "id": "google/gemma-4-26b-a4b",
+          "input": ["text", "image"]
+        }
+      ]
+    }
+  }
+}

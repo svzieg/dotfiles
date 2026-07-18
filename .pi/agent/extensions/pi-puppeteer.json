@@ -1,0 +1,13 @@
+{
+  "defaultBrowser": "chrome",
+  "defaults": {
+    "headless": true,
+    "timeoutMs": 30000,
+    "navigationWaitUntil": "domcontentloaded"
+  },
+  "browsers": {
+    "chrome": {
+      "executablePath": "/var/lib/flatpak/exports/bin/com.google.Chrome"
+    }
+  }
+}

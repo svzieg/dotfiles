@@ -1,0 +1,27 @@
+# === Secrets (NEVER commit) ===
+settings.local.json
+settings.json.bak
+settings.json.backup
+
+# === Caches / runtime state ===
+cache/
+backups/
+paste-cache/
+projects/
+plans/
+tasks/
+file-history/
+context-mode/
+plugins/cache/
+plugins/data/
+plugins/marketplaces/
+plugins/plugin-catalog-cache.json
+plugins/.last_inuse_sweep
+plugins/blocklist.json
+plugins/installed_plugins.json
+plugins/known_marketplaces.json
+history.jsonl
+stats-cache.json
+.caveman-active
+.last-cleanup
+.last-update-result.json
