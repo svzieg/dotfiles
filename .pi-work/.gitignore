@@ -1,0 +1,19 @@
+# Secrets — NEVER commit
+agent/auth.json
+agent/models-store.json
+agent/trust.json
+# NOTE: agent/models.json IS tracked on purpose. It holds provider endpoints that
+# reference credentials as $ENV_VAR, never literal keys, and other machines need it
+# to reproduce the Langdock setup.
+
+# Caches / runtime state
+agent/mcp-cache.json
+agent/mcp-npx-cache.json
+agent/run-history.jsonl
+agent/settings.json.bak-*
+agent/settings.json.backup
+agent/npm/node_modules/
+agent/tmp/
+sessions/
+logs/
+plans/

@@ -1,28 +1,17 @@
-.pi/agent/models.json
-.claude/settings.local.json
-.claude/history.jsonl
-.claude/file-history/
-.claude/paste-cache/
-.claude/cache/
-.claude/backups/
-.claude/shell-snapshots/
-.claude/context-mode/
-.claude/session-env/
-.claude/sessions/
-.claude/projects/
-.claude/plans/
-.claude/tasks/
-.claude/ide/
-.claude/stats-cache.json
-.claude/plugins/cache/
-.claude/plugins/data/
-.claude/plugins/plugin-catalog-cache.json
-.claude/plugins/installed_plugins.json
-.claude/plugins/blocklist.json
-.claude/plugins/known_marketplaces.json
-.claude/.caveman-active
-.claude/.last-cleanup
-.claude/settings.json.backup
-.claude/settings.json.bak
-.claude/skills/
-.claude/hooks/
+# INERT — kept only as a signpost.
+#
+# This file is NOT a $HOME/.gitignore. The repo is a bare git dir whose
+# work-tree is $HOME, so the repository root is $HOME, not $HOME/.cfg.
+# Ignore rules placed here match nothing and give false protection.
+#
+# The files that actually apply:
+#   $HOME/.gitignore        top-level paths (pi runtime, shell secrets)
+#   $HOME/.pi/.gitignore    .pi/ subtree
+#   $HOME/.pi-work/.gitignore  .pi-work/ subtree
+#   $HOME/.claude/.gitignore    .claude/ subtree
+#
+# The rules that used to live here were duplicates of $HOME/.claude/.gitignore,
+# which is live and effective. The single unique entry,
+# ".pi/agent/models.json", was deliberately NOT carried over: that file holds
+# provider endpoints that reference credentials as $ENV_VAR and never literal
+# keys, so other machines need it tracked to reproduce the setup.

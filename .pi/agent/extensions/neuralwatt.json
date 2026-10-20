@@ -1,4 +1,13 @@
 {
-  "quotaWarnings": false,
-  "includeLegacyModelIds": false
+  "$schema": "https://unpkg.com/@aliou/pi-neuralwatt@0.18.0/schema.json",
+  "provider": {
+    "includeLegacyModelIds": true,
+    "includeEarlyAccessModels": true,
+    "includeAliasedModelIds": true
+  },
+  "quotaCommand": {},
+  "quotaWarnings": {
+    "enabled": false
+  },
+  "version": "0.18.0"
 }

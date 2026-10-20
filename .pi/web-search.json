@@ -1,4 +1,7 @@
 {
   "searchModel": "neuralwatt/qwen3.5-397b",
-  "summaryModel": "neuralwatt/qwen3.5-397b-fast"
+  "summaryModel": "minimax/MiniMax-M3",
+  "webSearch": {
+    "enabled": true
+  }
 }

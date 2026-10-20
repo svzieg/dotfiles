@@ -1,5 +1,26 @@
+# ==============================================================================
+# Repo root .gitignore
+#
+# This repo is a BARE git dir (~/.cfg) used with --work-tree=$HOME, so the
+# repository root IS $HOME. This file is the only root-level ignore that
+# actually applies. Effective scope rules:
+#   - $HOME/.gitignore      (this file)  -> top-level paths
+#   - $HOME/.pi/.gitignore               -> .pi/ subtree
+#   - $HOME/.pi-work/.gitignore          -> .pi-work/ subtree
+#   - $HOME/.claude/.gitignore           -> .claude/ subtree
+# Anything else (notably $HOME/.cfg/.gitignore) is INERT: a bare repo has no
+# work-tree at its own location, so rules placed there match nothing.
+# ==============================================================================
+
 # Local Pi runtime state
 .atl/
-# Secrets / local env (keys)
-.bashrc.d/pi.sh
+
+# --- Secrets -----------------------------------------------------------------
+# Matched by SUFFIX, not by literal filename. A literal rule silently stops
+# matching when a file is renamed (that is how .bashrc.d/pi.sh -> pi.dev.sh
+# left a plaintext API key stageable). Keep these suffix rules.
+.bashrc.d/*.secrets
+.bashrc.d/secrets.d/
+.secrets.env
+
 .claude/settings.local.json

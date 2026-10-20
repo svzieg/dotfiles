@@ -1,0 +1,35 @@
+{
+  "defaultProvider": "openai-codex",
+  "defaultModel": "gpt-6.1-sol",
+  "defaultThinkingLevel": "high",
+  "packages": [
+    "npm:context-mode",
+    {
+      "source": "npm:pi-mcp-adapter",
+      "extensions": []
+    },
+    "npm:pi-web-access",
+    "npm:pi-fff",
+    "npm:pi-effort",
+    "npm:pi-herdr",
+    "npm:pi-herdr-subagents",
+    "npm:pi-patty-bg-tasks@1.1.6",
+    "npm:pi-powerline-footer",
+    "npm:betterwright",
+    "npm:@juicesharp/rpiv-ask-user-question",
+    "npm:pi-ultra-compact",
+    "npm:pi-updater"
+  ],
+  "enabledModels": [
+    "openai-codex/gpt-6.1-sol",
+    "openai-codex/gpt-6-sol",
+    "openai-codex/gpt-6-luna"
+  ],
+  "hideThinkingBlock": false,
+  "steeringMode": "one-at-a-time",
+  "theme": "dark",
+  "tuiMode": "regular",
+  "extensions": [
+    "+builtin:mcp"
+  ]
+}

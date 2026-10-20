@@ -1,55 +1,51 @@
 {
-  "lastChangelogVersion": "0.80.3",
-  "defaultProvider": "neuralwatt",
-  "defaultModel": "glm-5.2",
+  "lastChangelogVersion": "1.3.0",
+  "defaultProvider": "openai-codex",
+  "defaultModel": "gpt-6.1-sol",
   "defaultThinkingLevel": "high",
   "packages": [
     "npm:context-mode",
-    "npm:pi-subagents",
-    "npm:pi-mcp-adapter",
-    "npm:pi-intercom",
+    {
+      "source": "npm:pi-mcp-adapter",
+      "extensions": []
+    },
     "npm:pi-web-access",
     "npm:pi-simplify",
-    "npm:pi-lens",
     "npm:pi-caveman",
     "npm:pi-rtk-rewrite",
     "npm:@aliou/pi-neuralwatt",
-    "npm:pi-puppeteer",
-    "npm:@juicesharp/rpiv-ask-user-question"
+    "npm:betterwright",
+    "npm:@juicesharp/rpiv-ask-user-question",
+    "npm:@sinamtz/pi-minimax-provider",
+    "npm:pi-effort",
+    "npm:pi-fff",
+    "npm:pi-powerline-footer",
+    "npm:pi-herdr-subagents",
+    "npm:pi-herdr",
+    "npm:@dietrichgebert/ponytail",
+    {
+      "source": "npm:pi-background-tasks",
+      "extensions": []
+    },
+    "npm:@narumitw/pi-usage",
+    "npm:pi-patty-bg-tasks@1.1.6",
+    "npm:pi-ultra-compact",
+    "npm:pi-updater"
   ],
   "enabledModels": [
-    "neuralwatt/glm-5.2",
-    "neuralwatt/glm-5.2-short",
-    "neuralwatt/kimi-k2.7-code",
-    "neuralwatt/qwen3.6-35b-fast",
-    "neuralwatt/kimi-k2.6"
+    "openai-codex/gpt-6-luna",
+    "openai-codex/gpt-6-sol",
+    "openai-codex/gpt-6.1-sol",
+    "openai-codex/gpt-6-astra"
   ],
   "hideThinkingBlock": false,
   "steeringMode": "one-at-a-time",
   "subagents": {
     "agentOverrides": {
       "worker": {
-        "model": "neuralwatt/glm-5.2-short",
-        "thinking": "medium",
-        "tools": [
-          "read",
-          "grep",
-          "find",
-          "ls",
-          "bash",
-          "edit",
-          "write",
-          "ctx_execute",
-          "ctx_execute_file",
-          "ctx_search",
-          "ctx_index",
-          "ctx_fetch_and_index",
-          "ctx_batch_execute",
-          "mcp"
-        ]
+        "thinking": "medium"
       },
       "scout": {
-        "model": "neuralwatt/qwen3.6-35b-fast",
         "thinking": "low",
         "tools": [
           "read",
@@ -57,11 +53,7 @@
           "find",
           "ls",
           "bash",
-          "write",
-          "ctx_execute",
-          "ctx_search",
-          "ctx_fetch_and_index",
-          "web_search"
+          "mcp:context-mode"
         ]
       },
       "reviewer": {
@@ -72,20 +64,14 @@
           "find",
           "ls",
           "bash",
-          "edit",
-          "write",
-          "ctx_execute",
-          "ctx_search",
-          "mcp"
+          "mcp:context-mode"
         ]
       },
       "delegate": {
-        "model": "neuralwatt/qwen3.6-35b-fast",
         "thinking": "medium",
         "tools": [
           "read",
-          "ctx_execute",
-          "ctx_search",
+          "mcp:context-mode",
           "mcp"
         ]
       },
@@ -93,22 +79,22 @@
         "thinking": "high",
         "tools": [
           "read",
-          "ctx_search",
-          "intercom",
-          "ctx_execute"
+          "mcp:context-mode",
+          "intercom"
         ]
       },
       "planner": {
         "thinking": "high",
         "tools": [
           "read",
-          "write",
-          "ctx_search",
-          "ctx_execute_file"
+          "grep",
+          "find",
+          "ls",
+          "bash",
+          "mcp:context-mode"
         ]
       },
       "context-builder": {
-        "model": "neuralwatt/qwen3.6-35b-fast",
         "thinking": "medium",
         "tools": [
           "read",
@@ -118,171 +104,24 @@
           "bash",
           "write",
           "web_search",
-          "ctx_execute",
-          "ctx_search",
-          "ctx_fetch_and_index",
-          "ctx_batch_execute"
+          "mcp:context-mode"
         ]
       },
       "researcher": {
-        "model": "neuralwatt/kimi-k2.6",
         "thinking": "high",
         "tools": [
           "read",
           "web_search",
           "fetch_content",
           "get_search_content",
-          "ctx_execute",
-          "ctx_execute_file",
-          "ctx_search",
-          "ctx_fetch_and_index",
-          "ctx_batch_execute"
-        ]
-      },
-      "sdd-explore": {
-        "model": "neuralwatt/qwen3.6-35b-fast",
-        "thinking": "low",
-        "tools": [
-          "read",
-          "grep",
-          "find",
-          "ls",
-          "bash",
-          "write",
-          "ctx_execute",
-          "ctx_execute_file",
-          "ctx_search",
-          "ctx_batch_execute"
-        ]
-      },
-      "sdd-proposal": {
-        "model": "neuralwatt/qwen3.6-35b",
-        "thinking": "high",
-        "tools": [
-          "read",
-          "grep",
-          "find",
-          "ls",
-          "bash",
-          "write",
-          "ctx_search",
-          "ctx_batch_execute"
-        ]
-      },
-      "sdd-spec": {
-        "model": "neuralwatt/qwen3.6-35b",
-        "thinking": "high",
-        "tools": [
-          "read",
-          "grep",
-          "find",
-          "ls",
-          "bash",
-          "write",
-          "ctx_search",
-          "ctx_batch_execute"
-        ]
-      },
-      "sdd-design": {
-        "model": "neuralwatt/qwen3.6-35b",
-        "thinking": "high",
-        "tools": [
-          "read",
-          "grep",
-          "find",
-          "ls",
-          "bash",
-          "write",
-          "ctx_search",
-          "ctx_batch_execute"
-        ]
-      },
-      "sdd-tasks": {
-        "model": "neuralwatt/qwen3.6-35b",
-        "thinking": "high",
-        "tools": [
-          "read",
-          "grep",
-          "find",
-          "ls",
-          "bash",
-          "write",
-          "ctx_search",
-          "ctx_batch_execute"
-        ]
-      },
-      "sdd-init": {
-        "model": "neuralwatt/qwen3.6-35b-fast",
-        "thinking": "low",
-        "tools": [
-          "read",
-          "write",
-          "bash",
-          "grep",
-          "find",
-          "ls"
-        ]
-      },
-      "sdd-apply": {
-        "model": "neuralwatt/glm-5.2",
-        "thinking": "high",
-        "tools": [
-          "read",
-          "grep",
-          "find",
-          "ls",
-          "bash",
-          "edit",
-          "write",
-          "ctx_execute",
-          "ctx_execute_file",
-          "ctx_search",
-          "ctx_index",
-          "ctx_batch_execute",
-          "mcp"
-        ]
-      },
-      "sdd-verify": {
-        "model": "neuralwatt/qwen3.6-35b",
-        "thinking": "high",
-        "tools": [
-          "read",
-          "grep",
-          "find",
-          "ls",
-          "bash",
-          "write",
-          "ctx_execute",
-          "ctx_execute_file",
-          "ctx_search",
-          "ctx_batch_execute"
-        ]
-      },
-      "sdd-sync": {
-        "model": "neuralwatt/qwen3.6-35b-fast",
-        "thinking": "low",
-        "tools": [
-          "read",
-          "grep",
-          "find",
-          "ls",
-          "bash",
-          "write"
-        ]
-      },
-      "sdd-archive": {
-        "model": "neuralwatt/qwen3.6-35b-fast",
-        "thinking": "low",
-        "tools": [
-          "read",
-          "grep",
-          "find",
-          "ls",
-          "bash",
-          "write"
+          "mcp:context-mode"
         ]
       }
     }
   },
-  "theme": "dark"
+  "theme": "dark",
+  "tuiMode": "regular",
+  "extensions": [
+    "+builtin:mcp"
+  ]
 }
