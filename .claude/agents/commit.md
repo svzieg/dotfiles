@@ -3,7 +3,7 @@ name: commit
 description: >
   Generate a conventional commit message from the current diff.
   Use for "write a commit message", "generate commit", "commit these changes".
-model: inherit
+model: haiku
 color: cyan
 tools: ["Read", "Grep", "Bash"]
 ---

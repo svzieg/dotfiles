@@ -101,3 +101,10 @@ if [[ -f /home/linuxbrew/.linuxbrew/bin/brew ]]; then  eval "$(/home/linuxbrew/.
 export PATH="$PATH:/var/home/svzieg/.lmstudio/bin"
 # End of LM Studio CLI section
 
+# zellij sessionizer (~/.local/bin/sess): run a queued command on the first
+# shell of a freshly-created session. Used to start `ssh <host>` for ssh sessions.
+if [[ -n "${SESS_CMD:-}" ]]; then
+  _sess_cmd="$SESS_CMD"; unset SESS_CMD
+  eval "$_sess_cmd"; unset _sess_cmd
+fi
+

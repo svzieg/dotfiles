@@ -12,6 +12,13 @@ return {
           backend = vim.env.ZELLIJ and "zellij" or "tmux",
           enabled = true,
         },
+        -- claude is exec'd directly by the mux backend (no shell in between),
+        -- so ~/.zshrc never runs for it. Wrap in a login+interactive zsh that
+        -- sources rc, then `exec claude` so the process stays named "claude"
+        -- (sidekick's is_proc detection matches on the name).
+        tools = {
+          claude = { cmd = { "zsh", "-lic", "exec claude" } },
+        },
       },
     },
     keys = {
@@ -32,32 +39,32 @@ return {
     config = function()
       require("minuet").setup({
         duet = {
-          provider = "openai_compatible",
+          provider = vim.env.NVIM_DUET_PROVIDER or "openai_compatible",
         },
-        provider = "openai_fim_compatible",
+        provider = vim.env.NVIM_FIM_PROVIDER or "openai_compatible",
         n_completions = 1,
         context_window = 512,
         provider_options = {
           openai_fim_compatible = {
-            api_key = "TERM",
-            name = "LMStudio",
-            end_point = "http://localhost:1234/v1/completions",
+            api_key = vim.env.NVIM_FIM_API_KEY or "TERM",
+            name = vim.env.NVIM_FIM_NAME or "LMStudio",
+            end_point = vim.env.NVIM_FIM_ENDPOINT or "http://localhost:1234/v1/completions",
             stream = true,
-            model = "qwen/qwen2.5-coder-14b",
+            model = vim.env.NVIM_FIM_MODEL or "qwen/qwen2.5-coder-14b",
             optional = {
+              reasoning_effort = "none",
               max_tokens = 256,
               top_p = 0.9,
             },
           },
 
           openai_compatible = {
-            api_key = "LMSTUDIO_API_KEY",
-            name = "LMStudio",
-            end_point = "http://localhost:1234/v1/chat/completions",
+            api_key = vim.env.NVIM_CHAT_API_KEY or "LMSTUDIO_API_KEY",
+            name = vim.env.NVIM_CHAT_NAME or "LMStudio",
+            end_point = vim.env.NVIM_CHAT_ENDPOINT or "http://localhost:1234/v1/chat/completions",
             stream = true,
-            model = "qwen/qwen3.5-9b",
+            model = vim.env.NVIM_CHAT_MODEL or "qwen/qwen3.5-9b",
             optional = {
-              reasoning_effort = "none",
               max_tokens = 256,
               top_p = 0.9,
             },

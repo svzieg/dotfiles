@@ -1,0 +1,97 @@
+#!/usr/bin/env bash
+# Fuzzy session-izer for zellij.
+# Pick a local repo (under $CODING_ROOT) or an SSH host (~/.ssh/config)
+# -> attach to (or create) a named zellij session.
+#   repo  -> "dev" layout (nvim + shell split)
+#   ssh   -> default layout, first shell runs `ssh <host>` (via SESS_CMD hook in zshrc)
+set -uo pipefail
+
+# Launched from a KDE shortcut -> minimal PATH (no linuxbrew, maybe no ~/.local/bin).
+# Make the tools we need resolvable regardless of how we were started.
+export PATH="$HOME/.local/bin:/home/linuxbrew/.linuxbrew/bin:/usr/local/bin:/usr/bin:/bin:$PATH"
+
+# log everything (debug) so failures are readable even if the window closes
+SESS_LOG="/tmp/sess.log"
+{ echo "===== sess start $(date) PATH=$PATH"; } >>"$SESS_LOG" 2>&1
+exec 2> >(tee -a "$SESS_LOG" >&2)
+
+# keep the terminal open so errors are readable instead of vanishing
+die() { echo "ERROR: $*" | tee -a "$SESS_LOG" >&2; echo; read -r -p "press enter to close..." _; exit 1; }
+
+CODING_ROOT="${CODING_ROOT:-$HOME/coding}"
+ZELLIJ_BIN="$(command -v zellij)"
+[ -z "$ZELLIJ_BIN" ] && die "zellij not found in PATH"
+command -v fzf >/dev/null 2>&1 || die "fzf not found in PATH"
+
+# Already inside zellij? Nested create/attach is not allowed.
+if [ -n "${ZELLIJ:-}" ]; then
+  echo "Already inside a zellij session." >&2
+  echo "Switch/create sessions from here with:  Ctrl-o w  (session manager)" >&2
+  exit 1
+fi
+
+sanitize() { printf '%s' "$1" | tr -c 'a-zA-Z0-9_.-' '_'; }
+
+# true only if a LIVE (non-exited) session with this name exists
+session_running() {
+  "$ZELLIJ_BIN" list-sessions 2>/dev/null \
+    | sed -E 's/\x1b\[[0-9;]*m//g' \
+    | grep -v 'EXITED' \
+    | awk '{print $1}' | grep -qx "$1"
+}
+
+list_targets() {
+  # local repos: parent dirs of .git under CODING_ROOT
+  if command -v fd >/dev/null 2>&1; then
+    fd -t d -H -g '.git' "$CODING_ROOT" 2>/dev/null | sed 's,/\.git/\?$,,'
+  else
+    find "$CODING_ROOT" -maxdepth 4 -type d -name .git 2>/dev/null | sed 's,/.git$,,'
+  fi | sort -u | sed 's,^,repo\t,'
+  # ssh hosts (skip wildcard patterns)
+  if [ -f "$HOME/.ssh/config" ]; then
+    awk 'tolower($1)=="host"{for(i=2;i<=NF;i++) if($i!~/[*?]/ && $i!="") print "ssh\t"$i}' \
+      "$HOME/.ssh/config" | sort -u
+  fi
+}
+
+# fzf: show kind + nice label, hide the raw path column from matching noise
+sel=$(list_targets | fzf \
+        --delimiter='\t' --with-nth='1,2' \
+        --prompt='session> ' --height='70%' --reverse --border \
+        --header='enter: open session   esc: cancel' \
+        --preview 'k={1}; t={2}; if [ "$k" = repo ]; then git -C "$t" log --oneline -10 2>/dev/null || ls -la "$t"; else echo "ssh -> $t"; fi') || exit 0
+[ -z "$sel" ] && exit 0
+
+kind=$(printf '%s' "$sel" | cut -f1)
+target=$(printf '%s' "$sel" | cut -f2)
+echo "selected: kind=$kind target=$target" >>"$SESS_LOG"
+
+case "$kind" in
+  repo)
+    name="$(sanitize "$(basename "$target")")"
+    if session_running "$name"; then
+      echo "attaching live session $name" >>"$SESS_LOG"
+      "$ZELLIJ_BIN" attach "$name"
+    else
+      echo "creating session $name (dev) cwd=$target" >>"$SESS_LOG"
+      "$ZELLIJ_BIN" delete-session "$name" -f 2>/dev/null   # clear any stale/exited session
+      cd "$target" || die "cannot cd to $target"
+      "$ZELLIJ_BIN" --session "$name" --new-session-with-layout dev; rc=$?
+      echo "zellij create exited rc=$rc" >>"$SESS_LOG"
+      [ $rc -ne 0 ] && die "zellij failed to start (layout dev), rc=$rc"
+    fi
+    ;;
+  ssh)
+    name="ssh_$(sanitize "$target")"
+    if session_running "$name"; then
+      "$ZELLIJ_BIN" attach "$name"
+    else
+      "$ZELLIJ_BIN" delete-session "$name" -f 2>/dev/null
+      # SESS_CMD is picked up by the zshrc hook on the first shell of the new session
+      SESS_CMD="ssh $target" "$ZELLIJ_BIN" --session "$name" --new-session-with-layout tmux || die "zellij failed to start (ssh)"
+    fi
+    ;;
+  *)
+    echo "unknown selection: $sel"; exit 1
+    ;;
+esac
