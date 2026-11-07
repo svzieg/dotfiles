@@ -2,6 +2,12 @@
   "mcpServers": {
     "context-mode": {
       "command": "context-mode"
+    },
+    "radius": {
+      "url": "https://radius.pi.dev/mcp",
+      "auth": {
+        "provider": "radius"
+      }
     }
   }
 }

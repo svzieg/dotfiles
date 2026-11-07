@@ -7,7 +7,7 @@
   },
   "quotaCommand": {},
   "quotaWarnings": {
-    "enabled": false
+    "enabled": true
   },
   "version": "0.18.0"
 }

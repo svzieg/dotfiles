@@ -1,5 +1,5 @@
 {
-  "lastChangelogVersion": "1.3.0",
+  "lastChangelogVersion": "1.5.0",
   "defaultProvider": "openai-codex",
   "defaultModel": "gpt-6.1-sol",
   "defaultThinkingLevel": "high",
@@ -29,8 +29,18 @@
     },
     "npm:@narumitw/pi-usage",
     "npm:pi-patty-bg-tasks@1.1.6",
-    "npm:pi-ultra-compact",
-    "npm:pi-updater"
+    {
+      "source": "npm:pi-ultra-compact",
+      "extensions": [],
+      "skills": []
+    },
+    "npm:pi-updater",
+    "npm:pi-image-view",
+    {
+      "source": "npm:agent-comms@8.15.18",
+      "extensions": []
+    },
+    "/home/svzieg/.pi/agent/local-packages/pi-intercom/node_modules/pi-intercom"
   ],
   "enabledModels": [
     "openai-codex/gpt-6-luna",
@@ -119,9 +129,22 @@
       }
     }
   },
-  "theme": "dark",
-  "tuiMode": "regular",
+  "theme": "light/dark",
+  "tuiMode": "fullscreen",
   "extensions": [
     "+builtin:mcp"
-  ]
+  ],
+  "followUpMode": "one-at-a-time",
+  "cacheWarming": "streaming",
+  "showCacheMissNotices": true,
+  "extensionChangelogVersions": {
+    "{\"source\":\"npm:pi-web-access\",\"scope\":\"user\"}": "0.47.0",
+    "{\"source\":\"npm:@aliou/pi-neuralwatt\",\"scope\":\"user\"}": "0.19.1",
+    "{\"source\":\"npm:betterwright\",\"scope\":\"user\"}": "2.9.1",
+    "{\"source\":\"npm:pi-effort\",\"scope\":\"user\"}": "0.1.1",
+    "{\"source\":\"npm:pi-powerline-footer\",\"scope\":\"user\"}": "0.22.0",
+    "{\"source\":\"npm:@narumitw/pi-usage\",\"scope\":\"user\"}": "0.69.2",
+    "{\"source\":\"npm:pi-updater\",\"scope\":\"user\"}": "0.5.0",
+    "{\"source\":\"npm:pi-image-view\",\"scope\":\"user\"}": "0.5.0"
+  }
 }
