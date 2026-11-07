@@ -1,0 +1,4 @@
+# Track portable settings only; exclude logs, sessions, and runtime state.
+*
+!.gitignore
+!config.toml
