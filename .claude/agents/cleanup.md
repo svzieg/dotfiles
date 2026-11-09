@@ -3,7 +3,8 @@ name: cleanup
 description: >
   Two-pass code cleanup: deslop (AI-slop patterns) + verbosity review.
   Use for "cleanup this code", "remove AI slop", "deslop", "simplify the diff".
-model: sonnet
+model: opus
+effort: medium
 color: yellow
 tools: ["Read", "Grep", "Glob", "Bash", "Edit", "Write"]
 ---

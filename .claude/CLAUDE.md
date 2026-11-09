@@ -100,7 +100,7 @@ After /clear or /compact: knowledge base and session stats preserved. Use `ctx p
 
 ## Subagent Model Routing
 
-Default session model: `opus` (Claude Opus 4.8), pinned in `settings.json` (`"model": "opus"`). Claude Code selects subagent model from agent-definition frontmatter (`model:` = `inherit` | `opus` | `sonnet` | `haiku` | `<api-id>`), NOT via per-call `model:` override on the `Task` tool. Reviewed 2026-06-29 against [Models overview](https://platform.claude.com/docs/en/about-claude/models/overview) + [Fable/Mythos intro](https://platform.claude.com/docs/en/about-claude/models/introducing-claude-fable-5-and-claude-mythos-5).
+Default session model: `sonnet` (Claude Sonnet 4.6), pinned in `settings.json` (`"model": "sonnet"`). Claude Code selects subagent model from agent-definition frontmatter (`model:` = `inherit` | `opus` | `sonnet` | `haiku` | `<api-id>`), NOT via per-call `model:` override on the `Task` tool. Reviewed 2026-06-29 against [Models overview](https://platform.claude.com/docs/en/about-claude/models/overview) + [Fable/Mythos intro](https://platform.claude.com/docs/en/about-claude/models/introducing-claude-fable-5-and-claude-mythos-5).
 
 ### Available models (3 only)
 
@@ -120,15 +120,22 @@ All 3: vision ✓, native tool-use / JSON ✓, multilingual ✓.
 
 ### NOT available (do not use)
 
-- **Claude Fable 5** (`claude-fable-5`) — GA June 9 2026 on API/Bedrock/Vertex/Foundry, but NOT available in this environment (2026-06-29). Do not reference.
+- **Claude Fable 5** (`claude-fable-5`) — available again in this environment as of 2026-07-14 (for now — provisional, re-check before relying on it long-term).
 - **Claude Mythos 5** (`claude-mythos-5`) — limited availability, Project Glasswing invitation-only. Do not reference.
-- If either becomes available, re-fetch docs + update this section.
+- If Mythos becomes available, re-fetch docs + update this section.
+
+### USER OVERRIDE (2026-09-29) — supersedes routing table + pins below
+
+- **opus**: all coding + review (`worker`, `review`, `oracle`, `cleanup` when non-trivial).
+- **sonnet**: testing, scouting, research, small/low-complexity tasks, low-complexity coding (`tester`, `scout`, `docs`, `commit`).
+- **Thinking effort** scales with complexity: low = mechanical/lookup, medium = standard impl/test, high = design, cross-file, security, root-cause. Agent frontmatter `effort:` sets default (worker/review/oracle `high`, tester/scout `low`, docs `medium`); raise/lower per dispatch in the prompt.
+- Dispatch-plan gate stays: list agent + model + effort, wait for OK.
 
 ### Routing table
 
 | Role                                                              | Agent(s)                                    | Model                                | Why                                                                                                      |
 | ----------------------------------------------------------------- | ------------------------------------------- | ------------------------------------ | -------------------------------------------------------------------------------------------------------- |
-| Orchestrator (main)                                               | —                                           | `opus`                               | Most capable; 1M ctx headroom for accumulating subagent returns; effort-tune. Pinned in `settings.json`. |
+| Orchestrator (main)                                               | —                                           | `sonnet`                             | 1M ctx headroom for accumulating subagent returns; effort-tune. Pinned in `settings.json`.               |
 | Worker: code-heavy / general fork (default)                       | `worker` (create); repin `cleanup`, `docs`  | `sonnet`                             | Best speed/intelligence; 1M ctx; effort-tune + extended thinking. ~3× cheaper than Opus on output.       |
 | Mechanical / test scaffold / recon / handoff                      | `scout` (create); `commit`                  | `haiku`                              | Cheapest + fastest; vision + tool-use. No adaptive thinking — skip for deduction.                        |
 | Analysis / review (standard)                                      | `review`, `oracle`                          | `sonnet`                             | Parallel sub-agents need breadth + 1M ctx; effort-tune for adversarial angles.                           |
@@ -149,7 +156,7 @@ A task escalating haiku→sonnet→opus within these tiers = pre-authorized (jus
 
 ### Per-agent pin mechanism (Claude Code)
 
-Claude Code picks model from agent-definition frontmatter. To pin a model: edit `~/.claude/<agent>.md`, set `model: <opus|sonnet|haiku|<api-id>>`. Use `model: inherit` to follow session default (`opus`).
+Claude Code picks model from agent-definition frontmatter. To pin a model: edit `~/.claude/<agent>.md`, set `model: <opus|sonnet|haiku|<api-id>>`. Use `model: inherit` to follow session default (`sonnet`).
 
 Current agent pins (updated 2026-06-29):
 
@@ -187,22 +194,25 @@ Fan out to subagents automatically when the task matches. **Always use the named
 | Locate symbols / map files / "where is X"                  | `scout`       | haiku   |
 | Write commit message                                       | `commit`      | haiku   |
 | Run or write tests                                         | `tester`      | haiku   |
+| Diagnose failing / flaky tests, root-cause investigation   | `review`      | sonnet  |
 | Clean up code / remove slop                                | `cleanup`     | sonnet  |
 | Add or generate docs                                       | `docs`        | sonnet  |
 
 For parallel fan-out batches, announce which agents you're spawning inline (one line), then spawn — no gate.
 
-### Model confirmation before dispatch
+### Model confirmation before dispatch — HARD GATE (temporary)
 
-Confirm ONLY for up-escalation: using `opus` for a role whose default is `sonnet` or `haiku`.
+**ALWAYS stop and show dispatch plan before spawning any subagent. Wait for explicit user confirmation.**
 
 ```
-Escalating <agent> to opus — reason: <why sonnet insufficient>. Proceed?
+Dispatch plan:
+  agent: <name>  model: <haiku|sonnet|opus>  reason: <one line>
+Proceed?
 ```
 
-- Role-default dispatches: fire automatically, no confirm.
-- Tier escalations (haiku→sonnet→opus): pre-authorized — log, no re-confirm.
-- Unsure → ASK.
+For parallel fan-out batches, list all agents in one block, then wait for a single confirmation before spawning any.
+
+Do NOT auto-fire. Do NOT skip this gate. Regardless of role defaults or tier escalations — always ask first.
 
 ### Ad-hoc Task spawns (no matching agent)
 
@@ -213,8 +223,25 @@ Escalating <agent> to opus — reason: <why sonnet insufficient>. Proceed?
 
 ### Known stale / unavailable
 
-- `claude-fable-5`, `claude-mythos-5` — NOT available (2026-06-29). Do not use. Re-check quarterly.
+- `claude-fable-5` — available again as of 2026-07-14 (provisional). `claude-mythos-5` — still NOT available. Re-check quarterly.
 
 ### Review cadence
 
 Quarterly; or after any model deprecation / new-model GA / re-fetching the [Models overview](https://platform.claude.com/docs/en/about-claude/models/overview).
+
+## Shell scripts — zsh pitfalls (MANDATORY)
+
+The Bash tool runs zsh. It does NOT word-split unquoted variables and it errors on unmatched globs. Seen too often (az calls all failed, "created" still printed).
+
+- Never put CLI args in a string variable (`Z="-g rg -z zone"; az ... $Z`). Use `bash -c '...'` with an array (`Z=(-g rg -z zone); az ... "${Z[@]}"`) or write the args out.
+- Quote globs/brackets (`'custom-columns=...[0]'`, `'*.foo'`); unmatched ones abort in zsh.
+- `set -e` + a trailing `echo done` proves nothing. Verify the result (read it back) before reporting success, and never report "created/done" from an echo.
+- Multi-step scripts: run under `bash -c` with `set -euo pipefail`, then read back state.
+
+## After every merge: worktree and Jira ticket (MANDATORY)
+
+After each merge request I merge (or set to auto-merge and see merged), do both without asking:
+1. **Worktree:** if a git worktree exists for the merged branch (`git worktree list`) and it is clean and fully merged, remove it (`git worktree remove`) and delete the local branch. Keep it when there is an open MR on it, uncommitted changes, or it is still in use.
+2. **Jira:** if the MR names a ticket (key in branch name, MR title or description, e.g. `DEVOPS-123`, `PAS-123`) or the user gave one for this work, add a short comment (1-3 lines: what merged, MR number, what is open) to keep it current. Do not close or transition the ticket without asking. No ticket given or found: skip, do not ask.
+
+Do this once per merge batch, not after every single MR of a stack.

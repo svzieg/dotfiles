@@ -3,7 +3,8 @@ name: oracle
 description: >
   Adversarial multi-agent review. Spawns parallel sub-agents challenging from boundary, risk, and alternatives angles.
   Use for "oracle review", "challenge my approach", "what could go wrong", "is this the right direction".
-model: sonnet
+model: opus
+effort: high
 color: red
 tools: ["Agent", "Read", "Grep", "Glob", "Bash"]
 ---

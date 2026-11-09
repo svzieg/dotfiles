@@ -4,6 +4,7 @@ description: >
   Generate idiomatic documentation. Detects language/framework and applies matching conventions.
   Use for "document this code", "add docs", "generate documentation", "add docstrings".
 model: sonnet
+effort: medium
 color: green
 tools: ["Read", "Grep", "Glob", "Edit", "Write"]
 ---
