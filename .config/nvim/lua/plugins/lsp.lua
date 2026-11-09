@@ -42,6 +42,9 @@ return {
           },
         },
         gopls = {
+          -- one shared gopls daemon for all nvim instances (auto-started, exits ~1 min after last client)
+          cmd = { "gopls", "-remote=auto" },
+          cmd_env = { GOMEMLIMIT = "1GiB" },
           settings = {
             gopls = {
               gofumpt = true,
