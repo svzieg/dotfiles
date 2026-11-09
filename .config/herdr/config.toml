@@ -1,1 +1,32 @@
 onboarding = false
+
+[theme]
+name = "catppuccin"
+
+# punchier state colors: green=done/idle, blue=working, red=blocked, yellow=attention
+[theme.custom]
+sidebar_bg = "#181825"
+active_row_bg = "#313244"
+selection_bg = "#45475a"
+accent = "#cba6f7"
+green = "#a6e3a1"
+blue = "#89b4fa"
+red = "#f38ba8"
+yellow = "#f9e2af"
+peach = "#fab387"
+text = "#cdd6f4"
+subtext0 = "#bac2de"
+
+[ui]
+agent_panel_sort = "spaces"             # keep agents grouped by workspace order
+status_indicators = "symbols"          # shape + color, not color alone
+show_agent_labels_on_pane_borders = true
+pane_borders = "always"
+sidebar_width = 34
+
+[ui.sidebar.agents]
+row_gap = 0                            # compact list
+rows = [
+  ["state_icon", { token = "terminal_title", bold = true }],
+  [{ token = "workspace", fg = "#cba6f7", dim = false }, { token = "state_text", bold = true }, { token = "tab", dim = true }],
+]
