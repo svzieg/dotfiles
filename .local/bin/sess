@@ -1,16 +1,18 @@
 #!/usr/bin/env bash
-# Fuzzy session-izer for zellij.
+# Fuzzy session-izer for herdr.
 # Pick a local repo (under $CODING_ROOT) or an SSH host (~/.ssh/config)
-# -> attach to (or create) a named zellij session.
-#   repo  -> "dev" layout (nvim + shell split)
-#   ssh   -> default layout, first shell runs `ssh <host>` (via SESS_CMD hook in zshrc)
+# -> create-or-focus a herdr WORKSPACE for it inside the current herdr
+# session, instead of starting a separate herdr session per project.
+# herdr already supports many workspaces in one persistent session (and a
+# plain `herdr` from any terminal attaches to that same session), so that's
+# the natural unit here, not a new session/window per pick.
+#   repo  -> nvim + shell split
+#   ssh   -> plain shell running `ssh <host>`
 set -uo pipefail
 
 # Launched from a KDE shortcut -> minimal PATH (no linuxbrew, maybe no ~/.local/bin).
-# Make the tools we need resolvable regardless of how we were started.
 export PATH="$HOME/.local/bin:/home/linuxbrew/.linuxbrew/bin:/usr/local/bin:/usr/bin:/bin:$PATH"
 
-# log everything (debug) so failures are readable even if the window closes
 SESS_LOG="/tmp/sess.log"
 { echo "===== sess start $(date) PATH=$PATH"; } >>"$SESS_LOG" 2>&1
 exec 2> >(tee -a "$SESS_LOG" >&2)
@@ -19,26 +21,12 @@ exec 2> >(tee -a "$SESS_LOG" >&2)
 die() { echo "ERROR: $*" | tee -a "$SESS_LOG" >&2; echo; read -r -p "press enter to close..." _; exit 1; }
 
 CODING_ROOT="${CODING_ROOT:-$HOME/coding}"
-ZELLIJ_BIN="$(command -v zellij)"
-[ -z "$ZELLIJ_BIN" ] && die "zellij not found in PATH"
+HERDR_BIN="$(command -v herdr)"
+[ -z "$HERDR_BIN" ] && die "herdr not found in PATH"
 command -v fzf >/dev/null 2>&1 || die "fzf not found in PATH"
-
-# Already inside zellij? Nested create/attach is not allowed.
-if [ -n "${ZELLIJ:-}" ]; then
-  echo "Already inside a zellij session." >&2
-  echo "Switch/create sessions from here with:  Ctrl-o w  (session manager)" >&2
-  exit 1
-fi
+command -v jq >/dev/null 2>&1 || die "jq not found in PATH"
 
 sanitize() { printf '%s' "$1" | tr -c 'a-zA-Z0-9_.-' '_'; }
-
-# true only if a LIVE (non-exited) session with this name exists
-session_running() {
-  "$ZELLIJ_BIN" list-sessions 2>/dev/null \
-    | sed -E 's/\x1b\[[0-9;]*m//g' \
-    | grep -v 'EXITED' \
-    | awk '{print $1}' | grep -qx "$1"
-}
 
 list_targets() {
   # local repos: parent dirs of .git under CODING_ROOT
@@ -69,29 +57,62 @@ echo "selected: kind=$kind target=$target" >>"$SESS_LOG"
 case "$kind" in
   repo)
     name="$(sanitize "$(basename "$target")")"
-    if session_running "$name"; then
-      echo "attaching live session $name" >>"$SESS_LOG"
-      "$ZELLIJ_BIN" attach "$name"
-    else
-      echo "creating session $name (dev) cwd=$target" >>"$SESS_LOG"
-      "$ZELLIJ_BIN" delete-session "$name" -f 2>/dev/null   # clear any stale/exited session
-      cd "$target" || die "cannot cd to $target"
-      "$ZELLIJ_BIN" --session "$name" --new-session-with-layout dev; rc=$?
-      echo "zellij create exited rc=$rc" >>"$SESS_LOG"
-      [ $rc -ne 0 ] && die "zellij failed to start (layout dev), rc=$rc"
-    fi
+    cwd="$target"
+    cmd='herdr pane split --current --direction down --ratio 0.8 --cwd "$PWD" --no-focus && exec nvim'
     ;;
   ssh)
     name="ssh_$(sanitize "$target")"
-    if session_running "$name"; then
-      "$ZELLIJ_BIN" attach "$name"
-    else
-      "$ZELLIJ_BIN" delete-session "$name" -f 2>/dev/null
-      # SESS_CMD is picked up by the zshrc hook on the first shell of the new session
-      SESS_CMD="ssh $target" "$ZELLIJ_BIN" --session "$name" --new-session-with-layout tmux || die "zellij failed to start (ssh)"
-    fi
+    cwd="$HOME"
+    cmd="ssh $target"
     ;;
   *)
-    echo "unknown selection: $sel"; exit 1
+    die "unknown selection: $sel"
     ;;
 esac
+
+# Make sure a server is reachable, starting a headless one if this is a
+# true cold start (nothing running yet, e.g. right after login/reboot).
+# herdr restores its previous workspaces when the server comes up (see
+# session.json / resume_agents_on_restore), so cold start is otherwise
+# identical to the warm case below -- it must go through the same
+# label-match-or-create check instead of blindly creating a duplicate.
+if ! "$HERDR_BIN" workspace list >/dev/null 2>&1; then
+  [ -n "${HERDR_ENV:-}" ] && die "no herdr server reachable, but already inside a herdr pane -- can't bootstrap from here"
+  echo "no herdr server reachable, starting one" >>"$SESS_LOG"
+  setsid "$HERDR_BIN" server >/dev/null 2>&1 &
+  disown
+  up=0
+  for _ in $(seq 1 30); do
+    sleep 0.5
+    "$HERDR_BIN" workspace list >/dev/null 2>&1 && { up=1; break; }
+  done
+  [ "$up" = 1 ] || die "herdr server did not come up"
+fi
+
+# `workspace create`'s --env is scoped to just this one pane spawn (unlike
+# `herdr --session`'s env, which becomes the server's own permanent environ
+# -- see ~/.zshrc), so no SESS_CMD/hook indirection is needed: just type
+# the setup command straight into the fresh pane.
+ws_list=$("$HERDR_BIN" workspace list 2>/dev/null) || die "herdr workspace list failed"
+ws_id=$(printf '%s' "$ws_list" | jq -r --arg n "$name" \
+  '.result.workspaces[]? | select(.label == $n) | .workspace_id' | head -1)
+
+if [ -n "$ws_id" ]; then
+  echo "reusing workspace $ws_id (label=$name)" >>"$SESS_LOG"
+  "$HERDR_BIN" workspace focus "$ws_id" || die "herdr workspace focus failed"
+else
+  created=$("$HERDR_BIN" workspace create --cwd "$cwd" --label "$name" --focus 2>&1) \
+    || die "herdr workspace create failed: $created"
+  root_pane=$(printf '%s' "$created" | jq -r '.result.root_pane.pane_id // empty')
+  [ -z "$root_pane" ] && die "herdr workspace create: no root pane in response: $created"
+  echo "created workspace for $name, pane=$root_pane, seeding: $cmd" >>"$SESS_LOG"
+  sleep 1.5   # let the fresh shell clear its startup banner before we type into it
+  "$HERDR_BIN" pane send-text "$root_pane" "$cmd"
+  "$HERDR_BIN" pane send-keys "$root_pane" enter
+fi
+
+if [ -n "${HERDR_ENV:-}" ]; then
+  echo "Already inside herdr -- workspace '$name' is focused; switch to it with the workspace picker (Ctrl-b w)." >&2
+  exit 0
+fi
+exec "$HERDR_BIN"   # attach a client to the (now-focused) session

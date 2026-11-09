@@ -41,9 +41,9 @@ setopt appendhistory
 
 # Set-up icons for files/folders in terminal using eza
 if which eza > /dev/null; then
-  alias ls='eza -a --icons'
-  alias ll='eza -al --icons'
-  alias lt='eza -a --tree --level=1 --icons'
+  alias ls='eza -a --icons=auto'
+  alias ll='eza -al --icons=auto'
+  alias lt='eza -a --tree --level=1 --icons=auto'
 fi
 
 alias nx='nice npx nx'
@@ -101,10 +101,19 @@ if [[ -f /home/linuxbrew/.linuxbrew/bin/brew ]]; then  eval "$(/home/linuxbrew/.
 export PATH="$PATH:/var/home/svzieg/.lmstudio/bin"
 # End of LM Studio CLI section
 
-# zellij sessionizer (~/.local/bin/sess): run a queued command on the first
-# shell of a freshly-created session. Used to start `ssh <host>` for ssh sessions.
+# herdr sessionizer (~/.local/bin/sess): run a queued command exactly once
+# per session -- not once per shell. herdr reapplies a session's launch-time
+# env (including SESS_CMD) to every pane it ever spawns in that session, so
+# without the lock this fires again in every split, forever. `sess` removes
+# the lock dir when it deletes a stale session, so a session recreated under
+# the same name re-arms cleanly.
 if [[ -n "${SESS_CMD:-}" ]]; then
-  _sess_cmd="$SESS_CMD"; unset SESS_CMD
-  eval "$_sess_cmd"; unset _sess_cmd
+  _sess_lock="/tmp/.sess-hook-${UID}-${HERDR_SOCKET_PATH//[^a-zA-Z0-9]/_}"
+  if mkdir "$_sess_lock" 2>/dev/null; then
+    _sess_cmd="$SESS_CMD"
+    eval "$_sess_cmd"
+    unset _sess_cmd
+  fi
+  unset SESS_CMD _sess_lock
 fi
 

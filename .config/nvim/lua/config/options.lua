@@ -1,6 +1,21 @@
 -- Options are automatically loaded before lazy.nvim startup
 -- Default options that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/options.lua
 -- Add any additional options here
+
+-- The "dev" zellij layout (~/.config/zellij/layouts/dev.kdl) execs nvim
+-- directly (`command="nvim"`), bypassing the login shell, so PATH additions
+-- that live in ~/.zshrc (like mise's shims dir) never apply to nvim or
+-- anything it jobstart()s directly without a shell in between (lazygit,
+-- LSP servers, etc. — see lua/plugins/copilot.lua for the same issue hitting
+-- the sidekick "claude" tool). mise shims are self-dispatching (they check
+-- the cwd's .mise.toml at exec time), so just prepending the shims dir here
+-- is enough — no need to re-run `mise activate`.
+do
+  local mise_shims = vim.fn.expand("~/.local/share/mise/shims")
+  if vim.fn.isdirectory(mise_shims) == 1 and not (vim.env.PATH or ""):find(mise_shims, 1, true) then
+    vim.env.PATH = mise_shims .. ":" .. (vim.env.PATH or "")
+  end
+end
 vim.opt.swapfile = false
 vim.opt.backup = false
 vim.opt.undofile = true

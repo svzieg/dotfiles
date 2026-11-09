@@ -1,5 +1,5 @@
 return {
-  -- AI sidekick: extends LazyVim sidekick extra with NES disabled + tmux + Claude shortcut
+  -- AI sidekick: extends LazyVim sidekick extra with NES disabled + tmux/herdr + Claude shortcut
   {
     "folke/sidekick.nvim",
     opts = {
@@ -21,6 +21,21 @@ return {
         },
       },
     },
+    -- Under herdr, swap in the herdr mux backend (lua/util/sidekick_herdr.lua)
+    -- instead of tmux/zellij, so `<leader>ac` and friends open the agent in a
+    -- herdr tab (visible in herdr's own agent sidebar). Done after setup() and
+    -- deferred one more tick so it lands after sidekick's own opts validation,
+    -- which only accepts "tmux"|"zellij" for cli.mux.backend.
+    config = function(_, opts)
+      require("sidekick").setup(opts)
+      if vim.env.HERDR_ENV == "1" then
+        vim.schedule(function()
+          require("sidekick.cli.session").register("herdr", require("util.sidekick_herdr"))
+          require("sidekick.config").cli.mux.backend = "herdr"
+          require("sidekick.config").cli.mux.create = "window"
+        end)
+      end
+    end,
     keys = {
       -- Claude shortcut not in the LazyVim extra defaults
       {
@@ -55,6 +70,16 @@ return {
               reasoning_effort = "none",
               max_tokens = 256,
               top_p = 0.9,
+            },
+            template = {
+              prompt = function(context_before_cursor, context_after_cursor)
+                return "<|fim_prefix|>"
+                  .. context_before_cursor
+                  .. "<|fim_suffix|>"
+                  .. context_after_cursor
+                  .. "<|fim_middle|>"
+              end,
+              suffix = false,
             },
           },
 

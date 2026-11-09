@@ -14,7 +14,7 @@
     ],
     "defaultMode": "auto"
   },
-  "model": "opus",
+  "model": "sonnet",
   "hooks": {
     "SessionStart": [
       {
@@ -34,6 +34,16 @@
             "command": "\"$HOME/.claude/hooks/context-mode-cache-heal.mjs\""
           }
         ]
+      },
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash '/home/u500132/.claude/hooks/herdr-agent-state.sh' session",
+            "timeout": 10
+          }
+        ]
       }
     ],
     "UserPromptSubmit": [
@@ -49,23 +59,6 @@
       }
     ],
     "PreToolUse": [
-      {
-        "matcher": "Bash",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "\"$HOME/.claude/hooks/confirm-git-ops.sh\"",
-            "timeout": 5,
-            "statusMessage": "Checking git operation..."
-          },
-          {
-            "type": "command",
-            "command": "\"$HOME/.claude/hooks/confirm-outside-project.sh\"",
-            "timeout": 5,
-            "statusMessage": "Checking directory scope..."
-          }
-        ]
-      },
       {
         "matcher": "Bash",
         "hooks": [
@@ -94,7 +87,10 @@
     "claude-code-setup@claude-plugins-official": true,
     "gitlab@claude-plugins-official": true,
     "atlassian@claude-plugins-official": true,
-    "lua-lsp@claude-plugins-official": true
+    "lua-lsp@claude-plugins-official": true,
+    "ponytail@ponytail": true,
+    "mattpocock-skills@claude-plugins-official": true,
+    "cc-plugin-you-should-know@builtin": true
   },
   "extraKnownMarketplaces": {
     "context-mode": {
@@ -126,13 +122,29 @@
         "source": "github",
         "repo": "lackeyjb/playwright-skill"
       }
+    },
+    "ponytail": {
+      "source": {
+        "source": "github",
+        "repo": "DietrichGebert/ponytail"
+      }
     }
   },
   "effortLevel": "high",
+  "modelSettings": {
+    "claude-sonnet-5-5": {
+      "effortLevel": "high"
+    }
+  },
   "skipDangerousModePermissionPrompt": true,
   "skipWorkflowUsageWarning": true,
   "theme": "auto",
   "editorMode": "normal",
   "autoCompactEnabled": true,
+  "switchModelsOnFlag": true,
+  "autoContinueAtUsageLimit": false,
+  "remoteControlAtStartup": false,
+  "inputNeededNotifEnabled": true,
+  "agentPushNotifEnabled": true,
   "skipAutoPermissionPrompt": true
 }
