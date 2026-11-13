@@ -1,5 +1,5 @@
 {
-  "lastChangelogVersion": "1.5.0",
+  "lastChangelogVersion": "1.5.2",
   "defaultProvider": "openai-codex",
   "defaultModel": "gpt-6.1-sol",
   "defaultThinkingLevel": "high",
@@ -40,7 +40,9 @@
       "source": "npm:agent-comms@8.15.18",
       "extensions": []
     },
-    "/home/svzieg/.pi/agent/local-packages/pi-intercom/node_modules/pi-intercom"
+    "/home/svzieg/.pi/agent/local-packages/pi-intercom/node_modules/pi-intercom",
+    "npm:@czottmann/pi-automode@1.17.0",
+    "npm:@pi-lab/openai"
   ],
   "enabledModels": [
     "openai-codex/gpt-6-luna",
@@ -129,6 +131,13 @@
       }
     }
   },
+  "openai": {
+    "fast": false,
+    "webSearch": true,
+    "imageGeneration": {
+      "backend": "codex"
+    }
+  },
   "theme": "light/dark",
   "tuiMode": "fullscreen",
   "extensions": [
@@ -139,12 +148,14 @@
   "showCacheMissNotices": true,
   "extensionChangelogVersions": {
     "{\"source\":\"npm:pi-web-access\",\"scope\":\"user\"}": "0.47.0",
-    "{\"source\":\"npm:@aliou/pi-neuralwatt\",\"scope\":\"user\"}": "0.19.1",
+    "{\"source\":\"npm:@aliou/pi-neuralwatt\",\"scope\":\"user\"}": "0.19.3",
     "{\"source\":\"npm:betterwright\",\"scope\":\"user\"}": "2.9.1",
     "{\"source\":\"npm:pi-effort\",\"scope\":\"user\"}": "0.1.1",
     "{\"source\":\"npm:pi-powerline-footer\",\"scope\":\"user\"}": "0.22.0",
-    "{\"source\":\"npm:@narumitw/pi-usage\",\"scope\":\"user\"}": "0.69.2",
+    "{\"source\":\"npm:@narumitw/pi-usage\",\"scope\":\"user\"}": "0.69.3",
     "{\"source\":\"npm:pi-updater\",\"scope\":\"user\"}": "0.5.0",
-    "{\"source\":\"npm:pi-image-view\",\"scope\":\"user\"}": "0.5.0"
-  }
+    "{\"source\":\"npm:pi-image-view\",\"scope\":\"user\"}": "0.5.0",
+    "{\"source\":\"npm:@czottmann/pi-automode@1.17.0\",\"scope\":\"user\"}": "1.17.0"
+  },
+  "deviceId": "d7c64f06-bdad-4bef-9a15-35b0d4b29ec9"
 }
