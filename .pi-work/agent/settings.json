@@ -18,7 +18,10 @@
     "npm:betterwright",
     "npm:@juicesharp/rpiv-ask-user-question",
     "npm:pi-ultra-compact",
-    "npm:pi-updater"
+    "npm:pi-updater",
+    "https://github.com/earendil-works/pi-claude-code",
+    "npm:@aliou/pi-neuralwatt",
+    "npm:@dietrichgebert/ponytail"
   ],
   "enabledModels": [
     "openai-codex/gpt-6.1-sol",
