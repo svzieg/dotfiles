@@ -21,14 +21,19 @@ On permission problems, stop and explain risk and exact proposed commands; reque
 
 Snapshot 2026-11-07 (`pi --list-models`). A catalog entry is not access: verify with `pi auth check --provider NAME --json --no-refresh` where the CLI knows the provider; extension providers (e.g. neuralwatt) are not covered by that check, so a catalog entry plus one successful run is the only evidence. A route the user reports as unavailable is excluded for that period — do not encode per-route bans here.
 
-| Agent / role | Exact route | Context / max out | Use for |
+| Role | Exact route | Context / max out | Use for |
 |---|---|---|---|
-| `worker`, `reviewer` (defaults) | `openai-codex/gpt-6.1-sol` | 500K / 128K | ordinary implementation, diagnosis, review; anything where a wrong answer costs money, data or security |
-| `worker-glm` | `neuralwatt/glm-5.3-flash` | 1M / 1M | bounded mechanical work: adopting a primitive, renames, fixtures, doc updates, repetitive edits |
-| `worker-deepseek` | `neuralwatt/deepseek-v4.1-flash` | 1M / 393K | alternative in the same band; large-context sweeps (`-flex` / `-speed` are latency variants) |
-| `worker-docs` | `openai-codex/gpt-6.1-terra` | 500K / 128K | documentation and language work: README/ADR prose, user-facing labels, i18n pairs, API descriptions |
-| `openai-codex/gpt-6-astra` | 272K / 128K | security-critical review when justified and approved |
-| `minimax/MiniMax-M3` | 1M / 524K | very large context only |
+| `worker` | `openai-codex/gpt-6.1-sol` | 500K / 128K | ordinary implementation, diagnosis; anything where a wrong answer costs money, data or security |
+| `worker` + `model: neuralwatt/glm-5.3-flash` | 1M / 1M | bounded mechanical work: primitive adoption, renames, fixtures, doc updates, repetitive edits |
+| `worker` + `model: neuralwatt/deepseek-v4.1-flash` | 1M / 393K | alternative in the same band; large-context sweeps (`-flex` / `-speed` are latency variants) |
+| `worker` + `model: openai-codex/gpt-6.1-terra` | 500K / 128K | documentation and language work: README/ADR prose, user-facing labels, i18n pairs, API descriptions |
+| `worker` + `model: neuralwatt/kimi-k3.1-pro` | 1M / 1M | evaluation route: side-by-side comparisons; unproven, so escalate judgement work |
+| `reviewer` | `openai-codex/gpt-6.1-sol` | 500K / 128K | independent review (read-only tool grant) |
+| `reviewer` + `model: neuralwatt/kimi-k3.1-pro` | 1M / 1M | evaluation review: findings carry less authority until the route is proven |
+| `reviewer` + `model: openai-codex/gpt-6-astra` | 272K / 128K | security-critical review when justified and approved |
+| `reviewer` + `model: minimax/MiniMax-M3` | 1M / 524K | very large context only |
+
+Roles are files; routes are dispatch arguments. Model-suffixed profiles (`worker-glm`, `worker-docs`, `worker-kimi`, …) were removed: a model is chosen when you dispatch, and duplicating role instructions per model made the profile and the actual run drift apart.
 
 **Decision rule:** Sol when a wrong answer costs money or data; a cheap route when a failing test or a diff review would catch the mistake. Context, not price, is the real capability difference — Sol's 500K means long sweeps belong on a 1M route.
 
