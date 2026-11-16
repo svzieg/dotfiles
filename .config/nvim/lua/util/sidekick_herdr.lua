@@ -34,10 +34,15 @@ local KIND = {
   opencode = "opencode",
   grok = "grok",
   pi = "pi",
+  piw = "pi", -- work profile: launched via the ~/.local/bin/piw script (see try_start)
 }
+-- tools herdr can't start itself (env/profile needed): run this command in the pane instead
+local RUN_CMD = { piw = "piw" }
 local TOOL_FOR_KIND = {}
 for tool, kind in pairs(KIND) do
-  TOOL_FOR_KIND[kind] = tool
+  if not RUN_CMD[tool] then -- piw sessions are reported as plain "pi" agents
+    TOOL_FOR_KIND[kind] = tool
+  end
 end
 
 -- A freshly created tab's pane briefly reports agent_pane_busy: herdr's
@@ -87,7 +92,7 @@ end
 -- One split+start attempt. Returns the pane on success; on failure closes
 -- the (broken) pane it opened and returns nil, err.
 ---@return {pane_id: string, tab_id: string}? pane, string? err
-local function try_start(cwd, name, kind)
+local function try_start(cwd, name, kind, tool)
   local data = json({
     "herdr",
     "pane",
@@ -109,7 +114,30 @@ local function try_start(cwd, name, kind)
   -- Note: herdr's --kind resolves its own canonical executable via its
   -- own integration (see `herdr integration status`), so self.tool.cmd
   -- (a tmux/zellij-only login-shell/PATH workaround) is not used here.
-  local ok, err = start_agent(name, kind, pane.pane_id)
+  local ok, err
+  if RUN_CMD[tool] then
+    -- `pane run` can be lost while the fresh pane's shell is still starting, and
+    -- unlike `agent start` it doesn't wait for herdr to detect the agent. So run,
+    -- poll for detection during a backoff window (1s, 2s, 4s), and only re-run
+    -- if the agent still hasn't shown up.
+    ok, err = false, "timed out waiting for herdr to detect " .. tool
+    for _, window in ipairs({ 1000, 2000, 4000 }) do
+      vim.system({ "herdr", "pane", "run", pane.pane_id, RUN_CMD[tool] }, { text = true }):wait()
+      local deadline = vim.uv.now() + window
+      repeat
+        vim.wait(250)
+        if vim.system({ "herdr", "agent", "get", pane.pane_id }, { text = true }):wait().code == 0 then
+          ok, err = true, nil
+          break
+        end
+      until vim.uv.now() >= deadline
+      if ok then
+        break
+      end
+    end
+  else
+    ok, err = start_agent(name, kind, pane.pane_id)
+  end
   if not ok then
     Util.exec({ "herdr", "pane", "close", pane.pane_id }, { notify = false })
     return nil, err
@@ -133,7 +161,7 @@ function M:start()
   local name = ("sk_%s_%s"):format(self.tool.name, vim.fn.sha256(self.cwd):sub(1, 8))
   local pane, err
   for attempt = 1, 2 do
-    pane, err = try_start(self.cwd, name, kind)
+    pane, err = try_start(self.cwd, name, kind, self.tool.name)
     if pane then
       break
     end

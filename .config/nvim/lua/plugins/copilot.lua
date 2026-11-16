@@ -18,6 +18,8 @@ return {
         -- (sidekick's is_proc detection matches on the name).
         tools = {
           claude = { cmd = { "zsh", "-lic", "exec claude" } },
+          -- work profile; only registered where the ~/.local/bin/piw script exists
+          piw = vim.fn.executable("piw") == 1 and { cmd = { "piw" } } or nil,
         },
       },
     },

@@ -1,0 +1,5 @@
+#!/bin/sh
+# pi with the work agent dir (usable from nvim/sidekick, unlike a shell function)
+PI_CODING_AGENT_DIR="$HOME/.pi-work/agent" \
+PI_CODING_AGENT_SESSION_DIR="$HOME/.pi-work/sessions" \
+exec pi "$@"

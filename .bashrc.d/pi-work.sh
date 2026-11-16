@@ -2,12 +2,7 @@
 # Work-context entry points. Personal pi stays on ~/.pi/agent; work pi uses
 # ~/.pi-work/agent. Both are independent — no shared state, separate sessions.
 
-# piw  — pi with the work agent dir (use like normal pi: `piw`, `piw --continue`)
-piw() {
-	PI_CODING_AGENT_DIR="$HOME/.pi-work/agent" \
-		PI_CODING_AGENT_SESSION_DIR="$HOME/.pi-work/sessions" \
-		command pi "$@"
-}
+# piw is now a script: ~/.local/bin/piw
 
 # piwj — pi in a work project dir, work agent dir
 piwj() {
