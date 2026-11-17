@@ -70,10 +70,13 @@ test("Neuralwatt shows monthly energy, falls back to credits, rejects malformed 
 test("compact row keeps 5h, weekly and monthly remaining units explicit", () => {
   assert.deepEqual(compactUsage("Claude Session: 2% · Weekly: 97% (stale)", "Codex Weekly: 42% used", "Neuralwatt: 12.35 kWh left (month)"),
     ["Claude 5h 2% wk 97% (stale)", "Codex wk 42%", "NW 12.35kWh left"]);
-  assert.deepEqual(compactUsage(undefined, "Codex weekly unavailable", "Neuralwatt usage loading…"), ["Codex wk n/a", "NW …"]);
-  assert.equal(compactUsage("Claude Weekly: 999%", "Codex weekly loading…", "Neuralwatt usage unavailable")[0], "Claude 5h n/a wk n/a");
+  // A provider whose status could not be fetched is omitted, not rendered as "n/a".
+  assert.deepEqual(compactUsage(undefined, "Codex weekly unavailable", "Neuralwatt usage loading…"), ["NW …"]);
+  assert.equal(compactUsage("Claude Weekly: 999%", "Codex weekly loading…", "Neuralwatt usage unavailable")[0], "Codex wk …");
   assert.equal(compactUsage("Claude Session: 🚨 41% (3h 54m) · Weekly: 🧊 7% · Monthly: 🧊 $1.46", "Codex weekly loading…", "Neuralwatt usage unavailable")[0], "Claude 5h 41% (3h 54m) wk 7%");
-  assert.equal(compactUsage("Claude Weekly: unavailable · Monthly: 42%", "Codex weekly loading…", "Neuralwatt usage unavailable")[0], "Claude 5h n/a wk n/a");
+  assert.equal(compactUsage("Claude Weekly: unavailable · Monthly: 42%", "Codex weekly loading…", "Neuralwatt usage unavailable")[0], "Codex wk …");
+  // Nothing available at all: no quota segment instead of three "n/a" meters.
+  assert.deepEqual(compactUsage(undefined, "Codex weekly unavailable", "Neuralwatt usage unavailable"), []);
   assert.deepEqual(compactUsage("Claude Session: 🔥 67% (1h 18m) · Weekly: 🧊 11%", "Codex Weekly: 32% used (6d 8h)", "Neuralwatt: 12.35 kWh left (month) (14d)"),
     ["Claude 5h 67% (1h 18m) wk 11%", "Codex wk 32% (6d 8h)", "NW 12.35kWh left (14d)"]);
 });

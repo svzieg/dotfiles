@@ -71,26 +71,36 @@ export async function fetchCodexWeekly(ctx: ExtensionContext, signal: AbortSigna
 
 export function compactUsage(claude: string | undefined, codex: string, neuralwatt: string): string[] {
   const meters: string[] = [];
-  if (claude) {
+  // A meter the account cannot provide is noise, not information: omit it instead of
+  // printing "n/a" for providers this machine has no credentials or tooling for (no
+  // ccburn, no Codex OAuth, no Neuralwatt key). Loading states still show "…" so a slow
+  // fetch is not mistaken for "no provider".
+  const fetched = (value: string | undefined): boolean => !!value && !/unavailable/i.test(value);
+  if (fetched(claude)) {
     // ccburn --compact prints "Session: 🔥 66% (1h 41m) · Weekly: 🧊 11% · Monthly: 🧊 $1.46".
     // ccburn only prints the reset countdown for the 5h session window.
-    const percent = (label: string) => {
-      const match = claude.match(new RegExp(`${label}:\\s*[^\\dA-Za-z%]*(\\d+(?:\\.\\d+)?)%\\s*(?:\\(([^)]+)\\))?`, "i"));
-      const value = match ? Number(match[1]) : NaN;
+    const value = (label: string): string | undefined => {
+      const match = claude!.match(new RegExp(`${label}:\\s*[^\\dA-Za-z%]*(\\d+(?:\\.\\d+)?)%\\s*(?:\\(([^)]+)\\))?`, "i"));
+      const number = match ? Number(match[1]) : NaN;
+      if (!Number.isFinite(number) || number < 0 || number > 100) return undefined;
       // The trailing "(stale)" marker from the cache helper is not a reset countdown.
       const extra = match?.[2] && !/^stale$/i.test(match[2]) ? match[2] : "";
-      return Number.isFinite(value) && value >= 0 && value <= 100
-        ? `${value}%${extra ? ` (${extra})` : ""}`
-        : claude.includes("loading") ? "…" : "n/a";
+      return `${number}%${extra ? ` (${extra})` : ""}`;
     };
-    const fiveHour = percent("Session");
-    const weekly = percent("Weekly");
-    meters.push(`Claude 5h ${fiveHour} wk ${weekly}${claude.includes("(stale)") ? " (stale)" : ""}`);
+    const fiveHour = value("Session");
+    const weekly = value("Weekly");
+    if (fiveHour || weekly || claude!.includes("loading")) {
+      meters.push(`Claude 5h ${fiveHour ?? "…"} wk ${weekly ?? "…"}${claude!.includes("(stale)") ? " (stale)" : ""}`);
+    }
   }
-  meters.push(codex.replace("Codex Weekly: ", "Codex wk ").replace(" used", "")
-    .replace("Codex weekly loading…", "Codex wk …").replace("Codex weekly unavailable", "Codex wk n/a"));
-  meters.push(neuralwatt.replace("Neuralwatt: ", "NW ").replace(" kWh left (month)", "kWh left")
-    .replace("Neuralwatt usage loading…", "NW …").replace("Neuralwatt usage unavailable", "NW n/a"));
+  if (fetched(codex)) {
+    meters.push(codex.replace("Codex Weekly: ", "Codex wk ").replace(" used", "")
+      .replace("Codex weekly loading…", "Codex wk …"));
+  }
+  if (fetched(neuralwatt)) {
+    meters.push(neuralwatt.replace("Neuralwatt: ", "NW ").replace(" kWh left (month)", "kWh left")
+      .replace("Neuralwatt usage loading…", "NW …"));
+  }
   return meters;
 }
 
