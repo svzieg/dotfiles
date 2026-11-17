@@ -11,18 +11,13 @@ LIMIT=$(echo "$STDIN" | jq -r '.context_window.context_window_size // 0')
 LIMIT_K=$((LIMIT / 1000))
 USED_K=$(echo "$STDIN" | jq -r '((.context_window.used_percentage // 0) * (.context_window.context_window_size // 0) / 100 / 1000 | floor)')
 
-# ccburn is a PyInstaller onefile binary: every start unpacks ~45 MB into /tmp (RAM), and a
-# SIGKILL leaves that /tmp/_MEI* dir behind. Usage limits are account-wide, so show a cached
-# value (shared by all sessions) and refresh it at most once a minute, detached from this
-# script so a killed statusline cannot kill ccburn mid-run.
-CACHE="${XDG_RUNTIME_DIR:-/tmp}/ccburn-statusline.cache"
-if command -v ccburn >/dev/null 2>&1; then
-  BURN=$(cat "$CACHE" 2>/dev/null)
-  if [ $(( $(date +%s) - $(stat -c %Y "$CACHE" 2>/dev/null || echo 0) )) -ge 60 ]; then
-    setsid -f flock -n "$CACHE.lock" bash -c \
-      'ccburn collect 2>/dev/null | ccburn --compact > "$1.tmp" 2>/dev/null && mv "$1.tmp" "$1"' \
-      _ "$CACHE" <<<"$STDIN" >/dev/null 2>&1
-  fi
+# Share the profile-scoped cache/lock with Pi. Reads never start ccburn; the detached
+# refresh rechecks its timestamp under the lock and collects native rate_limits first.
+BURN=""
+HELPER="$HOME/.claude/hooks/ccburn-cache.py"
+if command -v ccburn >/dev/null 2>&1 && command -v python3 >/dev/null 2>&1; then
+  BURN=$(python3 "$HELPER" --cached 2>/dev/null)
+  setsid -f python3 "$HELPER" --refresh <<<"$STDIN" >/dev/null 2>&1
 fi
 # Output the status line - ${DIR##*/} extracts just the folder name
 echo "[$MODEL] - ${DIR##*/} | ${USED_K}k/${LIMIT_K}k (${PCT}%) context"

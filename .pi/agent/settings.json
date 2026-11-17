@@ -157,5 +157,22 @@
     "{\"source\":\"npm:pi-image-view\",\"scope\":\"user\"}": "0.5.0",
     "{\"source\":\"npm:@czottmann/pi-automode@1.17.0\",\"scope\":\"user\"}": "1.17.0"
   },
-  "deviceId": "d7c64f06-bdad-4bef-9a15-35b0d4b29ec9"
+  "deviceId": "5090d557-a38a-4227-a896-fe5411231cd5",
+  "powerline": {
+    "separator": "dot",
+    "secondaryOverflow": "wrap",
+    "hiddenExtensionStatusKeys": ["usage", "codex-weekly", "neuralwatt-usage", "pi-effort-thinking"],
+    "layout": {
+      "left": ["model", "thinking", "custom:ponytail", "custom:fast-mode", "path", "context_pct", "queue"],
+      "right": [],
+      "secondary": []
+    },
+    "customItems": [
+      { "id": "ponytail", "statusKey": "ponytail", "position": "left", "color": "muted" },
+      { "id": "fast-mode", "statusKey": "pi-effort-fast", "position": "left", "color": "muted" }
+    ],
+    "model": { "showThinkingLevel": false },
+    "path": { "mode": "abbreviated", "maxLength": 12 },
+    "context": { "format": "full" }
+  }
 }
