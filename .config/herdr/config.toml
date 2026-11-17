@@ -27,6 +27,6 @@ sidebar_width = 34
 [ui.sidebar.agents]
 row_gap = 0                            # compact list
 rows = [
-  ["state_icon", { token = "terminal_title", bold = true }],
-  [{ token = "workspace", fg = "#cba6f7", dim = false }, { token = "state_text", bold = true }, { token = "tab", dim = true }],
+  ["state_icon", { token = "workspace", fg = "#cba6f7", bold = true }, { token = "state_text", bold = true }, { token = "tab", dim = true }],
+  [{ token = "terminal_title", dim = false }],
 ]
