@@ -20,6 +20,15 @@ Company context. Overrides the personal `~/.pi/agent/AGENTS.md` routing notes.
   alternative before dispatching a subagent. Do not infer quality, cost, or quota
   from a model name.
 
+## Tooling
+
+- **Surface choice:** batch independent reads, greps and test-output analysis
+  through `codemode` (JS filters; print only findings) instead of sequential
+  `bash` calls; keep `bash` for processes, long jobs and file mutation —
+  codemode has no filesystem and cancels calls when the script returns. Reach
+  for a python heredoc only for mechanical multi-file patches where every
+  replacement is asserted (`count == 1`).
+
 ## Delegation
 
 - Dedicated work and eligible-personal worker/reviewer agents are allowed in this

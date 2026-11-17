@@ -10,6 +10,7 @@ Follow current project workflow, not another project's process. Verify installed
 - Large public docs: `ctx_fetch_and_index` → focused `ctx_search`. Web navigation: installed browser/search tools. Do not flood context with HTML/logs/broad greps/child transcripts or bypass output controls with `curl`/`wget`/inline HTTP scripts. Never expose credentials.
 - On resume, use available `ctx_search({queries:[...],sort:"timeline"})` before reasking settled decisions. No results: use known context, never invented memory. Without context-mode, use bounded native tools; do not invent tools or block unrelated work.
 - `ctx_stats` is read-only; `ctx_doctor` diagnoses. Upgrade only on request. Purge requires explicit session/project scope, permanent-deletion warning, and `confirm:true` with exactly one scope (session needs ID). `/clear` and `/compact` never authorize purge.
+- **Surface choice:** batch independent reads, greps and test-output analysis through `codemode` (JS filters; print only findings) instead of sequential `bash` calls; keep `bash` for processes, long jobs and file mutation — codemode has no filesystem and cancels calls when the script returns. Reach for a python heredoc only for mechanical multi-file patches where every replacement is asserted (`count == 1`).
 
 ## Protected devcontainer kubeconfig — AGENT-CONTRACT: PROTECT_PROJECT_KUBECONFIG
 
