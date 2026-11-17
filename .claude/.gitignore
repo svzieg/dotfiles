@@ -1,5 +1,8 @@
 # === Secrets (NEVER commit) ===
 settings.local.json
+.credentials.json
+mcp-needs-auth-cache.json
+sessions/
 settings.json.bak
 settings.json.backup
 

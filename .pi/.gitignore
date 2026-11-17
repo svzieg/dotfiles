@@ -1,5 +1,6 @@
 # === Secrets (NEVER commit) ===
 agent/auth.json
+agent/sessions/
 
 # === Caches / runtime state ===
 agent/mcp-cache.json
