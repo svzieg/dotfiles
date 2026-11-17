@@ -23,14 +23,14 @@ Snapshot 2026-11-07 (`pi --list-models`). A catalog entry is not access: verify 
 
 | Role | Exact route | Context / max out | Use for |
 |---|---|---|---|
-| `worker` | `openai-codex/gpt-6.1-sol` | 500K / 128K | ordinary implementation, diagnosis; anything where a wrong answer costs money, data or security |
+| `worker` | `openai-codex/gpt-6.2-sol` | 500K / 128K | ordinary implementation, diagnosis; anything where a wrong answer costs money, data or security |
 | `worker` + `model: neuralwatt/glm-5.3-flash` | 1M / 1M | bounded mechanical work: primitive adoption, renames, fixtures, doc updates, repetitive edits |
 | `worker` + `model: neuralwatt/deepseek-v4.1-flash` | 1M / 393K | alternative in the same band; large-context sweeps (`-flex` / `-speed` are latency variants) |
 | `worker` + `model: openai-codex/gpt-6.1-terra` | 500K / 128K | documentation and language work: README/ADR prose, user-facing labels, i18n pairs, API descriptions |
 | `worker` + `model: neuralwatt/kimi-k3.1-pro` | 1M / 1M | evaluation route: side-by-side comparisons; unproven, so escalate judgement work |
-| `reviewer` | `openai-codex/gpt-6.1-sol` | 500K / 128K | independent review (read-only tool grant) |
+| `reviewer` | `openai-codex/gpt-6.2-sol` | 500K / 128K | independent review (read-only tool grant) |
 | `reviewer` + `model: neuralwatt/kimi-k3.1-pro` | 1M / 1M | evaluation review: findings carry less authority until the route is proven |
-| `reviewer` + `model: openai-codex/gpt-6-astra` | 272K / 128K | security-critical review when justified and approved |
+| `reviewer` + `model: openai-codex/gpt-6.2-astra` | 272K / 128K | security-critical review when justified and approved |
 | `reviewer` + `model: minimax/MiniMax-M3` | 1M / 524K | very large context only |
 
 Roles are files; routes are dispatch arguments. Model-suffixed profiles (`worker-glm`, `worker-docs`, `worker-kimi`, …) were removed: a model is chosen when you dispatch, and duplicating role instructions per model made the profile and the actual run drift apart.

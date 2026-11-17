@@ -1,7 +1,7 @@
 ---
 name: reviewer
 description: Code review agent - reviews changes for quality, security, and correctness
-model: openai-codex/gpt-6.1-sol
+model: openai-codex/gpt-6.2-sol
 tools: read, bash, intercom, ctx_execute, ctx_execute_file, ctx_batch_execute, ctx_search, ctx_index, ctx_fetch_and_index, ctx_stats, ctx_doctor
 spawning: false
 auto-exit: true

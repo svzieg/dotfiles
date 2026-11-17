@@ -1,7 +1,7 @@
 {
   "lastChangelogVersion": "1.5.2",
   "defaultProvider": "openai-codex",
-  "defaultModel": "gpt-6.1-sol",
+  "defaultModel": "gpt-6.2-sol",
   "defaultThinkingLevel": "high",
   "packages": [
     "npm:context-mode",
@@ -47,8 +47,8 @@
   "enabledModels": [
     "openai-codex/gpt-6-luna",
     "openai-codex/gpt-6-sol",
-    "openai-codex/gpt-6.1-sol",
-    "openai-codex/gpt-6-astra"
+    "openai-codex/gpt-6.2-sol",
+    "openai-codex/gpt-6.2-astra"
   ],
   "hideThinkingBlock": false,
   "steeringMode": "one-at-a-time",
@@ -161,18 +161,48 @@
   "powerline": {
     "separator": "dot",
     "secondaryOverflow": "wrap",
-    "hiddenExtensionStatusKeys": ["usage", "codex-weekly", "neuralwatt-usage", "pi-effort-thinking"],
+    "hiddenExtensionStatusKeys": [
+      "usage",
+      "codex-weekly",
+      "neuralwatt-usage",
+      "pi-effort-thinking"
+    ],
     "layout": {
-      "left": ["model", "thinking", "custom:ponytail", "custom:fast-mode", "path", "context_pct", "queue"],
+      "left": [
+        "model",
+        "thinking",
+        "custom:ponytail",
+        "custom:fast-mode",
+        "path",
+        "context_pct",
+        "queue"
+      ],
       "right": [],
       "secondary": []
     },
     "customItems": [
-      { "id": "ponytail", "statusKey": "ponytail", "position": "left", "color": "muted" },
-      { "id": "fast-mode", "statusKey": "pi-effort-fast", "position": "left", "color": "muted" }
+      {
+        "id": "ponytail",
+        "statusKey": "ponytail",
+        "position": "left",
+        "color": "muted"
+      },
+      {
+        "id": "fast-mode",
+        "statusKey": "pi-effort-fast",
+        "position": "left",
+        "color": "muted"
+      }
     ],
-    "model": { "showThinkingLevel": false },
-    "path": { "mode": "abbreviated", "maxLength": 12 },
-    "context": { "format": "full" }
+    "model": {
+      "showThinkingLevel": false
+    },
+    "path": {
+      "mode": "abbreviated",
+      "maxLength": 12
+    },
+    "context": {
+      "format": "full"
+    }
   }
 }
