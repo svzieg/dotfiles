@@ -41,7 +41,6 @@
       "extensions": []
     },
     "/home/svzieg/.pi/agent/local-packages/pi-intercom/node_modules/pi-intercom",
-    "npm:@czottmann/pi-automode@1.17.0",
     "npm:@pi-lab/openai"
   ],
   "enabledModels": [
