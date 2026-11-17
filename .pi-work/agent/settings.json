@@ -20,7 +20,8 @@
     "npm:pi-updater",
     "https://github.com/earendil-works/pi-claude-code",
     "npm:@aliou/pi-neuralwatt",
-    "npm:@dietrichgebert/ponytail"
+    "npm:@dietrichgebert/ponytail",
+    "npm:pi-image-view"
   ],
   "enabledModels": [
     "openai-codex/gpt-6.1-sol",
