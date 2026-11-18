@@ -152,8 +152,7 @@
     "{\"source\":\"npm:pi-powerline-footer\",\"scope\":\"user\"}": "0.22.0",
     "{\"source\":\"npm:@narumitw/pi-usage\",\"scope\":\"user\"}": "0.69.3",
     "{\"source\":\"npm:pi-updater\",\"scope\":\"user\"}": "0.7.0",
-    "{\"source\":\"npm:pi-image-view\",\"scope\":\"user\"}": "0.5.0",
-    "{\"source\":\"npm:@czottmann/pi-automode@1.17.0\",\"scope\":\"user\"}": "1.17.0"
+    "{\"source\":\"npm:pi-image-view\",\"scope\":\"user\"}": "0.5.0"
   },
   "deviceId": "5090d557-a38a-4227-a896-fe5411231cd5",
   "powerline": {
