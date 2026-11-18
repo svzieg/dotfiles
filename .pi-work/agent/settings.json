@@ -103,5 +103,8 @@
     }
   },
   "showCacheMissNotices": true,
-  "enableInstallTelemetry": false
+  "enableInstallTelemetry": false,
+  "defaultTools": [
+    "+codemode"
+  ]
 }

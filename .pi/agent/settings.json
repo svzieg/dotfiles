@@ -202,5 +202,8 @@
     "context": {
       "format": "full"
     }
-  }
+  },
+  "defaultTools": [
+    "+codemode"
+  ]
 }
