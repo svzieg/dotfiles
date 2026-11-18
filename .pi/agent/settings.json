@@ -16,7 +16,6 @@
     "npm:@aliou/pi-neuralwatt",
     "npm:betterwright",
     "npm:@juicesharp/rpiv-ask-user-question",
-    "npm:@sinamtz/pi-minimax-provider",
     "npm:pi-effort",
     "npm:pi-fff",
     "npm:pi-powerline-footer",
@@ -152,7 +151,7 @@
     "{\"source\":\"npm:pi-effort\",\"scope\":\"user\"}": "0.1.1",
     "{\"source\":\"npm:pi-powerline-footer\",\"scope\":\"user\"}": "0.22.0",
     "{\"source\":\"npm:@narumitw/pi-usage\",\"scope\":\"user\"}": "0.69.3",
-    "{\"source\":\"npm:pi-updater\",\"scope\":\"user\"}": "0.6.0",
+    "{\"source\":\"npm:pi-updater\",\"scope\":\"user\"}": "0.7.0",
     "{\"source\":\"npm:pi-image-view\",\"scope\":\"user\"}": "0.5.0",
     "{\"source\":\"npm:@czottmann/pi-automode@1.17.0\",\"scope\":\"user\"}": "1.17.0"
   },
