@@ -1,0 +1,21 @@
+#!/bin/sh
+# Keep package executables local to the selected Pi profile, including MCP servers.
+pi_profile=${PI_CODING_AGENT_DIR:-"$HOME/.pi/agent"}
+pi_package_bin=$pi_profile/npm/node_modules/.bin
+pi_clean_path=:${PATH-}:
+# Also remove entries inherited from shells that sourced the old pi-paths.sh.
+for pi_old_bin in "$HOME/.pi/agent/npm/node_modules/.bin" "$HOME/.pi-work/agent/npm/node_modules/.bin" "$pi_package_bin"; do
+  while :; do
+    case "$pi_clean_path" in
+      *":$pi_old_bin:"*)
+        pi_clean_path=${pi_clean_path%%":$pi_old_bin:"*}:${pi_clean_path#*":$pi_old_bin:"}
+        ;;
+      *) break ;;
+    esac
+  done
+done
+pi_clean_path=${pi_clean_path#:}
+pi_clean_path=${pi_clean_path%:}
+PATH=$pi_package_bin:$pi_clean_path
+export PATH
+exec "$HOME/.pi/agent/bin/pi" "$@"

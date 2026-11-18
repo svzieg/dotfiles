@@ -322,6 +322,46 @@
       "pluginName": "mattpocock-skills",
       "installedAt": "2026-06-10T13:55:45.519Z",
       "updatedAt": "2026-06-10T13:55:45.519Z"
+    },
+    "fluentbit-log-recovery": {
+      "source": "/home/u500132/coding/k8s/devops-skills",
+      "sourceType": "local",
+      "sourceUrl": "/home/u500132/coding/k8s/devops-skills",
+      "skillFolderHash": "f1dd0aa1a02d1264030875342691edabb03986cb729f75c9477cfc6fdbd65902",
+      "installedAt": "2026-11-17T08:46:57.561Z",
+      "updatedAt": "2026-11-17T08:47:25.115Z"
+    },
+    "k8s-env-value-search": {
+      "source": "/home/u500132/coding/k8s/devops-skills",
+      "sourceType": "local",
+      "sourceUrl": "/home/u500132/coding/k8s/devops-skills",
+      "skillFolderHash": "361eaee530c36c747b95ce793d2caa9667cb918f95fa2b78bf81b01877d6040d",
+      "installedAt": "2026-11-17T08:46:57.563Z",
+      "updatedAt": "2026-11-17T08:47:25.116Z"
+    },
+    "pas-antora-docs": {
+      "source": "/home/u500132/coding/k8s/devops-skills",
+      "sourceType": "local",
+      "sourceUrl": "/home/u500132/coding/k8s/devops-skills",
+      "skillFolderHash": "a2791e861c1f3ea477bda0f16393066775385fd284a852aa951847ae40bd3c30",
+      "installedAt": "2026-11-17T08:46:57.564Z",
+      "updatedAt": "2026-11-17T08:47:25.117Z"
+    },
+    "pas-code-database-management": {
+      "source": "/home/u500132/coding/k8s/devops-skills",
+      "sourceType": "local",
+      "sourceUrl": "/home/u500132/coding/k8s/devops-skills",
+      "skillFolderHash": "9db36034783e8c991b4dc61f6b05f2df6b50ba2e0b2a005e0366306bf775c838",
+      "installedAt": "2026-11-17T08:46:57.564Z",
+      "updatedAt": "2026-11-17T08:47:25.117Z"
+    },
+    "pas-k8s-repo-context": {
+      "source": "/home/u500132/coding/k8s/devops-skills",
+      "sourceType": "local",
+      "sourceUrl": "/home/u500132/coding/k8s/devops-skills",
+      "skillFolderHash": "50f94603e0a7e749aed16202af5d800adde0548f72620001a46b82e9f296ff7a",
+      "installedAt": "2026-11-17T08:46:57.565Z",
+      "updatedAt": "2026-11-17T08:47:25.118Z"
     }
   },
   "dismissed": {
