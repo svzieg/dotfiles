@@ -30,7 +30,7 @@
     "pi-rtk-rewrite": "^0.3.0",
     "pi-simplify": "^0.2.1",
     "pi-ultra-compact": "^1.3.0",
-    "pi-updater": "^0.7.0",
+    "pi-updater": "^0.8.0",
     "pi-web-access": "^0.48.0"
   }
 }

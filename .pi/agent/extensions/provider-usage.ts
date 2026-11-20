@@ -35,15 +35,21 @@ export function formatCodexWeekly(payload: any): string {
 
 export function formatNeuralwatt(payload: any): string {
   const quotas = payload?.quotas;
+  const num = (v: unknown): v is number => typeof v === "number" && Number.isFinite(v);
+  const parts: string[] = [];
   const remaining = quotas?.subscription?.kwh_remaining;
-  if (typeof remaining === "number" && Number.isFinite(remaining)) {
+  if (num(remaining)) {
     const ends = Date.parse(quotas?.subscription?.current_period_end);
-    return `Neuralwatt: ${remaining.toFixed(2)} kWh left (month)${suffix((ends - Date.now()) / 1000)}`;
+    parts.push(`${remaining.toFixed(2)} kWh left (month)${suffix((ends - Date.now()) / 1000)}`);
   }
+  const free = quotas?.daily_free_energy?.kwh_remaining;
+  if (num(free)) {
+    const reset = Date.parse(quotas?.daily_free_energy?.reset_at);
+    parts.push(`${free.toFixed(2)} kWh free (day)${suffix((reset - Date.now()) / 1000)}`);
+  }
+  if (parts.length) return `Neuralwatt: ${parts.join(" · ")}`;
   const credits = quotas?.balance?.credits_remaining_usd;
-  return typeof credits === "number" && Number.isFinite(credits)
-    ? `Neuralwatt: $${credits.toFixed(2)} left`
-    : "Neuralwatt usage unavailable";
+  return num(credits) ? `Neuralwatt: $${credits.toFixed(2)} left` : "Neuralwatt usage unavailable";
 }
 
 export async function fetchCodexWeekly(ctx: ExtensionContext, signal: AbortSignal): Promise<string> {
@@ -98,7 +104,7 @@ export function compactUsage(claude: string | undefined, codex: string, neuralwa
       .replace("Codex weekly loading…", "Codex wk …"));
   }
   if (fetched(neuralwatt)) {
-    meters.push(neuralwatt.replace("Neuralwatt: ", "NW ").replace(" kWh left (month)", "kWh left")
+    meters.push(neuralwatt.replace("Neuralwatt: ", "NW ").replace(" kWh left (month)", "kWh left").replace(" kWh free (day)", "kWh free")
       .replace("Neuralwatt usage loading…", "NW …"));
   }
   return meters;
