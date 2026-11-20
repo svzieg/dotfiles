@@ -146,7 +146,7 @@
   "showCacheMissNotices": true,
   "extensionChangelogVersions": {
     "{\"source\":\"npm:pi-web-access\",\"scope\":\"user\"}": "0.48.0",
-    "{\"source\":\"npm:@aliou/pi-neuralwatt\",\"scope\":\"user\"}": "0.19.3",
+    "{\"source\":\"npm:@aliou/pi-neuralwatt\",\"scope\":\"user\"}": "0.20.0",
     "{\"source\":\"npm:betterwright\",\"scope\":\"user\"}": "2.9.1",
     "{\"source\":\"npm:pi-effort\",\"scope\":\"user\"}": "0.1.1",
     "{\"source\":\"npm:pi-powerline-footer\",\"scope\":\"user\"}": "0.22.0",

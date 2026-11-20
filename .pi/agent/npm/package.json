@@ -2,7 +2,7 @@
   "name": "pi-extensions",
   "private": true,
   "dependencies": {
-    "@aliou/pi-neuralwatt": "^0.19.3",
+    "@aliou/pi-neuralwatt": "^0.20.0",
     "@dietrichgebert/ponytail": "^5.3.2",
     "@ersintarhan/pi-toolkit": "^0.7.2",
     "@juicesharp/rpiv-ask-user-question": "^2.13.9",
