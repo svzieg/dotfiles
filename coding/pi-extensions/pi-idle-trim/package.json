@@ -1,0 +1,25 @@
+{
+  "name": "pi-idle-trim",
+  "version": "0.1.0",
+  "description": "Trim a Pi session's context mechanically (no model call) once its prompt cache has expired, so the first request after a break does not re-bill the whole conversation.",
+  "license": "MIT",
+  "author": "u500132",
+  "keywords": [
+    "pi-package",
+    "pi-extension",
+    "compaction",
+    "prompt-cache"
+  ],
+  "files": [
+    "index.ts",
+    "README.md"
+  ],
+  "pi": {
+    "extensions": [
+      "./index.ts"
+    ]
+  },
+  "peerDependencies": {
+    "@earendil-works/pi-coding-agent": ">=0.86.0"
+  }
+}
