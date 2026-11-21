@@ -16,6 +16,21 @@ for pi_old_bin in "$HOME/.pi/agent/npm/node_modules/.bin" "$HOME/.pi-work/agent/
 done
 pi_clean_path=${pi_clean_path#:}
 pi_clean_path=${pi_clean_path%:}
-PATH=$pi_package_bin:$pi_clean_path
-export PATH
-exec "$HOME/.pi/agent/bin/pi" "$@"
+
+# Use PATH order, skipping our wrapper directory and any aliases of this script.
+# The managed installer can also put Pi in ~/.pi/agent/bin without adding it to PATH.
+pi_search_path=$pi_clean_path:$HOME/.pi/agent/bin:
+while [ -n "$pi_search_path" ]; do
+  pi_dir=${pi_search_path%%:*}
+  pi_search_path=${pi_search_path#*:}
+  [ -n "$pi_dir" ] && [ ! "$pi_dir" -ef "$HOME/.local/bin" ] || continue
+  pi_candidate=$pi_dir/pi
+  if [ -f "$pi_candidate" ] && [ -x "$pi_candidate" ] && [ ! "$pi_candidate" -ef "$0" ]; then
+    PATH=$pi_package_bin:$pi_clean_path
+    export PATH
+    exec "$pi_candidate" "$@"
+  fi
+done
+
+printf '%s\n' 'pi: no executable found on PATH outside ~/.local/bin or in ~/.pi/agent/bin' >&2
+exit 127
