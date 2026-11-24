@@ -22,12 +22,27 @@ Company context. Overrides the personal `~/.pi/agent/AGENTS.md` routing notes.
 
 ## Tooling
 
-- **Surface choice:** batch independent reads, greps and test-output analysis
-  through `codemode` (JS filters; print only findings) instead of sequential
-  `bash` calls; keep `bash` for processes, long jobs and file mutation —
-  codemode has no filesystem and cancels calls when the script returns. Reach
-  for a python heredoc only for mechanical multi-file patches where every
-  replacement is asserted (`count == 1`).
+- **Surface choice:** three tools overlap; pick by what the step is, not by
+  habit. The context-mode hint ("use `ctx_execute` for >20 lines of data")
+  does not override this section.
+  - `codemode` (JS): the default when there are **two or more independent
+    calls** (reads, greps, Jira/`twg` lookups, several kubectl queries), or
+    when the result needs filtering, joining or comparing across calls. It
+    reaches every tool via `tools.*`, including `tools.bash` and
+    `tools.ctx_execute`, so run the calls in parallel (`Promise.allSettled`)
+    and return only the findings. It has no filesystem or shell of its own and
+    cancels pending calls when the script returns.
+  - `ctx_execute`: one local script that needs a real runtime (shell pipeline,
+    Python/Node parsing of a big file or JSON dump) and whose raw output is
+    large. Only the printed answer reaches the conversation, and the full
+    output is indexed for `ctx_search`. Inside a `codemode` script, call it as
+    `tools.ctx_execute` when one step of a batch needs this.
+  - `bash`: processes, long or background jobs, and file mutation (git, edits,
+    `kubectl apply`/`annotate`). Keep its output small; for large output use
+    `ctx_execute` instead of piping to `/tmp` files and re-reading them.
+  - A single small command: just run it with `bash`; no wrapper needed.
+  - Reach for a python heredoc only for mechanical multi-file patches where
+    every replacement is asserted (`count == 1`).
 
 ## Delegation
 
