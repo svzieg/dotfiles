@@ -1,7 +1,7 @@
 ---
 name: visual-tester
 description: Visual QA tester — navigates web UIs via Chrome CDP, spots visual issues, tests interactions, produces structured reports
-tools: bash, read, write, intercom, ctx_execute, ctx_execute_file, ctx_batch_execute, ctx_search, ctx_index, ctx_fetch_and_index, ctx_stats, ctx_doctor
+tools: codemode, bash, read, write, intercom, ctx_execute, ctx_execute_file, ctx_batch_execute, ctx_search, ctx_index, ctx_fetch_and_index, ctx_stats, ctx_doctor
 skill: chrome-cdp
 spawning: false
 auto-exit: true

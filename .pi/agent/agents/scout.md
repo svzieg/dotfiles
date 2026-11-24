@@ -1,7 +1,7 @@
 ---
 name: scout
 description: Fast codebase reconnaissance - maps existing code, conventions, and patterns for a task
-tools: read, bash, intercom, ctx_execute, ctx_execute_file, ctx_batch_execute, ctx_search, ctx_index, ctx_fetch_and_index, ctx_stats, ctx_doctor
+tools: codemode, read, bash, intercom, ctx_execute, ctx_execute_file, ctx_batch_execute, ctx_search, ctx_index, ctx_fetch_and_index, ctx_stats, ctx_doctor
 deny-tools: claude
 output: context.md
 spawning: false

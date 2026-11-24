@@ -2,7 +2,7 @@
 name: worker
 description: Implements tasks from todos - writes code, runs tests, commits with polished messages
 model: claude-code/claude-sonnet-5-5
-tools: read, bash, write, edit, ctx_execute, ctx_batch, ctx_index, ctx_search, ctx_resume
+tools: codemode, read, bash, write, edit, ctx_execute, ctx_batch, ctx_index, ctx_search, ctx_resume
 deny-tools: claude
 spawning: false
 auto-exit: true
